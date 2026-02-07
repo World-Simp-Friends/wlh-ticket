@@ -1,1147 +1,412 @@
-<!doctype html>
-<html lang="vi" data-theme="light">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>OFFLINE HOLOLIVE TOGETHER, WE SIMP</title>
-        <meta
-            name="description"
-            content="Sự kiện offline Hololive tại TP.HCM."
-        />
-        <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-            crossorigin
-        />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            :root {
-                --ink: #1d1d1f;
-                --muted: #6e6e73;
-                --bg: #ffffff;
-                --bg-2: #f5f5f7;
-                --elev: #ffffff;
-                --blue: #007aff;
-                --blue-2: #0051d5;
-                --border: rgba(0, 0, 0, 0.12);
-                --border-strong: rgba(0, 0, 0, 0.18);
-                --radius: 12px;
-                --radius-lg: 20px;
-                --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-                --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.14);
-                --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 60%, white);
-                --link: #0a84ff;
-                --footer-bg: #121215;
-                --footer-fg: #ffffff;
-                --footer-muted: #c9c9cf;
-                --footer-border: rgba(255, 255, 255, 0.18);
-                --nav-h: 60px;
-            }
-            html[data-theme="dark"] {
-                --ink: #f5f5f7;
-                --muted: #b7b7bd;
-                --bg: #0b0b0c;
-                --bg-2: #111114;
-                --elev: #121215;
-                --blue: #0a84ff;
-                --blue-2: #0066cc;
-                --border: rgba(255, 255, 255, 0.14);
-                --border-strong: rgba(255, 255, 255, 0.22);
-                --shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
-                --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.7);
-                --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 65%, black);
-                --link: #66aaff;
-            }
+<!DOCTYPE html>
+<html class="light" lang="vi">
 
-            * {
-                box-sizing: border-box;
-            }
-            html {
-                scroll-behavior: smooth;
-            }
-            body {
-                margin: 0;
-                font-family:
-                    "Inter",
-                    system-ui,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    "Segoe UI",
-                    Arial;
-                background: var(--bg);
-                color: var(--ink);
-                line-height: 1.55;
-                letter-spacing: -0.01em;
-                text-rendering: optimizeLegibility;
-                overflow-x: hidden;
-            }
-            a {
-                color: var(--link);
-                text-decoration: none;
-            }
-            a:hover,
-            a:focus-visible {
-                text-decoration: underline;
-            }
-            .container {
-                max-width: 1100px;
-                margin: auto;
-                padding: 0 22px;
-            }
-            .section {
-                padding: 72px 0;
-            }
-            h1 {
-                font-size: clamp(40px, 6vw, 80px);
-                line-height: 1.05;
-                margin: 0 0 10px;
-            }
-            h2 {
-                font-size: clamp(28px, 4vw, 42px);
-                line-height: 1.1;
-                margin: 0 0 18px;
-            }
-            h3 {
-                font-size: 22px;
-                margin: 0 0 8px;
-            }
-            .muted {
-                color: var(--muted);
-            }
-            .center {
-                text-align: center;
-            }
-            .mb-18 {
-                margin-bottom: 18px;
-            }
-            .mb-22 {
-                margin-bottom: 22px;
-            }
-            .mb-26 {
-                margin-bottom: 26px;
-            }
-            .semibold {
-                font-weight: 600;
-            }
-            .ink {
-                color: var(--ink);
-            }
-            .bg-2 {
-                background: var(--bg-2);
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Drivin' Into Dreams - Hololive Fan Event Hanoi</title>
+    <meta name="description"
+        content="Tham gia Drivin' Into Dreams - Sự kiện Watch Party Hololive 7th Fes tại Hà Nội! Cùng cháy hết mình với cộng đồng fan Hololive VN. Vé Early Bird mở bán ngay!">
+    <meta name="keywords" content="Hololive, Hololive VN, Watch Party, Hanoi, Event, Drivin Into Dreams, Fan Meeting">
+    <meta name="author" content="Worldsimp Projekt">
 
-            .card {
-                background: var(--elev);
-                border: 1px solid var(--border);
-                border-radius: var(--radius);
-                box-shadow: var(--shadow);
-            }
-            .card.pad {
-                padding: 28px;
-            }
-            .pill {
-                display: inline-block;
-                padding: 9px 14px;
-                border: 1px solid var(--border);
-                border-radius: 999px;
-                font-size: 12px;
-            }
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://worldsimp.com/">
+    <meta property="og:title" content="Drivin' Into Dreams - Hololive Fan Event Hanoi">
+    <meta property="og:description"
+        content="Sự kiện Watch Party Hololive 7th Fes lớn nhất tại Hà Nội. Đặt vé ngay hôm nay!">
+    <meta property="og:image" content="./assets/images/hero.webp">
 
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                min-height: 44px;
-                padding: 12px 18px;
-                border-radius: 999px;
-                border: 1px solid transparent;
-                background: transparent;
-                color: var(--ink);
-                font-weight: 700;
-                cursor: pointer;
-                transition:
-                    transform 0.15s ease,
-                    background-color 0.2s ease,
-                    border-color 0.2s ease;
-            }
-            .btn:focus-visible {
-                outline: none;
-                box-shadow: var(--focus);
-            }
-            .btn-primary {
-                background: var(--blue);
-                color: #fff;
-            }
-            .btn-primary:hover {
-                transform: translateY(-1px);
-                background: var(--blue-2);
-            }
-            .btn-ghost {
-                border-color: var(--border);
-                background: color-mix(in oklab, var(--bg) 86%, var(--ink) 6%);
-            }
-            .btn-ghost:hover {
-                transform: translateY(-1px);
-            }
-            .cta-large {
-                font-size: 20px;
-                min-height: 56px;
-                padding: 16px 28px;
-            }
-            .cta-wrap {
-                display: flex;
-                justify-content: center;
-                margin-top: 28px;
-            }
-            .cta-full {
-                width: min(560px, 92vw);
-            }
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://worldsimp.com/">
+    <meta property="twitter:title" content="Drivin' Into Dreams - Hololive Fan Event Hanoi">
+    <meta property="twitter:description"
+        content="Sự kiện Watch Party Hololive 7th Fes lớn nhất tại Hà Nội. Đặt vé ngay hôm nay!">
+    <meta property="twitter:image" content="./assets/images/hero.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4fc2f8", // Light Blue
+                        "accent": "#A2FF00",  // Neon Green
+                        "cta": "#FFB74D",     // Orange
+                        "text-main": "#2C3E50", // Dark Blue/Grey
+                        "background-light": "#f0f2f5", // Ant Design typical bg
+                        "background-dark": "#101c22",
+                        "card-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "body": ["Spline Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'bento': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                        'bento-hover': '0 10px 25px rgba(79, 195, 247, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
 
-            /* NAV */
-            .nav {
-                position: sticky;
-                top: 0;
-                z-index: 20;
-                background: color-mix(in oklab, var(--bg) 92%, transparent);
-                backdrop-filter: saturate(180%) blur(14px);
-                border-bottom: 1px solid var(--border);
-            }
-            .nav-inner {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                height: var(--nav-h);
-            }
-            .brand {
-                color: inherit;
-                text-decoration: none;
-                font-weight: 800;
-            }
-            .nav a:hover,
-            .nav a:focus-visible {
-                text-decoration: none;
-            }
-            .nav-desktop {
-                display: flex;
-            }
-            .nav-links {
-                display: flex;
-                gap: 8px;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-            .link {
-                padding: 8px 12px;
-                border-radius: 8px;
-            }
-            .link:hover {
-                background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
-            }
-            .nav-actions {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .theme-toggle {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                border: 1px solid var(--border);
-                border-radius: 999px;
-                padding: 6px 10px;
-                cursor: pointer;
-                background: var(--elev);
-            }
-            .theme-toggle input {
-                appearance: none;
-                width: 34px;
-                height: 20px;
-                border-radius: 999px;
-                background: color-mix(in oklab, var(--bg-2) 60%, var(--ink) 8%);
-                position: relative;
-                outline: none;
-                border: 1px solid var(--border-strong);
-            }
-            .theme-toggle input:before {
-                content: "";
-                position: absolute;
-                inset: 2px auto auto 2px;
-                width: 14px;
-                height: 14px;
-                border-radius: 50%;
-                background: var(--ink);
-                transition:
-                    transform 0.2s ease,
-                    background 0.2s ease;
-            }
-            .theme-toggle input:checked:before {
-                transform: translateX(14px);
-                background: #fff;
-            }
-            .menu-toggle {
-                display: none;
-                border: 1px solid var(--border);
-                background: var(--elev);
-                border-radius: 10px;
-                padding: 8px;
-                cursor: pointer;
-            }
-            /* Mobile drawer */
-            .nav-mobile {
-                display: none;
-                flex-direction: column;
-                padding: 10px 22px 16px;
-                gap: 8px;
-                border-top: 1px solid var(--border);
-                background: var(--elev);
-            }
-            .nav-mobile.open {
-                display: flex;
-                animation: slideDown 0.18s ease;
-            }
-            .m-link {
-                padding: 10px;
-                border-radius: 8px;
-                color: inherit;
-                text-decoration: none;
-            }
-            .m-link:hover {
-                background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
-            }
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-6px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            @media (max-width: 768px) {
-                .nav-desktop {
-                    display: none;
-                }
-                .menu-toggle {
-                    display: inline-flex;
-                }
-            }
+        .bento-card {
+            transition: all 0.3s ease;
+        }
 
-            /* KPI */
-            .kpi-header {
-                text-align: center;
-                background: var(--bg-2);
-                border-bottom: 1px solid var(--border);
-            }
-            .kpi-header .sub {
-                max-width: 560px;
-                margin: 6px auto 0;
-            }
-            .kpi {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                background: var(--elev);
-            }
-            .kpi > div {
-                padding: 30px;
-                text-align: center;
-                border-right: 1px solid var(--border);
-            }
-            .kpi > div:last-child {
-                border-right: 0;
-            }
-            .kpi-mid {
-                border-left: 1px solid var(--border);
-                border-right: 1px solid var(--border);
-            }
-            .kpi .label {
-                letter-spacing: 0.16em;
-                font-weight: 700;
-            }
-            .kpi .kpi-num {
-                font-size: 40px;
-                font-weight: 700;
-            }
-            @media (max-width: 900px) {
-                .kpi {
-                    grid-template-columns: 1fr;
-                }
-                .kpi > div {
-                    border-right: 0;
-                    border-bottom: 1px solid var(--border);
-                }
-                .kpi > div:last-child {
-                    border-bottom: 0;
-                }
-                .kpi-mid {
-                    border-left: 0;
-                    border-right: 0;
-                }
-            }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.25);
+        }
 
-            /* HERO full-screen */
-            .hero {
-                padding: 0;
-            }
-            .hero-banner {
-                position: relative;
-                width: 100vw;
-                margin-left: 50%;
-                transform: translateX(-50%);
-                background: var(--bg-2);
-            }
-            .hero-media {
-                width: 100%;
-                height: calc(100dvh - var(--nav-h));
-                height: calc(100svh - var(--nav-h));
-                height: calc(100vh - var(--nav-h));
-                min-height: 480px;
-                position: relative;
-                overflow: hidden;
-            }
-            .hero-media img {
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-                opacity: 0;
-                animation: fadeIn 0.6s ease 0.05s forwards;
-                filter: brightness(0.5);
-            }
-            .hero-overlay {
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(
-                    to top,
-                    rgba(0, 0, 0, 0.45),
-                    rgba(0, 0, 0, 0.25) 40%,
-                    transparent 70%
-                );
-                pointer-events: none;
-            }
-            .hero-content {
-                position: absolute;
-                left: 50%;
-                bottom: 6%;
-                transform: translateX(-50%);
-                width: min(1100px, 92vw);
-                color: #fff;
-                text-align: center;
-                padding: 0 22px;
-                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-            }
-            .hero-title {
-                font-size: clamp(36px, 6vw, 72px);
-                line-height: 1.05;
-                margin: 0 0 10px;
-            }
-            .hero-sub {
-                font-size: clamp(16px, 2.8vw, 22px);
-                opacity: 0.9;
-                margin: 0 0 18px;
-            }
-            .hero-actions {
-                display: flex;
-                gap: 12px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            @keyframes fadeIn {
-                to {
-                    opacity: 1;
-                }
-            }
+        .grid-bg {
+            background-image: radial-gradient(#4fc2f8 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
 
-            /* Tickets */
-            .tickets-grid {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 24px;
-            }
-            @media (max-width: 1024px) {
-                .tickets-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 20px;
-                }
-            }
-            @media (max-width: 640px) {
-                .tickets-grid {
-                    grid-template-columns: 1fr;
-                    gap: 16px;
-                }
-            }
+<body
+    class="bg-background-light dark:bg-background-dark text-text-main min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
+    <header
+        class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-[#101c22]/90 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 w-full">
+                <div class="flex items-center gap-3">
+                    <img src="./assets/images/host.webp" alt="Hololive VN Fanclub Logo"
+                        class="h-10 w-auto object-contain">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-grow p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-min">
+            <div
+                class="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-2 rounded-xl flex flex-col justify-between relative overflow-hidden group border border-primary/10 min-h-[300px]">
+                <div class="absolute inset-0 bg-cover bg-center z-0"
+                    style="background-image: url('./assets/images/hero.webp');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-0">
+                </div>
 
-            .ticket-option {
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                border-radius: var(--radius-lg);
-                border: 1.5px solid var(--border);
-                background: var(--elev);
-                padding: 20px;
-                transition:
-                    transform 0.15s ease,
-                    box-shadow 0.2s ease;
-            }
-            .ticket-option:hover {
-                transform: translateY(-1px);
-                box-shadow: var(--shadow-lg);
-            }
+                <div class="relative z-10 flex flex-col h-full justify-between p-6 sm:p-8">
+                    <div class="sr-only">
+                        <h1>OFF-FAN HOLOLIVE HANOI 2026</h1>
+                        <p>Drivin' Into Dreams: Trải nghiệm phép màu tại Hà Nội! Tham gia sự kiện fan offline đáng nhớ
+                            cùng chúng tôi.
+                        </p>
+                    </div>
 
-            /* MOBILE-LIKE STACK ON ALL BREAKPOINTS */
-            .ticket-row {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-                min-width: 0;
-            }
-            .ticket-title {
-                font-weight: 800;
-                font-size: clamp(18px, 2.1vw, 22px);
-                line-height: 1.2;
-                overflow-wrap: anywhere;
-                text-wrap: balance; /* tránh tràn chữ dài */
-            }
-            .ticket-price {
-                font-weight: 800;
-                line-height: 1.1;
-                font-size: clamp(24px, 4vw, 36px);
-                white-space: normal; /* cho phép xuống dòng nếu cần */
-            }
-            .ticket-price .unit {
-                white-space: nowrap;
-            } /* giữ VNĐ dính số */
+                </div>
+            </div>
 
-            .ticket-badge {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                z-index: 1;
-                font-size: 11px;
-                font-weight: 700;
-                letter-spacing: 0.08em;
-                color: #fff;
-                background: var(--blue);
-                padding: 4px 10px;
-                border-radius: 999px;
-            }
-
-            .benefits {
-                margin-top: 12px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                background: var(--bg-2);
-                padding: 12px;
-                border-radius: 12px;
-            }
-            .benefits li {
-                list-style: none;
-                display: flex;
-                gap: 8px;
-                align-items: flex-start;
-            }
-            .dot {
-                inline-size: 16px;
-                block-size: 16px;
-                border-radius: 50%;
-                background: var(--ink);
-                color: #fff;
-                display: grid;
-                place-items: center;
-                font-size: 11px;
-            }
-            html[data-theme="dark"] .ticket-option {
-                background: var(--elev);
-                border-color: var(--border);
-            }
-            html[data-theme="dark"] .benefits {
-                background: color-mix(in oklab, var(--bg) 85%, var(--ink) 6%);
-            }
-
-            /* Schedule */
-            .schedule .row {
-                display: grid;
-                grid-template-columns: 120px 1fr;
-                gap: 16px;
-                padding: 20px;
-                border-bottom: 1px solid var(--border);
-            }
-            .schedule time {
-                font-size: 22px;
-                font-weight: 700;
-            }
-            @media (max-width: 700px) {
-                .schedule .row {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            /* Footer */
-            .site-footer {
-                background: var(--footer-bg);
-                color: var(--footer-fg);
-            }
-            .site-footer a {
-                color: var(--footer-fg);
-                text-decoration: none;
-            }
-            .site-footer a:hover,
-            .site-footer a:focus-visible {
-                text-decoration: underline;
-            }
-            .site-footer .muted {
-                color: var(--footer-muted);
-            }
-            .site-footer hr {
-                border: none;
-                border-top: 1px solid var(--footer-border);
-                margin: 24px 0;
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                * {
-                    transition: none !important;
-                    animation: none !important;
-                    scroll-behavior: auto;
-                }
-                .hero-media img {
-                    opacity: 1 !important;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <!-- NAVBAR -->
-        <header class="nav">
-            <div class="container nav-inner">
-                <img
-                    src="./assets/images/logo.png"
-                    alt="Worldsimp logo"
-                    width="75"
-                    height="40"
-                    style="margin-right: 8px"
-                />
-                <nav aria-label="Main" class="nav-desktop">
-                    <ul class="nav-links">
-                        <li><a class="link" href="#event">Sự kiện</a></li>
-                        <li><a class="link" href="#tickets">Vé</a></li>
-                        <li><a class="link" href="#schedule">Lịch trình</a></li>
+            <div
+                class="bento-card col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-center gap-3">
+                <div
+                    class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase">Thời Gian</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1">
+                        09:00 - 18:00
+                    </p>
+                    <p class="text-sm font-medium text-primary mt-0.5">
+                        Chủ nhật, 08/03/2026
+                    </p>
+                </div>
+            </div>
+            <div
+                class="bento-card col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-center gap-3">
+                <div
+                    class="size-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-cta">
+                    <span class="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase">Địa Điểm</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1">
+                        Biblio - Cafe Sách Ngụy Như Kon Tum
+                    </p>
+                    <p class="text-sm font-medium text-text-main/60 dark:text-gray-400 mt-0.5">
+                        Cổng 1 - 79 Ngụy Như Kon Tum, Thanh Xuân, Hà Nội
+                    </p>
+                </div>
+            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-2 row-span-2 bg-white dark:bg-[#1a262d] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col h-full relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 bg-accent text-text-main text-xs font-black px-4 py-2 rounded-bl-xl shadow-sm z-10">
+                    GIỚI HẠN 15 VÉ
+                </div>
+                <div class="flex flex-col gap-1 mb-6">
+                    <h2 class="text-xl font-bold text-text-main dark:text-white flex items-center gap-2">
+                        <span class="material-symbols-outlined text-cta">confirmation_number</span>
+                        VÉ SIMP EARLY BIRD
+                    </h2>
+                    <div class="flex items-baseline gap-3 mt-2">
+                        <span class="text-4xl font-black text-primary tracking-tighter">150.000₫</span>
+                        <span class="text-lg text-gray-400 line-through font-medium">170.000₫</span>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">timer</span>
+                        Mở bán đến 14/02
+                    </p>
+                </div>
+                <div class="flex-grow space-y-3 mb-6">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Quyền Lợi Vé</h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Chiếu Concert Holofes Stage 4
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            01 Đồ Uống Miễn Phí
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Vé Cứng Kỷ Niệm
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Móc Khóa Random
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Lightstick &amp; Pack Sticker
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
+                            <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
+                            Quyền Lợi Vé GA
+                        </li>
                     </ul>
-                </nav>
-
-                <div class="nav-actions">
-                    <label class="theme-toggle" title="Chuyển giao diện">
-                        <span class="muted" aria-hidden="true">🌞</span>
-                        <input
-                            id="themeSwitch"
-                            type="checkbox"
-                            aria-label="Dark mode"
-                        />
-                        <span class="muted" aria-hidden="true">🌚</span>
-                    </label>
+                </div>
+                <button
+                    class="w-full bg-primary/10 hover:bg-primary/20 text-primary dark:text-primary font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    Mua Vé Ngay
+                </button>
+            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-2 lg:col-span-2 bg-white dark:bg-[#1a262d] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col relative overflow-hidden h-full">
+                <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <span class="material-symbols-outlined text-6xl text-primary transform rotate-12">handshake</span>
+                </div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider z-10">ĐƠN VỊ TỔ CHỨC & ĐỐI TÁC
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center justify-center h-full z-10 pb-2">
+                    <a href="https://www.facebook.com/worldsimp235" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/host.webp" alt="Hololive VN Fanclub Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-bold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight">
+                                World Simp & Friends</p>
+                            <p class="text-xs font-medium text-primary mt-1">Host</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/kenzokuvnfanpage" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/co-host1.webp" alt="Anime Store Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-bold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight">
+                                Mái ấm nhỏ nơi một Kenzoku sìn Oshi</p>
+                            <p class="text-xs font-medium text-accent mt-1">Co-host</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100092364346373" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/co-host2.webp" alt="Otaku News Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-bold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight">
+                                Một góc nhỏ nơi thịt trấn của những vì sao</p>
+                            <p class="text-xs font-medium text-cta mt-1">Co-host</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div onclick="window.open('https://maps.app.goo.gl/p9ieo9yfb347VUZQ9', '_blank')"
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-2 row-span-2 relative group overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-bento min-h-[240px] cursor-pointer">
+                <div class="absolute inset-0 bg-gray-200 bg-center bg-cover transition-transform duration-700 group-hover:scale-110"
+                    data-alt="Map showing the location of Biblio Cafe Sách in Hanoi" data-location="Hanoi, Vietnam"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNNvaFO5CX5krdmQQ0GDeJm9_mgZVJgZ9E1SgIbstIaEZ227Qz18FVCT9Rm8bi0IBHA6yMYCL67MaCO1CPqy1P7XmSnBalCX12jEk356nQ2e9-V7Dpvnt6wfBidKHa0O3OvhdGdx3sysuZZSIxi10oFMaVN1pgFhUyaJZ8oDwtdUUHooZvmvOidGUHuzEcwKSTWnN5HAaHwR7i3T9f63D0gmmhO3GOUIn_TG8vlJuH6kYsiZfuS-nvMDiDkDUJQB71fqxbvR0p6zY");'>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+                    <div class="text-white">
+                        <h3 class="text-lg font-bold">Biblio - Cafe Sách Ngụy Như Kon Tum</h3>
+                        <a href="https://maps.app.goo.gl/p9ieo9yfb347VUZQ9" target="_blank"
+                            class="text-sm opacity-90 hover:underline">Xem trên Google Maps</a>
+                    </div>
                     <button
-                        class="menu-toggle"
-                        id="menuBtn"
-                        aria-label="Mở menu"
-                        aria-expanded="false"
-                        aria-controls="mobileMenu"
-                    >
-                        <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            aria-hidden="true"
-                        >
-                            <path
-                                d="M3 6h18M3 12h18M3 18h18"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                            />
-                        </svg>
+                        class="size-10 rounded-full bg-white text-text-main flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">near_me</span>
                     </button>
                 </div>
             </div>
-
-            <nav id="mobileMenu" class="nav-mobile" aria-label="Mobile">
-                <a class="m-link" href="#event">Sự kiện</a>
-                <a class="m-link" href="#tickets">Vé</a>
-                <a class="m-link" href="#schedule">Lịch trình</a>
-            </nav>
-        </header>
-
-        <main id="main">
-            <!-- HERO FULL SCREEN -->
-            <section class="hero" aria-label="Hero">
-                <div class="hero-banner">
-                    <div class="hero-media">
-                        <!-- THAY URL ảnh banner ở đây -->
-                        <img
-                            src="./assets/images/banner.webp"
-                            alt="VTuber Offline Event banner"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async"
-                        />
-                        <div class="hero-overlay"></div>
-                        <div class="hero-content">
-                            <h1 class="hero-title">
-                                OFFLINE HOLOLIVE TOGETHER, WE SIMP
-                            </h1>
-                            <p class="hero-sub">Thành phố Hồ Chí Minh 2025.</p>
-                            <div class="hero-actions">
-                                <a
-                                    class="btn btn-primary cta-large"
-                                    href="#tickets"
-                                    >Mua vé ngay</a
-                                >
-                                <a class="btn btn-ghost cta-large" href="#event"
-                                    >Tìm hiểu thêm</a
-                                >
-                            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 bg-text-main dark:bg-card-light dark:bg-opacity-5 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden text-white border border-white/10 dark:border-gray-700 h-full">
+                <div class="absolute top-0 right-0 p-4">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-accent/20 border border-accent/30 text-accent text-xs font-bold uppercase tracking-wider">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                        </span>
+                        SẮP DIỄN RA
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm font-medium text-gray-300 dark:text-gray-400 mb-1">Đếm Ngược</p>
+                    <div class="flex gap-2 items-baseline text-center">
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-days"
+                                class="text-3xl font-black text-primary font-display leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60">Ngày</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-hours"
+                                class="text-3xl font-black text-primary font-display leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60">Giờ</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-minutes"
+                                class="text-3xl font-black text-cta font-display leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60">Phút</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-seconds"
+                                class="text-3xl font-black text-accent font-display leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60">Giây</span>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- EVENT INFO -->
-            <section id="event" class="section" aria-label="Thông tin sự kiện">
-                <div class="container">
-                    <div class="card" style="overflow: hidden">
-                        <div class="card pad kpi-header">
-                            <span class="pill">OFFLINE HOLOLIVE</span>
-                            <h3>Together, We Simp</h3>
-                            <p class="muted sub">Nơi các con Simp gặp nhau.</p>
-                        </div>
-                        <div class="kpi">
-                            <div>
-                                <div class="kpi-num">5</div>
-                                <div class="muted">
-                                    Tháng 10, 2025 — CN<br /><strong class="ink"
-                                        >9:00–16:00</strong
-                                    >
-                                </div>
-                            </div>
-                            <div class="kpi-mid">
-                                <div class="muted label">ĐỊA ĐIỂM</div>
-                                <h3>Mcafé</h3>
-                                <p class="muted">
-                                    40 Nguyễn Văn Hưởng, Phường An Khánh, Thành
-                                    phố Hồ Chí Minh
-                                </p>
-                            </div>
-                            <div>
-                                <div class="muted label">NHÀ TÀI TRỢ</div>
-                                <img
-                                    src="./assets/images/peopo.webp"
-                                    alt="peopo logo"
-                                    style="
-                                        max-height: 100px;
-                                        height: auto;
-                                        width: auto;
-                                    "
-                                />
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-4">
+                    <p class="text-xs text-center text-gray-400">Sự kiện bắt đầu: <span
+                            class="text-white font-bold">08/03</span></p>
                 </div>
-            </section>
-
-            <!-- TICKETS -->
-            <section id="tickets" class="section" aria-label="Các gói vé">
-                <div class="container tickets">
-                    <h2 class="center mb-18">Các gói vé</h2>
-                    <p class="muted center mb-26">
-                        Chọn loại vé & thanh toán sẽ thực hiện ở trang mua vé.
-                    </p>
-
-                    <div class="tickets-grid" aria-label="Các gói vé">
-                        <article class="ticket-option">
-                            <div class="ticket-row">
-                                <div class="ticket-title">Simp</div>
-                                <div class="ticket-price">
-                                    119.000&nbsp;<span
-                                        class="muted semibold unit"
-                                        >VNĐ</span
-                                    >
-                                </div>
-                            </div>
-                            <ul class="benefits" aria-label="Quyền lợi">
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 vé vật lý</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 huy hiệu</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Unlimited nước</span>
-                                </li>
-                            </ul>
-                        </article>
-
-                        <article class="ticket-option">
-                            <span class="ticket-badge">Phổ biến</span>
-                            <div class="ticket-row">
-                                <div class="ticket-title">Simp Premium</div>
-                                <div class="ticket-price">
-                                    189.000&nbsp;<span
-                                        class="muted semibold unit"
-                                        >VNĐ</span
-                                    >
-                                </div>
-                            </div>
-                            <ul class="benefits" aria-label="Quyền lợi">
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 vé vật lý</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 huy hiệu</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 móc khóa</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Random 1 trong 3 dây đeo</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Random 1 sticker</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span
-                                        >Random 1 móc khóa / mini standee</span
-                                    >
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Unlimited nước</span>
-                                </li>
-                            </ul>
-                        </article>
-
-                        <article class="ticket-option">
-                            <div class="ticket-row">
-                                <div class="ticket-title">Simp Elite</div>
-                                <div class="ticket-price">
-                                    279.000&nbsp;<span
-                                        class="muted semibold unit"
-                                        >VNĐ</span
-                                    >
-                                </div>
-                            </div>
-                            <ul class="benefits" aria-label="Quyền lợi">
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 vé vật lý</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 huy hiệu</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 móc khóa</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Random 1 trong 3 dây đeo</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>1 artprint</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span
-                                        >Random 2 mini standee / móc khóa / huy
-                                        hiệu</span
-                                    >
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Random 2 / 3 sticker</span>
-                                </li>
-                                <li>
-                                    <span class="dot">✓</span
-                                    ><span>Unlimited nước</span>
-                                </li>
-                            </ul>
-                        </article>
-                    </div>
-
-                    <div class="cta-wrap">
-                        <a
-                            class="btn btn-primary cta-large cta-full"
-                            href="https://api.worldlotho.com/events/1"
-                            >Mua vé</a
-                        >
-                    </div>
-                </div>
-            </section>
-
-            <!-- SCHEDULE -->
-            <section
-                id="schedule"
-                class="section bg-2"
-                aria-label="Lịch trình"
-                style="display: none"
-            >
-                <div class="container">
-                    <h2 class="center mb-22">Lịch trình sự kiện</h2>
-                    <div class="card">
-                        <div class="schedule">
-                            <!-- 09:00 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T09:00:00+07:00"
-                                    >09:00</time
-                                >
-                                <div>
-                                    <h3>Mở cửa – Khai mạc</h3>
-                                    <p class="muted">
-                                        Chào mừng &amp; Giới thiệu • Giao lưu
-                                        chung
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 09:30 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T09:30:00+07:00"
-                                    >09:30</time
-                                >
-                                <div>
-                                    <h3>Văn Nghệ</h3>
-                                    <p class="muted">
-                                        Tiết mục mở màn, giao lưu
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 10:30 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T10:30:00+07:00"
-                                    >10:30</time
-                                >
-                                <div>
-                                    <h3>Talkshow</h3>
-                                    <p class="muted">Trò chuyện • Q&amp;A</p>
-                                </div>
-                            </div>
-
-                            <!-- 11:00 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T11:00:00+07:00"
-                                    >11:00</time
-                                >
-                                <div>
-                                    <h3>Karaoke cùng khách mời</h3>
-                                    <p class="muted">Sân khấu mở</p>
-                                </div>
-                            </div>
-
-                            <!-- 11:30 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T11:30:00+07:00"
-                                    >11:30</time
-                                >
-                                <div>
-                                    <h3>Đoán Nhân Vật cùng khách mời</h3>
-                                    <p class="muted">Đăng ký IS tại quầy</p>
-                                </div>
-                            </div>
-
-                            <!-- 12:00 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T12:00:00+07:00"
-                                    >12:00</time
-                                >
-                                <div>
-                                    <h3>Nghỉ ngơi – Chụp ảnh đầu buổi</h3>
-                                    <p class="muted">
-                                        Ăn uống • Networking • Xem Concert (song
-                                        song)
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 13:00 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T13:00:00+07:00"
-                                    >13:00</time
-                                >
-                                <div>
-                                    <h3>Karaoke – Cuộc thi hát</h3>
-                                    <p class="muted">
-                                        Ri viu mim mở màng (10’)
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 14:00 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T14:00:00+07:00"
-                                    >14:00</time
-                                >
-                                <div>
-                                    <h3>BK-CK Event Idol Showdown</h3>
-                                    <p class="muted">
-                                        Trả lời câu hỏi • Reviu góc simp
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 14:30 -->
-                            <div class="row">
-                                <time datetime="2024-12-15T14:30:00+07:00"
-                                    >14:30</time
-                                >
-                                <div>
-                                    <h3>Giao lưu cosplay</h3>
-                                    <p class="muted">
-                                        Vòng quay may mắn • Xem Concert
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 15:30 -->
-                            <div class="row" style="border-bottom: 0">
-                                <time datetime="2024-12-15T15:30:00+07:00"
-                                    >15:30</time
-                                >
-                                <div>
-                                    <h3>Chụp ảnh cuối buổi</h3>
-                                    <p class="muted">
-                                        Good gallery / holowall • Q&amp;A kết
-                                        thúc
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- FOOTER -->
-        <footer class="section site-footer" aria-label="Footer">
-            <div class="container center">
-                <h3 style="margin: 0 0 6px">
-                    OFFLINE HOLOLIVE HCM - TOGETHER, WE SIMP
-                </h3>
-                <hr />
-                <nav
-                    aria-label="Mạng xã hội"
-                    style="
-                        display: flex;
-                        justify-content: center;
-                        gap: 20px;
-                        flex-wrap: wrap;
-                    "
-                >
-                    <a href="https://www.facebook.com/worldlotho" rel="noopener"
-                        >Facebook</a
-                    >
-                    <a href="https://youtube.com/@WorldLotHo" rel="noopener"
-                        >YouTube</a
-                    >
-                    <a href="mailto:worldsimp@urumocha.com">Support</a>
-                </nav>
-                <hr />
-                <small class="muted"
-                    >© 2025 Worldsimp. All rights reserved.</small
-                >
             </div>
-        </footer>
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-between relative overflow-hidden h-full">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">CỘNG ĐỒNG FAN</h3>
+                    <span class="material-symbols-outlined text-primary text-xl">diversity_3</span>
+                </div>
+                <div class="flex -space-x-2 overflow-hidden mb-3">
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPP-DCh8qM6HtUowqGiSwy0_SlSLdJw64D7OPlBWx0G5Mx38P5SQnDr9udvacnpV7EU2HDi2ny3BN1CuCjHLcH9IAOTdRVaQlipV-hcYzD5E6Z3XsdaUd3C_-P46FsjqGeJcZEyLTlLQkbknbKkzhZSkQA_uBS49EqAWX-0ObyeXjVN11KyKPouhND_w1Szqilft6Kxs5cafWQoGtYic5HKlpkeebvh76dZQsPHWHvcITASL_p0TeGn2ApZjs1fiyGSx8MEPHCnrk")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBo8_eZhjzH6qv1WaxsulvLkFOjrbV0-4faMI87sE5kf7XsEmXQtw9FPKekqP9eNrWIkfPvjCZ7msI6AtJgElbuG6l8r9UAC5RHpy2lnwvslAp1XYZ8EDIC81CHKUVXTfjExpr5H-_fgegF8ARFulL0_XNdUWJx7tAyToa307W6MBn_vOlGrqDf4jqwsgLiC8D3no1elQBgyhsZ2XD-PD5oxpXJTsaAgQK-8o-R5vfiIz5j8c46r_g1b_WJyDJiw4ALCDi5PZXCIys")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfMxj6K4c_SkTAGEzU_ohXHwWeTs3yYbKvXrN7Ar1O9TM9YcCcMTIMy6n-QS_J25jUJbKOTzZX_XKWSRnqQS99m89d_mGwQJoFvG82gZx9Ssk3ODZqYMe8qoERkYXYvWhcGLbp_QBh2pBZWktJODBG8hsWUpd30wBAD1SmbSL8wS3V9ASG4wq6fTHNa2yCCGOD7QYx7dSug1GVv9S02uhhv9e2ptKB17OXEXc8ZdxBAZTEDCKJtHM7LyvIDON8BBWUVAsBKdTAeHE")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUmf0thKRnh4rMp0SYlBIJecx9hb8T7-26nfTbszPcogWPWHZg-4CvX9vNEl6q2LS4lSjYUyQtwhCFe0K7kYfog6iYrpFRQSR2muvCY7ECkaUjgbHHEt88NdykYT3gtyMq8A0MICp4ZUrrX6ppLPDAWAGYln2p6LAvT7z4GNBflqmNC2_HVI1jgLFCQyu8GY_D6VaRvhu6THnG35ZAcn7tZsbG2MZfCma3NoUshAm3M0YrwCnwrvatgTe-GcEcGEHk9sEFjGAvn7A")'>
+                    </div>
+                    <div
+                        class="flex items-center justify-center size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-100 dark:bg-gray-700 text-[10px] font-bold text-gray-500 dark:text-gray-300">
+                        +142
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        class="flex-1 bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                        <span class="size-2 rounded-full bg-green-500"></span> Discord
+                    </button>
+                    <button
+                        class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                        Group
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#101c22] py-8">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+                © 2026 Worldsimp Projekt. All rights reserved.
+            </div>
+            <div class="flex gap-6">
+                <a class="text-gray-400 hover:text-primary transition-colors"
+                    href="https://www.facebook.com/worldsimp235">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="text-gray-400 hover:text-primary transition-colors" href="mailto:admin@worldsimp.com">
+                    <span class="sr-only">Email</span>
+                    <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Countdown Timer Logic
+        const targetDate = new Date('2026-03-08T09:00:00').getTime();
 
-        <script>
-            // Theme toggle
-            const htmlEl = document.documentElement;
-            const themeSwitch = document.getElementById("themeSwitch");
-            const saved = localStorage.getItem("theme");
-            if (saved) {
-                htmlEl.setAttribute("data-theme", saved);
-                if (themeSwitch) themeSwitch.checked = saved === "dark";
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById('countdown-days').textContent = "00";
+                document.getElementById('countdown-hours').textContent = "00";
+                document.getElementById('countdown-minutes').textContent = "00";
+                document.getElementById('countdown-seconds').textContent = "00";
             }
-            if (themeSwitch) {
-                themeSwitch.addEventListener("change", () => {
-                    const mode = themeSwitch.checked ? "dark" : "light";
-                    htmlEl.setAttribute("data-theme", mode);
-                    localStorage.setItem("theme", mode);
-                });
-            }
+        }
 
-            // Mobile menu
-            const menuBtn = document.getElementById("menuBtn");
-            const mobileMenu = document.getElementById("mobileMenu");
-            if (menuBtn && mobileMenu) {
-                const closeMenu = () => {
-                    mobileMenu.classList.remove("open");
-                    menuBtn.setAttribute("aria-expanded", "false");
-                };
-                menuBtn.addEventListener("click", () => {
-                    const open = mobileMenu.classList.toggle("open");
-                    menuBtn.setAttribute(
-                        "aria-expanded",
-                        open ? "true" : "false",
-                    );
-                });
-                mobileMenu
-                    .querySelectorAll("a")
-                    .forEach((a) => a.addEventListener("click", closeMenu));
-                document.addEventListener("click", (e) => {
-                    if (
-                        !mobileMenu.contains(e.target) &&
-                        !menuBtn.contains(e.target)
-                    ) {
-                        closeMenu();
-                    }
-                });
-            }
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
 
-            // Smooth scroll for in-page links
-            document.querySelectorAll('a[href^="#"]').forEach((a) => {
-                a.addEventListener("click", (e) => {
-                    const id = a.getAttribute("href");
-                    if (id && id.length > 1) {
-                        const el = document.querySelector(id);
-                        if (el) {
-                            e.preventDefault();
-                            el.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start",
-                            });
-                        }
-                    }
-                });
-            });
-
-            // Lock buy ticket button
-            document.querySelectorAll(".buy-ticket").forEach((btn) => {
-                btn.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    alert("Chưa đến giờ mua vé");
-                });
-            });
-        </script>
-    </body>
 </html>
