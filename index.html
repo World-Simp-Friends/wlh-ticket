@@ -25,7 +25,8 @@
     <meta property="twitter:description"
         content="Sự kiện Watch Party Hololive 7th Fes lớn nhất tại Hà Nội. Đặt vé ngay hôm nay!">
     <meta property="twitter:image" content="./assets/images/hero.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@700&display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -46,8 +47,9 @@
                         "card-light": "#ffffff",
                     },
                     fontFamily: {
-                        "display": ["Spline Sans", "sans-serif"],
-                        "body": ["Spline Sans", "sans-serif"],
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
                     },
                     borderRadius: {
                         "DEFAULT": "1rem",
@@ -65,7 +67,7 @@
     </script>
     <style>
         body {
-            font-family: 'Spline Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         .bento-card {
@@ -108,7 +110,7 @@
 
                 <div class="relative z-10 flex flex-col h-full justify-between p-6 sm:p-8">
                     <div class="sr-only">
-                        <h1>OFF-FAN HOLOLIVE HANOI 2026</h1>
+                        <h1 class="font-headline">OFF-FAN HOLOLIVE HANOI 2026</h1>
                         <p>Drivin' Into Dreams: Trải nghiệm phép màu tại Hà Nội! Tham gia sự kiện fan offline đáng nhớ
                             cùng chúng tôi.
                         </p>
@@ -124,11 +126,11 @@
                     <span class="material-symbols-outlined">schedule</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-gray-400 uppercase">Thời Gian</h3>
-                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase font-headline">Thời Gian</h3>
+                    <p class="text-lg font-black text-text-main dark:text-white leading-tight mt-1 font-mono">
                         09:00 - 18:00
                     </p>
-                    <p class="text-sm font-medium text-primary mt-0.5">
+                    <p class="text-sm font-semibold text-primary mt-0.5 font-headline">
                         Chủ nhật, 08/03/2026
                     </p>
                 </div>
@@ -140,8 +142,8 @@
                     <span class="material-symbols-outlined">location_on</span>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-gray-400 uppercase">Địa Điểm</h3>
-                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase font-headline">Địa Điểm</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1 font-headline">
                         Biblio - Cafe Sách Ngụy Như Kon Tum
                     </p>
                     <p class="text-sm font-medium text-text-main/60 dark:text-gray-400 mt-0.5">
@@ -156,21 +158,23 @@
                     GIỚI HẠN 15 VÉ
                 </div>
                 <div class="flex flex-col gap-1 mb-6">
-                    <h2 class="text-xl font-bold text-text-main dark:text-white flex items-center gap-2">
+                    <h2
+                        class="text-xl font-extrabold text-text-main dark:text-white flex items-center gap-2 font-headline">
                         <span class="material-symbols-outlined text-cta">confirmation_number</span>
                         VÉ SIMP EARLY BIRD
                     </h2>
                     <div class="flex items-baseline gap-3 mt-2">
-                        <span class="text-4xl font-black text-primary tracking-tighter">150.000₫</span>
-                        <span class="text-lg text-gray-400 line-through font-medium">170.000₫</span>
+                        <span class="text-4xl font-black text-primary tracking-tighter font-mono">150.000₫</span>
+                        <span class="text-lg text-gray-400 line-through font-bold font-mono">170.000₫</span>
                     </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1 font-medium">
                         <span class="material-symbols-outlined text-sm">timer</span>
-                        Mở bán đến 14/02
+                        Mở bán đến <span class="font-mono">14/02</span>
                     </p>
                 </div>
                 <div class="flex-grow space-y-3 mb-6">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Quyền Lợi Vé</h3>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 font-headline">Quyền Lợi Vé
+                    </h3>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                         <li class="flex items-start gap-2 text-sm text-text-main dark:text-gray-300">
                             <span class="material-symbols-outlined text-accent text-lg">check_circle</span>
@@ -199,7 +203,7 @@
                     </ul>
                 </div>
                 <button
-                    class="w-full bg-primary/10 hover:bg-primary/20 text-primary dark:text-primary font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    class="w-full bg-primary/10 hover:bg-primary/20 text-primary dark:text-primary font-extrabold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 font-headline">
                     Mua Vé Ngay
                 </button>
             </div>
@@ -208,7 +212,8 @@
                 <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
                     <span class="material-symbols-outlined text-6xl text-primary transform rotate-12">handshake</span>
                 </div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider z-10">ĐƠN VỊ TỔ CHỨC & ĐỐI TÁC
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider z-10 font-headline">ĐƠN VỊ TỔ
+                    CHỨC & ĐỐI TÁC
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center justify-center h-full z-10 pb-2">
                     <a href="https://www.facebook.com/worldsimp235" target="_blank"
@@ -289,26 +294,26 @@
                     <div class="flex gap-2 items-baseline text-center">
                         <div class="flex flex-col items-center">
                             <span id="countdown-days"
-                                class="text-3xl font-black text-primary font-display leading-none">00</span>
-                            <span class="text-[10px] uppercase tracking-wide opacity-60">Ngày</span>
+                                class="text-3xl font-black text-primary font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Ngày</span>
                         </div>
                         <span class="text-xl font-bold text-gray-500">:</span>
                         <div class="flex flex-col items-center">
                             <span id="countdown-hours"
-                                class="text-3xl font-black text-primary font-display leading-none">00</span>
-                            <span class="text-[10px] uppercase tracking-wide opacity-60">Giờ</span>
+                                class="text-3xl font-black text-primary font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Giờ</span>
                         </div>
                         <span class="text-xl font-bold text-gray-500">:</span>
                         <div class="flex flex-col items-center">
                             <span id="countdown-minutes"
-                                class="text-3xl font-black text-cta font-display leading-none">00</span>
-                            <span class="text-[10px] uppercase tracking-wide opacity-60">Phút</span>
+                                class="text-3xl font-black text-cta font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Phút</span>
                         </div>
                         <span class="text-xl font-bold text-gray-500">:</span>
                         <div class="flex flex-col items-center">
                             <span id="countdown-seconds"
-                                class="text-3xl font-black text-accent font-display leading-none">00</span>
-                            <span class="text-[10px] uppercase tracking-wide opacity-60">Giây</span>
+                                class="text-3xl font-black text-accent font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Giây</span>
                         </div>
                     </div>
                 </div>
@@ -320,7 +325,8 @@
             <div
                 class="bento-card col-span-1 md:col-span-1 lg:col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-between relative overflow-hidden h-full">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider">CỘNG ĐỒNG FAN</h3>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider font-headline">CỘNG ĐỒNG FAN
+                    </h3>
                     <span class="material-symbols-outlined text-primary text-xl">diversity_3</span>
                 </div>
                 <div class="flex -space-x-2 overflow-hidden mb-3">
