@@ -1,3 +1,31 @@
-/* 
-  Cache-Control: public, max-age=300
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# HTML: không cache, luôn kiểm tra phiên bản mới
+/ThapNienHenUoc/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+
+# WebP images: cache 1 năm (immutable vì có hash/content-based)
+/ThapNienHenUoc/assets/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
+
+# PNG/JPG gốc (fallback): cache 30 ngày
+/ThapNienHenUoc/assets/*.png
+  Cache-Control: public, max-age=2592000
+/ThapNienHenUoc/assets/*.jpg
+  Cache-Control: public, max-age=2592000
+
+# Favicon: cache 7 ngày
+/ThapNienHenUoc/assets/favicon_io/*
+  Cache-Control: public, max-age=604800
+
+# Web Manifest
+/ThapNienHenUoc/assets/favicon_io/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=604800
