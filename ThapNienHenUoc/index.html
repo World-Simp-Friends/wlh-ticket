@@ -387,7 +387,7 @@
             animation: lock-inner-pulse 0.15s ease-in-out infinite alternate;
         }
 
-        /* Chấm tâm điểm nhấp nháy nhanh đỏ-vàng-trắng */
+        /* Chấm tâm điểm nhấp nháy nhanh xanh-vàng-trắng */
         .l-cursor.is-locking .l-cursor__point::before {
             animation: lock-point-blink 0.15s linear infinite;
         }
@@ -407,13 +407,14 @@
             100% { transform: rotate(0deg); }
         }
 
-        /* Đổi màu liên tục rực rỡ và nhanh */
+        /* Đổi màu liên tục rực rỡ và nhanh (né các màu nóng cận đỏ) */
         @keyframes lock-color-cycle {
-            0% { color: #ef4444; }     /* Đỏ */
-            25% { color: #eab308; }    /* Vàng */
-            50% { color: #22c55e; }    /* Xanh lá */
-            75% { color: #ec4899; }    /* Hồng */
-            100% { color: #ef4444; }
+            0% { color: #eab308; }     /* Vàng Koro-sensei */
+            20% { color: #22c55e; }    /* Xanh lá */
+            40% { color: #06b6d4; }    /* Xanh ngọc Teal */
+            60% { color: #00c3ff; }    /* Xanh Cyan */
+            80% { color: #84cc16; }    /* Vàng chanh */
+            100% { color: #eab308; }
         }
 
         /* Hồng tâm ngoài co bóp liên tục như đang khóa mục tiêu */
@@ -428,10 +429,10 @@
             100% { transform: translate(-50%, -50%) scale(0.65); opacity: 1; }
         }
 
-        /* Chấm nhỏ trung tâm nhấp nháy đổi màu liên tiếp */
+        /* Chấm nhỏ trung tâm nhấp nháy đổi màu liên tiếp (né màu nóng cận đỏ) */
         @keyframes lock-point-blink {
-            0% { background: #ef4444; }
-            50% { background: #eab308; }
+            0% { background: #00c3ff; }
+            50% { background: #22c55e; }
             100% { background: #ffffff; }
         }
 
