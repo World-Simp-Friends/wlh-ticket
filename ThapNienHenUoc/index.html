@@ -387,13 +387,22 @@
                         <span
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-6 py-2.5 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-2 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308]"
-                        href="#tickets">
-                        <span class="transform skew-x-12 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[20px]">confirmation_number</span>
-                            MUA VÉ
-                        </span>
-                    </a>
+                    <div class="flex items-center gap-3">
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308]"
+                            href="#tickets">
+                            <span class="transform skew-x-12 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                HÀ NỘI
+                            </span>
+                        </a>
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308]"
+                            href="#tickets">
+                            <span class="transform skew-x-12 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                HỒ CHÍ MINH
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary focus:outline-none">
@@ -408,8 +417,16 @@
                 <a class="block text-base font-bold text-gray-600 hover:text-primary" href="#">TRANG CHỦ</a>
                 <a class="block text-base font-bold text-gray-600 hover:text-primary"
                     href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank">TIN TỨC</a>
-                <a class="block w-full text-center bg-secondary hover:bg-red-600 text-white px-6 py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308]"
-                    href="#tickets">MUA VÉ</a>
+                <div class="flex gap-3">
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12"
+                        href="#tickets">
+                        <span class="transform skew-x-12 block text-sm">HÀ NỘI</span>
+                    </a>
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12"
+                        href="#tickets">
+                        <span class="transform skew-x-12 block text-sm">HỒ CHÍ MINH</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -1136,12 +1153,19 @@
 
             <div class="max-w-3xl mx-auto text-center glass-panel p-8 rounded-3xl border-2 border-primary/20">
                 <h3 class="text-2xl font-display font-black text-gray-800 mb-6">SẴN SÀNG THAM GIA CHIẾN DỊCH?</h3>
-                <div class="flex justify-center">
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-10 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto"
-                        href="#tickets-registration">
+                <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto"
+                        href="#tickets">
                         <span class="transform skew-x-12 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[24px]">confirmation_number</span>
-                            MUA VÉ NGAY
+                            <span class="material-symbols-outlined text-[24px]">location_on</span>
+                            MUA VÉ HÀ NỘI
+                        </span>
+                    </a>
+                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto"
+                        href="#tickets">
+                        <span class="transform skew-x-12 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[24px]">location_on</span>
+                            MUA VÉ HỒ CHÍ MINH
                         </span>
                     </a>
                 </div>
