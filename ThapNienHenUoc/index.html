@@ -397,43 +397,95 @@
         ========================================= */
         /* Xoay xuôi chiều kim đồng hồ */
         @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Xoay ngược chiều kim đồng hồ */
         @keyframes rotate-reverse {
-            0% { transform: rotate(360deg); }
-            100% { transform: rotate(0deg); }
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
         }
 
         /* Đổi màu liên tục rực rỡ và nhanh (né các màu nóng cận đỏ) */
         @keyframes lock-color-cycle {
-            0% { color: #eab308; }     /* Vàng Koro-sensei */
-            20% { color: #22c55e; }    /* Xanh lá */
-            40% { color: #06b6d4; }    /* Xanh ngọc Teal */
-            60% { color: #00c3ff; }    /* Xanh Cyan */
-            80% { color: #84cc16; }    /* Vàng chanh */
-            100% { color: #eab308; }
+            0% {
+                color: #eab308;
+            }
+
+            /* Vàng Koro-sensei */
+            20% {
+                color: #22c55e;
+            }
+
+            /* Xanh lá */
+            40% {
+                color: #06b6d4;
+            }
+
+            /* Xanh ngọc Teal */
+            60% {
+                color: #00c3ff;
+            }
+
+            /* Xanh Cyan */
+            80% {
+                color: #84cc16;
+            }
+
+            /* Vàng chanh */
+            100% {
+                color: #eab308;
+            }
         }
 
         /* Hồng tâm ngoài co bóp liên tục như đang khóa mục tiêu */
         @keyframes lock-pulsate {
-            0% { transform: scale(1.1); }
-            100% { transform: scale(1.4); }
+            0% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1.4);
+            }
         }
 
         /* Vòng ngắm trong nhấp nháy giật liên tục */
         @keyframes lock-inner-pulse {
-            0% { transform: translate(-50%, -50%) scale(0.35); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(0.65); opacity: 1; }
+            0% {
+                transform: translate(-50%, -50%) scale(0.35);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(0.65);
+                opacity: 1;
+            }
         }
 
         /* Chấm nhỏ trung tâm nhấp nháy đổi màu liên tiếp (né màu nóng cận đỏ) */
         @keyframes lock-point-blink {
-            0% { background: #00c3ff; }
-            50% { background: #22c55e; }
-            100% { background: #ffffff; }
+            0% {
+                background: #00c3ff;
+            }
+
+            50% {
+                background: #22c55e;
+            }
+
+            100% {
+                background: #ffffff;
+            }
         }
 
         /* Định nghĩa con trỏ cho nút mua vé để ẩn con trỏ mặc định */
@@ -443,21 +495,32 @@
 
         /* Hiệu ứng viền cảnh báo nhấp nháy khi khóa mục tiêu */
         @keyframes border-alert {
-            0%, 100% { 
-                border-color: #ef4444; 
-                box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); 
+
+            0%,
+            100% {
+                border-color: #ef4444;
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
             }
-            50% { 
-                border-color: #eab308; 
-                box-shadow: 0 0 35px rgba(234, 179, 8, 0.6); 
+
+            50% {
+                border-color: #eab308;
+                box-shadow: 0 0 35px rgba(234, 179, 8, 0.6);
             }
         }
 
         /* Hiệu ứng tia quét laser di chuyển lên xuống */
         @keyframes scan-line {
-            0% { top: 0%; }
-            50% { top: 100%; }
-            100% { top: 0%; }
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0%;
+            }
         }
 
         .border-alert-hover {
@@ -553,8 +616,7 @@
         });
     </script>
 
-    <header
-        class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
+    <header class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
         <!-- Background Image with Blur Effect -->
         <div class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-[3px] scale-105 transform origin-center z-0"
             style="background-image: url('assets/visual-banner.webp');"></div>
@@ -689,23 +751,36 @@
                                 <span class="hidden group-hover:inline text-yellow-300">ĐÃ KHÓA</span>
                             </span>
                             <span class="tracking-widest group-hover:hidden">/// ĐỐI TƯỢNG MỤC TIÊU</span>
-                            <span class="tracking-widest hidden group-hover:inline text-yellow-300 animate-pulse">/// ĐÃ KHÓA MỤC TIÊU</span>
+                            <span class="tracking-widest hidden group-hover:inline text-yellow-300 animate-pulse">/// ĐÃ
+                                KHÓA MỤC TIÊU</span>
                         </div>
 
                         <!-- Khung ảnh Koro-sensei -->
                         <div
                             class="relative z-10 bg-[#fefce8] rounded-xl overflow-hidden border-2 border-gray-700 h-[300px] md:h-[400px] flex items-center justify-center">
                             <!-- Phủ đỏ ngầu radar khi khóa mục tiêu -->
-                            <div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 animate-pulse"></div>
+                            <div
+                                class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 animate-pulse">
+                            </div>
 
                             <!-- Tia quét mục tiêu (Scan Line) -->
-                            <div class="absolute left-0 w-full h-[3px] bg-red-500 shadow-[0_0_8px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-15 pointer-events-none animate-[scan-line_2s_linear_infinite]"></div>
+                            <div
+                                class="absolute left-0 w-full h-[3px] bg-red-500 shadow-[0_0_8px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-15 pointer-events-none animate-[scan-line_2s_linear_infinite]">
+                            </div>
 
                             <!-- Góc ngắm HUD (HUD Corner brackets) -->
-                            <div class="absolute w-6 h-6 border-t-2 border-l-2 border-secondary top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none z-20"></div>
-                            <div class="absolute w-6 h-6 border-t-2 border-r-2 border-secondary top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1 pointer-events-none z-20"></div>
-                            <div class="absolute w-6 h-6 border-b-2 border-l-2 border-secondary bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20"></div>
-                            <div class="absolute w-6 h-6 border-b-2 border-r-2 border-secondary bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20"></div>
+                            <div
+                                class="absolute w-6 h-6 border-t-2 border-l-2 border-secondary top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-t-2 border-r-2 border-secondary top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-b-2 border-l-2 border-secondary bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-b-2 border-r-2 border-secondary bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20">
+                            </div>
 
                             <!-- Overlay Tâm Ngắm ngầu -->
                             <div
@@ -729,9 +804,10 @@
                                     class="font-mono text-secondary font-black text-2xl md:text-3xl mb-1 tracking-widest">
                                     KORO-SENSEI</p>
                                 <p class="font-mono text-gray-400 text-[10px] md:text-xs">MỨC THƯỞNG: 10 TỶ YÊN | TÌNH
-                                    TRẠNG: 
+                                    TRẠNG:
                                     <span class="text-secondary font-bold group-hover:hidden">CHƯA TIÊU DIỆT</span>
-                                    <span class="text-red-500 font-black hidden group-hover:inline animate-pulse">ĐANG KHÓA MỤC TIÊU...</span>
+                                    <span class="text-red-500 font-black hidden group-hover:inline animate-pulse">ĐANG
+                                        KHÓA MỤC TIÊU...</span>
                                 </p>
                             </div>
                             <!-- Icon scan -->
@@ -762,7 +838,8 @@
 
 
                     <p class="text-gray-600 text-lg font-medium border-l-4 border-secondary pl-4 py-1 mb-8">
-                        Hãy chuẩn bị sẵn sàng cho sự kiện Offline | Fan Screening lớn nhất của cộng đồng Ansatsu Kyoushitsu tại Việt Nam!
+                        Hãy chuẩn bị sẵn sàng cho sự kiện Offline | Fan Screening lớn nhất của cộng đồng Ansatsu
+                        Kyoushitsu tại Việt Nam!
                     </p>
 
                     <!-- Classified Dossier Box (Light Mode) -->
@@ -843,20 +920,23 @@
                 <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
 
                     <!-- Organizer 1: World Simp And Friends -->
-                    <a href="https://www.facebook.com/worldsimp235" target="_blank" class="group flex flex-col items-center">
+                    <a href="https://www.facebook.com/worldsimp235" target="_blank"
+                        class="group flex flex-col items-center">
                         <div
                             class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
                             <img src="assets/worldsimp.webp" alt="World Simp And Friends" loading="lazy"
                                 class="w-full h-full rounded-full object-cover transition-all duration-300">
                         </div>
-                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">World Simp And Friends</p>
+                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">World
+                            Simp And Friends</p>
                         <p
                             class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
                             TỔ CHỨC</p>
                     </a>
 
                     <!-- Organizer 2: Ansatsu Kyoushitsu VN Fanpage -->
-                    <a href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank" class="group flex flex-col items-center">
+                    <a href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank"
+                        class="group flex flex-col items-center">
                         <div
                             class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
                             <img src="assets/ansattsu.webp" alt="Ansatsu Kyoushitsu VN Fanpage" loading="lazy"
@@ -871,13 +951,15 @@
                     </a>
 
                     <!-- Sponsor: PeoPo Store -->
-                    <a href="https://www.facebook.com/PeoPoStore" target="_blank" class="group flex flex-col items-center">
+                    <a href="https://www.facebook.com/PeoPoStore" target="_blank"
+                        class="group flex flex-col items-center">
                         <div
                             class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
                             <img src="assets/peopostore.webp" alt="PeoPo Store" loading="lazy"
                                 class="w-full h-full rounded-full object-cover transition-all duration-300">
                         </div>
-                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">PeoPo Store</p>
+                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">PeoPo
+                            Store</p>
                         <p
                             class="text-[10px] font-mono font-bold text-yellow-600 tracking-[0.2em] mt-2 border border-yellow-300 bg-yellow-50 rounded px-3 py-1">
                             TÀI TRỢ</p>
@@ -1292,22 +1374,127 @@
                 </div>
             </div>
 
-            <div class="max-w-3xl mx-auto text-center glass-panel p-8 rounded-3xl border-2 border-primary/20">
-                <h3 class="text-2xl font-display font-black text-gray-800 mb-6">SẴN SÀNG THAM GIA CHIẾN DỊCH?</h3>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto ticket-btn"
-                        href="#tickets">
-                        <span class="transform skew-x-12 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[24px]">location_on</span>
-                            MUA VÉ HÀ NỘI
-                        </span>
+            <!-- KHU VỰC TÁC CHIẾN (MISSION ZONE SELECTION) -->
+            <div class="max-w-6xl mx-auto text-center relative z-10 mt-16 pb-8">
+                <div class="flex items-center justify-center gap-4 mb-10">
+                    <span class="w-16 h-1 bg-secondary skew-x-12"></span>
+                    <h3 class="text-3xl md:text-5xl font-display font-black text-gray-800 uppercase tracking-widest">
+                        CHỌN KHU VỰC <span class="text-secondary">TÁC CHIẾN</span>
+                    </h3>
+                    <span class="w-16 h-1 bg-secondary -skew-x-12"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
+                    <!-- HÀ NỘI MISSION CARD -->
+                    <a href="#" target="_blank"
+                        class="relative group block transform -skew-x-6 hover:-translate-y-2 transition-all duration-500 overflow-hidden rounded-3xl border-4 border-gray-800 hover:border-secondary shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_0_40px_rgba(239,68,68,0.5)] ticket-btn">
+                        <!-- Background Image Container -->
+                        <div class="absolute inset-0 z-0 bg-gray-900">
+                            <img src="assets/westlake.webp" alt="Hà Nội West Lake"
+                                class="w-full h-full object-cover grayscale mix-blend-screen opacity-50 group-hover:grayscale-0 group-hover:mix-blend-normal group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out" />
+                            <!-- Red/Dark filter overlay that fades on hover -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent group-hover:opacity-30 transition-opacity duration-500">
+                            </div>
+                        </div>
+
+                        <!-- Scan Line on hover -->
+                        <div
+                            class="absolute left-0 w-full h-[4px] bg-red-500 shadow-[0_0_12px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none animate-[scan-line_2.5s_linear_infinite]">
+                        </div>
+
+                        <!-- Radar Lock Target on hover -->
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none scale-150 group-hover:scale-100 ease-out">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 border-[3px] border-secondary rounded-full animate-[spin_3s_linear_infinite] border-dashed shadow-[0_0_15px_#ef4444]">
+                            </div>
+                            <div class="absolute w-full h-[2px] bg-secondary/60"></div>
+                            <div class="absolute h-full w-[2px] bg-secondary/60"></div>
+                            <div class="w-3 h-3 bg-secondary rounded-full absolute animate-ping"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                            <div
+                                class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
+                                <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
+                                ĐỊA ĐIỂM: HÀ NỘI
+                            </div>
+
+                            <h4
+                                class="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tight group-hover:hidden transition-all duration-300 drop-shadow-xl">
+                                LOTTE HỒ TÂY
+                            </h4>
+                            <h4
+                                class="text-3xl md:text-5xl font-display font-black text-yellow-400 uppercase tracking-tight hidden group-hover:block animate-pulse drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                                XÁC NHẬN MỤC TIÊU
+                            </h4>
+
+                            <div class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                                <span
+                                    class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
+                                    CHƯA MỞ KHÓA ]</span>
+                                <span
+                                    class="material-symbols-outlined text-gray-400 group-hover:text-secondary transform group-hover:translate-x-3 transition-all duration-300 text-xl md:text-2xl">arrow_forward_ios</span>
+                            </div>
+                        </div>
                     </a>
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto ticket-btn"
-                        href="#tickets">
-                        <span class="transform skew-x-12 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[24px]">location_on</span>
-                            MUA VÉ HỒ CHÍ MINH
-                        </span>
+
+                    <!-- HỒ CHÍ MINH MISSION CARD -->
+                    <a href="#" target="_blank"
+                        class="relative group block transform -skew-x-6 hover:-translate-y-2 transition-all duration-500 overflow-hidden rounded-3xl border-4 border-gray-800 hover:border-secondary shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_0_40px_rgba(239,68,68,0.5)] ticket-btn">
+                        <!-- Background Image Container -->
+                        <div class="absolute inset-0 z-0 bg-gray-900">
+                            <img src="assets/lotte-govap.webp" alt="Hồ Chí Minh Lotte Gò Vấp"
+                                class="w-full h-full object-cover grayscale mix-blend-screen opacity-50 group-hover:grayscale-0 group-hover:mix-blend-normal group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out" />
+                            <!-- Red/Dark filter overlay that fades on hover -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent group-hover:opacity-30 transition-opacity duration-500">
+                            </div>
+                        </div>
+
+                        <!-- Scan Line on hover -->
+                        <div
+                            class="absolute left-0 w-full h-[4px] bg-red-500 shadow-[0_0_12px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none animate-[scan-line_2.5s_linear_infinite]">
+                        </div>
+
+                        <!-- Radar Lock Target on hover -->
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none scale-150 group-hover:scale-100 ease-out">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 border-[3px] border-secondary rounded-full animate-[spin_3s_linear_infinite] border-dashed shadow-[0_0_15px_#ef4444]">
+                            </div>
+                            <div class="absolute w-full h-[2px] bg-secondary/60"></div>
+                            <div class="absolute h-full w-[2px] bg-secondary/60"></div>
+                            <div class="w-3 h-3 bg-secondary rounded-full absolute animate-ping"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                            <div
+                                class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
+                                <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
+                                ĐỊA ĐIỂM: HỒ CHÍ MINH
+                            </div>
+
+                            <h4
+                                class="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tight group-hover:hidden transition-all duration-300 drop-shadow-xl">
+                                LOTTE GÒ VẤP
+                            </h4>
+                            <h4
+                                class="text-3xl md:text-5xl font-display font-black text-yellow-400 uppercase tracking-tight hidden group-hover:block animate-pulse drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                                XÁC NHẬN MỤC TIÊU
+                            </h4>
+
+                            <div class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                                <span
+                                    class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
+                                    CHƯA MỞ KHÓA ]</span>
+                                <span
+                                    class="material-symbols-outlined text-gray-400 group-hover:text-secondary transform group-hover:translate-x-3 transition-all duration-300 text-xl md:text-2xl">arrow_forward_ios</span>
+                            </div>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -1468,9 +1655,109 @@
                 btn.addEventListener('mouseleave', () => {
                     cursor.classList.remove('is-locking');
                 });
+
+                // Cảnh báo khi mua vé
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    let rawText = btn.innerText.toUpperCase();
+                    let locationStr = rawText.includes('HÀ NỘI') || rawText.includes('HỒ TÂY') ? 'HÀ NỘI' : 'HỒ CHÍ MINH';
+                    let link = btn.getAttribute('href');
+                    
+                    const modal = document.getElementById('ticket-warning-modal');
+                    const modalOverlay = document.getElementById('ticket-modal-overlay');
+                    const modalContent = document.getElementById('ticket-modal-content');
+                    const locationTextEl = document.getElementById('ticket-location-text');
+                    
+                    // Xóa event cũ của nút xác nhận để tránh gọi nhiều lần
+                    const oldConfirmBtn = document.getElementById('ticket-modal-confirm');
+                    const newConfirmBtn = oldConfirmBtn.cloneNode(true);
+                    oldConfirmBtn.parentNode.replaceChild(newConfirmBtn, oldConfirmBtn);
+                    
+                    locationTextEl.innerText = locationStr;
+                    modal.classList.remove('hidden');
+                    void modal.offsetWidth; // trigger reflow
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-90', 'opacity-0');
+
+                    newConfirmBtn.addEventListener('click', () => {
+                        modalOverlay.classList.add('opacity-0');
+                        modalContent.classList.add('scale-90', 'opacity-0');
+                        setTimeout(() => modal.classList.add('hidden'), 300);
+                        
+                        if(link && link !== '#tickets' && link !== '#') {
+                            window.open(link, btn.getAttribute('target') || '_self');
+                        } else {
+                            // Link tạm nếu chưa điền
+                            console.log('Chưa cấu hình link mua vé.');
+                        }
+                    });
+                });
+            });
+
+            // Logic đóng modal
+            document.getElementById('ticket-modal-cancel').addEventListener('click', () => {
+                const modal = document.getElementById('ticket-warning-modal');
+                const modalOverlay = document.getElementById('ticket-modal-overlay');
+                const modalContent = document.getElementById('ticket-modal-content');
+                modalOverlay.classList.add('opacity-0');
+                modalContent.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
             });
         });
     </script>
+
+    <!-- CẢNH BÁO MUA VÉ HUD MODAL -->
+    <div id="ticket-warning-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+        <!-- Overlay blur -->
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-crosshair" id="ticket-modal-overlay"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative w-[90%] max-w-md bg-[#111827] border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] transform scale-90 opacity-0 transition-all duration-300 p-8" id="ticket-modal-content">
+            <!-- Corner Brackets -->
+            <div class="absolute w-4 h-4 border-t-2 border-l-2 border-red-500 top-2 left-2"></div>
+            <div class="absolute w-4 h-4 border-t-2 border-r-2 border-red-500 top-2 right-2"></div>
+            <div class="absolute w-4 h-4 border-b-2 border-l-2 border-red-500 bottom-2 left-2"></div>
+            <div class="absolute w-4 h-4 border-b-2 border-r-2 border-red-500 bottom-2 right-2"></div>
+
+            <!-- Header -->
+            <div class="flex items-center gap-3 mb-6 border-b border-red-500/30 pb-4">
+                <span class="material-symbols-outlined text-red-500 text-4xl animate-pulse">warning</span>
+                <div>
+                    <h4 class="text-red-500 font-display font-black text-2xl tracking-widest leading-none">CẢNH BÁO</h4>
+                    <p class="text-red-400/80 font-mono text-xs tracking-[0.2em] mt-1">HỆ THỐNG XÁC NHẬN MỤC TIÊU</p>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-8 relative z-10">
+                <p class="text-gray-300 font-mono text-sm leading-relaxed mb-4">
+                    Bạn đang chuẩn bị khóa mục tiêu và tiến hành mua vé cho khu vực:
+                </p>
+                <div class="bg-red-500/10 border border-red-500/50 p-4 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgoJPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iNCIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==')] opacity-50"></div>
+                    <h5 id="ticket-location-text" class="text-3xl font-display font-black text-white tracking-widest relative z-10 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                        HÀ NỘI
+                    </h5>
+                </div>
+                <p class="text-yellow-400 font-mono text-[11px] md:text-xs mt-4 text-center leading-relaxed">
+                    * Lưu ý: Vé đã mua KHÔNG THỂ hoán đổi giữa 2 đầu cầu. Vui lòng kiểm tra kỹ tọa độ trước khi tấn công!
+                </p>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-4 relative z-10">
+                <button id="ticket-modal-cancel" class="flex-1 bg-transparent border border-gray-600 text-gray-400 font-display font-bold py-3 hover:bg-gray-800 hover:text-white hover:border-gray-500 transition-colors tracking-wider">
+                    HỦY LỆNH
+                </button>
+                <button id="ticket-modal-confirm" class="flex-1 bg-red-600 text-white font-display font-black py-3 hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] tracking-wider flex items-center justify-center gap-2 group">
+                    XÁC NHẬN <span class="material-symbols-outlined text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">rocket_launch</span>
+                </button>
+            </div>
+            
+            <!-- Scan line effect for modal -->
+            <div class="absolute left-0 w-full h-[2px] bg-red-500/50 shadow-[0_0_8px_#ef4444] pointer-events-none animate-[scan-line_3s_linear_infinite] z-0"></div>
+        </div>
+    </div>
 </body>
 
 </html>
