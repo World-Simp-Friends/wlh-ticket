@@ -353,6 +353,65 @@
         .l-cursor.is-scope .l-cursor__inner::before {
             transform: scale(1);
         }
+
+        /* =========================================
+           HIỆU ỨNG KHÓA MỤC TIÊU (.is-locking)
+           Khi hover vào nút mua vé
+        ========================================= */
+        .l-cursor.is-locking {
+            --cursor-color: currentColor;
+            animation: lock-color-cycle 0.8s linear infinite;
+        }
+
+        .l-cursor.is-locking .l-cursor__outer {
+            animation: lock-pulsate 0.3s ease-in-out infinite alternate;
+        }
+
+        .l-cursor.is-locking .l-cursor__outer-deco {
+            animation: rotate 0.8s linear infinite !important;
+        }
+
+        .l-cursor.is-locking .l-cursor__inner {
+            animation: lock-inner-pulse 0.15s ease-in-out infinite alternate;
+        }
+
+        /* Chấm tâm điểm nhấp nháy nhanh đỏ-vàng-trắng */
+        .l-cursor.is-locking .l-cursor__point::before {
+            animation: lock-point-blink 0.15s linear infinite;
+        }
+
+        /* Đổi màu liên tục rực rỡ và nhanh */
+        @keyframes lock-color-cycle {
+            0% { color: #ef4444; }     /* Đỏ */
+            25% { color: #eab308; }    /* Vàng */
+            50% { color: #22c55e; }    /* Xanh lá */
+            75% { color: #ec4899; }    /* Hồng */
+            100% { color: #ef4444; }
+        }
+
+        /* Hồng tâm ngoài co bóp liên tục như đang khóa mục tiêu */
+        @keyframes lock-pulsate {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.4); }
+        }
+
+        /* Vòng ngắm trong nhấp nháy giật liên tục */
+        @keyframes lock-inner-pulse {
+            0% { transform: translate(-50%, -50%) scale(0.35); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(0.65); opacity: 1; }
+        }
+
+        /* Chấm nhỏ trung tâm nhấp nháy đổi màu liên tiếp */
+        @keyframes lock-point-blink {
+            0% { background: #ef4444; }
+            50% { background: #eab308; }
+            100% { background: #ffffff; }
+        }
+
+        /* Định nghĩa con trỏ cho nút mua vé để ẩn con trỏ mặc định */
+        .ticket-btn {
+            cursor: none !important;
+        }
     </style>
 </head>
 
@@ -388,14 +447,14 @@
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
                     <div class="flex items-center gap-3">
-                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308]"
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308] ticket-btn"
                             href="#tickets">
                             <span class="transform skew-x-12 flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-[18px]">location_on</span>
                                 HÀ NỘI
                             </span>
                         </a>
-                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308]"
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308] ticket-btn"
                             href="#tickets">
                             <span class="transform skew-x-12 flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-[18px]">location_on</span>
@@ -418,11 +477,11 @@
                 <a class="block text-base font-bold text-gray-600 hover:text-primary"
                     href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank">TIN TỨC</a>
                 <div class="flex gap-3">
-                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12"
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12 ticket-btn"
                         href="#tickets">
                         <span class="transform skew-x-12 block text-sm">HÀ NỘI</span>
                     </a>
-                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12"
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12 ticket-btn"
                         href="#tickets">
                         <span class="transform skew-x-12 block text-sm">HỒ CHÍ MINH</span>
                     </a>
@@ -1157,14 +1216,14 @@
             <div class="max-w-3xl mx-auto text-center glass-panel p-8 rounded-3xl border-2 border-primary/20">
                 <h3 class="text-2xl font-display font-black text-gray-800 mb-6">SẴN SÀNG THAM GIA CHIẾN DỊCH?</h3>
                 <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto"
+                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto ticket-btn"
                         href="#tickets">
                         <span class="transform skew-x-12 flex items-center gap-2">
                             <span class="material-symbols-outlined text-[24px]">location_on</span>
                             MUA VÉ HÀ NỘI
                         </span>
                     </a>
-                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto"
+                    <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-8 py-4 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center justify-center gap-2 border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] w-full sm:w-auto ticket-btn"
                         href="#tickets">
                         <span class="transform skew-x-12 flex items-center gap-2">
                             <span class="material-symbols-outlined text-[24px]">location_on</span>
@@ -1275,6 +1334,7 @@
             // Mảng các thẻ cần hover đổi màu đỏ (a, button, input...)
             // WOW Effect: Thêm hình ảnh (img, svg) và Tiêu đề (h2, h3) để ngắm bắn
             const hoverTargets = document.querySelectorAll('a, button, input, .hover-target, img, svg, h2, h3, .glass-panel');
+            const ticketBtns = document.querySelectorAll('.ticket-btn');
 
             // Logic chạy theo chuột
             document.addEventListener('mousemove', (e) => {
@@ -1298,15 +1358,36 @@
                 if (!isHoveringTarget) {
                     cursor.classList.remove('is-scope');
                 }
+
+                // Nếu đang thả chuột trên nút mua vé thì khôi phục lại trạng thái lock mục tiêu
+                let isHoveringTicketBtn = Array.from(ticketBtns).some(btn => btn.contains(e.target));
+                if (isHoveringTicketBtn) {
+                    cursor.classList.add('is-locking');
+                } else {
+                    cursor.classList.remove('is-locking');
+                }
             });
 
             // Logic handle Xanh - Đỏ (Bật/tắt class is-scope)
             hoverTargets.forEach(target => {
+                // Bỏ qua nếu target này là nút mua vé (đã được xử lý riêng bằng class is-locking)
+                if (target.classList.contains('ticket-btn')) return;
+
                 target.addEventListener('mouseenter', () => {
                     cursor.classList.add('is-scope');
                 });
                 target.addEventListener('mouseleave', () => {
                     cursor.classList.remove('is-scope');
+                });
+            });
+
+            // Logic handle Lock mục tiêu cho nút mua vé
+            ticketBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    cursor.classList.add('is-locking');
+                });
+                btn.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('is-locking');
                 });
             });
         });
