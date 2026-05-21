@@ -440,6 +440,33 @@
         .ticket-btn {
             cursor: none !important;
         }
+
+        /* Hiệu ứng viền cảnh báo nhấp nháy khi khóa mục tiêu */
+        @keyframes border-alert {
+            0%, 100% { 
+                border-color: #ef4444; 
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); 
+            }
+            50% { 
+                border-color: #eab308; 
+                box-shadow: 0 0 35px rgba(234, 179, 8, 0.6); 
+            }
+        }
+
+        /* Hiệu ứng tia quét laser di chuyển lên xuống */
+        @keyframes scan-line {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
+
+        .border-alert-hover {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .group:hover .border-alert-hover {
+            animation: border-alert 0.8s ease-in-out infinite;
+        }
     </style>
 </head>
 
@@ -644,7 +671,7 @@
                 <!-- Cột trái: Koro-sensei Target (Wanted Poster) -->
                 <div class="w-full lg:w-1/2 relative group">
                     <div
-                        class="bg-gray-900 rounded-[2rem] p-5 shadow-2xl border-4 border-gray-800 relative overflow-hidden transform transition-all duration-500 group-hover:scale-[1.02] group-hover:border-secondary group-hover:shadow-[0_0_40px_rgba(239,68,68,0.5)]">
+                        class="bg-gray-900 rounded-[2rem] p-5 shadow-2xl border-4 border-gray-800 relative overflow-hidden transform transition-all duration-500 group-hover:scale-[1.02] border-alert-hover">
                         <!-- Radar/Grid Background -->
                         <div
                             class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
@@ -655,15 +682,31 @@
 
                         <!-- Cảnh báo (Header của thẻ) -->
                         <div
-                            class="relative z-20 flex justify-between items-center bg-secondary text-white font-mono font-black text-sm md:text-base px-4 py-3 rounded-xl mb-4 border-2 border-red-900 shadow-inner">
-                            <span class="flex items-center gap-2 animate-pulse"><span
-                                    class="material-symbols-outlined text-[20px]">warning</span> CAO MẬT</span>
-                            <span class="tracking-widest">/// ĐỐI TƯỢNG MỤC TIÊU</span>
+                            class="relative z-20 flex justify-between items-center bg-secondary text-white font-mono font-black text-sm md:text-base px-4 py-3 rounded-xl mb-4 border-2 border-red-900 shadow-inner transition-colors duration-300 group-hover:bg-red-700">
+                            <span class="flex items-center gap-2 animate-pulse">
+                                <span class="material-symbols-outlined text-[20px]">warning</span>
+                                <span class="group-hover:hidden">CAO MẬT</span>
+                                <span class="hidden group-hover:inline text-yellow-300">ĐÃ KHÓA</span>
+                            </span>
+                            <span class="tracking-widest group-hover:hidden">/// ĐỐI TƯỢNG MỤC TIÊU</span>
+                            <span class="tracking-widest hidden group-hover:inline text-yellow-300 animate-pulse">/// ĐÃ KHÓA MỤC TIÊU</span>
                         </div>
 
                         <!-- Khung ảnh Koro-sensei -->
                         <div
                             class="relative z-10 bg-[#fefce8] rounded-xl overflow-hidden border-2 border-gray-700 h-[300px] md:h-[400px] flex items-center justify-center">
+                            <!-- Phủ đỏ ngầu radar khi khóa mục tiêu -->
+                            <div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 animate-pulse"></div>
+
+                            <!-- Tia quét mục tiêu (Scan Line) -->
+                            <div class="absolute left-0 w-full h-[3px] bg-red-500 shadow-[0_0_8px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-15 pointer-events-none animate-[scan-line_2s_linear_infinite]"></div>
+
+                            <!-- Góc ngắm HUD (HUD Corner brackets) -->
+                            <div class="absolute w-6 h-6 border-t-2 border-l-2 border-secondary top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none z-20"></div>
+                            <div class="absolute w-6 h-6 border-t-2 border-r-2 border-secondary top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1 pointer-events-none z-20"></div>
+                            <div class="absolute w-6 h-6 border-b-2 border-l-2 border-secondary bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20"></div>
+                            <div class="absolute w-6 h-6 border-b-2 border-r-2 border-secondary bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20"></div>
+
                             <!-- Overlay Tâm Ngắm ngầu -->
                             <div
                                 class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
@@ -686,7 +729,10 @@
                                     class="font-mono text-secondary font-black text-2xl md:text-3xl mb-1 tracking-widest">
                                     KORO-SENSEI</p>
                                 <p class="font-mono text-gray-400 text-[10px] md:text-xs">MỨC THƯỞNG: 10 TỶ YÊN | TÌNH
-                                    TRẠNG: <span class="text-secondary font-bold">CHƯA TIÊU DIỆT</span></p>
+                                    TRẠNG: 
+                                    <span class="text-secondary font-bold group-hover:hidden">CHƯA TIÊU DIỆT</span>
+                                    <span class="text-red-500 font-black hidden group-hover:inline animate-pulse">ĐANG KHÓA MỤC TIÊU...</span>
+                                </p>
                             </div>
                             <!-- Icon scan -->
                             <div
@@ -696,12 +742,17 @@
                             </div>
                         </div>
 
-                        <!-- Dấu mộc CONFIDENTIAL / WANTED -->
+                        <!-- Dấu mộc WANTED / LOCKED -->
                         <div
-                            class="absolute top-28 -right-4 z-30 transform rotate-[25deg] opacity-0 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none">
+                            class="absolute top-28 -right-4 z-30 transform rotate-[25deg] transition-all duration-300 pointer-events-none">
+                            <!-- Mộc WANTED mặc định -->
                             <div
-                                class="border-[6px] border-secondary text-secondary font-black text-4xl px-4 py-1 rounded-xl shadow-lg bg-gray-900/50 backdrop-blur-sm">
+                                class="border-[6px] border-secondary text-secondary font-black text-4xl px-4 py-1 rounded-xl shadow-lg bg-gray-900/70 backdrop-blur-sm group-hover:hidden">
                                 WANTED</div>
+                            <!-- Mộc LOCKED khi hover -->
+                            <div
+                                class="hidden group-hover:block border-[6px] border-yellow-500 text-yellow-500 font-black text-4xl px-4 py-1 rounded-xl shadow-[0_0_25px_rgba(234,179,8,0.7)] bg-gray-900/80 backdrop-blur-sm animate-pulse transform scale-110">
+                                LOCKED</div>
                         </div>
                     </div>
                 </div>
