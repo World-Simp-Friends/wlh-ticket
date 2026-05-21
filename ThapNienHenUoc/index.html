@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+                      DỰ ÁN: THẬP NIÊN HẸN ƯỚC
+========================================================================
+Tác giả / Author:
+- Miho (Website: https://miho.worldsimp.com/ | GitHub: https://github.com/Miho1254)
+
+Nguồn tài nguyên & Thư viện sử dụng:
+1. CSS Framework: Tailwind CSS v3 (CDN)
+2. Animation & Scroll Control:
+   - GSAP (GreenSock Animation Platform)
+   - GSAP ScrollTrigger Plugin
+   - Lenis Smooth Scroll (by Studio Freight / darkroom.engineering)
+3. Fonts & Icons:
+   - Montserrat & Nunito (Google Fonts)
+   - Material Symbols Outlined (Google Fonts)
+4. Hiệu ứng Custom Cursor:
+   - Tham khảo và phát triển dựa trên mã nguồn của: https://anime-86.com/
+========================================================================
+-->
 <html lang="vi">
 
 <head>
@@ -90,6 +110,87 @@
         html::-webkit-scrollbar {
             display: none;
             /* Chrome, Safari and Opera */
+        }
+
+        /* Tactical Grid Pattern cho nền trang và các phần tử sáng */
+        body,
+        section.bg-white {
+            background-image:
+                linear-gradient(rgba(153, 27, 27, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(153, 27, 27, 0.06) 1px, transparent 1px) !important;
+            background-size: 60px 60px !important;
+            background-position: center center !important;
+            background-attachment: fixed !important;
+        }
+
+        /* Style cho Tactical Sidebar Navigation */
+        .nav-label {
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot {
+            box-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-label {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            color: #991b1b !important;
+            /* Đỏ Sát Thủ sẫm tương phản tối đa trên nền kem */
+            font-weight: 700;
+            text-shadow: none !important;
+        }
+
+        .nav-item.active .nav-dot {
+            border-color: #991b1b !important;
+            background-color: rgba(153, 27, 27, 0.08) !important;
+            transform: rotate(45deg) scale(1.25) !important;
+            box-shadow: 0 0 10px rgba(153, 27, 27, 0.15) !important;
+        }
+
+        .nav-item.active .nav-dot-inner {
+            background-color: #991b1b !important;
+            box-shadow: 0 0 6px rgba(153, 27, 27, 0.4);
+        }
+
+        /* Micro-animation khi hover trên chấm tròn và nhãn */
+        .nav-item:hover .nav-label {
+            color: #dc2626 !important;
+            /* Đỏ sáng */
+            text-shadow: none !important;
+        }
+
+        .nav-item:hover .nav-dot {
+            border-color: #dc2626 !important;
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        .nav-item:hover .nav-dot-inner {
+            background-color: #dc2626 !important;
+        }
+
+        /* Hiệu ứng vòng ngắm radar (pulsing ring) khi active */
+        .nav-item.active .nav-dot::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+            animation: hud-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes hud-ping {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2.0);
+                opacity: 0;
+            }
         }
 
         .glass-panel {
@@ -616,7 +717,7 @@
         });
     </script>
 
-    <header class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
+    <header id="hero" class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
         <!-- Background Image with Blur Effect -->
         <div class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-[3px] scale-105 transform origin-center z-0"
             style="background-image: url('assets/visual-banner.webp');"></div>
@@ -689,6 +790,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mũi tên cuộn trang trỏ thẳng xuống mục mua vé -->
+        <a href="#zones"
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-300 group rounded-full z-20 p-4 max-md:z-30">
+            <div class="flex flex-col items-center">
+                <!-- Nhãn phụ phong cách Tactical HUD -->
+                <span
+                    class="text-[10px] font-mono font-black text-primary tracking-[0.2em] mb-2 opacity-70 group-hover:opacity-100 transition-opacity uppercase">Mục
+                    tiêu</span>
+                <!-- SVG Mũi tên hướng xuống bự lên -->
+                <svg class="w-12 h-12 text-primary animate-bounce group-hover:text-secondary transition-colors"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </a>
     </header>
 
     <script>
@@ -881,8 +999,7 @@
                                 <div class="space-y-4">
                                     <div
                                         class="bg-gray-50 border-2 border-gray-200 p-4 rounded-xl flex items-center gap-4">
-                                        <div
-                                            class="text-5xl font-black text-primary">
+                                        <div class="text-5xl font-black text-primary">
                                             01</div>
                                         <div>
                                             <p class="text-gray-900 font-bold text-lg">Lotte Gò Vấp</p>
@@ -891,8 +1008,7 @@
                                     </div>
                                     <div
                                         class="bg-gray-50 border-2 border-gray-200 p-4 rounded-xl flex items-center gap-4">
-                                        <div
-                                            class="text-5xl font-black text-primary">
+                                        <div class="text-5xl font-black text-primary">
                                             02</div>
                                         <div>
                                             <p class="text-gray-900 font-bold text-lg">Lotte West Lake</p>
@@ -907,70 +1023,11 @@
                 </div>
             </div>
 
-            <!-- Đối tác - Organizers & Sponsors (Center Layout) -->
-            <div class="mt-20 border-t-2 border-dashed border-gray-200 pt-16">
-                <div class="text-center mb-10 md:mb-16">
-                    <h3 class="font-mono text-gray-500 font-bold tracking-[0.3em] uppercase text-sm mb-2">Đồng Hành Cùng
-                        Sự Kiện</h3>
-                    <h2 class="font-display font-black text-3xl md:text-4xl text-gray-800 uppercase">Lực Lượng <span
-                            class="text-primary">Yểm Trợ</span></h2>
-                </div>
 
-                <!-- 3 Logo Center Layout -->
-                <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
-
-                    <!-- Organizer 1: World Simp And Friends -->
-                    <a href="https://www.facebook.com/worldsimp235" target="_blank"
-                        class="group flex flex-col items-center">
-                        <div
-                            class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
-                            <img src="assets/worldsimp.webp" alt="World Simp And Friends" loading="lazy"
-                                class="w-full h-full rounded-full object-cover transition-all duration-300">
-                        </div>
-                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">World
-                            Simp And Friends</p>
-                        <p
-                            class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
-                            TỔ CHỨC</p>
-                    </a>
-
-                    <!-- Organizer 2: Ansatsu Kyoushitsu VN Fanpage -->
-                    <a href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank"
-                        class="group flex flex-col items-center">
-                        <div
-                            class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
-                            <img src="assets/ansattsu.webp" alt="Ansatsu Kyoushitsu VN Fanpage" loading="lazy"
-                                class="w-full h-full rounded-full object-cover transition-all duration-300">
-                        </div>
-                        <p
-                            class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors text-center">
-                            Ansatsu Kyoushitsu VN Fanpage</p>
-                        <p
-                            class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
-                            TỔ CHỨC</p>
-                    </a>
-
-                    <!-- Sponsor: PeoPo Store -->
-                    <a href="https://www.facebook.com/PeoPoStore" target="_blank"
-                        class="group flex flex-col items-center">
-                        <div
-                            class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
-                            <img src="assets/peopostore.webp" alt="PeoPo Store" loading="lazy"
-                                class="w-full h-full rounded-full object-cover transition-all duration-300">
-                        </div>
-                        <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">PeoPo
-                            Store</p>
-                        <p
-                            class="text-[10px] font-mono font-bold text-yellow-600 tracking-[0.2em] mt-2 border border-yellow-300 bg-yellow-50 rounded px-3 py-1">
-                            TÀI TRỢ</p>
-                    </a>
-
-                </div>
-            </div>
         </div>
     </section>
 
-    <section class="py-20 relative bg-white border-y border-gray-100 overflow-hidden" id="tickets">
+    <section class="py-20 relative bg-white border-t border-gray-100 overflow-hidden" id="tickets">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12">
                 <h2
@@ -1373,9 +1430,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- KHU VỰC TÁC CHIẾN (MISSION ZONE SELECTION) -->
-            <div class="max-w-6xl mx-auto text-center relative z-10 mt-16 pb-8">
+    <!-- KHU VỰC TÁC CHIẾN (MISSION ZONE SELECTION) -->
+    <section class="py-20 relative bg-white border-t border-gray-100 overflow-hidden" id="zones">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-6xl mx-auto text-center relative z-10 pb-8">
                 <div class="flex items-center justify-center gap-4 mb-10">
                     <span class="w-16 h-1 bg-secondary skew-x-12"></span>
                     <h3 class="text-3xl md:text-5xl font-display font-black text-gray-800 uppercase tracking-widest">
@@ -1415,7 +1476,8 @@
                         </div>
 
                         <!-- Card Content -->
-                        <div class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                        <div
+                            class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
                             <div
                                 class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
                                 <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
@@ -1431,7 +1493,8 @@
                                 XÁC NHẬN MỤC TIÊU
                             </h4>
 
-                            <div class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                            <div
+                                class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
                                 <span
                                     class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
                                     CHƯA MỞ KHÓA ]</span>
@@ -1471,7 +1534,8 @@
                         </div>
 
                         <!-- Card Content -->
-                        <div class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                        <div
+                            class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
                             <div
                                 class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
                                 <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
@@ -1487,7 +1551,8 @@
                                 XÁC NHẬN MỤC TIÊU
                             </h4>
 
-                            <div class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                            <div
+                                class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
                                 <span
                                     class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
                                     CHƯA MỞ KHÓA ]</span>
@@ -1501,12 +1566,76 @@
         </div>
     </section>
 
+    <!-- Đối tác - Organizers & Sponsors (Center Layout) -->
+    <section class="py-20 bg-white border-t border-gray-100 relative overflow-hidden" id="sponsors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="font-mono text-gray-500 font-bold tracking-[0.3em] uppercase text-sm mb-2">Đồng Hành Cùng
+                    Sự Kiện</h3>
+                <h2 class="font-display font-black text-3xl md:text-4xl text-gray-800 uppercase">Lực Lượng <span
+                        class="text-primary">Yểm Trợ</span></h2>
+            </div>
+
+            <!-- 3 Logo Center Layout -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+
+                <!-- Organizer 1: World Simp And Friends -->
+                <a href="https://www.facebook.com/worldsimp235" target="_blank"
+                    class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/worldsimp.webp" alt="World Simp And Friends" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">World
+                        Simp And Friends</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
+                        TỔ CHỨC</p>
+                </a>
+
+                <!-- Organizer 2: Ansatsu Kyoushitsu VN Fanpage -->
+                <a href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank"
+                    class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/ansattsu.webp" alt="Ansatsu Kyoushitsu VN Fanpage" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p
+                        class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors text-center">
+                        Ansatsu Kyoushitsu VN Fanpage</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
+                        TỔ CHỨC</p>
+                </a>
+
+                <!-- Sponsor: PeoPo Store -->
+                <a href="https://www.facebook.com/PeoPoStore" target="_blank" class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/peopostore.webp" alt="PeoPo Store" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">PeoPo
+                        Store</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-yellow-600 tracking-[0.2em] mt-2 border border-yellow-300 bg-yellow-50 rounded px-3 py-1">
+                        TÀI TRỢ</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
     <footer class="bg-white border-t border-gray-200 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
                 <div>
-                    <h2 class="font-display font-black text-2xl text-gray-800">LỚP HỌC <span class="text-primary">ÁM
-                            SÁT</span></h2>
+                    <h2 class="font-display font-black text-2xl text-gray-800">
+                        <span class="text-primary">THẬP NIÊN HẸN ƯỚC</span>
+                        <span class="text-sky-600">Ngày Trở Về</span>
+                    </h2>
                     <p class="text-sm text-gray-500 mt-2 max-w-md">Offline & Fanscreening 2026. Một dự án phi lợi nhuận
                         dành cho cộng đồng fan Việt Nam.</p>
                 </div>
@@ -1550,10 +1679,11 @@
             // KHỞI TẠO LENIS SMOOTH SCROLL & GSAP SNAP
             // =========================================================
             const isPC = window.innerWidth >= 1024;
+            let lenis = null;
 
             if (isPC) {
                 // Khởi tạo Lenis
-                const lenis = new Lenis({
+                lenis = new Lenis({
                     duration: 1.2,
                     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing curve siêu mượt của Lenis
                     direction: 'vertical',
@@ -1584,7 +1714,71 @@
                         delay: 0.05 // Thời gian trễ rất nhỏ để tạo cảm giác tự nhiên
                     }
                 });
+
+                // Theo dõi vị trí và kích hoạt trạng thái Active trên Mục lục dọc
+                const nav = document.getElementById('tactical-nav');
+                const navItems = document.querySelectorAll('#tactical-nav .nav-item');
+                const sections = ['#hero', '#event-info', '#tickets', '#zones'];
+
+                sections.forEach((selector) => {
+                    ScrollTrigger.create({
+                        trigger: selector,
+                        start: "top 50%", // Kích hoạt khi đỉnh của section chạm tới trung tâm màn hình
+                        end: "bottom 50%", // Tắt khi đáy của section vượt qua trung tâm màn hình
+                        onToggle: (self) => {
+                            if (self.isActive) {
+                                const targetId = selector.replace('#', '');
+
+                                // Nếu đang ở Hero section thì ẩn mục lục đi
+                                if (nav) {
+                                    if (targetId === 'hero') {
+                                        nav.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
+                                        nav.classList.remove('opacity-100', 'pointer-events-auto', 'translate-x-0');
+                                    } else {
+                                        nav.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
+                                        nav.classList.add('opacity-100', 'pointer-events-auto', 'translate-x-0');
+                                    }
+                                }
+
+                                navItems.forEach(item => {
+                                    if (item.getAttribute('data-target') === targetId) {
+                                        item.classList.add('active');
+                                    } else {
+                                        item.classList.remove('active');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
             }
+
+            // Smooth Scroll cho các liên kết nội bộ
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    // Nếu là nút mua vé có class ticket-btn thì để logic cảnh báo xử lý riêng, tránh tự động cuộn
+                    if (this.classList.contains('ticket-btn')) return;
+
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        if (lenis) {
+                            lenis.scrollTo(targetEl, {
+                                offset: 0,
+                                duration: 2.2,
+                                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                            });
+                        } else {
+                            targetEl.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
 
             // Chỉ chạy custom cursor trên PC có chuột (pointer: fine = stylus/mouse, không phải touch)
             const isMouseDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -1662,17 +1856,17 @@
                     let rawText = btn.innerText.toUpperCase();
                     let locationStr = rawText.includes('HÀ NỘI') || rawText.includes('HỒ TÂY') ? 'HÀ NỘI' : 'HỒ CHÍ MINH';
                     let link = btn.getAttribute('href');
-                    
+
                     const modal = document.getElementById('ticket-warning-modal');
                     const modalOverlay = document.getElementById('ticket-modal-overlay');
                     const modalContent = document.getElementById('ticket-modal-content');
                     const locationTextEl = document.getElementById('ticket-location-text');
-                    
+
                     // Xóa event cũ của nút xác nhận để tránh gọi nhiều lần
                     const oldConfirmBtn = document.getElementById('ticket-modal-confirm');
                     const newConfirmBtn = oldConfirmBtn.cloneNode(true);
                     oldConfirmBtn.parentNode.replaceChild(newConfirmBtn, oldConfirmBtn);
-                    
+
                     locationTextEl.innerText = locationStr;
                     modal.classList.remove('hidden');
                     void modal.offsetWidth; // trigger reflow
@@ -1683,8 +1877,8 @@
                         modalOverlay.classList.add('opacity-0');
                         modalContent.classList.add('scale-90', 'opacity-0');
                         setTimeout(() => modal.classList.add('hidden'), 300);
-                        
-                        if(link && link !== '#tickets' && link !== '#') {
+
+                        if (link && link !== '#tickets' && link !== '#') {
                             window.open(link, btn.getAttribute('target') || '_self');
                         } else {
                             // Link tạm nếu chưa điền
@@ -1706,13 +1900,80 @@
         });
     </script>
 
+    <!-- Tactical Sidebar Navigation (Bảng điều khiển mục lục bên phải cho PC) -->
+    <nav id="tactical-nav"
+        class="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-10 select-none opacity-0 pointer-events-none translate-x-4 transition-all duration-500">
+        <!-- Đường line dọc làm xương sống HUD -->
+        <div
+            class="absolute right-[12px] top-4 bottom-4 w-[1px] bg-gradient-to-b from-transparent via-slate-400 to-transparent pointer-events-none">
+        </div>
+
+        <!-- Mục 1: Hero -->
+        <a href="#hero" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="hero">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 01 // KHỞI ĐỘNG ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+
+        <!-- Mục 2: Thông tin sự kiện -->
+        <a href="#event-info" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="event-info">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 02 // CHIẾN DỊCH ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+
+        <!-- Mục 3: Chọn hạng vé -->
+        <a href="#tickets" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="tickets">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 03 // TRANG BỊ ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+
+        <!-- Mục 4: Chọn khu vực tác chiến -->
+        <a href="#zones" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="zones">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 04 // TÁC CHIẾN ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+    </nav>
+
     <!-- CẢNH BÁO MUA VÉ HUD MODAL -->
     <div id="ticket-warning-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
         <!-- Overlay blur -->
-        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-crosshair" id="ticket-modal-overlay"></div>
-        
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-crosshair"
+            id="ticket-modal-overlay"></div>
+
         <!-- Modal Content -->
-        <div class="relative w-[90%] max-w-md bg-[#111827] border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] transform scale-90 opacity-0 transition-all duration-300 p-8" id="ticket-modal-content">
+        <div class="relative w-[90%] max-w-md bg-[#111827] border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] transform scale-90 opacity-0 transition-all duration-300 p-8"
+            id="ticket-modal-content">
             <!-- Corner Brackets -->
             <div class="absolute w-4 h-4 border-t-2 border-l-2 border-red-500 top-2 left-2"></div>
             <div class="absolute w-4 h-4 border-t-2 border-r-2 border-red-500 top-2 right-2"></div>
@@ -1734,28 +1995,37 @@
                     Bạn đang chuẩn bị khóa mục tiêu và tiến hành mua vé cho khu vực:
                 </p>
                 <div class="bg-red-500/10 border border-red-500/50 p-4 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgoJPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iNCIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==')] opacity-50"></div>
-                    <h5 id="ticket-location-text" class="text-3xl font-display font-black text-white tracking-widest relative z-10 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                    <div
+                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgoJPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iNCIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==')] opacity-50">
+                    </div>
+                    <h5 id="ticket-location-text"
+                        class="text-3xl font-display font-black text-white tracking-widest relative z-10 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
                         HÀ NỘI
                     </h5>
                 </div>
                 <p class="text-yellow-400 font-mono text-[11px] md:text-xs mt-4 text-center leading-relaxed">
-                    * Lưu ý: Vé đã mua KHÔNG THỂ hoán đổi giữa 2 đầu cầu. Vui lòng kiểm tra kỹ tọa độ trước khi tấn công!
+                    * Lưu ý: Vé đã mua KHÔNG THỂ hoán đổi giữa 2 đầu cầu. Vui lòng kiểm tra kỹ tọa độ trước khi tấn
+                    công!
                 </p>
             </div>
 
             <!-- Actions -->
             <div class="flex gap-4 relative z-10">
-                <button id="ticket-modal-cancel" class="flex-1 bg-transparent border border-gray-600 text-gray-400 font-display font-bold py-3 hover:bg-gray-800 hover:text-white hover:border-gray-500 transition-colors tracking-wider">
+                <button id="ticket-modal-cancel"
+                    class="flex-1 bg-transparent border border-gray-600 text-gray-400 font-display font-bold py-3 hover:bg-gray-800 hover:text-white hover:border-gray-500 transition-colors tracking-wider">
                     HỦY LỆNH
                 </button>
-                <button id="ticket-modal-confirm" class="flex-1 bg-red-600 text-white font-display font-black py-3 hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] tracking-wider flex items-center justify-center gap-2 group">
-                    XÁC NHẬN <span class="material-symbols-outlined text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">rocket_launch</span>
+                <button id="ticket-modal-confirm"
+                    class="flex-1 bg-red-600 text-white font-display font-black py-3 hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] tracking-wider flex items-center justify-center gap-2 group">
+                    XÁC NHẬN <span
+                        class="material-symbols-outlined text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">rocket_launch</span>
                 </button>
             </div>
-            
+
             <!-- Scan line effect for modal -->
-            <div class="absolute left-0 w-full h-[2px] bg-red-500/50 shadow-[0_0_8px_#ef4444] pointer-events-none animate-[scan-line_3s_linear_infinite] z-0"></div>
+            <div
+                class="absolute left-0 w-full h-[2px] bg-red-500/50 shadow-[0_0_8px_#ef4444] pointer-events-none animate-[scan-line_3s_linear_infinite] z-0">
+            </div>
         </div>
     </div>
 </body>
