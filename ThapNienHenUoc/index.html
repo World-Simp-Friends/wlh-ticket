@@ -354,6 +354,12 @@
             transform: scale(1);
         }
 
+        /* Cho viền ngoài cùng nét đứt xoay nhẹ khi ngắm bắn */
+        .l-cursor.is-scope .l-cursor__outer::before {
+            border-style: dashed;
+            animation: rotate-reverse 6s linear infinite;
+        }
+
         /* =========================================
            HIỆU ỨNG KHÓA MỤC TIÊU (.is-locking)
            Khi hover vào nút mua vé
@@ -367,6 +373,12 @@
             animation: lock-pulsate 0.3s ease-in-out infinite alternate;
         }
 
+        /* Viền ngoài cùng nét đứt xoay nhanh ngược chiều kim đồng hồ */
+        .l-cursor.is-locking .l-cursor__outer::before {
+            border-style: dashed;
+            animation: rotate-reverse 3s linear infinite;
+        }
+
         .l-cursor.is-locking .l-cursor__outer-deco {
             animation: rotate 0.8s linear infinite !important;
         }
@@ -378,6 +390,21 @@
         /* Chấm tâm điểm nhấp nháy nhanh đỏ-vàng-trắng */
         .l-cursor.is-locking .l-cursor__point::before {
             animation: lock-point-blink 0.15s linear infinite;
+        }
+
+        /* =========================================
+           KEYFRAMES ANIMATIONS
+        ========================================= */
+        /* Xoay xuôi chiều kim đồng hồ */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Xoay ngược chiều kim đồng hồ */
+        @keyframes rotate-reverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
         }
 
         /* Đổi màu liên tục rực rỡ và nhanh */
