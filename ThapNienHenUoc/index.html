@@ -440,8 +440,11 @@
     </script>
 
     <header
-        class="relative h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat scroll-snap-item"
-        style="background-image: url('assets/visual-banner.webp');">
+        class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
+        <!-- Background Image with Blur Effect -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-[3px] scale-105 transform origin-center z-0"
+            style="background-image: url('assets/visual-banner.webp');"></div>
+        <!-- Gradient Overlay on top of background -->
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-black/30 z-0"></div>
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
             <div class="flex flex-col items-center space-y-6 md:space-y-8">
