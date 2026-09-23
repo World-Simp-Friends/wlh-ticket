@@ -514,82 +514,122 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
 
     await sleep(450);
     await reply('Gần đây, các cô gái ở Mitakihara đang truyền tai nhau về nó.',880,'--:--');
-    await sleep(550);
-    await reply(lizardPhoneMessage,800,'--:--');
-    await sleep(450);
-    await reply('Nghe nói nó có thể thực hiện một điều ước.',820,'--:--');
-    await sleep(550);
-    await reply('Và cái giá là phải chiến đấu với những lời nguyền của thế giới này.',900,'--:--');
-    await sleep(900);
-    await reply('Nếu lời đồn đó là thật…',820,'--:--');
-    await sleep(450);
-    await reply('Cậu sẽ ước điều gì?',780,'--:--');
+    showRumorChoices();
+  }
 
+  function showRumorChoices(){
+    choices.innerHTML=`<button class="choice" id="askRumor">Lời đồn gì?</button><button class="choice" id="neverHeard">Tôi chưa từng nghe.</button>`;
+    showChoices();
+    $('askRumor').onclick=()=>continueFromRumor('Lời đồn gì?','Về một chiếc điện thoại.');
+    $('neverHeard').onclick=()=>continueFromRumor('Tôi chưa từng nghe.','Vậy thì bây giờ cậu sẽ biết.');
+  }
+
+  async function continueFromRumor(userText,response){
+    hideChoices();addMine(userText);
+    await sleep(350);await reply(response,780,'--:--');
+    await sleep(450);await reply(lizardPhoneMessage,800,'--:--');
+    await sleep(800);await reply('Nghe nói nó có thể thực hiện một điều ước.',820,'--:--');
+    showPriceChoices();
+  }
+
+  function showPriceChoices(){
+    choices.innerHTML=`<button class="choice" id="anyWish">Bất kỳ điều ước nào?</button><button class="choice" id="soundsSuspicious">Nghe đáng ngờ quá.</button><button class="choice" id="askPrice">Cái giá là gì?</button>`;
+    showChoices();
+    $('anyWish').onclick=()=>continueFromWishClaim('Bất kỳ điều ước nào?','Người ta đồn là vậy.');
+    $('soundsSuspicious').onclick=()=>continueFromWishClaim('Nghe đáng ngờ quá.','Những lời đồn thú vị thường là thế mà.');
+    $('askPrice').onclick=()=>continueFromWishClaim('Cái giá là gì?','Tất nhiên là có.');
+  }
+
+  async function continueFromWishClaim(userText,response){
+    hideChoices();addMine(userText);
+    await sleep(350);await reply(response,780,'--:--');
+    await sleep(450);await reply('Cái giá là phải chiến đấu với những lời nguyền của thế giới này.',900,'--:--');
+    await sleep(1000);await reply('Nếu lời đồn đó là thật…',820,'--:--');
+    await sleep(450);await reply('Cậu sẽ ước điều gì?',780,'--:--');
+    showWishChoices();
+  }
+
+  function showWishOrLeaveChoices(){
     choices.innerHTML=`<button class="choice" id="wish">Tôi có một điều ước.</button><button class="choice" id="leave">Đóng cuộc trò chuyện.</button>`;
     showChoices();
     $('wish').onclick=()=>contract(false);
-    $('leave').onclick=async()=>{
+    $('leave').onclick=leaveConversation;
+  }
+
+  function showWishChoices(){
+    choices.innerHTML=`<button class="choice" id="wantSomething">…Có một điều tôi muốn.</button><button class="choice" id="whyAsk">Tại sao cậu muốn biết?</button><button class="choice" id="noAnswer">Không trả lời.</button>`;
+    showChoices();
+    $('wantSomething').onclick=()=>contract(false,'…Có một điều tôi muốn.');
+    $('whyAsk').onclick=()=>respondToWishChoice('Tại sao cậu muốn biết?','Tớ chỉ muốn biết cậu có tin vào lời đồn không.');
+    $('noAnswer').onclick=()=>respondToWishChoice('Không trả lời.','Ừm. Tùy cậu.');
+  }
+
+  async function respondToWishChoice(userText,response){
+    hideChoices();addMine(userText);
+    await sleep(350);await reply(response,780,'--:--');
+    showWishOrLeaveChoices();
+  }
+
+  async function leaveConversation(){
+    hideChoices();addMine('Đóng cuộc trò chuyện.');
+
+    await sleep(850);
+    showView('home');
+
+    await sleep(900);
+    buzz();
+
+    // LINE comes back even after the user tries to leave.
+    popup.classList.add('show');
+    popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
+
+    await sleep(1400);
+    popup.classList.remove('show');
+    showView('line');
+
+    await sleep(350);
+    addThem('Cậu không cần phải tin đâu.','--:--');
+
+    await sleep(700);
+    await reply('Chỉ cần nhớ cái tên này.',800,'--:--');
+
+    await sleep(450);
+    await reply(lizardPhoneMessage,820,'--:--');
+
+    await sleep(500);
+
+    choices.innerHTML=`
+      <button class="choice" id="returnWish">…Tôi có một điều ước.</button>
+      <button class="choice" id="ignoreAgain">Tiếp tục bỏ qua.</button>
+    `;
+    showChoices();
+
+    $('returnWish').onclick=()=>contract(true);
+
+    $('ignoreAgain').onclick=async()=>{
       hideChoices();
-      addMine('Đóng cuộc trò chuyện.');
+      addMine('Tiếp tục bỏ qua.');
 
-      await sleep(850);
-      showView('home');
+      await sleep(1000);
 
-      await sleep(900);
-      buzz();
+      status.classList.add('noService');
+      lineView.classList.add('stage2');
+      voidCard.classList.add('show');
+      secretPhoto.classList.add('show');
 
-      // LINE comes back even after the user tries to leave.
-      popup.classList.add('show');
-      popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
-
+      await reply('Ừm.',650,'--:--');
       await sleep(1400);
-      popup.classList.remove('show');
-      showView('line');
-
-      await sleep(350);
-      addThem('Cậu không cần phải tin đâu.','--:--');
-
-      await sleep(700);
-      await reply('Chỉ cần nhớ cái tên này.',800,'--:--');
-
-      await sleep(450);
-      await reply(lizardPhoneMessage,820,'--:--');
-
+      await reply('Vậy cứ coi như cậu chưa từng thấy những tin nhắn này.',900,'--:--');
+      await sleep(600);
+      await reply('Nhưng nếu một chiếc điện thoại lạ reo lên…',850,'--:--');
       await sleep(500);
-
-      choices.innerHTML=`
-        <button class="choice" id="returnWish">…Tôi có một điều ước.</button>
-        <button class="choice" id="ignoreAgain">Tiếp tục bỏ qua.</button>
-      `;
-      showChoices();
-
-      $('returnWish').onclick=()=>contract(true);
-
-      $('ignoreAgain').onclick=async()=>{
-        hideChoices();
-        addMine('Tiếp tục bỏ qua.');
-
-        await sleep(1000);
-
-        status.classList.add('noService');
-        lineView.classList.add('stage2');
-        voidCard.classList.add('show');
-        secretPhoto.classList.add('show');
-
-        await reply('Ừm.',650,'--:--');
-        await sleep(1400);
-        await reply('Vậy cứ coi như cậu chưa từng thấy những tin nhắn này.',900,'--:--');
-        await sleep(600);
-        await reply('Nhưng nếu một chiếc điện thoại lạ reo lên…',850,'--:--');
-        await sleep(500);
-        await reply('đừng bỏ lỡ cuộc gọi.',820,'--:--');
-        showFinalContinue();
-      };
+      await reply('đừng bỏ lỡ cuộc gọi.',820,'--:--');
+      showFinalContinue();
     };
   }
 
-  async function contract(returning=false){
-    hideChoices();addMine(returning?'…Tôi có một điều ước.':'Tôi có một điều ước.');
+  async function contract(returning=false,userText='Tôi có một điều ước.'){
+    hideChoices();addMine(returning?'…Tôi có một điều ước.':userText);
     await sleep(450);
     await reply(returning?'Vậy thì cậu có lý do để nhớ lời đồn đó.':'Vậy thì cậu có lý do để nhớ cái tên đó.',800,'--:--');
     if(!returning){
