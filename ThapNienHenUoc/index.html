@@ -1,515 +1,2033 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+========================================================================
+                      DỰ ÁN: THẬP NIÊN HẸN ƯỚC
+========================================================================
+Tác giả / Author:
+- Miho (Website: https://miho.worldsimp.com/ | GitHub: https://github.com/Miho1254)
+
+Nguồn tài nguyên & Thư viện sử dụng:
+1. CSS Framework: Tailwind CSS v3 (CDN)
+2. Animation & Scroll Control:
+   - GSAP (GreenSock Animation Platform)
+   - GSAP ScrollTrigger Plugin
+   - Lenis Smooth Scroll (by Studio Freight / darkroom.engineering)
+3. Fonts & Icons:
+   - Montserrat & Nunito (Google Fonts)
+   - Material Symbols Outlined (Google Fonts)
+4. Hiệu ứng Custom Cursor:
+   - Tham khảo và phát triển dựa trên mã nguồn của: https://anime-86.com/
+========================================================================
+-->
 <html lang="vi">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Madoka 2013 Device — Demo v3</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#14171a}
-body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
-:root{
-  --ow:390px;--oh:760px;--sw:360px;--sh:640px;
-  --lineTop1:#465368;--lineTop2:#293446;--lineTop3:#151f2c;
-  --lime1:#c8ef68;--lime2:#9fd53d;--lime3:#80b925;
-  --chat:#8eb1ce;
-}
-.stage{
-  position:relative;width:100vw;height:100vh;overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 36%,rgba(255,255,255,.035),transparent 34%),
-    linear-gradient(#1d2024,#121416 76%);
-}
-.stage:before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
-  background:
-    linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.02) 50%,transparent 50.1%),
-    linear-gradient(transparent 49.9%,rgba(255,255,255,.015) 50%,transparent 50.1%);
-  background-size:34px 34px;
-}
-.phoneScale{
-  position:absolute;left:50%;top:50%;width:var(--ow);height:var(--oh);
-  transform:translate(-50%,-50%);transform-origin:center;z-index:5;
-  opacity:1;transition:opacity .45s ease;
-}
-.phoneScale.gone{opacity:0;pointer-events:none}
-.phone{
-  position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(100deg,#111214 0 9%,#303236 12%,#0f1013 18% 82%,#2c2e31 90%,#08090b 100%);
-  border:1px solid #030405;
-  box-shadow:0 36px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 -14px 28px rgba(255,255,255,.02);
-}
-.phone.vibrate{animation:vib .12s steps(2,end) 5}
-@keyframes vib{0%{transform:translateX(-1px) rotate(-.08deg)}100%{transform:translateX(1px) rotate(.08deg)}}
-.earpiece{position:absolute;top:20px;left:50%;width:64px;height:5px;transform:translateX(-50%);border-radius:5px;background:#050607}
-.cam{position:absolute;right:83px;top:18px;width:7px;height:7px;border-radius:50%;background:#111923;border:1px solid #050607;box-shadow:inset 0 0 3px #385368}
-.sensor{position:absolute;left:79px;top:19px;width:18px;height:5px;border-radius:5px;background:#090a0c}
-.screen{
-  position:absolute;left:15px;top:57px;width:var(--sw);height:var(--sh);overflow:hidden;
-  background:#000;border:1px solid #050607;box-shadow:0 0 0 1px rgba(255,255,255,.055),inset 0 0 14px rgba(0,0,0,.35);
-}
-.screen:after{
-  content:"";position:absolute;inset:0;z-index:200;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,0,0,.026) 0 1px,rgba(0,255,0,.018) 1px 2px,rgba(0,0,255,.022) 2px 3px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);
-}
-.ui{position:absolute;inset:0;background:#000;text-rendering:optimizeSpeed;-webkit-font-smoothing:subpixel-antialiased}
-.status{
-  position:absolute;left:0;right:0;top:0;height:24px;z-index:70;
-  display:flex;align-items:center;padding:0 7px;color:#eee;font-size:10px;
-  background:rgba(0,0,0,.88);text-shadow:0 1px rgba(0,0,0,.8)
-}
-.sl{display:flex;align-items:center;gap:5px}.sr{margin-left:auto;display:flex;align-items:center;gap:5px}
-.mail{width:10px;height:7px;border:1px solid #cfd3d5;position:relative}
-.mail:after{content:"";position:absolute;width:6px;height:6px;left:1px;top:-3px;border-right:1px solid #cfd3d5;border-bottom:1px solid #cfd3d5;transform:rotate(45deg)}
-.sig{display:flex;align-items:end;gap:1px;height:10px}.sig i{display:block;width:2px;background:#d7d9da}.sig i:nth-child(1){height:3px}.sig i:nth-child(2){height:5px}.sig i:nth-child(3){height:7px}.sig i:nth-child(4){height:9px}
-.bat{width:17px;height:9px;border:1px solid #d7dadc;position:relative;padding:1px}.bat:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:4px;background:#d7dadc}.bat b{display:block;width:78%;height:100%;background:#88d145}
-.status.noService .sig{display:none}.status.noService .net{font-size:0}.status.noService .net:after{content:"圏外";font-size:10px}
-.nav{
-  position:absolute;left:0;right:0;bottom:0;height:48px;z-index:70;background:#07090b;border-top:1px solid #1f252a;
-  display:flex;align-items:center;justify-content:space-around
-}
-.nav button{width:70px;height:44px;border:0;background:transparent;position:relative;opacity:.8;cursor:pointer}
-.back:before{content:"";position:absolute;left:28px;top:14px;width:12px;height:12px;border-left:2px solid #c4c9cc;border-bottom:2px solid #c4c9cc;transform:rotate(45deg)}
-.back:after{content:"";position:absolute;left:29px;top:20px;width:14px;height:2px;background:#c4c9cc}
-.home:before{content:"";position:absolute;left:27px;top:14px;width:16px;height:14px;border:2px solid #c4c9cc;border-top:0}
-.home:after{content:"";position:absolute;left:28px;top:9px;width:14px;height:14px;border-left:2px solid #c4c9cc;border-top:2px solid #c4c9cc;transform:rotate(45deg)}
-.recent:before,.recent:after{content:"";position:absolute;width:13px;height:10px;border:2px solid #c4c9cc}.recent:before{left:26px;top:13px}.recent:after{left:31px;top:18px;background:#07090b}
-.view{position:absolute;left:0;right:0;top:24px;bottom:48px;display:none}
-.view.active{display:block}
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-/* HOME */
-.homeView{
-  background:
-    radial-gradient(circle at 68% 23%,rgba(255,255,255,.25) 0 1%,transparent 1.8%),
-    radial-gradient(circle at 72% 29%,rgba(255,255,255,.1) 0 4%,transparent 5%),
-    radial-gradient(circle at 26% 64%,rgba(231,196,207,.22) 0 7%,transparent 9%),
-    radial-gradient(circle at 70% 58%,rgba(132,172,191,.33) 0 12%,transparent 18%),
-    linear-gradient(145deg,#4c5c6d,#b5a7af 53%,#5f6670)
-}
-.clock{position:absolute;top:29px;left:18px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55)}
-.clock .t{font-size:41px;line-height:.95;font-weight:300;letter-spacing:-1.8px}.clock .d{margin-top:5px;font-size:11px}
-.grid{position:absolute;left:18px;right:18px;top:138px;display:grid;grid-template-columns:repeat(4,1fr);gap:21px 12px}
-.app{text-align:center;color:#fff;font-size:9px;text-shadow:0 1px 2px rgba(0,0,0,.8);cursor:pointer}
-.icon{width:42px;height:42px;margin:0 auto 5px;border-radius:8px;border:1px solid rgba(0,0,0,.28);box-shadow:inset 0 1px rgba(255,255,255,.42),0 1px 2px rgba(0,0,0,.32);position:relative}
-.lineIcon{background:linear-gradient(#84d935,#4ba812);border-radius:11px}
-.lineIcon:after{content:"";position:absolute;left:8px;top:9px;width:25px;height:18px;background:#fff;border-radius:50%}.lineIcon:before{content:"";position:absolute;z-index:2;left:10px;top:19px;width:9px;height:8px;background:#fff;transform:skewX(-28deg)}
-.albumIcon{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsIcon{background:linear-gradient(#aab0b4,#62686c)}
-.settingsIcon:after{content:"⚙";position:absolute;inset:0;display:grid;place-items:center;color:#eef0f1;font-size:22px;text-shadow:0 -1px rgba(0,0,0,.4)}
-.cameraIcon{background:linear-gradient(#a6b4bc,#45515a)}.cameraIcon:after{content:"";position:absolute;left:10px;top:10px;width:20px;height:16px;border:2px solid #edf1f2;border-radius:4px}.cameraIcon:before{content:"";position:absolute;left:16px;top:14px;width:8px;height:8px;border:2px solid #edf1f2;border-radius:50%}
-.musicIcon{background:linear-gradient(#c35f78,#7b3349)}.musicIcon:after{content:"♪";position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:26px}
-.browserIcon{background:linear-gradient(#8bc9ee,#357ca5)}.browserIcon:after{content:"";position:absolute;left:9px;top:9px;width:22px;height:22px;border:2px solid white;border-radius:50%}
-.phoneIcon{background:linear-gradient(#8fd963,#4da82f)}.contactIcon{background:linear-gradient(#f1d57a,#bd9438)}
-.dock{position:absolute;left:0;right:0;bottom:0;height:62px;background:rgba(28,32,37,.42);border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-around}
-.dock .icon{width:39px;height:39px;margin:0}
+    <!-- ======= SEO Core ======= -->
+    <title>Lớp Học Ám Sát | Thập Niên Hẹn Ước:  — Offline Fanscreening 2026</title>
+    <meta name="description"
+        content="Sự kiện Fanscreening Offline 2026 kỷ niệm 10 năm Lớp Học Ám Sát. Cùng lớp 3-E và Koro-sensei sống lại những ký ức trọn vẹn nhất — TP. Hồ Chí Minh & Hà Nội, ngày 07/06/2026.">
+    <meta name="keywords"
+        content="Lớp Học Ám Sát, Assassination Classroom, offline event, fanscreening, 2026, Koro-sensei, thap nien hen uoc">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="World Simp & Friends x LHAS VN Fanpage">
+    <link rel="canonical" href="https://ticket.worldsimp/ThapNienHenUoc">
 
-/* LINE popup */
-.popup{
-  position:absolute;left:17px;right:17px;top:154px;z-index:90;opacity:0;transform:translateY(-8px);pointer-events:none;
-  background:#f0f0f0;border:1px solid #515151;box-shadow:0 7px 17px rgba(0,0,0,.46);transition:.2s
-}
-.popup.show{opacity:1;transform:none;pointer-events:auto}
-.popupHead{height:34px;display:flex;align-items:center;padding:0 10px;color:#fff;font-weight:bold;font-size:12px;text-shadow:0 -1px rgba(0,0,0,.35);background:linear-gradient(#82d238,#56ad16);border-bottom:1px solid #467f18}
-.miniLine{width:19px;height:19px;margin-right:7px;border-radius:5px;background:#fff;position:relative}
-.miniLine:after{content:"LINE";position:absolute;left:1px;top:5px;color:#55af16;font-size:6px;font-weight:bold}
-.popupBody{padding:13px;font-size:12px;line-height:1.45}.popupBody strong{display:block;margin-bottom:4px}
-.popupActions{height:42px;border-top:1px solid #c3c3c3;background:#ddd;display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:0 8px}
-.oldBtn{min-width:68px;height:28px;border:1px solid #666;border-radius:3px;background:linear-gradient(#fff,#c9c9c9);color:#222;font-size:11px;font-weight:bold;box-shadow:inset 0 1px #fff;cursor:pointer}.oldBtn.primary{color:#fff;border-color:#4f7415;background:linear-gradient(#91c93e,#61951a);text-shadow:0 -1px rgba(0,0,0,.35)}
+    <!-- ======= Open Graph / Facebook ======= -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ticket.worldsimp/ThapNienHenUoc">
+    <meta property="og:title" content="Lớp Học Ám Sát | Thập Niên Hẹn Ước: Ngày Trở Về">
+    <meta property="og:description"
+        content="Sự kiện Fanscreening Offline 2026. Cùng nhìn lên màn ảnh rộng, sống lại những ký ức trọn vẹn nhất! 07/06/2026 — TP.HCM & Hà Nội.">
+    <meta property="og:image" content="assets/visual-banner_final.webp">
+    <meta property="og:image:alt" content="Lớp Học Ám Sát Thập Niên Hẹn Ước poster">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="Thập Niên Hẹn Ước">
 
-/* LINE */
-.lineView{background:var(--chat)}
-.topbar{height:50px;display:flex;align-items:center;padding:0 6px;color:#fff;background:linear-gradient(var(--lineTop1),var(--lineTop2) 48%,var(--lineTop3) 52%,#1a2432);border-bottom:1px solid #0b1118;box-shadow:inset 0 1px rgba(255,255,255,.14);text-shadow:0 -1px rgba(0,0,0,.7)}
-.topBtn{height:31px;min-width:41px;border:1px solid #0d141d;border-radius:4px;color:#fff;background:linear-gradient(#46556a,#1b2737);box-shadow:inset 0 1px rgba(255,255,255,.14);font-size:11px;font-weight:bold;cursor:pointer}.topBack{font-size:19px}
-.chatTitle{flex:1;text-align:center;font-size:16px;font-weight:bold}
-.scroll{
-  position:absolute;left:0;right:0;top:50px;bottom:48px;padding:9px 7px 16px;overflow-y:auto;overflow-x:hidden;
-  scrollbar-width:none;-ms-overflow-style:none;
-  background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.12) 0 1px,transparent 1.3px) 0 0/7px 7px,linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.025)),#8cb1cf
-}
-.scroll::-webkit-scrollbar{width:0;height:0}
-.dateChip{display:table;margin:0 auto 8px;padding:2px 8px;border-radius:8px;background:rgba(55,80,101,.42);color:#fff;font-size:9px;text-shadow:0 1px rgba(0,0,0,.3)}
-.row{display:flex;align-items:flex-end;width:100%;margin:7px 0 12px;position:relative;z-index:2}.them{justify-content:flex-start}.me{justify-content:flex-end}
-.avatar{flex:0 0 35px;width:35px;height:35px;margin-right:7px;background:linear-gradient(#d3d5d6,#909497);border:1px solid rgba(0,0,0,.35);box-shadow:0 1px 2px rgba(0,0,0,.25);position:relative;overflow:hidden}
-.avatar:before,.avatar:after{content:"";position:absolute;width:13px;height:21px;top:2px;background:#f4f4f4;border-radius:75% 18% 70% 18%;opacity:0;transition:opacity .8s}.avatar:before{left:2px;transform:rotate(-22deg)}.avatar:after{right:2px;transform:scaleX(-1) rotate(-22deg)}
-.avatar .eye{position:absolute;left:50%;top:16px;width:5px;height:5px;transform:translateX(-50%);border-radius:50%;background:#7a7d7e;transition:.8s}
-.bw{max-width:235px;position:relative}.bubble{display:inline-block;position:relative;min-height:31px;padding:8px 11px 9px;border:1px solid rgba(0,0,0,.23);border-radius:14px;font-size:13px;line-height:1.38;box-shadow:0 2px 3px rgba(0,0,0,.21),inset 0 1px rgba(255,255,255,.55)}
-.them .bubble{background:linear-gradient(#fff,#f7f7f7 57%,#e8e8e8)}.them .bubble:before{content:"";position:absolute;width:12px;height:12px;left:-6px;top:10px;background:#fafafa;border-left:1px solid rgba(0,0,0,.19);border-bottom:1px solid rgba(0,0,0,.16);transform:rotate(45deg)}
-.me .bubble{background:linear-gradient(var(--lime1),var(--lime2) 53%,var(--lime3))}.me .bubble:after{content:"";position:absolute;width:12px;height:12px;right:-6px;top:10px;background:#a1d843;border-right:1px solid rgba(0,0,0,.2);transform:rotate(45deg)}
-.stamp{min-width:31px;margin:0 5px 2px;color:#fff;font-size:8px;line-height:1.2;text-shadow:0 1px rgba(0,0,0,.38)}.me .stamp{text-align:right}
-.typing{width:50px;display:flex;justify-content:center;gap:4px}.typing i{display:block;width:5px;height:5px;border-radius:50%;background:#777;animation:dot 1s infinite}.typing i:nth-child(2){animation-delay:.12s}.typing i:nth-child(3){animation-delay:.24s}@keyframes dot{0%,65%,100%{transform:none}35%{transform:translateY(-4px)}}
-.composer{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;gap:5px;padding:6px;background:linear-gradient(#dedede,#bdbdbd);border-top:1px solid #707070;box-shadow:inset 0 1px #f6f6f6}
-.plus{width:33px;height:33px;border:1px solid #727272;border-radius:4px;background:linear-gradient(#f8f8f8,#c7c7c7);color:#666;font-size:23px;line-height:29px;text-align:center}.input{flex:1;height:33px;border:1px solid #777;border-radius:3px;background:#fff;box-shadow:inset 0 1px 3px rgba(0,0,0,.18);color:#999;font-size:12px;padding:8px 7px}.send{height:33px;min-width:48px;border:1px solid #4d7116;border-radius:3px;background:linear-gradient(#8bc337,#5c8f17);color:#fff;font-size:11px;font-weight:bold}
-.choices{position:absolute;left:12px;right:12px;bottom:58px;z-index:50;display:none;background:#ededed;border:1px solid #626262;box-shadow:0 6px 16px rgba(0,0,0,.4)}.choices.show{display:block}.choice{display:block;width:100%;border:0;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:11px 12px;text-align:left;font-size:11px;cursor:pointer}.choice:last-child{border-bottom:0}
-.menu{position:absolute;top:52px;right:7px;width:135px;z-index:60;display:none;background:#eee;border:1px solid #5d5d5d;box-shadow:0 5px 13px rgba(0,0,0,.4)}.menu.show{display:block}.menu button{width:100%;height:37px;border:0;border-bottom:1px solid #c7c7c7;background:linear-gradient(#fff,#e7e7e7);text-align:left;padding:0 10px;font-size:11px;cursor:pointer}
-.toast{position:absolute;z-index:65;left:50%;bottom:67px;transform:translateX(-50%);padding:8px 12px;border-radius:3px;background:rgba(20,20,20,.9);color:#fff;font-size:10px;opacity:0;white-space:nowrap;transition:.18s}.toast.show{opacity:1}
-.dialogMask{position:absolute;inset:0;z-index:66;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.24)}.dialogMask.show{display:flex}.dialog{width:246px;border:1px solid #4d4d4d;background:#efefef;box-shadow:0 8px 20px rgba(0,0,0,.48)}.dialog h3{margin:0;padding:10px 12px;background:linear-gradient(#4a5669,#202a39);color:#fff;font-size:12px}.dialog p{margin:0;padding:14px 12px;font-size:11px}.da{padding:7px;background:#ddd;border-top:1px solid #c0c0c0;display:flex;justify-content:flex-end;gap:6px}
-.who{position:absolute;inset:0;z-index:68;display:grid;place-items:center;color:#fff;background:#000;font:700 24px Georgia,serif;letter-spacing:.1em;opacity:0;pointer-events:none}
-.who.flash{animation:who .32s steps(2,end)}@keyframes who{0%{opacity:0}35%{opacity:1}65%{opacity:0}100%{opacity:0}}
-.lineView.stage1 .avatar:before,.lineView.stage1 .avatar:after{opacity:.22}.lineView.stage2 .avatar:before,.lineView.stage2 .avatar:after{opacity:.9}.lineView.stage2 .avatar .eye{width:7px;height:7px;background:#bf1830;box-shadow:0 0 7px rgba(190,24,48,.6)}
+    <!-- ======= Twitter Card ======= -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lớp Học Ám Sát | Thập Niên Hẹn Ước: Ngày Trở Về">
+    <meta name="twitter:description" content="Sự kiện Offline Fanscreening 2026. 07/06/2026 — TP.HCM & Hà Nội.">
+    <meta name="twitter:image" content="assets/visual-banner_final.webp">
 
-/* RECENTS */
-.recentsView{background:#1f2327;padding:13px}
-.recentsTitle{color:#d7dadd;font-size:12px;margin:3px 0 11px}
-.card{height:108px;margin:0 0 10px;background:#e9e9e9;border:1px solid #444;box-shadow:0 2px 6px rgba(0,0,0,.35);display:flex;cursor:pointer;position:relative;overflow:hidden}
-.cardPreview{width:108px;background:#8cb1cf;border-right:1px solid #aaa;position:relative}.cardText{padding:11px 12px;font-size:12px}.cardText strong{display:block;margin-bottom:5px}.cardText span{font-size:10px;color:#777}
-.linePrev:before{content:"LINE";position:absolute;left:15px;top:15px;padding:4px 8px;background:#61bc22;color:#fff;font-weight:bold;border-radius:4px}
-.albumPrev{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsPrev{background:linear-gradient(#7d858a,#454b4f)}
-.voidCard{display:none;background:#070707;border-color:#111}.voidCard.show{display:flex}.voidCard .cardPreview{background:#000;border-right-color:#111}.voidCard .cardText{color:#bbb}
+    <!-- ======= Favicon (updated) ======= -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="assets/favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="assets/favicon_io/site.webmanifest">
+    <meta name="theme-color" content="#eab308">
 
-/* ALBUM */
-.albumView{background:#111}
-.appHeader{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #0d131a;font-size:15px;font-weight:bold;text-shadow:0 -1px #000}
-.albumGrid{padding:9px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.photo{aspect-ratio:1;background:#555;position:relative;border:1px solid #222;cursor:pointer;overflow:hidden}.p1{background:linear-gradient(#7f9bb1 0 58%,#556b4d 58%)}.p2{background:linear-gradient(#b3bac2 0 45%,#595c63 45%)}.p3{background:linear-gradient(135deg,#b9a69e,#504c50)}.p4{background:linear-gradient(#667680,#252b31)}.p5{background:linear-gradient(#ae9f90,#67554e)}.p6{background:linear-gradient(#7c8794,#29313a)}
-.secretPhoto{display:none;background:#050607}.secretPhoto.show{display:block}.secretPhoto:before,.secretPhoto:after{content:"";position:absolute;top:44%;width:4px;height:4px;border-radius:50%;background:#8f0e22;box-shadow:0 0 4px #8f0e22}.secretPhoto:before{left:42%}.secretPhoto:after{right:42%}.fname{position:absolute;left:3px;bottom:3px;color:#eee;font-size:7px;text-shadow:0 1px 2px #000}
-.viewer{position:absolute;inset:0;z-index:55;background:#030405;display:none}.viewer.show{display:block}.viewerTop{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 9px;font-size:11px}.viewerImage{position:absolute;left:14px;right:14px;top:70px;bottom:72px;background:#050607;border:1px solid #1b1d1f}.redEyes:before,.redEyes:after{content:"";position:absolute;top:46%;width:5px;height:5px;border-radius:50%;background:#a31128;box-shadow:0 0 7px #a31128}.redEyes:before{left:46%}.redEyes:after{right:46%}.rune{position:absolute;right:18px;bottom:18px;color:#7c7470;font:700 15px Georgia,serif;transform:rotate(-7deg);opacity:.58}.viewerMeta{position:absolute;left:14px;right:14px;bottom:20px;color:#888;font-size:9px;display:flex;justify-content:space-between}
+    <!-- ======= Preload LCP (Hero Banner) ======= -->
+    <link rel="preload" as="image" href="assets/visual-banner_final.webp" fetchpriority="high">
 
-/* SETTINGS / ABOUT */
-.settingsView{background:#eee}.settingRow{height:48px;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:9px 13px;font-size:12px;cursor:pointer}.settingRow strong{display:block}.settingRow span{font-size:10px;color:#777}
-.aboutView{background:#eee}.aboutList{padding-top:4px}.aboutRow{padding:9px 13px;border-bottom:1px solid #c8c8c8;background:#f7f7f7}.aboutRow small{display:block;color:#777;font-size:9px;margin-bottom:3px}.aboutRow div{font-size:12px}
+    <!-- ======= Fonts ======= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Nunito:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols: defer load to avoid render-blocking -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+            rel="stylesheet" />
+    </noscript>
 
-/* REVEAL */
-.black{position:absolute;inset:0;z-index:150;background:#000;opacity:0;pointer-events:none;transition:.28s}.black.show{opacity:1}
-.reveal{position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;transition:1s;color:#ece6dc;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 50%,rgba(101,20,49,.16),transparent 23%),#111214}.reveal.show{opacity:1}.revealInner{transform:translateY(275px)}.reveal small{display:block;font-size:9px;letter-spacing:.32em;color:#877a69;margin-bottom:7px}.reveal strong{display:block;font:400 21px Georgia,serif;letter-spacing:.02em}.reveal span{display:block;margin-top:6px;color:#877f75;font-size:9px;letter-spacing:.12em}
-.hint{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);color:#656b70;font-size:8px;letter-spacing:.16em;text-transform:uppercase;opacity:.42;white-space:nowrap}
-</style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#eab308', /* Vàng Koro-sensei */
+                        secondary: '#ef4444', /* Đỏ ám sát */
+                        accent: '#fef08a',
+                        greenknife: '#22c55e',
+                        pinkbullet: '#ec4899',
+                    },
+                    fontFamily: {
+                        display: ['Montserrat', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ẩn thanh cuộn bên phải toàn trang */
+        html {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari and Opera */
+        }
+
+        /* Tactical Grid Pattern cho nền trang và các phần tử sáng */
+        body,
+        section.bg-white {
+            background-image:
+                linear-gradient(rgba(153, 27, 27, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(153, 27, 27, 0.06) 1px, transparent 1px) !important;
+            background-size: 60px 60px !important;
+            background-position: center center !important;
+            background-attachment: fixed !important;
+        }
+
+        /* Style cho Tactical Sidebar Navigation */
+        .nav-label {
+            text-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot {
+            box-shadow: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-label {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            color: #991b1b !important;
+            /* Đỏ Sát Thủ sẫm tương phản tối đa trên nền kem */
+            font-weight: 700;
+            text-shadow: none !important;
+        }
+
+        .nav-item.active .nav-dot {
+            border-color: #991b1b !important;
+            background-color: rgba(153, 27, 27, 0.08) !important;
+            transform: rotate(45deg) scale(1.25) !important;
+            box-shadow: 0 0 10px rgba(153, 27, 27, 0.15) !important;
+        }
+
+        .nav-item.active .nav-dot-inner {
+            background-color: #991b1b !important;
+            box-shadow: 0 0 6px rgba(153, 27, 27, 0.4);
+        }
+
+        /* Micro-animation khi hover trên chấm tròn và nhãn */
+        .nav-item:hover .nav-label {
+            color: #dc2626 !important;
+            /* Đỏ sáng */
+            text-shadow: none !important;
+        }
+
+        .nav-item:hover .nav-dot {
+            border-color: #dc2626 !important;
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        .nav-item:hover .nav-dot-inner {
+            background-color: #dc2626 !important;
+        }
+
+        /* Hiệu ứng vòng ngắm radar (pulsing ring) khi active */
+        .nav-item.active .nav-dot::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+            animation: hud-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes hud-ping {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2.0);
+                opacity: 0;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes target-blink {
+
+            0%,
+            100% {
+                color: #eab308;
+                /* Vàng */
+                filter: drop-shadow(0 0 3px rgba(234, 179, 8, 0.8));
+            }
+
+            33% {
+                color: #a855f7;
+                /* Tím */
+                filter: drop-shadow(0 0 3px rgba(168, 85, 247, 0.8));
+            }
+
+            66% {
+                color: #22c55e;
+                /* Xanh lá */
+                filter: drop-shadow(0 0 3px rgba(34, 197, 94, 0.8));
+            }
+        }
+
+        .group:hover .animate-target-blink-hover {
+            animation: target-blink 0.6s linear infinite;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Ẩn chuột mặc định — CHỈ trên PC có chuột thực sự */
+        @media (hover: hover) and (pointer: fine) {
+
+            body,
+            a,
+            button {
+                cursor: none;
+            }
+        }
+
+        .l-cursor {
+            /* MẶC ĐỊNH MÀU XANH */
+            --cursor-color: #00c3ff;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* KHI HOVER SẼ CHUYỂN SANG MÀU ĐỎ */
+        .l-cursor.is-scope {
+            --cursor-color: #ff3100;
+        }
+
+        /* 1. Điểm chấm trắng ở giữa */
+        .l-cursor__point {
+            position: fixed;
+            top: -3px;
+            left: -3px;
+            z-index: 99999;
+            width: 6px;
+            height: 6px;
+        }
+
+        .l-cursor__point::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background: #fff;
+            /* Chấm giữa luôn trắng */
+            width: 100%;
+            height: 100%;
+            content: "";
+        }
+
+        /* 2. Cụm ngắm bắn */
+        .l-cursor__deco {
+            position: fixed;
+            top: -25px;
+            left: -25px;
+            z-index: 99998;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Vòng ngoài */
+        .l-cursor__outer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: scale(1);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+            height: 100%;
+        }
+
+        .l-cursor__outer::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            border: 2px solid var(--cursor-color);
+            border-radius: 50%;
+            transition: border-color 0.3s ease;
+            width: 100%;
+            height: 100%;
+            content: "";
+        }
+
+        /* Vạch xoay */
+        .l-cursor__outer-deco {
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: rotate 3s linear infinite;
+            width: 100%;
+            height: 100%;
+        }
+
+        .l-cursor__outer-deco::before,
+        .l-cursor__outer-deco::after,
+        .l-cursor__outer-deco span {
+            position: absolute;
+            background: var(--cursor-color);
+            transition: background-color 0.3s ease;
+            content: "";
+        }
+
+        .l-cursor__outer-deco::before,
+        .l-cursor__outer-deco::after {
+            top: 50%;
+            width: 20%;
+            height: 2px;
+        }
+
+        .l-cursor__outer-deco::before {
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .l-cursor__outer-deco::after {
+            right: 0;
+            transform: translate(50%, -50%);
+        }
+
+        .l-cursor__outer-deco span {
+            left: 50%;
+            width: 2px;
+            height: 20%;
+            display: block;
+        }
+
+        .l-cursor__outer-deco span:nth-child(1) {
+            top: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .l-cursor__outer-deco span:nth-child(2) {
+            bottom: 0;
+            transform: translate(-50%, 50%);
+        }
+
+        /* Vòng trong & Tâm chữ thập */
+        .l-cursor__inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+            border: 1px solid var(--cursor-color);
+            border-radius: 50%;
+            width: 60%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .l-cursor__inner::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+            border-radius: 50%;
+            background: var(--cursor-color);
+            width: 100%;
+            height: 100%;
+            content: "";
+        }
+
+        .l-cursor__cross {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 40%;
+        }
+
+        .l-cursor__cross::before,
+        .l-cursor__cross::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cursor-color);
+            transition: background-color 0.3s ease;
+            content: "";
+        }
+
+        .l-cursor__cross::before {
+            width: 100%;
+            height: 1px;
+        }
+
+        .l-cursor__cross::after {
+            width: 1px;
+            height: 100%;
+        }
+
+        /* =========================================
+           HIỆU ỨNG HOVER (.is-scope)
+        ========================================= */
+        .l-cursor.is-scope .l-cursor__outer {
+            transform: scale(1.3);
+        }
+
+        .l-cursor.is-scope .l-cursor__outer-deco {
+            animation-duration: 1.5s;
+        }
+
+        .l-cursor.is-scope .l-cursor__inner {
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+
+        .l-cursor.is-scope .l-cursor__inner::before {
+            transform: scale(1);
+        }
+
+        /* Cho viền ngoài cùng nét đứt xoay nhẹ khi ngắm bắn */
+        .l-cursor.is-scope .l-cursor__outer::before {
+            border-style: dashed;
+            animation: rotate-reverse 6s linear infinite;
+        }
+
+        /* =========================================
+           HIỆU ỨNG KHÓA MỤC TIÊU (.is-locking)
+           Khi hover vào nút mua vé
+        ========================================= */
+        .l-cursor.is-locking {
+            --cursor-color: currentColor;
+            animation: lock-color-cycle 0.8s linear infinite;
+        }
+
+        .l-cursor.is-locking .l-cursor__outer {
+            animation: lock-pulsate 0.3s ease-in-out infinite alternate;
+        }
+
+        /* Viền ngoài cùng nét đứt xoay nhanh ngược chiều kim đồng hồ */
+        .l-cursor.is-locking .l-cursor__outer::before {
+            border-style: dashed;
+            animation: rotate-reverse 3s linear infinite;
+        }
+
+        .l-cursor.is-locking .l-cursor__outer-deco {
+            animation: rotate 0.8s linear infinite !important;
+        }
+
+        .l-cursor.is-locking .l-cursor__inner {
+            animation: lock-inner-pulse 0.15s ease-in-out infinite alternate;
+        }
+
+        /* Chấm tâm điểm nhấp nháy nhanh xanh-vàng-trắng */
+        .l-cursor.is-locking .l-cursor__point::before {
+            animation: lock-point-blink 0.15s linear infinite;
+        }
+
+        /* =========================================
+           KEYFRAMES ANIMATIONS
+        ========================================= */
+        /* Xoay xuôi chiều kim đồng hồ */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Xoay ngược chiều kim đồng hồ */
+        @keyframes rotate-reverse {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Đổi màu liên tục rực rỡ và nhanh (né các màu nóng cận đỏ) */
+        @keyframes lock-color-cycle {
+            0% {
+                color: #eab308;
+            }
+
+            /* Vàng Koro-sensei */
+            20% {
+                color: #22c55e;
+            }
+
+            /* Xanh lá */
+            40% {
+                color: #06b6d4;
+            }
+
+            /* Xanh ngọc Teal */
+            60% {
+                color: #00c3ff;
+            }
+
+            /* Xanh Cyan */
+            80% {
+                color: #84cc16;
+            }
+
+            /* Vàng chanh */
+            100% {
+                color: #eab308;
+            }
+        }
+
+        /* Hồng tâm ngoài co bóp liên tục như đang khóa mục tiêu */
+        @keyframes lock-pulsate {
+            0% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1.4);
+            }
+        }
+
+        /* Vòng ngắm trong nhấp nháy giật liên tục */
+        @keyframes lock-inner-pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.35);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(0.65);
+                opacity: 1;
+            }
+        }
+
+        /* Chấm nhỏ trung tâm nhấp nháy đổi màu liên tiếp (né màu nóng cận đỏ) */
+        @keyframes lock-point-blink {
+            0% {
+                background: #00c3ff;
+            }
+
+            50% {
+                background: #22c55e;
+            }
+
+            100% {
+                background: #ffffff;
+            }
+        }
+
+        /* Định nghĩa con trỏ cho nút mua vé để ẩn con trỏ mặc định */
+        .ticket-btn {
+            cursor: none !important;
+        }
+
+        /* Hiệu ứng viền cảnh báo nhấp nháy khi khóa mục tiêu */
+        @keyframes border-alert {
+
+            0%,
+            100% {
+                border-color: #ef4444;
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            }
+
+            50% {
+                border-color: #eab308;
+                box-shadow: 0 0 35px rgba(234, 179, 8, 0.6);
+            }
+        }
+
+        /* Hiệu ứng tia quét laser di chuyển lên xuống */
+        @keyframes scan-line {
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0%;
+            }
+        }
+
+        .border-alert-hover {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .group:hover .border-alert-hover {
+            animation: border-alert 0.8s ease-in-out infinite;
+        }
+    </style>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "795167730d2e454d86b8056d43cf0b81"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
-<body>
-<main class="stage">
-  <section class="reveal" id="reveal">
-    <div class="revealInner">
-      <small>INVITATION RECEIVED</small>
-      <strong>MADOKA FAN SCREENING</strong>
-      <span>DATE · VENUE · TICKETS</span>
+
+<body
+    class="bg-[#fefce8] text-gray-900 font-body antialiased transition-colors duration-300 overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-[40%] -left-[10%] w-[50%] h-[50%] bg-orange-400/10 rounded-full blur-3xl"></div>
     </div>
-  </section>
 
-  <div class="phoneScale" id="phoneScale">
-    <div class="phone" id="phone">
-      <div class="earpiece"></div><div class="cam"></div><div class="sensor"></div>
-      <div class="screen">
-        <div class="ui">
-          <div class="status" id="status">
-            <div class="sl"><div class="mail"></div></div>
-            <div class="sr"><span class="net">3G</span><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"><b></b></span><span id="sysClock">23:47</span></div>
-          </div>
-
-          <!-- HOME -->
-          <section class="view homeView active" id="homeView">
-            <div class="clock"><div class="t">23:47</div><div class="d">Saturday</div></div>
-            <div class="grid">
-              <div class="app" data-open="line"><div class="icon lineIcon"></div><span>LINE</span></div>
-              <div class="app" data-open="album"><div class="icon albumIcon"></div><span>Album</span></div>
-              <div class="app" data-open="settings"><div class="icon settingsIcon"></div><span>Settings</span></div>
-              <div class="app"><div class="icon cameraIcon"></div><span>Camera</span></div>
-              <div class="app"><div class="icon musicIcon"></div><span>Music</span></div>
-              <div class="app"><div class="icon browserIcon"></div><span>Browser</span></div>
+    <nav
+        class="fixed w-full z-50 bg-white/80 backdrop-blur-lg border-b border-yellow-200 transition-all duration-300 hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <a href="#"><img src="assets/1. Koro-sensei.webp" alt="Logo LHAS"
+                            class="h-12 w-12 rounded-full object-cover border-2 border-primary" /></a>
+                    <a href="#" class="font-display font-black text-xl tracking-tight">LỚP HỌC <span
+                            class="text-primary">ÁM SÁT</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a class="text-sm font-bold text-gray-700 hover:text-primary transition-colors relative group"
+                        href="#">
+                        TRANG CHỦ
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a class="text-sm font-bold text-gray-700 hover:text-primary transition-colors relative group"
+                        href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank">
+                        TIN TỨC
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <div class="flex items-center gap-3">
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308] ticket-btn"
+                            href="#tickets">
+                            <span class="transform skew-x-12 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                HÀ NỘI
+                            </span>
+                        </a>
+                        <a class="transform -skew-x-12 bg-secondary hover:bg-red-600 text-white px-4 py-2 font-display font-black tracking-wider transition-all hover:scale-105 flex items-center gap-1.5 border-2 border-primary shadow-[3px_3px_0px_0px_#eab308] ticket-btn"
+                            href="#tickets">
+                            <span class="transform skew-x-12 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[18px]">location_on</span>
+                                HỒ CHÍ MINH
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary focus:outline-none">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                </div>
             </div>
-            <div class="dock">
-              <div class="icon phoneIcon"></div><div class="icon contactIcon"></div><div class="icon lineIcon"></div><div class="icon browserIcon"></div>
-            </div>
-
-            <div class="popup" id="popup">
-              <div class="popupHead"><span class="miniLine"></span>LINE</div>
-              <div class="popupBody"><strong>Unknown</strong>ねえ。</div>
-              <div class="popupActions"><button class="oldBtn" id="closePopup">Close</button><button class="oldBtn primary" id="viewPopup">View</button></div>
-            </div>
-          </section>
-
-          <!-- LINE -->
-          <section class="view lineView" id="lineView">
-            <header class="topbar">
-              <button class="topBtn topBack" id="lineBack">‹</button>
-              <div class="chatTitle">Unknown</div>
-              <button class="topBtn" id="menuBtn">Menu</button>
-            </header>
-
-            <div class="scroll" id="scroll">
-              <div class="dateChip">Sat.</div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">ねえ。</div></div><div class="stamp">23:47</div>
-              </div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">Cậu có một điều ước muốn trở thành hiện thực không?</div></div><div class="stamp">23:47</div>
-              </div>
-              <div id="dynamic"></div>
-            </div>
-
-            <div class="choices show" id="choices">
-              <button class="choice" data-answer="who">Cậu là ai?</button>
-              <button class="choice" data-answer="wrong">Nhắn nhầm người rồi.</button>
-            </div>
-
-            <footer class="composer"><div class="plus">＋</div><div class="input">Nhập tin nhắn</div><button class="send">Gửi</button></footer>
-            <div class="menu" id="menu"><button id="profileBtn">Profile</button><button id="blockBtn">Block</button></div>
-            <div class="toast" id="toast">ユーザーが見つかりません</div>
-            <div class="who" id="whoFlash">WHO AM I?</div>
-            <div class="dialogMask" id="dialogMask"><div class="dialog"><h3>Block user</h3><p>このユーザーをブロックしますか？</p><div class="da"><button class="oldBtn" id="cancelBlock">Cancel</button><button class="oldBtn primary" id="confirmBlock">OK</button></div></div></div>
-          </section>
-
-          <!-- RECENTS -->
-          <section class="view recentsView" id="recentsView">
-            <div class="recentsTitle">Recent apps</div>
-            <div class="card" data-open="line"><div class="cardPreview linePrev"></div><div class="cardText"><strong>LINE</strong><span>Unknown</span></div></div>
-            <div class="card" data-open="album"><div class="cardPreview albumPrev"></div><div class="cardText"><strong>Album</strong><span>Photos</span></div></div>
-            <div class="card" data-open="settings"><div class="cardPreview settingsPrev"></div><div class="cardText"><strong>Settings</strong><span>About phone</span></div></div>
-            <div class="card voidCard" id="voidCard"><div class="cardPreview"></div><div class="cardText"><strong>&nbsp;</strong><span>&nbsp;</span></div></div>
-          </section>
-
-          <!-- ALBUM -->
-          <section class="view albumView" id="albumView">
-            <div class="appHeader">Album</div>
-            <div class="albumGrid">
-              <div class="photo p1"><span class="fname">IMG_1001.JPG</span></div>
-              <div class="photo p2"><span class="fname">IMG_1008.JPG</span></div>
-              <div class="photo p3"><span class="fname">IMG_1012.JPG</span></div>
-              <div class="photo p4"><span class="fname">IMG_1016.JPG</span></div>
-              <div class="photo p5"><span class="fname">IMG_1020.JPG</span></div>
-              <div class="photo p6"><span class="fname">IMG_1024.JPG</span></div>
-              <div class="photo secretPhoto" id="secretPhoto"><span class="fname">IMG_1026.JPG</span></div>
-            </div>
-            <div class="viewer" id="viewer">
-              <div class="viewerTop">IMG_1026.JPG</div>
-              <div class="viewerImage redEyes"><div class="rune">YUME</div></div>
-              <div class="viewerMeta"><span>--:--</span><span>IMG_1026.JPG</span></div>
-            </div>
-          </section>
-
-          <!-- SETTINGS -->
-          <section class="view settingsView" id="settingsView">
-            <div class="appHeader">Settings</div>
-            <div class="settingRow"><strong>Wi‑Fi</strong><span>Off</span></div>
-            <div class="settingRow"><strong>Sound</strong><span>Default</span></div>
-            <div class="settingRow" id="aboutRow"><strong>About phone</strong><span>Status · Legal information · Android version</span></div>
-          </section>
-
-          <section class="view aboutView" id="aboutView">
-            <div class="appHeader">About phone</div>
-            <div class="aboutList">
-              <div class="aboutRow"><small>Android version</small><div>4.2.2</div></div>
-              <div class="aboutRow"><small>Model number</small><div id="modelNumber">SO-XX13</div></div>
-              <div class="aboutRow"><small>Build number</small><div id="buildNumber">10.3.A.0.423</div></div>
-            </div>
-          </section>
-
-          <nav class="nav">
-            <button class="back" id="navBack" aria-label="Back"></button>
-            <button class="home" id="navHome" aria-label="Home"></button>
-            <button class="recent" id="navRecent" aria-label="Recent"></button>
-          </nav>
-          <div class="black" id="black"></div>
         </div>
-      </div>
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 absolute w-full left-0 top-20 shadow-xl transition-all duration-300">
+            <div class="px-4 py-6 space-y-4">
+                <a class="block text-base font-bold text-gray-600 hover:text-primary" href="#">TRANG CHỦ</a>
+                <a class="block text-base font-bold text-gray-600 hover:text-primary"
+                    href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank">TIN TỨC</a>
+                <div class="flex gap-3">
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12 ticket-btn"
+                        href="#tickets">
+                        <span class="transform skew-x-12 block text-sm">HÀ NỘI</span>
+                    </a>
+                    <a class="flex-1 text-center bg-secondary hover:bg-red-600 text-white py-3 font-display font-black tracking-wider uppercase border-2 border-primary shadow-[4px_4px_0px_0px_#eab308] transform -skew-x-12 ticket-btn"
+                        href="#tickets">
+                        <span class="transform skew-x-12 block text-sm">HỒ CHÍ MINH</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <header id="hero" class="relative h-screen flex items-center justify-center overflow-hidden scroll-snap-item">
+        <!-- Background Image with Blur Effect -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-[3px] scale-105 transform origin-center z-0"
+            style="background-image: url('assets/visual-banner_final.webp');"></div>
+        <!-- Gradient Overlay on top of background -->
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-black/30 z-0"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+            <div class="flex flex-col items-center space-y-6 md:space-y-8">
+
+
+                <!-- Main Title -->
+                <h1
+                    class="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none text-white drop-shadow-2xl flex flex-col gap-4 md:gap-5">
+                    <span class="block whitespace-nowrap">LỚP HỌC <span
+                            class="text-secondary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">ÁM SÁT</span></span>
+                    <span
+                        class="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary drop-shadow-[0_0_15px_rgba(234,179,8,0.4)] flex flex-col gap-2 md:gap-3">
+                        <span>Thập Niên Hẹn Ước</span>
+                        <span class="text-[#b4d7f8]">Ngày Trở Về</span>
+                    </span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed font-bold"
+                    style="text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 4px 15px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.7);">
+                    Thấm thoắt đã 10 năm kể từ ngày những thước phim đầu tiên được phát sóng, chuyến tàu thanh xuân của
+                    lớp 3-E chưa bao giờ dừng lại. Tuyệt thật đấy, khi sau một thập kỷ, chúng ta lại có cơ hội tụ họp
+                    đông đủ để cùng nhìn lên màn ảnh rộng, sống lại những ký ức trọn vẹn nhất!
+                </p>
+
+
+
+                <!-- Countdown -->
+                <!-- <div class="pt-6 w-full max-w-2xl mx-auto">
+                    <p
+                        class="text-sm font-bold text-gray-400 mb-5 uppercase tracking-[0.15em] flex items-center justify-center flex-wrap gap-2">
+                        Đếm ngược đến <span
+                            class="text-primary font-mono font-black drop-shadow-[0_0_10px_rgba(234,179,8,0.6)] bg-primary/10 border border-primary/30 rounded px-2.5 py-0.5 select-all">17:00
+                            - 07/06/2026</span>
+                    </p>
+                    <div class="flex justify-center gap-3 sm:gap-6 flex-wrap sm:flex-nowrap">
+                        <div
+                            class="bg-black/40 backdrop-blur-md border border-white/10 p-3 sm:p-5 rounded-2xl min-w-[70px] sm:min-w-[90px] text-center border-b-4 border-b-primary shadow-2xl transition-transform hover:scale-105 duration-300">
+                            <span id="days"
+                                class="block text-3xl sm:text-4xl lg:text-5xl font-black text-white drop-shadow-md">00</span>
+                            <span
+                                class="text-[10px] sm:text-xs text-gray-400 uppercase font-bold tracking-widest mt-1">Ngày</span>
+                        </div>
+                        <div
+                            class="bg-black/40 backdrop-blur-md border border-white/10 p-3 sm:p-5 rounded-2xl min-w-[70px] sm:min-w-[90px] text-center border-b-4 border-b-primary shadow-2xl transition-transform hover:scale-105 duration-300">
+                            <span id="hours"
+                                class="block text-3xl sm:text-4xl lg:text-5xl font-black text-white drop-shadow-md">00</span>
+                            <span
+                                class="text-[10px] sm:text-xs text-gray-400 uppercase font-bold tracking-widest mt-1">Giờ</span>
+                        </div>
+                        <div
+                            class="bg-black/40 backdrop-blur-md border border-white/10 p-3 sm:p-5 rounded-2xl min-w-[70px] sm:min-w-[90px] text-center border-b-4 border-b-primary shadow-2xl transition-transform hover:scale-105 duration-300">
+                            <span id="minutes"
+                                class="block text-3xl sm:text-4xl lg:text-5xl font-black text-white drop-shadow-md">00</span>
+                            <span
+                                class="text-[10px] sm:text-xs text-gray-400 uppercase font-bold tracking-widest mt-1">Phút</span>
+                        </div>
+                        <div
+                            class="bg-black/40 backdrop-blur-md border border-white/10 p-3 sm:p-5 rounded-2xl min-w-[70px] sm:min-w-[90px] text-center border-b-4 border-b-primary shadow-2xl transition-transform hover:scale-105 duration-300">
+                            <span id="seconds"
+                                class="block text-3xl sm:text-4xl lg:text-5xl font-black text-white drop-shadow-md">00</span>
+                            <span
+                                class="text-[10px] sm:text-xs text-gray-400 uppercase font-bold tracking-widest mt-1">Giây</span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Mũi tên cuộn trang trỏ thẳng xuống mục mua vé -->
+        <a href="#zones"
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-300 group rounded-full z-20 p-4 max-md:z-30">
+            <div class="flex flex-col items-center">
+                <!-- Nhãn phụ phong cách Tactical HUD -->
+                <span
+                    class="text-[10px] font-mono font-black text-primary tracking-[0.2em] mb-2 opacity-70 group-hover:opacity-100 transition-opacity uppercase">Mục
+                    tiêu</span>
+                <!-- SVG Mũi tên hướng xuống bự lên -->
+                <svg class="w-12 h-12 text-primary animate-bounce group-hover:text-secondary transition-colors"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </a>
+    </header>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("2026-06-07T17:00:00").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            document.getElementById("days").innerText = String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById("hours").innerText = String(Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(Math.floor((difference % (1000 * 60)) / 1000)).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); 
+    </script>
+
+    <section id="event-info" class="py-20 relative bg-white border-y border-gray-100 overflow-hidden scroll-snap-item">
+        <!-- Đồ họa trang trí (Decorative shapes) -->
+        <div
+            class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-end gap-4 mb-14 justify-center md:justify-start">
+                <h2
+                    class="font-display font-black text-4xl md:text-5xl text-gray-800 uppercase tracking-tight relative inline-block">
+                    Thông Tin <span class="text-secondary relative z-10">Sự Kiện</span>
+                    <span class="absolute bottom-1 left-0 w-full h-3 bg-secondary/20 -z-10 transform -rotate-1"></span>
+                </h2>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+                <!-- Cột trái: Koro-sensei Target (Wanted Poster) -->
+                <div class="w-full lg:w-1/2 relative group">
+                    <div
+                        class="bg-gray-900 rounded-[2rem] p-5 shadow-2xl border-4 border-gray-800 relative overflow-hidden transform transition-all duration-500 group-hover:scale-[1.02] border-alert-hover">
+                        <!-- Radar/Grid Background -->
+                        <div
+                            class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10">
+                        </div>
+
+                        <!-- Cảnh báo (Header của thẻ) -->
+                        <div
+                            class="relative z-20 flex justify-between items-center bg-secondary text-white font-mono font-black text-sm md:text-base px-4 py-3 rounded-xl mb-4 border-2 border-red-900 shadow-inner transition-colors duration-300 group-hover:bg-red-700">
+                            <span class="flex items-center gap-2 animate-pulse">
+                                <span class="material-symbols-outlined text-[20px]">warning</span>
+                                <span class="group-hover:hidden">CAO MẬT</span>
+                                <span class="hidden group-hover:inline text-yellow-300">ĐÃ KHÓA</span>
+                            </span>
+                            <span class="tracking-widest group-hover:hidden">/// ĐỐI TƯỢNG MỤC TIÊU</span>
+                            <span class="tracking-widest hidden group-hover:inline text-yellow-300 animate-pulse">/// ĐÃ
+                                KHÓA MỤC TIÊU</span>
+                        </div>
+
+                        <!-- Khung ảnh Koro-sensei -->
+                        <div
+                            class="relative z-10 bg-[#fefce8] rounded-xl overflow-hidden border-2 border-gray-700 h-[300px] md:h-[400px] flex items-center justify-center">
+                            <!-- Phủ đỏ ngầu radar khi khóa mục tiêu -->
+                            <div
+                                class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 animate-pulse">
+                            </div>
+
+                            <!-- Tia quét mục tiêu (Scan Line) -->
+                            <div
+                                class="absolute left-0 w-full h-[3px] bg-red-500 shadow-[0_0_8px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-15 pointer-events-none animate-[scan-line_2s_linear_infinite]">
+                            </div>
+
+                            <!-- Góc ngắm HUD (HUD Corner brackets) -->
+                            <div
+                                class="absolute w-6 h-6 border-t-2 border-l-2 border-secondary top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-t-2 border-r-2 border-secondary top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-b-2 border-l-2 border-secondary bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20">
+                            </div>
+                            <div
+                                class="absolute w-6 h-6 border-b-2 border-r-2 border-secondary bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 pointer-events-none z-20">
+                            </div>
+
+                            <!-- Overlay Tâm Ngắm ngầu -->
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
+                                <div
+                                    class="w-48 h-48 border-[3px] border-secondary rounded-full animate-[spin_4s_linear_infinite] border-dashed">
+                                </div>
+                                <div class="absolute w-full h-[2px] bg-secondary/70"></div>
+                                <div class="absolute h-full w-[2px] bg-secondary/70"></div>
+                                <div class="w-2 h-2 bg-secondary rounded-full absolute"></div>
+                            </div>
+
+                            <img src="assets/1. Koro-sensei.webp" alt="Koro-sensei" loading="lazy"
+                                class="w-3/4 h-3/4 object-contain transform group-hover:scale-110 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0" />
+                        </div>
+
+                        <!-- Footer Info -->
+                        <div class="relative z-20 mt-5 px-2 flex justify-between items-end">
+                            <div>
+                                <p
+                                    class="font-mono text-secondary font-black text-2xl md:text-3xl mb-1 tracking-widest">
+                                    KORO-SENSEI</p>
+                                <p class="font-mono text-gray-400 text-[10px] md:text-xs">MỨC THƯỞNG: 10 TỶ YÊN | TÌNH
+                                    TRẠNG:
+                                    <span class="text-secondary font-bold group-hover:hidden">CHƯA TIÊU DIỆT</span>
+                                    <span class="text-red-500 font-black hidden group-hover:inline animate-pulse">ĐANG
+                                        KHÓA MỤC TIÊU...</span>
+                                </p>
+                            </div>
+                            <!-- Icon scan -->
+                            <div
+                                class="w-10 h-10 border border-gray-600 rounded bg-gray-800 flex items-center justify-center group-hover:border-secondary transition-colors">
+                                <span
+                                    class="material-symbols-outlined text-gray-500 group-hover:text-secondary animate-pulse">qr_code_scanner</span>
+                            </div>
+                        </div>
+
+                        <!-- Dấu mộc WANTED / LOCKED -->
+                        <div
+                            class="absolute top-28 -right-4 z-30 transform rotate-[25deg] transition-all duration-300 pointer-events-none">
+                            <!-- Mộc WANTED mặc định -->
+                            <div
+                                class="border-[6px] border-secondary text-secondary font-black text-4xl px-4 py-1 rounded-xl shadow-lg bg-gray-900/70 backdrop-blur-sm group-hover:hidden">
+                                WANTED</div>
+                            <!-- Mộc LOCKED khi hover -->
+                            <div
+                                class="hidden group-hover:block border-[6px] border-yellow-500 text-yellow-500 font-black text-4xl px-4 py-1 rounded-xl shadow-[0_0_25px_rgba(234,179,8,0.7)] bg-gray-900/80 backdrop-blur-sm animate-pulse transform scale-110">
+                                LOCKED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Thông tin -->
+                <div class="w-full lg:w-1/2 space-y-6">
+
+
+                    <p class="text-gray-600 text-lg font-medium border-l-4 border-secondary pl-4 py-1 mb-8">
+                        Hãy chuẩn bị sẵn sàng cho sự kiện Offline | Fan Screening lớn nhất của cộng đồng Ansatsu
+                        Kyoushitsu tại Việt Nam!
+                    </p>
+
+                    <!-- Classified Dossier Box (Light Mode) -->
+                    <div
+                        class="bg-white p-6 sm:p-8 rounded-[2rem] border-4 border-gray-900 relative shadow-[8px_8px_0px_#eab308] transform md:rotate-1">
+                        <!-- Tape decoration -->
+                        <div
+                            class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-red-500/80 -rotate-2 shadow-sm">
+                        </div>
+
+                        <div
+                            class="absolute top-4 right-4 border-2 border-red-500 text-red-500 font-black tracking-widest uppercase text-[10px] px-2 py-1 transform rotate-12 opacity-80">
+                            Classified
+                        </div>
+
+                        <div class="space-y-8 relative z-10 pt-2">
+                            <!-- Tactical Time -->
+                            <div class="relative pl-6 border-l-2 border-dashed border-primary">
+                                <div
+                                    class="absolute -left-[13px] top-0 w-6 h-6 bg-white border-2 border-primary rounded-full flex items-center justify-center">
+                                    <div class="w-2 h-2 bg-primary rounded-full animate-ping"></div>
+                                </div>
+                                <p class="text-xs font-mono font-bold text-gray-500 mb-1 tracking-[0.2em]">/// THỜI GIAN
+                                    HÀNH ĐỘNG</p>
+                                <p
+                                    class="text-2xl sm:text-3xl font-display font-black text-gray-900 uppercase tracking-wider">
+                                    Chủ Nhật, 7/6/2026</p>
+                            </div>
+
+                            <!-- Tactical Location -->
+                            <div class="relative pl-6 border-l-2 border-dashed border-secondary">
+                                <div
+                                    class="absolute -left-[13px] top-0 w-6 h-6 bg-white border-2 border-secondary rounded-full flex items-center justify-center">
+                                    <span
+                                        class="material-symbols-outlined text-[14px] text-secondary">my_location</span>
+                                </div>
+                                <p class="text-xs font-mono font-bold text-gray-500 mb-3 tracking-[0.2em]">/// TỌA ĐỘ
+                                    TẬP KẾT</p>
+                                <div class="space-y-4">
+                                    <div
+                                        class="bg-gray-50 border-2 border-gray-200 p-4 rounded-xl flex items-center gap-4">
+                                        <div class="text-5xl font-black text-primary">
+                                            01</div>
+                                        <div>
+                                            <p class="text-gray-900 font-bold text-lg">Lotte Gò Vấp</p>
+                                            <p class="text-gray-500 text-sm font-medium">TP. Hồ Chí Minh</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-gray-50 border-2 border-gray-200 p-4 rounded-xl flex items-center gap-4">
+                                        <div class="text-5xl font-black text-primary">
+                                            02</div>
+                                        <div>
+                                            <p class="text-gray-900 font-bold text-lg">Lotte West Lake</p>
+                                            <p class="text-gray-500 text-sm font-medium">Hà Nội</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="py-20 relative bg-white border-t border-gray-100 overflow-hidden" id="tickets">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2
+                    class="font-display font-black text-4xl md:text-5xl text-gray-800 uppercase tracking-tight relative inline-block">
+                    Chọn <span class="text-primary relative z-10">Hạng Vé</span>
+                    <span class="absolute bottom-1 left-0 w-full h-3 bg-primary/20 -z-10 transform -rotate-1"></span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto font-medium mt-4">Số lượng vé có hạn. Hãy nhanh tay sở hữu tấm
+                    vé
+                    phù hợp nhất để tham gia cùng chúng mình nhé!<br></p>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-4xl mx-auto mb-12">
+                <!-- Standard Ticket: GREEN KNIFE -->
+                <div
+                    class="bg-white rounded-[2rem] p-5 md:p-6 border-4 border-gray-900 overflow-hidden relative transition-all duration-500 hover:shadow-[8px_8px_0px_0px_#22c55e] h-full flex flex-col group">
+                    <!-- Grid background -->
+                    <div
+                        class="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:24px_24px]">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-greenknife/5 via-transparent to-transparent">
+                    </div>
+
+                    <div class="relative z-10 flex flex-col h-full">
+                        <!-- Header Nhiệm vụ -->
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-2 h-2 bg-greenknife rounded-full animate-pulse"></div>
+                            <p class="font-mono text-greenknife text-xs font-bold tracking-[0.3em] uppercase">/// MÃ
+                                CODE: STANDARD</p>
+                        </div>
+                        <h3
+                            class="font-display font-black text-3xl md:text-4xl text-gray-900 uppercase leading-tight tracking-tight">
+                            GREEN <span class="text-greenknife">KNIFE</span>
+                        </h3>
+
+                        <!-- Divider -->
+                        <div class="w-full h-px bg-gray-200 my-4"></div>
+
+                        <!-- Thông số (Stats) -->
+                        <div class="mb-2">
+                            <p class="font-mono text-gray-500 text-xs tracking-[0.2em] mb-1">/// PHÍ TRANG BỊ</p>
+                            <p class="font-display font-black text-gray-900 text-4xl md:text-5xl leading-none">189<span
+                                    class="text-2xl md:text-3xl text-gray-400 font-bold ml-1">K</span></p>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="w-full h-px bg-gray-200 my-4"></div>
+
+                        <!-- Quân tư trang (Tính năng) -->
+                        <div class="flex-grow">
+                            <p class="font-mono text-gray-500 text-xs tracking-[0.2em] mb-4">/// QUÂN TƯ TRANG (VẬT
+                                PHẨM)</p>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <!-- Sniper Crosshair Icon (Smaller & Hover Rotate/Blink Animation) -->
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>Chọn vị trí ngồi khu vực Standard</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Vé xem phim: Giờ Của Chúng Ta</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Ticket cứng lưu niệm</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Keychain Koro-sensei</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Card bo góc Random</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-greenknife">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 mã số may mắn GIVEAWAY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIP Ticket: PINK BULLET -->
+                <div
+                    class="bg-white rounded-[2rem] p-5 md:p-6 border-4 border-gray-900 overflow-hidden relative transition-all duration-500 hover:shadow-[8px_8px_0px_0px_#ec4899] h-full flex flex-col group md:scale-[1.02] z-10">
+                    <!-- Grid background -->
+                    <div
+                        class="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:24px_24px]">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-pinkbullet/5 via-transparent to-transparent">
+                    </div>
+
+                    <!-- Highlight mark -->
+                    <div class="absolute top-5 right-5 z-20 transform rotate-[15deg] pointer-events-none">
+                        <div
+                            class="border-[3px] border-pinkbullet/80 text-pinkbullet font-black text-[10px] px-2 py-0.5 rounded shadow-sm bg-white/80 backdrop-blur-sm">
+                            TOP PRIORITY</div>
+                    </div>
+
+                    <div class="relative z-10 flex flex-col h-full">
+                        <!-- Header Nhiệm vụ -->
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-2 h-2 bg-pinkbullet rounded-full animate-pulse"></div>
+                            <p class="font-mono text-pinkbullet text-xs font-bold tracking-[0.3em] uppercase">/// MÃ
+                                CODE: VIP</p>
+                        </div>
+                        <h3
+                            class="font-display font-black text-3xl md:text-4xl text-gray-900 uppercase leading-tight tracking-tight">
+                            PINK <span class="text-pinkbullet">BULLET</span>
+                        </h3>
+
+                        <!-- Divider -->
+                        <div class="w-full h-px bg-gray-200 my-4"></div>
+
+                        <!-- Thông số (Stats) -->
+                        <div class="mb-2">
+                            <p class="font-mono text-gray-500 text-xs tracking-[0.2em] mb-1">/// PHÍ TRANG BỊ</p>
+                            <p class="font-display font-black text-gray-900 text-4xl md:text-5xl leading-none">289<span
+                                    class="text-2xl md:text-3xl text-gray-400 font-bold ml-1">K</span></p>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="w-full h-px bg-gray-200 my-4"></div>
+
+                        <!-- Quân tư trang (Tính năng) -->
+                        <div class="flex-grow">
+                            <p class="font-mono text-gray-500 text-xs tracking-[0.2em] mb-4">/// QUÂN TƯ TRANG (VẬT
+                                PHẨM)</p>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <!-- Sniper Crosshair Icon (Smaller & Hover Rotate/Blink Animation) -->
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>Chọn vị trí ngồi khu vực VIP</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Vé xem phim: Giờ Của Chúng Ta</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Ticket cứng lưu niệm</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span>1 Keychain Koro-sensei</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">1 Card bo góc Tự Chọn</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">1 Pack sticker 6 nhân vật</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-pinkbullet rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">1 Badge nhân vật Random</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">1 Artprint A5</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1.5px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">1 Standee Mica Koro-sensei</span>
+                                </div>
+                                <div class="flex items-start gap-3 text-gray-800 font-medium text-sm md:text-[15px]">
+                                    <div
+                                        class="mt-1 w-4 h-4 flex items-center justify-center shrink-0 relative transition-transform duration-500 group-hover:rotate-90 animate-target-blink-hover text-pinkbullet">
+                                        <div
+                                            class="absolute inset-0 border-[1.2px] border-current rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute w-full h-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="absolute h-full w-[1px] bg-current opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                        </div>
+                                        <div
+                                            class="w-1 h-1 bg-current rounded-full z-10 transition-all duration-300 group-hover:scale-125">
+                                        </div>
+                                    </div>
+                                    <span class="text-pinkbullet font-bold">2 mã số may mắn GIVEAWAY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KHU VỰC TÁC CHIẾN (MISSION ZONE SELECTION) -->
+    <section class="py-20 relative bg-white border-t border-gray-100 overflow-hidden" id="zones">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-6xl mx-auto text-center relative z-10 pb-8">
+                <div class="flex items-center justify-center gap-4 mb-10">
+                    <span class="w-16 h-1 bg-secondary skew-x-12"></span>
+                    <h3 class="text-3xl md:text-5xl font-display font-black text-gray-800 uppercase tracking-widest">
+                        CHỌN KHU VỰC <span class="text-secondary">TÁC CHIẾN</span>
+                    </h3>
+                    <span class="w-16 h-1 bg-secondary -skew-x-12"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
+                    <!-- HÀ NỘI MISSION CARD -->
+                    <a href="https://buy.worldsimp.com/events/11" target="_blank"
+                        class="relative group block transform -skew-x-6 hover:-translate-y-2 transition-all duration-500 overflow-hidden rounded-3xl border-4 border-gray-800 hover:border-secondary shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_0_40px_rgba(239,68,68,0.5)] ticket-btn">
+                        <!-- Background Image Container -->
+                        <div class="absolute inset-0 z-0 bg-gray-900">
+                            <img src="assets/westlake.webp" alt="Hà Nội West Lake"
+                                class="w-full h-full object-cover grayscale mix-blend-screen opacity-50 group-hover:grayscale-0 group-hover:mix-blend-normal group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out" />
+                            <!-- Red/Dark filter overlay that fades on hover -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent group-hover:opacity-30 transition-opacity duration-500">
+                            </div>
+                        </div>
+
+                        <!-- Scan Line on hover -->
+                        <div
+                            class="absolute left-0 w-full h-[4px] bg-red-500 shadow-[0_0_12px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none animate-[scan-line_2.5s_linear_infinite]">
+                        </div>
+
+                        <!-- Radar Lock Target on hover -->
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none scale-150 group-hover:scale-100 ease-out">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 border-[3px] border-secondary rounded-full animate-[spin_3s_linear_infinite] border-dashed shadow-[0_0_15px_#ef4444]">
+                            </div>
+                            <div class="absolute w-full h-[2px] bg-secondary/60"></div>
+                            <div class="absolute h-full w-[2px] bg-secondary/60"></div>
+                            <div class="w-3 h-3 bg-secondary rounded-full absolute animate-ping"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div
+                            class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                            <div
+                                class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
+                                <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
+                                ĐỊA ĐIỂM: HÀ NỘI
+                            </div>
+
+                            <h4
+                                class="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tight group-hover:hidden transition-all duration-300 drop-shadow-xl">
+                                LOTTE HỒ TÂY
+                            </h4>
+                            <h4
+                                class="text-3xl md:text-5xl font-display font-black text-yellow-400 uppercase tracking-tight hidden group-hover:block animate-pulse drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                                XÁC NHẬN MỤC TIÊU
+                            </h4>
+
+                            <div
+                                class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                                <span
+                                    class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
+                                    CHƯA MỞ KHÓA ]</span>
+                                <span
+                                    class="material-symbols-outlined text-gray-400 group-hover:text-secondary transform group-hover:translate-x-3 transition-all duration-300 text-xl md:text-2xl">arrow_forward_ios</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- HỒ CHÍ MINH MISSION CARD -->
+                    <a href="https://buy.worldsimp.com/events/10" target="_blank"
+                        class="relative group block transform -skew-x-6 hover:-translate-y-2 transition-all duration-500 overflow-hidden rounded-3xl border-4 border-gray-800 hover:border-secondary shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_0_40px_rgba(239,68,68,0.5)] ticket-btn">
+                        <!-- Background Image Container -->
+                        <div class="absolute inset-0 z-0 bg-gray-900">
+                            <img src="assets/lotte-govap.webp" alt="Hồ Chí Minh Lotte Gò Vấp"
+                                class="w-full h-full object-cover grayscale mix-blend-screen opacity-50 group-hover:grayscale-0 group-hover:mix-blend-normal group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out" />
+                            <!-- Red/Dark filter overlay that fades on hover -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent group-hover:opacity-30 transition-opacity duration-500">
+                            </div>
+                        </div>
+
+                        <!-- Scan Line on hover -->
+                        <div
+                            class="absolute left-0 w-full h-[4px] bg-red-500 shadow-[0_0_12px_#ef4444] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none animate-[scan-line_2.5s_linear_infinite]">
+                        </div>
+
+                        <!-- Radar Lock Target on hover -->
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none scale-150 group-hover:scale-100 ease-out">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 border-[3px] border-secondary rounded-full animate-[spin_3s_linear_infinite] border-dashed shadow-[0_0_15px_#ef4444]">
+                            </div>
+                            <div class="absolute w-full h-[2px] bg-secondary/60"></div>
+                            <div class="absolute h-full w-[2px] bg-secondary/60"></div>
+                            <div class="w-3 h-3 bg-secondary rounded-full absolute animate-ping"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div
+                            class="relative z-20 p-5 md:p-8 h-[220px] sm:h-[250px] md:h-[350px] flex flex-col justify-end transform skew-x-6 text-left">
+                            <div
+                                class="inline-flex items-center gap-2 text-secondary font-mono text-[10px] md:text-sm font-black tracking-widest mb-2 md:mb-3 border border-secondary/30 px-2 md:px-3 py-1 md:py-1.5 bg-gray-900/80 backdrop-blur-md w-max shadow-lg">
+                                <span class="w-2 h-2 md:w-2.5 md:h-2.5 bg-secondary rounded-full animate-pulse"></span>
+                                ĐỊA ĐIỂM: HỒ CHÍ MINH
+                            </div>
+
+                            <h4
+                                class="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tight group-hover:hidden transition-all duration-300 drop-shadow-xl">
+                                LOTTE GÒ VẤP
+                            </h4>
+                            <h4
+                                class="text-3xl md:text-5xl font-display font-black text-yellow-400 uppercase tracking-tight hidden group-hover:block animate-pulse drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                                XÁC NHẬN MỤC TIÊU
+                            </h4>
+
+                            <div
+                                class="mt-4 md:mt-6 flex items-center justify-between border-t-2 border-gray-700/80 pt-3 md:pt-4">
+                                <span
+                                    class="font-mono text-gray-400 text-xs md:text-base font-bold tracking-wider group-hover:text-white transition-colors">[
+                                    CHƯA MỞ KHÓA ]</span>
+                                <span
+                                    class="material-symbols-outlined text-gray-400 group-hover:text-secondary transform group-hover:translate-x-3 transition-all duration-300 text-xl md:text-2xl">arrow_forward_ios</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Đối tác - Organizers & Sponsors (Center Layout) -->
+    <section class="py-20 bg-white border-t border-gray-100 relative overflow-hidden" id="sponsors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10 md:mb-16">
+                <h3 class="font-mono text-gray-500 font-bold tracking-[0.3em] uppercase text-sm mb-2">Đồng Hành Cùng
+                    Sự Kiện</h3>
+                <h2 class="font-display font-black text-3xl md:text-4xl text-gray-800 uppercase">Lực Lượng <span
+                        class="text-primary">Yểm Trợ</span></h2>
+            </div>
+
+            <!-- 3 Logo Center Layout -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+
+                <!-- Organizer 1: World Simp And Friends -->
+                <a href="https://www.facebook.com/worldsimp235" target="_blank"
+                    class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/worldsimp.webp" alt="World Simp And Friends" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">World
+                        Simp And Friends</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
+                        TỔ CHỨC</p>
+                </a>
+
+                <!-- Organizer 2: Ansatsu Kyoushitsu VN Fanpage -->
+                <a href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank"
+                    class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/ansattsu.webp" alt="Ansatsu Kyoushitsu VN Fanpage" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p
+                        class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors text-center">
+                        Ansatsu Kyoushitsu VN Fanpage</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-gray-500 tracking-[0.2em] mt-2 border border-gray-200 rounded px-3 py-1">
+                        TỔ CHỨC</p>
+                </a>
+
+                <!-- Sponsor: PeoPo Store -->
+                <a href="https://www.facebook.com/PeoPoStore" target="_blank" class="group flex flex-col items-center">
+                    <div
+                        class="w-40 h-40 md:w-44 md:h-44 rounded-full border-4 border-gray-100 p-2 overflow-hidden bg-white shadow-xl group-hover:border-gray-900 group-hover:-translate-y-2 group-hover:shadow-[8px_8px_0px_#111827] transition-all duration-300 relative">
+                        <img src="assets/peopostore.webp" alt="PeoPo Store" loading="lazy"
+                            class="w-full h-full rounded-full object-cover transition-all duration-300">
+                    </div>
+                    <p class="mt-6 font-bold text-gray-800 text-xl group-hover:text-primary transition-colors">PeoPo
+                        Store</p>
+                    <p
+                        class="text-[10px] font-mono font-bold text-yellow-600 tracking-[0.2em] mt-2 border border-yellow-300 bg-yellow-50 rounded px-3 py-1">
+                        TÀI TRỢ</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-200 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <div>
+                    <h2 class="font-display font-black text-2xl text-gray-800">
+                        <span class="text-primary">THẬP NIÊN HẸN ƯỚC</span>
+                        <span class="text-sky-600">NGÀY TRỞ VỀ</span>
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-2 max-w-md">Offline & Fanscreening 2026. Một dự án phi lợi nhuận
+                        dành cho cộng đồng fan Việt Nam.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                        href="https://www.facebook.com/LHAS.AK.VNFanpage" target="_blank">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>© 2026 Lớp Học Ám Sát VN Fanpage x World Simp & Friends Project.</p>
+            </div>
+        </div>
+    </footer>
+    <div class="l-cursor" id="custom-cursor">
+        <div class="l-cursor__deco js-cursor-bg" id="cursor-deco">
+            <div class="l-cursor__outer">
+                <div class="l-cursor__outer-deco">
+                    <span></span><span></span>
+                </div>
+            </div>
+            <div class="l-cursor__inner">
+                <div class="l-cursor__cross"></div>
+            </div>
+        </div>
+        <div class="l-cursor__point js-cursor-point" id="cursor-point"></div>
     </div>
-  </div>
-  <div class="hint">interactive concept · 2013-era japanese android</div>
-</main>
 
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const phoneScale=$('phoneScale'),phone=$('phone'),popup=$('popup'),status=$('status');
-  const homeView=$('homeView'),lineView=$('lineView'),recentsView=$('recentsView'),albumView=$('albumView'),settingsView=$('settingsView'),aboutView=$('aboutView');
-  const views=[homeView,lineView,recentsView,albumView,settingsView,aboutView];
-  const scroll=$('scroll'),dynamic=$('dynamic'),choices=$('choices'),menu=$('menu'),toast=$('toast'),whoFlash=$('whoFlash');
-  const dialogMask=$('dialogMask'),secretPhoto=$('secretPhoto'),viewer=$('viewer'),voidCard=$('voidCard'),modelNumber=$('modelNumber'),buildNumber=$('buildNumber');
-  const black=$('black'),reveal=$('reveal');
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false;
+    <!-- GSAP & Lenis Smooth Scroll Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // =========================================================
+            // KHỞI TẠO LENIS SMOOTH SCROLL & GSAP SNAP
+            // =========================================================
+            const isPC = window.innerWidth >= 1024;
+            let lenis = null;
 
-  function fit(){
-    const s=Math.min(1,(innerWidth-22)/390,(innerHeight-22)/760);
-    phoneScale.style.transform=`translate(-50%,-50%) scale(${s})`;
-  }
-  fit(); addEventListener('resize',fit);
+            if (isPC) {
+                // Khởi tạo Lenis
+                lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing curve siêu mượt của Lenis
+                    direction: 'vertical',
+                    smooth: true,
+                });
 
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  function buzz(){phone.classList.remove('vibrate');void phone.offsetWidth;phone.classList.add('vibrate')}
-  function showView(name){
-    const map={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
-    previous=current; current=name;
-    views.forEach(v=>v.classList.remove('active'));
-    map[name].classList.add('active');
-    menu.classList.remove('show');
-  }
-  function toastMsg(t){
-    toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);
-  }
-  function bottom(){scroll.scrollTop=scroll.scrollHeight}
-  function addMine(t){
-    const r=document.createElement('div');r.className='row me';
-    r.innerHTML=`<div class="stamp">既読<br>23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function addThem(t,time='23:47'){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble">${t}</div></div><div class="stamp">${time}</div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function typing(){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble typing"><i></i><i></i><i></i></div></div>`;
-    dynamic.appendChild(r);bottom();return r;
-  }
-  async function reply(t,delay=800,time='23:47'){const x=typing();await sleep(delay);x.remove();addThem(t,time)}
+                // Kết nối Lenis với GSAP ScrollTrigger
+                lenis.on('scroll', ScrollTrigger.update);
 
-  // first notification
-  (async()=>{await sleep(900);buzz();popup.classList.add('show')})();
+                gsap.ticker.add((time) => {
+                    lenis.raf(time * 1000);
+                });
 
-  $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
-  $('viewPopup').onclick=()=>{popup.classList.remove('show');showView('line')};
+                gsap.ticker.lagSmoothing(0);
 
-  document.querySelectorAll('[data-open]').forEach(el=>{
-    el.addEventListener('click',()=>showView(el.dataset.open));
-  });
+                // Đăng ký ScrollTrigger
+                gsap.registerPlugin(ScrollTrigger);
 
-  $('lineBack').onclick=()=>showView('home');
-  $('menuBtn').onclick=()=>menu.classList.toggle('show');
+                // Tạo hiệu ứng snap mượt giữa Hero và Section 2
+                ScrollTrigger.create({
+                    trigger: "header",
+                    start: "top top",
+                    end: "bottom top",
+                    snap: {
+                        snapTo: 1, // Snap đúng 100% chiều cao Hero
+                        duration: { min: 0.6, max: 1.2 }, // Thời gian trượt
+                        ease: "power3.inOut", // Gia tốc trượt cực kỳ êm ái của GSAP
+                        delay: 0.05 // Thời gian trễ rất nhỏ để tạo cảm giác tự nhiên
+                    }
+                });
 
-  $('profileBtn').onclick=async()=>{
-    menu.classList.remove('show'); profileVisits++;
-    if(profileVisits>=2){
-      whoFlash.classList.remove('flash');void whoFlash.offsetWidth;whoFlash.classList.add('flash');
-      await sleep(330);
-    }
-    toastMsg('ユーザーが見つかりません');
-  };
+                // Theo dõi vị trí và kích hoạt trạng thái Active trên Mục lục dọc
+                const nav = document.getElementById('tactical-nav');
+                const navItems = document.querySelectorAll('#tactical-nav .nav-item');
+                const sections = ['#hero', '#event-info', '#tickets', '#zones'];
 
-  $('blockBtn').onclick=()=>{menu.classList.remove('show');dialogMask.classList.add('show')};
-  $('cancelBlock').onclick=()=>dialogMask.classList.remove('show');
-  $('confirmBlock').onclick=async()=>{
-    dialogMask.classList.remove('show');toastMsg('ブロックしました');
-    await sleep(900);buzz();addThem('どうして？','--:--');
-    if(stage<2){stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');modelNumber.textContent='QB-1026'}
-  };
+                sections.forEach((selector) => {
+                    ScrollTrigger.create({
+                        trigger: selector,
+                        start: "top 50%", // Kích hoạt khi đỉnh của section chạm tới trung tâm màn hình
+                        end: "bottom 50%", // Tắt khi đáy của section vượt qua trung tâm màn hình
+                        onToggle: (self) => {
+                            if (self.isActive) {
+                                const targetId = selector.replace('#', '');
 
-  document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>begin(b.dataset.answer));
+                                // Nếu đang ở Hero section thì ẩn mục lục đi
+                                if (nav) {
+                                    if (targetId === 'hero') {
+                                        nav.classList.add('opacity-0', 'pointer-events-none', 'translate-x-4');
+                                        nav.classList.remove('opacity-100', 'pointer-events-auto', 'translate-x-0');
+                                    } else {
+                                        nav.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-4');
+                                        nav.classList.add('opacity-100', 'pointer-events-auto', 'translate-x-0');
+                                    }
+                                }
 
-  async function begin(kind){
-    if(started)return; started=true; choices.classList.remove('show');
-    addMine(kind==='who'?'Cậu là ai?':'Nhắn nhầm người rồi.');
-    await sleep(450);
-    await reply(kind==='who'?'Điều đó quan trọng sao?':'Không. Chính là cậu.',820);
-    await sleep(500);
+                                navItems.forEach(item => {
+                                    if (item.getAttribute('data-target') === targetId) {
+                                        item.classList.add('active');
+                                    } else {
+                                        item.classList.remove('active');
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+            }
 
-    stage=1;
-    status.classList.add('noService');
-    lineView.classList.add('stage1');
-    secretPhoto.classList.add('show');
+            // Smooth Scroll cho các liên kết nội bộ
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
 
-    await sleep(500);
-    await reply('Nếu bất kỳ điều ước nào cũng có thể thành sự thật…',880,'--:--');
-    await sleep(420);
-    await reply('cậu sẽ ước điều gì?',780,'--:--');
+                    // Nếu là nút mua vé có class ticket-btn thì để logic cảnh báo xử lý riêng, tránh tự động cuộn
+                    if (this.classList.contains('ticket-btn')) return;
 
-    choices.innerHTML=`<button class="choice" id="wish">Tôi có một điều ước.</button><button class="choice" id="leave">Đóng cuộc trò chuyện.</button>`;
-    choices.classList.add('show');
-    $('wish').onclick=contract;
-    $('leave').onclick=async()=>{
-      choices.classList.remove('show');
-      addMine('Đóng cuộc trò chuyện.');
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        if (lenis) {
+                            lenis.scrollTo(targetEl, {
+                                offset: 0,
+                                duration: 2.2,
+                                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                            });
+                        } else {
+                            targetEl.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
 
-      await sleep(850);
-      showView('home');
+            // Chỉ chạy custom cursor trên PC có chuột (pointer: fine = stylus/mouse, không phải touch)
+            const isMouseDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!isMouseDevice) {
+                document.getElementById('custom-cursor').style.display = 'none';
+                return; // Dừng lại, không init gì cả
+            }
 
-      await sleep(900);
-      buzz();
+            const cursor = document.getElementById('custom-cursor');
+            const cursorPoint = document.getElementById('cursor-point');
+            const cursorDeco = document.getElementById('cursor-deco');
 
-      // LINE comes back even after the user tries to leave.
-      popup.classList.add('show');
-      popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>Tớ vẫn đang ở đây.';
+            // Mảng các thẻ cần hover đổi màu đỏ (a, button, input...)
+            // WOW Effect: Thêm hình ảnh (img, svg) và Tiêu đề (h2, h3) để ngắm bắn
+            const hoverTargets = document.querySelectorAll('a, button, input, .hover-target, img, svg, h2, h3, .glass-panel');
+            const ticketBtns = document.querySelectorAll('.ticket-btn');
 
-      await sleep(1400);
-      popup.classList.remove('show');
-      showView('line');
+            // Logic chạy theo chuột
+            document.addEventListener('mousemove', (e) => {
+                // Dùng translate3d để ép GPU render, mượt không độ trễ
+                cursorPoint.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+                cursorDeco.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+            });
 
-      await sleep(350);
-      addThem('Tớ vẫn đang ở đây.','--:--');
+            // WOW Effect: Hiệu ứng giật cò súng khi click (ngắm bắn)
+            document.addEventListener('mousedown', () => {
+                cursor.classList.add('is-scope');
+                cursorDeco.style.transition = 'transform 0.05s ease';
+                cursorDeco.style.transform += ' scale(0.7)';
+            });
 
-      await sleep(700);
-      await reply('Cậu không cần trả lời ngay đâu.',800,'--:--');
+            document.addEventListener('mouseup', (e) => {
+                cursorDeco.style.transition = 'none'; // Phục hồi transition mặc định CSS
 
-      await sleep(650);
-      await reply('Nhưng điều ước của cậu vẫn chưa biến mất, đúng không?',850,'--:--');
+                // Kiểm tra xem chuột có đang nằm trên vùng mục tiêu không
+                let isHoveringTarget = Array.from(hoverTargets).some(target => target.contains(e.target));
+                if (!isHoveringTarget) {
+                    cursor.classList.remove('is-scope');
+                }
 
-      await sleep(500);
+                // Nếu đang thả chuột trên nút mua vé thì khôi phục lại trạng thái lock mục tiêu
+                let isHoveringTicketBtn = Array.from(ticketBtns).some(btn => btn.contains(e.target));
+                if (isHoveringTicketBtn) {
+                    cursor.classList.add('is-locking');
+                } else {
+                    cursor.classList.remove('is-locking');
+                }
+            });
 
-      choices.innerHTML=`
-        <button class="choice" id="returnWish">…Tôi có một điều ước.</button>
-        <button class="choice" id="ignoreAgain">Tiếp tục bỏ qua.</button>
-      `;
-      choices.classList.add('show');
+            // Logic handle Xanh - Đỏ (Bật/tắt class is-scope)
+            hoverTargets.forEach(target => {
+                // Bỏ qua nếu target này là nút mua vé (đã được xử lý riêng bằng class is-locking)
+                if (target.classList.contains('ticket-btn')) return;
 
-      $('returnWish').onclick=contract;
+                target.addEventListener('mouseenter', () => {
+                    cursor.classList.add('is-scope');
+                });
+                target.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('is-scope');
+                });
+            });
 
-      $('ignoreAgain').onclick=async()=>{
-        choices.classList.remove('show');
-        addMine('Tiếp tục bỏ qua.');
+            // Logic handle Lock mục tiêu cho nút mua vé
+            ticketBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    cursor.classList.add('is-locking');
+                });
+                btn.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('is-locking');
+                });
 
-        await sleep(1000);
+                // Cảnh báo khi mua vé
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    let rawText = btn.innerText.toUpperCase();
+                    let locationStr = rawText.includes('HÀ NỘI') || rawText.includes('HỒ TÂY') ? 'HÀ NỘI' : 'HỒ CHÍ MINH';
+                    let link = btn.getAttribute('href');
 
-        status.classList.add('noService');
-        lineView.classList.add('stage2');
-        voidCard.classList.add('show');
-        secretPhoto.classList.add('show');
+                    const modal = document.getElementById('ticket-warning-modal');
+                    const modalOverlay = document.getElementById('ticket-modal-overlay');
+                    const modalContent = document.getElementById('ticket-modal-content');
+                    const locationTextEl = document.getElementById('ticket-location-text');
 
-        await reply('Ừm.',650,'--:--');
-        await sleep(800);
-        await reply('Vậy tớ sẽ chờ đến khi cậu muốn nói chuyện.',850,'--:--');
+                    // Xóa event cũ của nút xác nhận để tránh gọi nhiều lần
+                    const oldConfirmBtn = document.getElementById('ticket-modal-confirm');
+                    const newConfirmBtn = oldConfirmBtn.cloneNode(true);
+                    oldConfirmBtn.parentNode.replaceChild(newConfirmBtn, oldConfirmBtn);
 
-        await sleep(850);
+                    locationTextEl.innerText = locationStr;
+                    modal.classList.remove('hidden');
+                    void modal.offsetWidth; // trigger reflow
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-90', 'opacity-0');
 
-        choices.innerHTML=`
-          <button class="choice" id="onlyChoice">Mở lời mời.</button>
-        `;
-        choices.classList.add('show');
-        $('onlyChoice').onclick=contract;
-      };
-    };
-  }
+                    newConfirmBtn.addEventListener('click', () => {
+                        modalOverlay.classList.add('opacity-0');
+                        modalContent.classList.add('scale-90', 'opacity-0');
+                        setTimeout(() => modal.classList.add('hidden'), 300);
 
-  async function contract(){
-    choices.classList.remove('show');addMine('Tôi có một điều ước.');
-    await sleep(450);await reply('Tớ biết.',700,'--:--');
-    await sleep(500);await reply('Đó là lý do tớ tìm đến cậu.',800,'--:--');
-    stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');buildNumber.textContent='QB.1026';
-    await sleep(600);
-    choices.innerHTML=`<button class="choice" id="invite">Mở lời mời.</button>`;
-    choices.classList.add('show');$('invite').onclick=revealEvent;
-  }
+                        if (link && link !== '#tickets' && link !== '#') {
+                            window.open(link, btn.getAttribute('target') || '_self');
+                        } else {
+                            // Link tạm nếu chưa điền
+                            console.log('Chưa cấu hình link mua vé.');
+                        }
+                    });
+                });
+            });
 
-  async function revealEvent(){
-    choices.classList.remove('show');addMine('Mở lời mời.');
-    await sleep(500);await reply('Vậy thì… đến gặp tớ nhé.',850,'--:--');
-    await sleep(800);black.classList.add('show');await sleep(360);phoneScale.classList.add('gone');reveal.classList.add('show');await sleep(520);black.classList.remove('show');
-  }
+            // Logic đóng modal
+            document.getElementById('ticket-modal-cancel').addEventListener('click', () => {
+                const modal = document.getElementById('ticket-warning-modal');
+                const modalOverlay = document.getElementById('ticket-modal-overlay');
+                const modalContent = document.getElementById('ticket-modal-content');
+                modalOverlay.classList.add('opacity-0');
+                modalContent.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            });
+        });
+    </script>
 
-  $('navHome').onclick=()=>showView('home');
-  $('navRecent').onclick=()=>showView('recents');
-  $('navBack').onclick=()=>{
-    if(current==='about')showView('settings');
-    else if(current==='settings'||current==='album'||current==='recents'||current==='line')showView('home');
-  };
+    <!-- Tactical Sidebar Navigation (Bảng điều khiển mục lục bên phải cho PC) -->
+    <nav id="tactical-nav"
+        class="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-10 select-none opacity-0 pointer-events-none translate-x-4 transition-all duration-500">
+        <!-- Đường line dọc làm xương sống HUD -->
+        <div
+            class="absolute right-[12px] top-4 bottom-4 w-[1px] bg-gradient-to-b from-transparent via-slate-400 to-transparent pointer-events-none">
+        </div>
 
-  $('aboutRow').onclick=()=>showView('about');
+        <!-- Mục 1: Hero -->
+        <a href="#hero" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="hero">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 01 // KHỞI ĐỘNG ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
 
-  secretPhoto.onclick=()=>{
-    viewer.classList.add('show');secretOpened=true;
-  };
-  viewer.onclick=()=>{
-    viewer.classList.remove('show');
-    if(secretOpened){setTimeout(()=>secretPhoto.classList.remove('show'),180)}
-  };
+        <!-- Mục 2: Thông tin sự kiện -->
+        <a href="#event-info" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="event-info">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 02 // CHIẾN DỊCH ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
 
-  voidCard.onclick=()=>{
-    showView('line');
-    if(stage<2){stage=2;lineView.classList.add('stage2')}
-  };
-})();
-</script>
+        <!-- Mục 3: Chọn hạng vé -->
+        <a href="#tickets" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="tickets">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 03 // TRANG BỊ ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+
+        <!-- Mục 4: Chọn khu vực tác chiến -->
+        <a href="#zones" class="nav-item group flex items-center gap-6 cursor-pointer relative py-1 pl-4"
+            data-target="zones">
+            <span
+                class="nav-label text-sm font-mono font-semibold tracking-widest text-slate-800 group-hover:text-red-600 transition-all duration-300 uppercase">
+                [ 04 // TÁC CHIẾN ]
+            </span>
+            <div
+                class="nav-dot w-6 h-6 border border-slate-500 rotate-45 transition-all duration-300 bg-white relative flex items-center justify-center group-hover:border-red-600 group-hover:bg-red-50/50">
+                <div class="nav-dot-inner w-2.5 h-2.5 bg-slate-500 transition-all duration-300 group-hover:bg-red-600">
+                </div>
+            </div>
+        </a>
+    </nav>
+
+    <!-- CẢNH BÁO MUA VÉ HUD MODAL -->
+    <div id="ticket-warning-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+        <!-- Overlay blur -->
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-crosshair"
+            id="ticket-modal-overlay"></div>
+
+        <!-- Modal Content -->
+        <div class="relative w-[90%] max-w-md bg-[#111827] border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] transform scale-90 opacity-0 transition-all duration-300 p-8"
+            id="ticket-modal-content">
+            <!-- Corner Brackets -->
+            <div class="absolute w-4 h-4 border-t-2 border-l-2 border-red-500 top-2 left-2"></div>
+            <div class="absolute w-4 h-4 border-t-2 border-r-2 border-red-500 top-2 right-2"></div>
+            <div class="absolute w-4 h-4 border-b-2 border-l-2 border-red-500 bottom-2 left-2"></div>
+            <div class="absolute w-4 h-4 border-b-2 border-r-2 border-red-500 bottom-2 right-2"></div>
+
+            <!-- Header -->
+            <div class="flex items-center gap-3 mb-6 border-b border-red-500/30 pb-4">
+                <span class="material-symbols-outlined text-red-500 text-4xl animate-pulse">warning</span>
+                <div>
+                    <h4 class="text-red-500 font-display font-black text-2xl tracking-widest leading-none">CẢNH BÁO</h4>
+                    <p class="text-red-400/80 font-mono text-xs tracking-[0.2em] mt-1">HỆ THỐNG XÁC NHẬN MỤC TIÊU</p>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-8 relative z-10">
+                <p class="text-gray-300 font-mono text-sm leading-relaxed mb-4">
+                    Bạn đang chuẩn bị khóa mục tiêu và tiến hành mua vé cho khu vực:
+                </p>
+                <div class="bg-red-500/10 border border-red-500/50 p-4 text-center relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgoJPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iNCIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==')] opacity-50">
+                    </div>
+                    <h5 id="ticket-location-text"
+                        class="text-3xl font-display font-black text-white tracking-widest relative z-10 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                        HÀ NỘI
+                    </h5>
+                </div>
+                <p class="text-yellow-400 font-mono text-[11px] md:text-xs mt-4 text-center leading-relaxed">
+                    * Lưu ý: Vé đã mua KHÔNG THỂ hoán đổi giữa 2 đầu cầu. Vui lòng kiểm tra kỹ tọa độ trước khi tấn
+                    công!
+                </p>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-4 relative z-10">
+                <button id="ticket-modal-cancel"
+                    class="flex-1 bg-transparent border border-gray-600 text-gray-400 font-display font-bold py-3 hover:bg-gray-800 hover:text-white hover:border-gray-500 transition-colors tracking-wider">
+                    HỦY LỆNH
+                </button>
+                <button id="ticket-modal-confirm"
+                    class="flex-1 bg-red-600 text-white font-display font-black py-3 hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(239,68,68,0.5)] tracking-wider flex items-center justify-center gap-2 group">
+                    XÁC NHẬN <span
+                        class="material-symbols-outlined text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">rocket_launch</span>
+                </button>
+            </div>
+
+            <!-- Scan line effect for modal -->
+            <div
+                class="absolute left-0 w-full h-[2px] bg-red-500/50 shadow-[0_0_8px_#ef4444] pointer-events-none animate-[scan-line_3s_linear_infinite] z-0">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
