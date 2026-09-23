@@ -1,515 +1,457 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Madoka 2013 Device — Demo v3</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#14171a}
-body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
-:root{
-  --ow:390px;--oh:760px;--sw:360px;--sh:640px;
-  --lineTop1:#465368;--lineTop2:#293446;--lineTop3:#151f2c;
-  --lime1:#c8ef68;--lime2:#9fd53d;--lime3:#80b925;
-  --chat:#8eb1ce;
-}
-.stage{
-  position:relative;width:100vw;height:100vh;overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 36%,rgba(255,255,255,.035),transparent 34%),
-    linear-gradient(#1d2024,#121416 76%);
-}
-.stage:before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
-  background:
-    linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.02) 50%,transparent 50.1%),
-    linear-gradient(transparent 49.9%,rgba(255,255,255,.015) 50%,transparent 50.1%);
-  background-size:34px 34px;
-}
-.phoneScale{
-  position:absolute;left:50%;top:50%;width:var(--ow);height:var(--oh);
-  transform:translate(-50%,-50%);transform-origin:center;z-index:5;
-  opacity:1;transition:opacity .45s ease;
-}
-.phoneScale.gone{opacity:0;pointer-events:none}
-.phone{
-  position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(100deg,#111214 0 9%,#303236 12%,#0f1013 18% 82%,#2c2e31 90%,#08090b 100%);
-  border:1px solid #030405;
-  box-shadow:0 36px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 -14px 28px rgba(255,255,255,.02);
-}
-.phone.vibrate{animation:vib .12s steps(2,end) 5}
-@keyframes vib{0%{transform:translateX(-1px) rotate(-.08deg)}100%{transform:translateX(1px) rotate(.08deg)}}
-.earpiece{position:absolute;top:20px;left:50%;width:64px;height:5px;transform:translateX(-50%);border-radius:5px;background:#050607}
-.cam{position:absolute;right:83px;top:18px;width:7px;height:7px;border-radius:50%;background:#111923;border:1px solid #050607;box-shadow:inset 0 0 3px #385368}
-.sensor{position:absolute;left:79px;top:19px;width:18px;height:5px;border-radius:5px;background:#090a0c}
-.screen{
-  position:absolute;left:15px;top:57px;width:var(--sw);height:var(--sh);overflow:hidden;
-  background:#000;border:1px solid #050607;box-shadow:0 0 0 1px rgba(255,255,255,.055),inset 0 0 14px rgba(0,0,0,.35);
-}
-.screen:after{
-  content:"";position:absolute;inset:0;z-index:200;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,0,0,.026) 0 1px,rgba(0,255,0,.018) 1px 2px,rgba(0,0,255,.022) 2px 3px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);
-}
-.ui{position:absolute;inset:0;background:#000;text-rendering:optimizeSpeed;-webkit-font-smoothing:subpixel-antialiased}
-.status{
-  position:absolute;left:0;right:0;top:0;height:24px;z-index:70;
-  display:flex;align-items:center;padding:0 7px;color:#eee;font-size:10px;
-  background:rgba(0,0,0,.88);text-shadow:0 1px rgba(0,0,0,.8)
-}
-.sl{display:flex;align-items:center;gap:5px}.sr{margin-left:auto;display:flex;align-items:center;gap:5px}
-.mail{width:10px;height:7px;border:1px solid #cfd3d5;position:relative}
-.mail:after{content:"";position:absolute;width:6px;height:6px;left:1px;top:-3px;border-right:1px solid #cfd3d5;border-bottom:1px solid #cfd3d5;transform:rotate(45deg)}
-.sig{display:flex;align-items:end;gap:1px;height:10px}.sig i{display:block;width:2px;background:#d7d9da}.sig i:nth-child(1){height:3px}.sig i:nth-child(2){height:5px}.sig i:nth-child(3){height:7px}.sig i:nth-child(4){height:9px}
-.bat{width:17px;height:9px;border:1px solid #d7dadc;position:relative;padding:1px}.bat:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:4px;background:#d7dadc}.bat b{display:block;width:78%;height:100%;background:#88d145}
-.status.noService .sig{display:none}.status.noService .net{font-size:0}.status.noService .net:after{content:"圏外";font-size:10px}
-.nav{
-  position:absolute;left:0;right:0;bottom:0;height:48px;z-index:70;background:#07090b;border-top:1px solid #1f252a;
-  display:flex;align-items:center;justify-content:space-around
-}
-.nav button{width:70px;height:44px;border:0;background:transparent;position:relative;opacity:.8;cursor:pointer}
-.back:before{content:"";position:absolute;left:28px;top:14px;width:12px;height:12px;border-left:2px solid #c4c9cc;border-bottom:2px solid #c4c9cc;transform:rotate(45deg)}
-.back:after{content:"";position:absolute;left:29px;top:20px;width:14px;height:2px;background:#c4c9cc}
-.home:before{content:"";position:absolute;left:27px;top:14px;width:16px;height:14px;border:2px solid #c4c9cc;border-top:0}
-.home:after{content:"";position:absolute;left:28px;top:9px;width:14px;height:14px;border-left:2px solid #c4c9cc;border-top:2px solid #c4c9cc;transform:rotate(45deg)}
-.recent:before,.recent:after{content:"";position:absolute;width:13px;height:10px;border:2px solid #c4c9cc}.recent:before{left:26px;top:13px}.recent:after{left:31px;top:18px;background:#07090b}
-.view{position:absolute;left:0;right:0;top:24px;bottom:48px;display:none}
-.view.active{display:block}
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Drivin' Into Dreams - Hololive Fan Event Hanoi</title>
+    <meta name="description"
+        content="Tham gia Drivin' Into Dreams - Sự kiện Watch Party Hololive 7th Fes tại Hà Nội! Cùng cháy hết mình với cộng đồng fan Hololive VN. Vé Eco mở bán ngay!">
+    <meta name="keywords" content="Hololive, Hololive VN, Watch Party, Hanoi, Event, Drivin Into Dreams, Fan Meeting">
+    <meta name="author" content="Worldsimp Projekt">
 
-/* HOME */
-.homeView{
-  background:
-    radial-gradient(circle at 68% 23%,rgba(255,255,255,.25) 0 1%,transparent 1.8%),
-    radial-gradient(circle at 72% 29%,rgba(255,255,255,.1) 0 4%,transparent 5%),
-    radial-gradient(circle at 26% 64%,rgba(231,196,207,.22) 0 7%,transparent 9%),
-    radial-gradient(circle at 70% 58%,rgba(132,172,191,.33) 0 12%,transparent 18%),
-    linear-gradient(145deg,#4c5c6d,#b5a7af 53%,#5f6670)
-}
-.clock{position:absolute;top:29px;left:18px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55)}
-.clock .t{font-size:41px;line-height:.95;font-weight:300;letter-spacing:-1.8px}.clock .d{margin-top:5px;font-size:11px}
-.grid{position:absolute;left:18px;right:18px;top:138px;display:grid;grid-template-columns:repeat(4,1fr);gap:21px 12px}
-.app{text-align:center;color:#fff;font-size:9px;text-shadow:0 1px 2px rgba(0,0,0,.8);cursor:pointer}
-.icon{width:42px;height:42px;margin:0 auto 5px;border-radius:8px;border:1px solid rgba(0,0,0,.28);box-shadow:inset 0 1px rgba(255,255,255,.42),0 1px 2px rgba(0,0,0,.32);position:relative}
-.lineIcon{background:linear-gradient(#84d935,#4ba812);border-radius:11px}
-.lineIcon:after{content:"";position:absolute;left:8px;top:9px;width:25px;height:18px;background:#fff;border-radius:50%}.lineIcon:before{content:"";position:absolute;z-index:2;left:10px;top:19px;width:9px;height:8px;background:#fff;transform:skewX(-28deg)}
-.albumIcon{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsIcon{background:linear-gradient(#aab0b4,#62686c)}
-.settingsIcon:after{content:"⚙";position:absolute;inset:0;display:grid;place-items:center;color:#eef0f1;font-size:22px;text-shadow:0 -1px rgba(0,0,0,.4)}
-.cameraIcon{background:linear-gradient(#a6b4bc,#45515a)}.cameraIcon:after{content:"";position:absolute;left:10px;top:10px;width:20px;height:16px;border:2px solid #edf1f2;border-radius:4px}.cameraIcon:before{content:"";position:absolute;left:16px;top:14px;width:8px;height:8px;border:2px solid #edf1f2;border-radius:50%}
-.musicIcon{background:linear-gradient(#c35f78,#7b3349)}.musicIcon:after{content:"♪";position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:26px}
-.browserIcon{background:linear-gradient(#8bc9ee,#357ca5)}.browserIcon:after{content:"";position:absolute;left:9px;top:9px;width:22px;height:22px;border:2px solid white;border-radius:50%}
-.phoneIcon{background:linear-gradient(#8fd963,#4da82f)}.contactIcon{background:linear-gradient(#f1d57a,#bd9438)}
-.dock{position:absolute;left:0;right:0;bottom:0;height:62px;background:rgba(28,32,37,.42);border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-around}
-.dock .icon{width:39px;height:39px;margin:0}
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://worldsimp.com/">
+    <meta property="og:title" content="Drivin' Into Dreams - Hololive Fan Event Hanoi">
+    <meta property="og:description"
+        content="Sự kiện Watch Party Hololive 7th Fes lớn nhất tại Hà Nội. Đặt vé ngay hôm nay!">
+    <meta property="og:image" content="./assets/images/hero.webp">
 
-/* LINE popup */
-.popup{
-  position:absolute;left:17px;right:17px;top:154px;z-index:90;opacity:0;transform:translateY(-8px);pointer-events:none;
-  background:#f0f0f0;border:1px solid #515151;box-shadow:0 7px 17px rgba(0,0,0,.46);transition:.2s
-}
-.popup.show{opacity:1;transform:none;pointer-events:auto}
-.popupHead{height:34px;display:flex;align-items:center;padding:0 10px;color:#fff;font-weight:bold;font-size:12px;text-shadow:0 -1px rgba(0,0,0,.35);background:linear-gradient(#82d238,#56ad16);border-bottom:1px solid #467f18}
-.miniLine{width:19px;height:19px;margin-right:7px;border-radius:5px;background:#fff;position:relative}
-.miniLine:after{content:"LINE";position:absolute;left:1px;top:5px;color:#55af16;font-size:6px;font-weight:bold}
-.popupBody{padding:13px;font-size:12px;line-height:1.45}.popupBody strong{display:block;margin-bottom:4px}
-.popupActions{height:42px;border-top:1px solid #c3c3c3;background:#ddd;display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:0 8px}
-.oldBtn{min-width:68px;height:28px;border:1px solid #666;border-radius:3px;background:linear-gradient(#fff,#c9c9c9);color:#222;font-size:11px;font-weight:bold;box-shadow:inset 0 1px #fff;cursor:pointer}.oldBtn.primary{color:#fff;border-color:#4f7415;background:linear-gradient(#91c93e,#61951a);text-shadow:0 -1px rgba(0,0,0,.35)}
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://worldsimp.com/">
+    <meta property="twitter:title" content="Drivin' Into Dreams - Hololive Fan Event Hanoi">
+    <meta property="twitter:description"
+        content="Sự kiện Watch Party Hololive 7th Fes lớn nhất tại Hà Nội. Đặt vé ngay hôm nay!">
+    <meta property="twitter:image" content="./assets/images/hero.webp">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4fc2f8", // Light Blue
+                        "accent": "#A2FF00",  // Neon Green
+                        "cta": "#FFB74D",     // Orange
+                        "text-main": "#2C3E50", // Dark Blue/Grey
+                        "background-light": "#f0f2f5", // Ant Design typical bg
+                        "background-dark": "#101c22",
+                        "card-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'bento': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                        'bento-hover': '0 10px 25px rgba(79, 195, 247, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-/* LINE */
-.lineView{background:var(--chat)}
-.topbar{height:50px;display:flex;align-items:center;padding:0 6px;color:#fff;background:linear-gradient(var(--lineTop1),var(--lineTop2) 48%,var(--lineTop3) 52%,#1a2432);border-bottom:1px solid #0b1118;box-shadow:inset 0 1px rgba(255,255,255,.14);text-shadow:0 -1px rgba(0,0,0,.7)}
-.topBtn{height:31px;min-width:41px;border:1px solid #0d141d;border-radius:4px;color:#fff;background:linear-gradient(#46556a,#1b2737);box-shadow:inset 0 1px rgba(255,255,255,.14);font-size:11px;font-weight:bold;cursor:pointer}.topBack{font-size:19px}
-.chatTitle{flex:1;text-align:center;font-size:16px;font-weight:bold}
-.scroll{
-  position:absolute;left:0;right:0;top:50px;bottom:48px;padding:9px 7px 16px;overflow-y:auto;overflow-x:hidden;
-  scrollbar-width:none;-ms-overflow-style:none;
-  background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.12) 0 1px,transparent 1.3px) 0 0/7px 7px,linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.025)),#8cb1cf
-}
-.scroll::-webkit-scrollbar{width:0;height:0}
-.dateChip{display:table;margin:0 auto 8px;padding:2px 8px;border-radius:8px;background:rgba(55,80,101,.42);color:#fff;font-size:9px;text-shadow:0 1px rgba(0,0,0,.3)}
-.row{display:flex;align-items:flex-end;width:100%;margin:7px 0 12px;position:relative;z-index:2}.them{justify-content:flex-start}.me{justify-content:flex-end}
-.avatar{flex:0 0 35px;width:35px;height:35px;margin-right:7px;background:linear-gradient(#d3d5d6,#909497);border:1px solid rgba(0,0,0,.35);box-shadow:0 1px 2px rgba(0,0,0,.25);position:relative;overflow:hidden}
-.avatar:before,.avatar:after{content:"";position:absolute;width:13px;height:21px;top:2px;background:#f4f4f4;border-radius:75% 18% 70% 18%;opacity:0;transition:opacity .8s}.avatar:before{left:2px;transform:rotate(-22deg)}.avatar:after{right:2px;transform:scaleX(-1) rotate(-22deg)}
-.avatar .eye{position:absolute;left:50%;top:16px;width:5px;height:5px;transform:translateX(-50%);border-radius:50%;background:#7a7d7e;transition:.8s}
-.bw{max-width:235px;position:relative}.bubble{display:inline-block;position:relative;min-height:31px;padding:8px 11px 9px;border:1px solid rgba(0,0,0,.23);border-radius:14px;font-size:13px;line-height:1.38;box-shadow:0 2px 3px rgba(0,0,0,.21),inset 0 1px rgba(255,255,255,.55)}
-.them .bubble{background:linear-gradient(#fff,#f7f7f7 57%,#e8e8e8)}.them .bubble:before{content:"";position:absolute;width:12px;height:12px;left:-6px;top:10px;background:#fafafa;border-left:1px solid rgba(0,0,0,.19);border-bottom:1px solid rgba(0,0,0,.16);transform:rotate(45deg)}
-.me .bubble{background:linear-gradient(var(--lime1),var(--lime2) 53%,var(--lime3))}.me .bubble:after{content:"";position:absolute;width:12px;height:12px;right:-6px;top:10px;background:#a1d843;border-right:1px solid rgba(0,0,0,.2);transform:rotate(45deg)}
-.stamp{min-width:31px;margin:0 5px 2px;color:#fff;font-size:8px;line-height:1.2;text-shadow:0 1px rgba(0,0,0,.38)}.me .stamp{text-align:right}
-.typing{width:50px;display:flex;justify-content:center;gap:4px}.typing i{display:block;width:5px;height:5px;border-radius:50%;background:#777;animation:dot 1s infinite}.typing i:nth-child(2){animation-delay:.12s}.typing i:nth-child(3){animation-delay:.24s}@keyframes dot{0%,65%,100%{transform:none}35%{transform:translateY(-4px)}}
-.composer{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;gap:5px;padding:6px;background:linear-gradient(#dedede,#bdbdbd);border-top:1px solid #707070;box-shadow:inset 0 1px #f6f6f6}
-.plus{width:33px;height:33px;border:1px solid #727272;border-radius:4px;background:linear-gradient(#f8f8f8,#c7c7c7);color:#666;font-size:23px;line-height:29px;text-align:center}.input{flex:1;height:33px;border:1px solid #777;border-radius:3px;background:#fff;box-shadow:inset 0 1px 3px rgba(0,0,0,.18);color:#999;font-size:12px;padding:8px 7px}.send{height:33px;min-width:48px;border:1px solid #4d7116;border-radius:3px;background:linear-gradient(#8bc337,#5c8f17);color:#fff;font-size:11px;font-weight:bold}
-.choices{position:absolute;left:12px;right:12px;bottom:58px;z-index:50;display:none;background:#ededed;border:1px solid #626262;box-shadow:0 6px 16px rgba(0,0,0,.4)}.choices.show{display:block}.choice{display:block;width:100%;border:0;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:11px 12px;text-align:left;font-size:11px;cursor:pointer}.choice:last-child{border-bottom:0}
-.menu{position:absolute;top:52px;right:7px;width:135px;z-index:60;display:none;background:#eee;border:1px solid #5d5d5d;box-shadow:0 5px 13px rgba(0,0,0,.4)}.menu.show{display:block}.menu button{width:100%;height:37px;border:0;border-bottom:1px solid #c7c7c7;background:linear-gradient(#fff,#e7e7e7);text-align:left;padding:0 10px;font-size:11px;cursor:pointer}
-.toast{position:absolute;z-index:65;left:50%;bottom:67px;transform:translateX(-50%);padding:8px 12px;border-radius:3px;background:rgba(20,20,20,.9);color:#fff;font-size:10px;opacity:0;white-space:nowrap;transition:.18s}.toast.show{opacity:1}
-.dialogMask{position:absolute;inset:0;z-index:66;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.24)}.dialogMask.show{display:flex}.dialog{width:246px;border:1px solid #4d4d4d;background:#efefef;box-shadow:0 8px 20px rgba(0,0,0,.48)}.dialog h3{margin:0;padding:10px 12px;background:linear-gradient(#4a5669,#202a39);color:#fff;font-size:12px}.dialog p{margin:0;padding:14px 12px;font-size:11px}.da{padding:7px;background:#ddd;border-top:1px solid #c0c0c0;display:flex;justify-content:flex-end;gap:6px}
-.who{position:absolute;inset:0;z-index:68;display:grid;place-items:center;color:#fff;background:#000;font:700 24px Georgia,serif;letter-spacing:.1em;opacity:0;pointer-events:none}
-.who.flash{animation:who .32s steps(2,end)}@keyframes who{0%{opacity:0}35%{opacity:1}65%{opacity:0}100%{opacity:0}}
-.lineView.stage1 .avatar:before,.lineView.stage1 .avatar:after{opacity:.22}.lineView.stage2 .avatar:before,.lineView.stage2 .avatar:after{opacity:.9}.lineView.stage2 .avatar .eye{width:7px;height:7px;background:#bf1830;box-shadow:0 0 7px rgba(190,24,48,.6)}
+        .bento-card {
+            transition: all 0.3s ease;
+        }
 
-/* RECENTS */
-.recentsView{background:#1f2327;padding:13px}
-.recentsTitle{color:#d7dadd;font-size:12px;margin:3px 0 11px}
-.card{height:108px;margin:0 0 10px;background:#e9e9e9;border:1px solid #444;box-shadow:0 2px 6px rgba(0,0,0,.35);display:flex;cursor:pointer;position:relative;overflow:hidden}
-.cardPreview{width:108px;background:#8cb1cf;border-right:1px solid #aaa;position:relative}.cardText{padding:11px 12px;font-size:12px}.cardText strong{display:block;margin-bottom:5px}.cardText span{font-size:10px;color:#777}
-.linePrev:before{content:"LINE";position:absolute;left:15px;top:15px;padding:4px 8px;background:#61bc22;color:#fff;font-weight:bold;border-radius:4px}
-.albumPrev{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsPrev{background:linear-gradient(#7d858a,#454b4f)}
-.voidCard{display:none;background:#070707;border-color:#111}.voidCard.show{display:flex}.voidCard .cardPreview{background:#000;border-right-color:#111}.voidCard .cardText{color:#bbb}
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.25);
+        }
 
-/* ALBUM */
-.albumView{background:#111}
-.appHeader{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #0d131a;font-size:15px;font-weight:bold;text-shadow:0 -1px #000}
-.albumGrid{padding:9px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.photo{aspect-ratio:1;background:#555;position:relative;border:1px solid #222;cursor:pointer;overflow:hidden}.p1{background:linear-gradient(#7f9bb1 0 58%,#556b4d 58%)}.p2{background:linear-gradient(#b3bac2 0 45%,#595c63 45%)}.p3{background:linear-gradient(135deg,#b9a69e,#504c50)}.p4{background:linear-gradient(#667680,#252b31)}.p5{background:linear-gradient(#ae9f90,#67554e)}.p6{background:linear-gradient(#7c8794,#29313a)}
-.secretPhoto{display:none;background:#050607}.secretPhoto.show{display:block}.secretPhoto:before,.secretPhoto:after{content:"";position:absolute;top:44%;width:4px;height:4px;border-radius:50%;background:#8f0e22;box-shadow:0 0 4px #8f0e22}.secretPhoto:before{left:42%}.secretPhoto:after{right:42%}.fname{position:absolute;left:3px;bottom:3px;color:#eee;font-size:7px;text-shadow:0 1px 2px #000}
-.viewer{position:absolute;inset:0;z-index:55;background:#030405;display:none}.viewer.show{display:block}.viewerTop{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 9px;font-size:11px}.viewerImage{position:absolute;left:14px;right:14px;top:70px;bottom:72px;background:#050607;border:1px solid #1b1d1f}.redEyes:before,.redEyes:after{content:"";position:absolute;top:46%;width:5px;height:5px;border-radius:50%;background:#a31128;box-shadow:0 0 7px #a31128}.redEyes:before{left:46%}.redEyes:after{right:46%}.rune{position:absolute;right:18px;bottom:18px;color:#7c7470;font:700 15px Georgia,serif;transform:rotate(-7deg);opacity:.58}.viewerMeta{position:absolute;left:14px;right:14px;bottom:20px;color:#888;font-size:9px;display:flex;justify-content:space-between}
-
-/* SETTINGS / ABOUT */
-.settingsView{background:#eee}.settingRow{height:48px;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:9px 13px;font-size:12px;cursor:pointer}.settingRow strong{display:block}.settingRow span{font-size:10px;color:#777}
-.aboutView{background:#eee}.aboutList{padding-top:4px}.aboutRow{padding:9px 13px;border-bottom:1px solid #c8c8c8;background:#f7f7f7}.aboutRow small{display:block;color:#777;font-size:9px;margin-bottom:3px}.aboutRow div{font-size:12px}
-
-/* REVEAL */
-.black{position:absolute;inset:0;z-index:150;background:#000;opacity:0;pointer-events:none;transition:.28s}.black.show{opacity:1}
-.reveal{position:absolute;inset:0;z-index:2;opacity:0;pointer-events:none;transition:1s;color:#ece6dc;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 50%,rgba(101,20,49,.16),transparent 23%),#111214}.reveal.show{opacity:1}.revealInner{transform:translateY(275px)}.reveal small{display:block;font-size:9px;letter-spacing:.32em;color:#877a69;margin-bottom:7px}.reveal strong{display:block;font:400 21px Georgia,serif;letter-spacing:.02em}.reveal span{display:block;margin-top:6px;color:#877f75;font-size:9px;letter-spacing:.12em}
-.hint{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);color:#656b70;font-size:8px;letter-spacing:.16em;text-transform:uppercase;opacity:.42;white-space:nowrap}
-</style>
+        .grid-bg {
+            background-image: radial-gradient(#4fc2f8 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "795167730d2e454d86b8056d43cf0b81"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
-<body>
-<main class="stage">
-  <section class="reveal" id="reveal">
-    <div class="revealInner">
-      <small>INVITATION RECEIVED</small>
-      <strong>MADOKA FAN SCREENING</strong>
-      <span>DATE · VENUE · TICKETS</span>
-    </div>
-  </section>
 
-  <div class="phoneScale" id="phoneScale">
-    <div class="phone" id="phone">
-      <div class="earpiece"></div><div class="cam"></div><div class="sensor"></div>
-      <div class="screen">
-        <div class="ui">
-          <div class="status" id="status">
-            <div class="sl"><div class="mail"></div></div>
-            <div class="sr"><span class="net">3G</span><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"><b></b></span><span id="sysClock">23:47</span></div>
-          </div>
-
-          <!-- HOME -->
-          <section class="view homeView active" id="homeView">
-            <div class="clock"><div class="t">23:47</div><div class="d">Saturday</div></div>
-            <div class="grid">
-              <div class="app" data-open="line"><div class="icon lineIcon"></div><span>LINE</span></div>
-              <div class="app" data-open="album"><div class="icon albumIcon"></div><span>Album</span></div>
-              <div class="app" data-open="settings"><div class="icon settingsIcon"></div><span>Settings</span></div>
-              <div class="app"><div class="icon cameraIcon"></div><span>Camera</span></div>
-              <div class="app"><div class="icon musicIcon"></div><span>Music</span></div>
-              <div class="app"><div class="icon browserIcon"></div><span>Browser</span></div>
+<body
+    class="bg-background-light dark:bg-background-dark text-text-main min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
+    <header
+        class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-[#101c22]/90 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 w-full">
+                <div class="flex items-center gap-3">
+                    <img src="./assets/images/host.webp" alt="Hololive VN Fanclub Logo"
+                        class="h-10 w-auto object-contain">
+                </div>
             </div>
-            <div class="dock">
-              <div class="icon phoneIcon"></div><div class="icon contactIcon"></div><div class="icon lineIcon"></div><div class="icon browserIcon"></div>
-            </div>
-
-            <div class="popup" id="popup">
-              <div class="popupHead"><span class="miniLine"></span>LINE</div>
-              <div class="popupBody"><strong>Unknown</strong>ねえ。</div>
-              <div class="popupActions"><button class="oldBtn" id="closePopup">Close</button><button class="oldBtn primary" id="viewPopup">View</button></div>
-            </div>
-          </section>
-
-          <!-- LINE -->
-          <section class="view lineView" id="lineView">
-            <header class="topbar">
-              <button class="topBtn topBack" id="lineBack">‹</button>
-              <div class="chatTitle">Unknown</div>
-              <button class="topBtn" id="menuBtn">Menu</button>
-            </header>
-
-            <div class="scroll" id="scroll">
-              <div class="dateChip">Sat.</div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">ねえ。</div></div><div class="stamp">23:47</div>
-              </div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">Cậu có một điều ước muốn trở thành hiện thực không?</div></div><div class="stamp">23:47</div>
-              </div>
-              <div id="dynamic"></div>
-            </div>
-
-            <div class="choices show" id="choices">
-              <button class="choice" data-answer="who">Cậu là ai?</button>
-              <button class="choice" data-answer="wrong">Nhắn nhầm người rồi.</button>
-            </div>
-
-            <footer class="composer"><div class="plus">＋</div><div class="input">Nhập tin nhắn</div><button class="send">Gửi</button></footer>
-            <div class="menu" id="menu"><button id="profileBtn">Profile</button><button id="blockBtn">Block</button></div>
-            <div class="toast" id="toast">ユーザーが見つかりません</div>
-            <div class="who" id="whoFlash">WHO AM I?</div>
-            <div class="dialogMask" id="dialogMask"><div class="dialog"><h3>Block user</h3><p>このユーザーをブロックしますか？</p><div class="da"><button class="oldBtn" id="cancelBlock">Cancel</button><button class="oldBtn primary" id="confirmBlock">OK</button></div></div></div>
-          </section>
-
-          <!-- RECENTS -->
-          <section class="view recentsView" id="recentsView">
-            <div class="recentsTitle">Recent apps</div>
-            <div class="card" data-open="line"><div class="cardPreview linePrev"></div><div class="cardText"><strong>LINE</strong><span>Unknown</span></div></div>
-            <div class="card" data-open="album"><div class="cardPreview albumPrev"></div><div class="cardText"><strong>Album</strong><span>Photos</span></div></div>
-            <div class="card" data-open="settings"><div class="cardPreview settingsPrev"></div><div class="cardText"><strong>Settings</strong><span>About phone</span></div></div>
-            <div class="card voidCard" id="voidCard"><div class="cardPreview"></div><div class="cardText"><strong>&nbsp;</strong><span>&nbsp;</span></div></div>
-          </section>
-
-          <!-- ALBUM -->
-          <section class="view albumView" id="albumView">
-            <div class="appHeader">Album</div>
-            <div class="albumGrid">
-              <div class="photo p1"><span class="fname">IMG_1001.JPG</span></div>
-              <div class="photo p2"><span class="fname">IMG_1008.JPG</span></div>
-              <div class="photo p3"><span class="fname">IMG_1012.JPG</span></div>
-              <div class="photo p4"><span class="fname">IMG_1016.JPG</span></div>
-              <div class="photo p5"><span class="fname">IMG_1020.JPG</span></div>
-              <div class="photo p6"><span class="fname">IMG_1024.JPG</span></div>
-              <div class="photo secretPhoto" id="secretPhoto"><span class="fname">IMG_1026.JPG</span></div>
-            </div>
-            <div class="viewer" id="viewer">
-              <div class="viewerTop">IMG_1026.JPG</div>
-              <div class="viewerImage redEyes"><div class="rune">YUME</div></div>
-              <div class="viewerMeta"><span>--:--</span><span>IMG_1026.JPG</span></div>
-            </div>
-          </section>
-
-          <!-- SETTINGS -->
-          <section class="view settingsView" id="settingsView">
-            <div class="appHeader">Settings</div>
-            <div class="settingRow"><strong>Wi‑Fi</strong><span>Off</span></div>
-            <div class="settingRow"><strong>Sound</strong><span>Default</span></div>
-            <div class="settingRow" id="aboutRow"><strong>About phone</strong><span>Status · Legal information · Android version</span></div>
-          </section>
-
-          <section class="view aboutView" id="aboutView">
-            <div class="appHeader">About phone</div>
-            <div class="aboutList">
-              <div class="aboutRow"><small>Android version</small><div>4.2.2</div></div>
-              <div class="aboutRow"><small>Model number</small><div id="modelNumber">SO-XX13</div></div>
-              <div class="aboutRow"><small>Build number</small><div id="buildNumber">10.3.A.0.423</div></div>
-            </div>
-          </section>
-
-          <nav class="nav">
-            <button class="back" id="navBack" aria-label="Back"></button>
-            <button class="home" id="navHome" aria-label="Home"></button>
-            <button class="recent" id="navRecent" aria-label="Recent"></button>
-          </nav>
-          <div class="black" id="black"></div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="hint">interactive concept · 2013-era japanese android</div>
-</main>
+    </header>
+    <main class="flex-grow p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-min">
+            <div
+                class="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-2 rounded-xl flex flex-col justify-between relative overflow-hidden group border border-primary/10 min-h-[300px]">
+                <div class="absolute inset-0 bg-cover bg-center z-0"
+                    style="background-image: url('./assets/images/hero.webp');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-0">
+                </div>
 
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const phoneScale=$('phoneScale'),phone=$('phone'),popup=$('popup'),status=$('status');
-  const homeView=$('homeView'),lineView=$('lineView'),recentsView=$('recentsView'),albumView=$('albumView'),settingsView=$('settingsView'),aboutView=$('aboutView');
-  const views=[homeView,lineView,recentsView,albumView,settingsView,aboutView];
-  const scroll=$('scroll'),dynamic=$('dynamic'),choices=$('choices'),menu=$('menu'),toast=$('toast'),whoFlash=$('whoFlash');
-  const dialogMask=$('dialogMask'),secretPhoto=$('secretPhoto'),viewer=$('viewer'),voidCard=$('voidCard'),modelNumber=$('modelNumber'),buildNumber=$('buildNumber');
-  const black=$('black'),reveal=$('reveal');
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false;
+                <div class="relative z-10 flex flex-col h-full justify-between p-6 sm:p-8">
+                    <div class="sr-only">
+                        <h1 class="font-headline">OFF-FAN HOLOLIVE HANOI 2026</h1>
+                        <p>Drivin' Into Dreams: Trải nghiệm phép màu tại Hà Nội! Tham gia sự kiện fan offline đáng nhớ
+                            cùng chúng tôi.
+                        </p>
+                    </div>
 
-  function fit(){
-    const s=Math.min(1,(innerWidth-22)/390,(innerHeight-22)/760);
-    phoneScale.style.transform=`translate(-50%,-50%) scale(${s})`;
-  }
-  fit(); addEventListener('resize',fit);
+                </div>
+            </div>
 
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  function buzz(){phone.classList.remove('vibrate');void phone.offsetWidth;phone.classList.add('vibrate')}
-  function showView(name){
-    const map={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
-    previous=current; current=name;
-    views.forEach(v=>v.classList.remove('active'));
-    map[name].classList.add('active');
-    menu.classList.remove('show');
-  }
-  function toastMsg(t){
-    toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);
-  }
-  function bottom(){scroll.scrollTop=scroll.scrollHeight}
-  function addMine(t){
-    const r=document.createElement('div');r.className='row me';
-    r.innerHTML=`<div class="stamp">既読<br>23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function addThem(t,time='23:47'){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble">${t}</div></div><div class="stamp">${time}</div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function typing(){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble typing"><i></i><i></i><i></i></div></div>`;
-    dynamic.appendChild(r);bottom();return r;
-  }
-  async function reply(t,delay=800,time='23:47'){const x=typing();await sleep(delay);x.remove();addThem(t,time)}
+            <div
+                class="bento-card col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-center gap-3">
+                <div
+                    class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">schedule</span>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase font-headline">Thời Gian</h3>
+                    <p class="text-lg font-black text-text-main dark:text-white leading-tight mt-1 font-mono">
+                        09:00 - 18:00
+                    </p>
+                    <p class="text-sm font-semibold text-primary mt-0.5 font-headline">
+                        Chủ nhật, 08/03/2026
+                    </p>
+                </div>
+            </div>
+            <div
+                class="bento-card col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-center gap-3">
+                <div
+                    class="size-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-cta">
+                    <span class="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-gray-400 uppercase font-headline">Địa Điểm</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white leading-tight mt-1 font-headline">
+                        Biblio - Cafe Sách Ngụy Như Kon Tum
+                    </p>
+                    <p class="text-sm font-medium text-text-main/60 dark:text-gray-400 mt-0.5">
+                        Cổng 1 - 79 Ngụy Như Kon Tum, Thanh Xuân, Hà Nội
+                    </p>
+                </div>
+            </div>
+            <!-- VÉ SECTION: XÉ ĐÔI ĐỂ TỐI ƯU BENTO UI -->
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 row-span-3 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col h-full relative overflow-hidden grayscale opacity-75">
+                <div
+                    class="absolute inset-0 bg-white/40 dark:bg-black/20 z-10 flex items-center justify-center pointer-events-none">
+                    <span
+                        class="text-xl font-black text-gray-500/50 -rotate-12 border-2 border-gray-500/50 px-2 py-1 rounded-lg">HẾT
+                        VÉ</span>
+                </div>
+                <div class="flex flex-col gap-1 mb-4">
+                    <h2
+                        class="text-base font-extrabold text-text-main dark:text-white flex items-center gap-1 font-headline">
+                        <span class="material-symbols-outlined text-gray-400 text-lg">local_fire_department</span>
+                        PASSIONATE SIMP
+                    </h2>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span class="text-2xl font-black text-gray-400 font-mono">170.000₫</span>
+                    </div>
+                </div>
+                <div class="flex-grow space-y-3 mb-4">
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            Thưởng thức Concert Holofes Stage 4
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            01 Thức uống tự chọn miễn phí
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            Vé cứng thiết kế kỷ niệm riêng
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            Móc khóa Random độc quyền
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            Lightstick & Sticker Pack sự kiện
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-semibold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            Đầy đủ quyền lợi vé GA
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-bold text-text-main dark:text-gray-200">
+                            <span class="material-symbols-outlined text-gray-400 text-base">check_circle</span>
+                            01 Artprint A5 ngẫu nhiên
+                        </li>
+                    </ul>
+                </div>
+                <button disabled
+                    class="w-full bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs font-extrabold py-2.5 rounded-lg cursor-not-allowed font-headline">
+                    Hết vé
+                </button>
+            </div>
 
-  // first notification
-  (async()=>{await sleep(900);buzz();popup.classList.add('show')})();
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 row-span-3 bg-white dark:bg-[#1a262d] rounded-xl p-5 border-2 border-primary/20 shadow-bento-hover flex flex-col h-full relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-3 py-1.5 rounded-bl-lg shadow-sm z-10">
+                    SẴN SÀNG
+                </div>
+                <div class="flex flex-col gap-1 mb-4">
+                    <h2
+                        class="text-base font-extrabold text-text-main dark:text-white flex items-center gap-1 font-headline">
+                        <span class="material-symbols-outlined text-cta text-lg">eco</span>
+                        ECO
+                    </h2>
+                    <div class="flex items-baseline gap-1 mt-1">
+                        <span class="text-3xl font-black text-primary font-mono">100.000₫</span>
+                    </div>
+                </div>
+                <div class="flex-grow space-y-3 mb-4">
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2 text-sm font-bold text-text-main dark:text-white">
+                            <span class="material-symbols-outlined text-accent text-base font-black">check_circle</span>
+                            Thưởng thức Concert Holofes Stage 4
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-bold text-text-main dark:text-white">
+                            <span class="material-symbols-outlined text-accent text-base">check_circle</span>
+                            01 Thức uống tự chọn miễn phí
+                        </li>
+                        <li class="flex items-start gap-2 text-sm font-bold text-text-main dark:text-white">
+                            <span class="material-symbols-outlined text-accent text-base">check_circle</span>
+                            Vé cứng thiết kế kỷ niệm riêng
+                        </li>
+                    </ul>
+                </div>
+                <a href="https://buy.worldsimp.com/events/5"
+                    class="w-full bg-primary hover:bg-primary/90 text-white text-sm font-extrabold py-2.5 rounded-lg transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-1.5 font-headline">
+                    ĐẶT VÉ NGAY
+                </a>
+            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-2 lg:col-span-2 bg-white dark:bg-[#1a262d] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col relative overflow-hidden h-full">
+                <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <span class="material-symbols-outlined text-6xl text-primary transform rotate-12">handshake</span>
+                </div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider z-10 font-headline">ĐƠN VỊ TỔ
+                    CHỨC & ĐỐI TÁC
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center justify-center h-full z-10 pb-2">
+                    <a href="https://www.facebook.com/worldsimp235" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/host.webp" alt="Hololive VN Fanclub Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-extrabold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight font-headline">
+                                World Simp & Friends</p>
+                            <p class="text-xs font-normal text-primary mt-1">Host</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/kenzokuvnfanpage" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/co-host1.webp" alt="Anime Store Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-extrabold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight font-headline">
+                                Mái ấm nhỏ nơi một Kenzoku sìn Oshi</p>
+                            <p class="text-xs font-normal text-accent mt-1">Co-host</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100092364346373" target="_blank"
+                        class="flex flex-col items-center justify-center group h-full transition-transform duration-300 hover:scale-105">
+                        <div class="h-16 w-full flex items-center justify-center group mb-2 relative">
+                            <img src="./assets/images/co-host2.webp" alt="Otaku News Logo"
+                                class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="text-center px-2">
+                            <p
+                                class="text-sm font-extrabold text-text-main dark:text-white group-hover:text-primary transition-colors leading-tight font-headline">
+                                Một góc nhỏ nơi thị trấn của những vì sao</p>
+                            <p class="text-xs font-normal text-cta mt-1">Co-host</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div onclick="window.open('https://maps.app.goo.gl/p9ieo9yfb347VUZQ9', '_blank')"
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-2 row-span-2 relative group overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-bento min-h-[240px] cursor-pointer">
+                <div class="absolute inset-0 bg-gray-200 bg-center bg-cover transition-transform duration-700 group-hover:scale-110"
+                    data-alt="Map showing the location of Biblio Cafe Sách in Hanoi" data-location="Hanoi, Vietnam"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNNvaFO5CX5krdmQQ0GDeJm9_mgZVJgZ9E1SgIbstIaEZ227Qz18FVCT9Rm8bi0IBHA6yMYCL67MaCO1CPqy1P7XmSnBalCX12jEk356nQ2e9-V7Dpvnt6wfBidKHa0O3OvhdGdx3sysuZZSIxi10oFMaVN1pgFhUyaJZ8oDwtdUUHooZvmvOidGUHuzEcwKSTWnN5HAaHwR7i3T9f63D0gmmhO3GOUIn_TG8vlJuH6kYsiZfuS-nvMDiDkDUJQB71fqxbvR0p6zY");'>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+                    <div class="text-white">
+                        <h3 class="text-lg font-bold">Biblio - Cafe Sách Ngụy Như Kon Tum</h3>
+                        <a href="https://maps.app.goo.gl/p9ieo9yfb347VUZQ9" target="_blank"
+                            class="text-sm opacity-90 hover:underline">Xem trên Google Maps</a>
+                    </div>
+                    <button
+                        class="size-10 rounded-full bg-white text-text-main flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">near_me</span>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 bg-text-main dark:bg-card-light dark:bg-opacity-5 rounded-xl p-6 flex flex-col justify-between relative overflow-hidden text-white border border-white/10 dark:border-gray-700 h-full">
+                <div class="absolute top-0 right-0 p-4">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-accent/20 border border-accent/30 text-accent text-xs font-bold uppercase tracking-wider">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                        </span>
+                        SẮP DIỄN RA
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <p class="text-sm font-medium text-gray-300 dark:text-gray-400 mb-1">Đếm Ngược</p>
+                    <div class="flex gap-2 items-baseline text-center">
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-days"
+                                class="text-3xl font-black text-primary font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Ngày</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-hours"
+                                class="text-3xl font-black text-primary font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Giờ</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-minutes"
+                                class="text-3xl font-black text-cta font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Phút</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-500">:</span>
+                        <div class="flex flex-col items-center">
+                            <span id="countdown-seconds"
+                                class="text-3xl font-black text-accent font-mono leading-none">00</span>
+                            <span class="text-[10px] uppercase tracking-wide opacity-60 font-bold">Giây</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-xs text-center text-gray-400">Sự kiện bắt đầu: <span
+                            class="text-white font-bold">08/03</span></p>
+                </div>
+            </div>
+            <div
+                class="bento-card col-span-1 md:col-span-1 lg:col-span-1 bg-white dark:bg-[#1a262d] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-bento flex flex-col justify-between relative overflow-hidden h-full">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider font-headline">CỘNG ĐỒNG FAN
+                    </h3>
+                    <span class="material-symbols-outlined text-primary text-xl">diversity_3</span>
+                </div>
+                <div class="flex -space-x-2 overflow-hidden mb-3">
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCPP-DCh8qM6HtUowqGiSwy0_SlSLdJw64D7OPlBWx0G5Mx38P5SQnDr9udvacnpV7EU2HDi2ny3BN1CuCjHLcH9IAOTdRVaQlipV-hcYzD5E6Z3XsdaUd3C_-P46FsjqGeJcZEyLTlLQkbknbKkzhZSkQA_uBS49EqAWX-0ObyeXjVN11KyKPouhND_w1Szqilft6Kxs5cafWQoGtYic5HKlpkeebvh76dZQsPHWHvcITASL_p0TeGn2ApZjs1fiyGSx8MEPHCnrk")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBo8_eZhjzH6qv1WaxsulvLkFOjrbV0-4faMI87sE5kf7XsEmXQtw9FPKekqP9eNrWIkfPvjCZ7msI6AtJgElbuG6l8r9UAC5RHpy2lnwvslAp1XYZ8EDIC81CHKUVXTfjExpr5H-_fgegF8ARFulL0_XNdUWJx7tAyToa307W6MBn_vOlGrqDf4jqwsgLiC8D3no1elQBgyhsZ2XD-PD5oxpXJTsaAgQK-8o-R5vfiIz5j8c46r_g1b_WJyDJiw4ALCDi5PZXCIys")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfMxj6K4c_SkTAGEzU_ohXHwWeTs3yYbKvXrN7Ar1O9TM9YcCcMTIMy6n-QS_J25jUJbKOTzZX_XKWSRnqQS99m89d_mGwQJoFvG82gZx9Ssk3ODZqYMe8qoERkYXYvWhcGLbp_QBh2pBZWktJODBG8hsWUpd30wBAD1SmbSL8wS3V9ASG4wq6fTHNa2yCCGOD7QYx7dSug1GVv9S02uhhv9e2ptKB17OXEXc8ZdxBAZTEDCKJtHM7LyvIDON8BBWUVAsBKdTAeHE")'>
+                    </div>
+                    <div class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-200 bg-cover bg-center"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUmf0thKRnh4rMp0SYlBIJecx9hb8T7-26nfTbszPcogWPWHZg-4CvX9vNEl6q2LS4lSjYUyQtwhCFe0K7kYfog6iYrpFRQSR2muvCY7ECkaUjgbHHEt88NdykYT3gtyMq8A0MICp4ZUrrX6ppLPDAWAGYln2p6LAvT7z4GNBflqmNC2_HVI1jgLFCQyu8GY_D6VaRvhu6THnG35ZAcn7tZsbG2MZfCma3NoUshAm3M0YrwCnwrvatgTe-GcEcGEHk9sEFjGAvn7A")'>
+                    </div>
+                    <div
+                        class="flex items-center justify-center size-8 rounded-full ring-2 ring-white dark:ring-[#1a262d] bg-gray-100 dark:bg-gray-700 text-[10px] font-bold text-gray-500 dark:text-gray-300">
+                        +142
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        class="flex-1 bg-primary/10 hover:bg-primary/20 text-primary px-3 py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                        <span class="size-2 rounded-full bg-green-500"></span> Discord
+                    </button>
+                    <button
+                        class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-2 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                        Group
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#101c22] py-8">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+                © 2026 Worldsimp Projekt. All rights reserved.
+            </div>
+            <div class="flex gap-6">
+                <a class="text-gray-400 hover:text-primary transition-colors"
+                    href="https://www.facebook.com/worldsimp235">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="text-gray-400 hover:text-primary transition-colors" href="mailto:admin@worldsimp.com">
+                    <span class="sr-only">Email</span>
+                    <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Countdown Timer Logic
+        const targetDate = new Date('2026-03-08T09:00:00').getTime();
 
-  $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
-  $('viewPopup').onclick=()=>{popup.classList.remove('show');showView('line')};
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-  document.querySelectorAll('[data-open]').forEach(el=>{
-    el.addEventListener('click',()=>showView(el.dataset.open));
-  });
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  $('lineBack').onclick=()=>showView('home');
-  $('menuBtn').onclick=()=>menu.classList.toggle('show');
+            document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
 
-  $('profileBtn').onclick=async()=>{
-    menu.classList.remove('show'); profileVisits++;
-    if(profileVisits>=2){
-      whoFlash.classList.remove('flash');void whoFlash.offsetWidth;whoFlash.classList.add('flash');
-      await sleep(330);
-    }
-    toastMsg('ユーザーが見つかりません');
-  };
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById('countdown-days').textContent = "00";
+                document.getElementById('countdown-hours').textContent = "00";
+                document.getElementById('countdown-minutes').textContent = "00";
+                document.getElementById('countdown-seconds').textContent = "00";
+            }
+        }
 
-  $('blockBtn').onclick=()=>{menu.classList.remove('show');dialogMask.classList.add('show')};
-  $('cancelBlock').onclick=()=>dialogMask.classList.remove('show');
-  $('confirmBlock').onclick=async()=>{
-    dialogMask.classList.remove('show');toastMsg('ブロックしました');
-    await sleep(900);buzz();addThem('どうして？','--:--');
-    if(stage<2){stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');modelNumber.textContent='QB-1026'}
-  };
-
-  document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>begin(b.dataset.answer));
-
-  async function begin(kind){
-    if(started)return; started=true; choices.classList.remove('show');
-    addMine(kind==='who'?'Cậu là ai?':'Nhắn nhầm người rồi.');
-    await sleep(450);
-    await reply(kind==='who'?'Điều đó quan trọng sao?':'Không. Chính là cậu.',820);
-    await sleep(500);
-
-    stage=1;
-    status.classList.add('noService');
-    lineView.classList.add('stage1');
-    secretPhoto.classList.add('show');
-
-    await sleep(500);
-    await reply('Nếu bất kỳ điều ước nào cũng có thể thành sự thật…',880,'--:--');
-    await sleep(420);
-    await reply('cậu sẽ ước điều gì?',780,'--:--');
-
-    choices.innerHTML=`<button class="choice" id="wish">Tôi có một điều ước.</button><button class="choice" id="leave">Đóng cuộc trò chuyện.</button>`;
-    choices.classList.add('show');
-    $('wish').onclick=contract;
-    $('leave').onclick=async()=>{
-      choices.classList.remove('show');
-      addMine('Đóng cuộc trò chuyện.');
-
-      await sleep(850);
-      showView('home');
-
-      await sleep(900);
-      buzz();
-
-      // LINE comes back even after the user tries to leave.
-      popup.classList.add('show');
-      popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>Tớ vẫn đang ở đây.';
-
-      await sleep(1400);
-      popup.classList.remove('show');
-      showView('line');
-
-      await sleep(350);
-      addThem('Tớ vẫn đang ở đây.','--:--');
-
-      await sleep(700);
-      await reply('Cậu không cần trả lời ngay đâu.',800,'--:--');
-
-      await sleep(650);
-      await reply('Nhưng điều ước của cậu vẫn chưa biến mất, đúng không?',850,'--:--');
-
-      await sleep(500);
-
-      choices.innerHTML=`
-        <button class="choice" id="returnWish">…Tôi có một điều ước.</button>
-        <button class="choice" id="ignoreAgain">Tiếp tục bỏ qua.</button>
-      `;
-      choices.classList.add('show');
-
-      $('returnWish').onclick=contract;
-
-      $('ignoreAgain').onclick=async()=>{
-        choices.classList.remove('show');
-        addMine('Tiếp tục bỏ qua.');
-
-        await sleep(1000);
-
-        status.classList.add('noService');
-        lineView.classList.add('stage2');
-        voidCard.classList.add('show');
-        secretPhoto.classList.add('show');
-
-        await reply('Ừm.',650,'--:--');
-        await sleep(800);
-        await reply('Vậy tớ sẽ chờ đến khi cậu muốn nói chuyện.',850,'--:--');
-
-        await sleep(850);
-
-        choices.innerHTML=`
-          <button class="choice" id="onlyChoice">Mở lời mời.</button>
-        `;
-        choices.classList.add('show');
-        $('onlyChoice').onclick=contract;
-      };
-    };
-  }
-
-  async function contract(){
-    choices.classList.remove('show');addMine('Tôi có một điều ước.');
-    await sleep(450);await reply('Tớ biết.',700,'--:--');
-    await sleep(500);await reply('Đó là lý do tớ tìm đến cậu.',800,'--:--');
-    stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');buildNumber.textContent='QB.1026';
-    await sleep(600);
-    choices.innerHTML=`<button class="choice" id="invite">Mở lời mời.</button>`;
-    choices.classList.add('show');$('invite').onclick=revealEvent;
-  }
-
-  async function revealEvent(){
-    choices.classList.remove('show');addMine('Mở lời mời.');
-    await sleep(500);await reply('Vậy thì… đến gặp tớ nhé.',850,'--:--');
-    await sleep(800);black.classList.add('show');await sleep(360);phoneScale.classList.add('gone');reveal.classList.add('show');await sleep(520);black.classList.remove('show');
-  }
-
-  $('navHome').onclick=()=>showView('home');
-  $('navRecent').onclick=()=>showView('recents');
-  $('navBack').onclick=()=>{
-    if(current==='about')showView('settings');
-    else if(current==='settings'||current==='album'||current==='recents'||current==='line')showView('home');
-  };
-
-  $('aboutRow').onclick=()=>showView('about');
-
-  secretPhoto.onclick=()=>{
-    viewer.classList.add('show');secretOpened=true;
-  };
-  viewer.onclick=()=>{
-    viewer.classList.remove('show');
-    if(secretOpened){setTimeout(()=>secretPhoto.classList.remove('show'),180)}
-  };
-
-  voidCard.onclick=()=>{
-    showView('line');
-    if(stage<2){stage=2;lineView.classList.add('stage2')}
-  };
-})();
-</script>
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
+
 </html>
