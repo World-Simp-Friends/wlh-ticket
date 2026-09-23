@@ -78,6 +78,8 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
 .recent:before,.recent:after{content:"";position:absolute;width:13px;height:10px;border:2px solid #c4c9cc}.recent:before{left:26px;top:13px}.recent:after{left:31px;top:18px;background:#07090b}
 .view{position:absolute;left:0;right:0;top:24px;bottom:48px;display:none}
 .view.active{display:block}
+@keyframes lineSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.lineView.slideInFromRight{animation:lineSlideIn .42s cubic-bezier(.2,.72,.22,1) both}
 
 /* HOME */
 .homeView{
@@ -400,7 +402,7 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
   const scroll=$('scroll'),dynamic=$('dynamic'),choices=$('choices'),menu=$('menu'),toast=$('toast'),whoFlash=$('whoFlash');
   const dialogMask=$('dialogMask'),secretPhoto=$('secretPhoto'),viewer=$('viewer'),voidCard=$('voidCard'),modelNumber=$('modelNumber'),buildNumber=$('buildNumber');
   const black=$('black'),reveal=$('reveal');
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false;
+  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false, firstLineOpen=true;
 
   function fit(){
     const mobile=matchMedia('(max-width: 600px), (pointer: coarse)').matches;
@@ -444,7 +446,15 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
   (async()=>{await sleep(900);buzz();popup.classList.add('show')})();
 
   $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
-  $('viewPopup').onclick=()=>{popup.classList.remove('show');showView('line')};
+  $('viewPopup').onclick=()=>{
+    popup.classList.remove('show');showView('line');
+    if(firstLineOpen){
+      firstLineOpen=false;
+      lineView.classList.remove('slideInFromRight');void lineView.offsetWidth;
+      lineView.classList.add('slideInFromRight');
+      lineView.addEventListener('animationend',()=>lineView.classList.remove('slideInFromRight'),{once:true});
+    }
+  };
 
   document.querySelectorAll('[data-open]').forEach(el=>{
     el.addEventListener('click',()=>showView(el.dataset.open));
@@ -566,14 +576,15 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
     await sleep(500);await reply('Đó là lý do tớ tìm đến cậu.',800,'--:--');
     stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');buildNumber.textContent='QB.1026';
     await sleep(600);
-    choices.innerHTML=`<button class="choice" id="invite">Mở lời mời.</button>`;
+    choices.innerHTML=`<button class="choice" id="invite">Tiếp tục</button>`;
     choices.classList.add('show');$('invite').onclick=revealEvent;
   }
 
   async function revealEvent(){
-    choices.classList.remove('show');addMine('Mở lời mời.');
-    await sleep(500);await reply('Vậy thì… đến gặp tớ nhé.',850,'--:--');
-    await sleep(800);black.classList.add('show');await sleep(360);phoneScale.classList.add('gone');reveal.classList.add('show');await sleep(520);black.classList.remove('show');
+    choices.classList.remove('show');addMine('…Vậy tôi phải làm gì?');
+    await sleep(450);await reply('Không có gì phức tạp đâu.',850,'--:--');
+    await sleep(350);await reply('Chỉ cần đến gặp tớ.',850,'--:--');
+    await sleep(650);black.classList.add('show');await sleep(360);phoneScale.classList.add('gone');reveal.classList.add('show');await sleep(520);black.classList.remove('show');
   }
 
   $('navHome').onclick=()=>showView('home');
