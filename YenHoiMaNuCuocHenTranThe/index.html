@@ -283,9 +283,15 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
         <p class="invitation-eyebrow"><span class="little-star" aria-hidden="true">✦</span> MỘT LỜI MỜI DÀNH CHO CẬU</p>
         <h1 id="event-title"><img src="assets/web/event-logo.webp" alt="Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế" width="1300" height="376" fetchpriority="high"></h1>
         <div class="hero-film"><span>OFF-FAN SCREENING</span><p>Puella Magi Madoka Magica the Movie<br><em>-Walpurgisnacht: Rising-</em></p></div>
-        <p class="hero-description">Cùng cộng đồng Madoka Magica Việt Nam<br>đón chờ đêm Walpurgis.</p>
-        <a class="invitation-button" href="#tickets"><span>Khám phá hạng vé</span><span class="button-arrow" aria-hidden="true">↗</span></a>
-        <p class="hero-cities">TP. HỒ CHÍ MINH <span aria-hidden="true">✦</span> HÀ NỘI</p>
+        <div class="hero-countdown" id="hero-countdown" aria-label="Đếm ngược đến ngày sự kiện">
+          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="days">--</span><span class="hero-countdown-label">Ngày</span></div>
+          <span class="hero-countdown-sep" aria-hidden="true">:</span>
+          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="hours">--</span><span class="hero-countdown-label">Giờ</span></div>
+          <span class="hero-countdown-sep" aria-hidden="true">:</span>
+          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="minutes">--</span><span class="hero-countdown-label">Phút</span></div>
+          <span class="hero-countdown-sep" aria-hidden="true">:</span>
+          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="seconds">--</span><span class="hero-countdown-label">Giây</span></div>
+        </div>
       </div>
       <div class="hero-footnote"><div><span class="hero-date">21<span> / </span>11<span> / </span>2026</span><span class="hero-time">THỨ BẢY &nbsp; · &nbsp; 16:00—20:00</span></div><a class="scroll-invitation" href="#rendezvous">MỞ LỜI MỜI <span aria-hidden="true">↓</span></a><span class="hero-folio" aria-hidden="true">I — THE INVITATION</span></div>
     </section>
@@ -817,5 +823,28 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
 </script>
 <script src="landing.js"></script>
 <script src="postlude.js"></script>
+<script>
+(function(){
+  var target = new Date('2026-11-21T16:00:00+07:00').getTime();
+  var root = document.getElementById('hero-countdown');
+  if(!root) return;
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var now = Date.now();
+    var diff = target - now;
+    if(diff < 0) diff = 0;
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    root.querySelector('[data-cd="days"]').textContent = pad(d);
+    root.querySelector('[data-cd="hours"]').textContent = pad(h);
+    root.querySelector('[data-cd="minutes"]').textContent = pad(m);
+    root.querySelector('[data-cd="seconds"]').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 </body>
 </html>
