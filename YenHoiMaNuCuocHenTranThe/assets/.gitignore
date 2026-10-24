@@ -1,0 +1,7 @@
+# Original design exports exceed the Cloudflare Pages 25 MiB asset limit.
+# Keep them locally; the website uses optimized files in web/.
+/Layer 2.png
+/madokaBG.png
+/madokaBG1.png
+/madokaBG2.png
+/madokafinal.png
