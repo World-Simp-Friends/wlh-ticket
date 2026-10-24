@@ -265,10 +265,10 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
 }
 
 </style>
-<link rel="stylesheet" href="landing.css">
-<link rel="stylesheet" href="postlude.css">
-<link rel="stylesheet" href="souvenirs.css">
-<link rel="stylesheet" href="typography.css">
+<link rel="stylesheet" href="landing.css?v=20261025-scroll1">
+<link rel="stylesheet" href="postlude.css?v=20261025-scroll1">
+<link rel="stylesheet" href="souvenirs.css?v=20261025-scroll1">
+<link rel="stylesheet" href="typography.css?v=20261025-scroll1">
 </head>
 <body>
 <!-- v4 asset pass: original AOSP Jelly Bean bitmap resources for system/launcher chrome; historical LINE icon reference used for prototype fidelity. -->
@@ -282,18 +282,30 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
       <div class="hero-copy">
         <p class="invitation-eyebrow"><span class="little-star" aria-hidden="true">✦</span> MỘT LỜI MỜI DÀNH CHO CẬU</p>
         <h1 id="event-title"><img src="assets/web/event-logo.webp" alt="Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế" width="1300" height="376" fetchpriority="high"></h1>
-        <div class="hero-film"><span>OFF-FAN SCREENING</span><p>Puella Magi Madoka Magica the Movie<br><em>-Walpurgisnacht: Rising-</em></p></div>
+        <div class="hero-film">
+          <span class="hero-film-kicker">Off-Fan Screening</span>
+          <p class="hero-film-title">Puella Magi Madoka Magica the Movie</p>
+          <p class="hero-film-release">-Walpurgisnacht: Rising-</p>
+        </div>
         <div class="hero-countdown" id="hero-countdown" aria-label="Đếm ngược đến ngày sự kiện">
-          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="days">--</span><span class="hero-countdown-label">Ngày</span></div>
-          <span class="hero-countdown-sep" aria-hidden="true">:</span>
-          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="hours">--</span><span class="hero-countdown-label">Giờ</span></div>
-          <span class="hero-countdown-sep" aria-hidden="true">:</span>
-          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="minutes">--</span><span class="hero-countdown-label">Phút</span></div>
-          <span class="hero-countdown-sep" aria-hidden="true">:</span>
-          <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="seconds">--</span><span class="hero-countdown-label">Giây</span></div>
+          <span class="hero-countdown-caption" aria-hidden="true"><span>Đếm ngược đến ngày hẹn</span></span>
+          <div class="hero-countdown-track">
+            <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="days">--</span><span class="hero-countdown-label">Ngày</span></div>
+            <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="hours">--</span><span class="hero-countdown-label">Giờ</span></div>
+            <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="minutes">--</span><span class="hero-countdown-label">Phút</span></div>
+            <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="seconds">--</span><span class="hero-countdown-label">Giây</span></div>
+          </div>
         </div>
       </div>
-      <div style="position:absolute;bottom:0;left:5.5%;right:5.5%;display:flex;align-items:center;gap:22px;min-height:0"><div><span class="hero-date">21<span> / </span>11<span> / </span>2026</span><span class="hero-time">THỨ BẢY &nbsp; · &nbsp; 16:00—20:00</span></div></div>
+      <div class="hero-dateline">
+        <span class="hero-dateline-mark" aria-hidden="true">✦</span>
+        <time class="hero-dateline-date" datetime="2026-11-21">21<span>/</span>11<span>/</span>2026</time>
+        <span class="hero-dateline-rule" aria-hidden="true"></span>
+        <div class="hero-dateline-meta">
+          <span class="hero-dateline-weekday">Thứ Bảy</span>
+          <span class="hero-dateline-clock">16:00–20:00</span>
+        </div>
+      </div>
     </section>
 
     <section class="programme-section" id="rendezvous" aria-labelledby="rendezvous-title" data-desktop-scene>
@@ -308,7 +320,57 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
       </div>
     </section>
 
-    <section class="ticket-salon" id="tickets" aria-labelledby="tickets-title" data-desktop-scene><div class="salon-heading"><div><span class="chapter-label">02 / HẠNG VÉ</span><h2 id="tickets-title">Chọn tấm vé <em>của cậu.</em></h2></div><div class="salon-city"><span>ĐIỂM HẸN ĐANG CHỌN</span><strong data-selected-city>TP.HCM</strong><small>Giá vé áp dụng tại cả hai thành phố.</small></div></div><div class="admission-list"><article class="admission-pass pass-standard" aria-labelledby="pass-standard-title"><div class="pass-identity"><span class="pass-kicker">YHMN / 001</span><h3 id="pass-standard-title">STANDARD</h3><div class="pass-amount">209<span>.000đ</span></div><span class="pass-date">21.11.2026 · 01 NGƯỜI</span><button class="pass-select" type="button" data-reserve="standard">Chọn Standard <span aria-hidden="true">↗</span></button></div><div class="pass-contents"><div class="pass-contents-heading"><span>TRỌN BỘ QUYỀN LỢI</span><span>6 MỤC ĐI CÙNG</span></div><ul class="pass-perks"><li><strong>01 chỗ ngồi</strong></li><li><strong>01 số may mắn</strong><span>Giveaway từ nhà tài trợ</span></li><li><strong>01 vé cứng răng cưa</strong></li><li><strong>Postcard A6</strong><span>Thiết kế ngẫu nhiên</span></li><li><strong>01 keychain</strong><span>Thiết kế ngẫu nhiên</span></li><li><strong>01 card giấy bo góc</strong></li></ul></div></article><article class="admission-pass pass-vip" aria-labelledby="pass-vip-title"><div class="pass-identity"><span class="pass-kicker">YHMN / 002</span><h3 id="pass-vip-title">VIP</h3><div class="pass-amount">309<span>.000đ</span></div><span class="pass-date">21.11.2026 · 01 NGƯỜI</span><button class="pass-select" type="button" data-reserve="vip">Chọn VIP <span aria-hidden="true">↗</span></button></div><div class="pass-contents"><div class="pass-contents-heading"><span>TRỌN BỘ QUYỀN LỢI</span><span>10 MỤC ĐI CÙNG</span></div><ul class="pass-perks"><li><strong>01 chỗ ngồi</strong></li><li><strong>02 số may mắn</strong><span>Giveaway từ nhà tài trợ</span></li><li><strong>01 vé cứng răng cưa</strong></li><li><strong>Postcard A6</strong><span>Thiết kế ngẫu nhiên</span></li><li><strong>02 keychain</strong><span>Tự chọn thiết kế trên web</span></li><li><strong>01 card giấy bo góc</strong></li><li><strong>01 artprint A4</strong><span>Key Visual</span></li><li><strong>01 badge tròn</strong></li><li><strong>01 hand banner</strong></li><li><strong>01 shikishi</strong></li></ul></div></article></div></section>
+    <section class="ticket-salon" id="tickets" aria-labelledby="tickets-title" data-desktop-scene><div class="salon-heading"><div><span class="chapter-label">02 / HẠNG VÉ</span><h2 id="tickets-title">Chọn tấm vé <em>của cậu.</em></h2></div><div class="salon-city"><span>ĐIỂM HẸN ĐANG CHỌN</span><strong data-selected-city>TP.HCM</strong><small>Giá vé áp dụng tại cả hai thành phố.</small></div></div><div class="admission-list">
+          <article class="admission-pass pass-standard" aria-labelledby="pass-standard-title">
+            <header class="pass-head">
+              <span class="pass-crest" aria-hidden="true"><svg viewBox="0 0 40 54" focusable="false"><path d="M1 53V31Q1 8 20 2Q39 8 39 31V53"></path><path class="pass-crest-inner" d="M5.5 53V31Q5.5 12.5 20 7Q34.5 12.5 34.5 31V53"></path></svg><i>✦</i></span>
+              <span class="pass-kicker">YHMN / 001</span>
+              <h3 id="pass-standard-title">Standard</h3>
+              <span class="pass-rule" aria-hidden="true">✦</span>
+              <div class="pass-amount">209<span>.000đ</span></div>
+              <span class="pass-date">21.11.2026 · 01 người</span>
+            </header>
+            <div class="pass-contents">
+              <div class="pass-contents-heading"><span>Trọn bộ quyền lợi</span><span>6 mục đi cùng</span></div>
+              <ul class="pass-perks">
+                <li><strong>01 chỗ ngồi</strong></li>
+                <li><strong>01 số may mắn</strong><span>Giveaway từ nhà tài trợ</span></li>
+                <li><strong>01 vé cứng răng cưa</strong></li>
+                <li><strong>Postcard A6</strong><span>Thiết kế ngẫu nhiên</span></li>
+                <li><strong>01 keychain</strong><span>Thiết kế ngẫu nhiên</span></li>
+                <li><strong>01 card giấy bo góc</strong></li>
+              </ul>
+            </div>
+            <button class="pass-select" type="button" data-reserve="standard"><span>Chọn Standard</span><span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="admission-pass pass-vip" aria-labelledby="pass-vip-title">
+            <header class="pass-head">
+              <span class="pass-crest" aria-hidden="true"><svg viewBox="0 0 40 54" focusable="false"><path d="M1 53V31Q1 8 20 2Q39 8 39 31V53"></path><path class="pass-crest-inner" d="M5.5 53V31Q5.5 12.5 20 7Q34.5 12.5 34.5 31V53"></path></svg><i>✦</i></span>
+              <span class="pass-kicker">YHMN / 002</span>
+              <h3 id="pass-vip-title">VIP</h3>
+              <span class="pass-rule" aria-hidden="true">✦</span>
+              <div class="pass-amount">309<span>.000đ</span></div>
+              <span class="pass-date">21.11.2026 · 01 người</span>
+            </header>
+            <div class="pass-contents">
+              <div class="pass-contents-heading"><span>Trọn bộ quyền lợi</span><span>10 mục đi cùng</span></div>
+              <ul class="pass-perks">
+                <li><strong>01 chỗ ngồi</strong></li>
+                <li><strong>02 số may mắn</strong><span>Giveaway từ nhà tài trợ</span></li>
+                <li><strong>01 vé cứng răng cưa</strong></li>
+                <li><strong>Postcard A6</strong><span>Thiết kế ngẫu nhiên</span></li>
+                <li><strong>02 keychain</strong><span>Tự chọn thiết kế trên web</span></li>
+                <li><strong>01 card giấy bo góc</strong></li>
+                <li><strong>01 artprint A4</strong><span>Key Visual</span></li>
+                <li><strong>01 badge tròn</strong></li>
+                <li><strong>01 hand banner</strong></li>
+                <li><strong>01 shikishi</strong></li>
+              </ul>
+            </div>
+            <button class="pass-select" type="button" data-reserve="vip"><span>Chọn VIP</span><span aria-hidden="true">↗</span></button>
+          </article>
+        </div>
+    </section>
 
 <section class="souvenir-room invitation-section" id="ticket-package" aria-labelledby="souvenir-title">
   <div class="souvenir-heading">
@@ -821,29 +883,34 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
   };
 })();
 </script>
-<script src="landing.js"></script>
-<script src="postlude.js"></script>
+<script src="landing.js?v=20261025-scroll1"></script>
+<script src="postlude.js?v=20261025-scroll1"></script>
 <script>
 (function(){
   var target = new Date('2026-11-21T16:00:00+07:00').getTime();
   var root = document.getElementById('hero-countdown');
   if(!root) return;
-  function pad(n){ return String(n).padStart(2,'0'); }
+  var cells = ['days','hours','minutes','seconds'].map(function(name){ return root.querySelector('[data-cd="'+name+'"]'); });
+  var timer = 0, visible = false;
   function tick(){
-    var now = Date.now();
-    var diff = target - now;
-    if(diff < 0) diff = 0;
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    root.querySelector('[data-cd="days"]').textContent = pad(d);
-    root.querySelector('[data-cd="hours"]').textContent = pad(h);
-    root.querySelector('[data-cd="minutes"]').textContent = pad(m);
-    root.querySelector('[data-cd="seconds"]').textContent = pad(s);
+    var diff = Math.max(0, target - Date.now());
+    var values = [Math.floor(diff/86400000),Math.floor(diff%86400000/3600000),Math.floor(diff%3600000/60000),Math.floor(diff%60000/1000)];
+    cells.forEach(function(cell,i){
+      var text = String(values[i]).padStart(2,'0');
+      if(cell && cell.textContent !== text) cell.textContent = text;
+    });
+    return diff > 0;
+  }
+  function schedule(){
+    clearTimeout(timer);
+    if(document.hidden || !visible) return;
+    if(tick()) timer = setTimeout(schedule, 1010 - Date.now()%1000);
   }
   tick();
-  setInterval(tick, 1000);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){ visible = entries[0].isIntersecting; schedule(); }).observe(root);
+  }else{ visible = true; schedule(); }
+  document.addEventListener('visibilitychange',schedule);
 })();
 </script>
 </body>
