@@ -22,9 +22,9 @@
 
 /* Banner */
 .invitation-eyebrow{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.13em}
-.hero-film>span{font-size:var(--type-caption);font-weight:600;line-height:1.5;letter-spacing:.12em}
-.hero-film p{font-family:var(--inv-serif);font-size:clamp(1.375rem,1.8vw,1.75rem);font-weight:500;line-height:1.35;letter-spacing:0}
-.hero-film em{font-size:1.08em;font-weight:600}
+.hero-film>span{font-family:var(--inv-serif);font-size:var(--type-caption);font-weight:600;line-height:1.5;letter-spacing:.22em;text-transform:uppercase;color:var(--inv-gold)}
+.hero-film p{font-family:var(--inv-serif);font-size:clamp(1.5rem,2vw,1.9rem);font-weight:500;line-height:1.25;letter-spacing:.01em;font-style:italic}
+.hero-film em{font-size:1.12em;font-weight:600;font-style:normal;letter-spacing:.04em}
 .hero-description{font-size:var(--type-body);line-height:1.8}
 .invitation .invitation-button{font-size:var(--type-small);font-weight:600;line-height:1.45;letter-spacing:0}
 .hero-cities{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.06em}
