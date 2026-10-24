@@ -22,15 +22,20 @@
 
 /* Banner */
 .invitation-eyebrow{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.13em}
-.hero-film>span{font-family:var(--inv-serif);font-size:var(--type-caption);font-weight:600;line-height:1.5;letter-spacing:.22em;text-transform:uppercase;color:var(--inv-gold)}
-.hero-film p{font-family:var(--inv-serif);font-size:clamp(1.5rem,2vw,1.9rem);font-weight:500;line-height:1.25;letter-spacing:.01em;font-style:italic}
-.hero-film em{font-size:1.12em;font-weight:600;font-style:normal;letter-spacing:.04em}
+.hero-film-kicker{font-size:.6875rem;font-weight:600;line-height:1.5;letter-spacing:.26em;text-transform:uppercase;color:var(--inv-gold)}
+.hero-film-title{font-family:var(--inv-serif);font-size:clamp(1.55rem,2.1vw,2rem);font-weight:500;line-height:1.2;letter-spacing:.005em;font-style:italic;color:var(--inv-ink);text-wrap:balance}
+.hero-film-release{font-family:var(--inv-theatre);font-size:clamp(1.05rem,1.4vw,1.25rem);font-weight:500;line-height:1.2;letter-spacing:.06em}
 .hero-description{font-size:var(--type-body);line-height:1.8}
 .invitation .invitation-button{font-size:var(--type-small);font-weight:600;line-height:1.45;letter-spacing:0}
 .hero-cities{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.06em}
-.hero-date{font-family:var(--inv-serif);font-size:2rem;font-weight:600;line-height:1.2;letter-spacing:0;font-variant-numeric:lining-nums}
-.hero-date>span{font-size:.7em;font-weight:400}
-.hero-time,.scroll-invitation,.hero-folio{font-size:var(--type-caption);font-weight:500;line-height:1.5;letter-spacing:.06em}
+/* Hero inscription: a serif date scored with gold caesuras, answered by a
+   letterspaced sans block for the weekday and the hours. */
+.hero-dateline{font-variant-numeric:lining-nums}
+.hero-dateline-date{font-family:var(--inv-serif);font-size:clamp(1.75rem,2.4vw,2.25rem);font-weight:600;line-height:1;letter-spacing:-.005em;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1,"onum" 0}
+.hero-dateline-date>span{display:inline-block;margin:0 .14em;font-size:.82em;font-weight:400;font-style:normal;color:var(--inv-gold);transform:translateY(-.02em)}
+.hero-dateline-weekday{font-size:.75rem;font-weight:600;line-height:1.2;letter-spacing:.22em;text-transform:uppercase;color:#4f3a52}
+.hero-dateline-clock{font-size:.875rem;font-weight:500;line-height:1.2;letter-spacing:.12em;color:#5f4d5a;font-variant-numeric:tabular-nums}
+.scroll-invitation,.hero-folio{font-size:var(--type-caption);font-weight:500;line-height:1.5;letter-spacing:.06em}
 
 /* An invitation that remains readable while pinned. */
 .destination-index{font-size:.6875rem;font-weight:600;line-height:1.5;letter-spacing:.08em}
@@ -60,13 +65,14 @@
 .salon-city>span{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.06em}
 .salon-city>strong{font-family:var(--inv-sans);font-size:1.25rem;font-weight:600;line-height:1.4;letter-spacing:0}
 .salon-city>small{font-size:var(--type-caption);line-height:1.6}
-.pass-kicker,.pass-date,.pass-contents-heading{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.06em;opacity:.85}
-.pass-identity h3{font-family:var(--inv-sans);font-size:1.375rem;font-weight:600;line-height:1.3;letter-spacing:.015em}
-.pass-amount{font-family:var(--inv-sans);font-size:2rem;font-weight:500;line-height:1.2;letter-spacing:-.035em;white-space:nowrap;font-variant-numeric:tabular-nums}
-.pass-amount>span{font-size:.64em;letter-spacing:-.02em}
-.invitation .pass-select{font-size:var(--type-small);font-weight:500;line-height:1.45;letter-spacing:0}
-.pass-perks li>strong{font-size:var(--type-small);font-weight:600;line-height:1.55;letter-spacing:0}
-.pass-perks li>span{font-size:var(--type-caption);font-weight:400;line-height:1.65;letter-spacing:0;opacity:.88}
+/* Admission tablets: theatrical tier name, serif price, reading-face ledger. */
+.pass-kicker,.pass-date,.pass-contents-heading{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.pass-head h3{font-family:var(--inv-theatre);font-size:clamp(1.75rem,2.5vw,2.2rem);font-weight:500;line-height:1;letter-spacing:.06em;text-transform:uppercase}
+.pass-amount{font-family:var(--inv-serif);font-size:clamp(2.25rem,3.3vw,2.85rem);font-weight:600;line-height:1;letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pass-amount>span{font-size:.55em;letter-spacing:0}
+.invitation .pass-select{font-size:var(--type-small);font-weight:600;line-height:1.4;letter-spacing:.02em}
+.pass-perks li>strong{font-size:var(--type-small);font-weight:600;line-height:1.5;letter-spacing:0}
+.pass-perks li>span{font-size:var(--type-caption);font-weight:400;line-height:1.6;letter-spacing:0;opacity:.85}
 .ticket-salon-note{font-size:var(--type-small);line-height:1.7}
 
 /* The merch caption is content; the small printing on the mock object is artwork. */
@@ -115,20 +121,14 @@
 .hero-footnote{gap:20px}
 .salon-heading{align-items:center}
 .salon-city>small{max-width:31ch}
-.pass-perks{gap:16px 20px}
-.pass-contents-heading{padding-bottom:12px;flex-wrap:wrap}
-.pass-identity{min-width:0}
-.pass-identity h3{margin-top:10px}
+.pass-contents-heading{flex-wrap:wrap}
 .pass-select{gap:12px}
 .souvenir-room .keepsake-label{grid-template-columns:20px minmax(0,1fr);gap:3px 8px;padding-top:12px}
 .souvenir-room .souvenir-controls{min-width:285px}
 .reservation-details>strong{margin-bottom:2px}
 
 @media(min-width:1024px){
- .admission-pass{grid-template-columns:230px minmax(0,1fr)}
- .pass-identity{padding:22px 24px}
- .pass-contents{padding:22px 24px}
- .pass-vip .pass-perks{gap:16px}
+ .admission-pass{padding:40px 36px 34px}
  .programme-heading{margin-bottom:24px}
  .programme-bottom{margin-top:22px}
  .hero-footnote>div{gap:18px}
@@ -142,8 +142,6 @@
  .programme-heading>p{font-size:var(--type-small)}
 }
 @media(min-width:1024px) and (max-width:1190px){
- .admission-pass{grid-template-columns:215px minmax(0,1fr)}
- .pass-vip .pass-perks{grid-template-columns:repeat(3,minmax(0,1fr))}
  .hero-footnote>div{gap:12px}
  .hero-folio{display:none}
 }
@@ -157,12 +155,11 @@
  .souvenir-room .souvenir-controls{min-width:0}
 }
 @media(max-width:760px){
- .hero-film p{font-size:1.375rem}
- .hero-film em{font-size:1.08em}
+ .hero-film-title{font-size:1.3rem}
+ .hero-film-release{font-size:1.18rem}
  .hero-cities{font-size:.6875rem}
  .hero-footnote{min-height:100px;gap:12px}
- .hero-time,.scroll-invitation{font-size:.6875rem;letter-spacing:.025em}
- .hero-date{font-size:1.875rem}
+ .scroll-invitation{font-size:.6875rem;letter-spacing:.025em}
  .hero-description{font-size:var(--type-body)}
  .hero-copy{padding-top:calc(32px + env(safe-area-inset-top,0px))}
  .hero-copy h1{margin-top:22px}
@@ -200,15 +197,12 @@
  .salon-city>span{font-size:.6875rem}
  .salon-city>strong{font-size:1.25rem}
  .salon-city>small{font-size:.75rem;max-width:none}
- .pass-identity{grid-template-columns:minmax(0,1fr) auto;gap:0 12px}
- .pass-identity h3{font-size:1.25rem;letter-spacing:0}
- .pass-amount{font-size:1.75rem}
- .pass-kicker,.pass-date,.pass-contents-heading{font-size:.625rem;letter-spacing:.03em}
+ .pass-head h3{font-size:1.75rem}
+ .pass-amount{font-size:2rem}
+ .pass-kicker,.pass-date,.pass-contents-heading{font-size:.625rem;letter-spacing:.08em}
  .pass-select{font-size:.8125rem!important;gap:8px}
- .pass-date{max-width:17ch}
  .pass-perks li>strong{font-size:.875rem}
  .pass-perks li>span{font-size:.75rem}
- .pass-perks,.pass-vip .pass-perks{gap:18px 14px}
  .souvenir-room .keepsake-label h3{font-size:.875rem}
  .souvenir-room .keepsake-label p{font-size:.8125rem}
  .souvenir-room .keepsake-availability,.souvenir-room .keepsake-vip .keepsake-availability{font-size:.75rem}
@@ -228,14 +222,11 @@
 @media(max-width:360px){
  .invitation{--type-section:2.5rem}
  .invitation-eyebrow{font-size:.6875rem;letter-spacing:.08em}
- .hero-film p{font-size:1.25rem}
+ .hero-film-title{font-size:1.2rem}
  .hero-cities{font-size:.625rem}
- .hero-date{font-size:1.625rem}
- .hero-time,.scroll-invitation{font-size:.625rem}
+ .scroll-invitation{font-size:.625rem}
  .scroll-invitation{gap:8px}
- .pass-amount{font-size:1.5625rem}
- .pass-identity h3{font-size:1.125rem}
- .pass-identity,.pass-contents{padding-left:17px;padding-right:17px}
+ .pass-amount{font-size:1.75rem}
  .invitation .pass-select{font-size:.75rem;gap:6px}
 }
 

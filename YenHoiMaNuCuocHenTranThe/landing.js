@@ -8,6 +8,7 @@
     root.dataset.invitationInitialized = 'true';
 
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const dockMedia = window.matchMedia('(max-width: 760px)');
     const cityStorageKey = 'yen-hoi-selected-city';
     const venues = {
       hcm: {
@@ -31,7 +32,10 @@
     let openingTimer;
     let openingFrame;
     let sceneObserver;
-    let dockObserver;
+    const dockObservers = [];
+    let dockFrame = 0;
+    let dockVisible = false;
+    const dockState = { heroPassed: false, ticketsVisible: true, footerVisible: false };
     let lastDialogTrigger;
     let dialogPointerDownOutside = false;
     const scenes = [...root.querySelectorAll('.scene-reveal')];
@@ -111,9 +115,10 @@
       const recomposeDesk = () => {
         root.dataset.giftTier = value;
         if (!before) return;
-        commonKeepsakes.forEach((gift) => {
+        // Finish every layout read before starting any FLIP animation.
+        const positions = commonKeepsakes.map(gift => ({ gift, next: gift.getBoundingClientRect() }));
+        positions.forEach(({ gift, next }) => {
           const previous = before.get(gift);
-          const next = gift.getBoundingClientRect();
           const x = previous.left - next.left;
           const y = previous.top - next.top;
           if (Math.abs(x) < 1 && Math.abs(y) < 1) return;
@@ -211,33 +216,57 @@
       scenes.forEach((scene) => sceneObserver.observe(scene));
     };
 
-    const intersectsViewport = (element) => {
-      if (!element) return false;
-      const rect = element.getBoundingClientRect();
-      return rect.bottom > 0 && rect.top < window.innerHeight;
-    };
-
     const updateDock = () => {
       if (!dock) return;
-      const heroHasPassed = hero ? hero.getBoundingClientRect().bottom < 80 : false;
-      const visible = opened && root.classList.contains('is-ready') && heroHasPassed
-        && !intersectsViewport(ticketSection) && !intersectsViewport(footer)
+      const visible = opened && dockMedia.matches && root.classList.contains('is-ready')
+        && dockState.heroPassed && !dockState.ticketsVisible && !dockState.footerVisible
         && !dialog?.open;
+      if (visible === dockVisible) return;
+      dockVisible = visible;
       dock.classList.toggle('is-visible', visible);
       dock.setAttribute('aria-hidden', String(!visible));
       dock.inert = !visible;
     };
 
+    // Only old browsers without IntersectionObserver need a mobile scroll fallback.
+    const fallbackDock = () => {
+      if (!opened || !dockMedia.matches || dockFrame) return;
+      dockFrame = requestAnimationFrame(() => {
+        dockFrame = 0;
+        const heroRect = hero?.getBoundingClientRect();
+        const ticketRect = ticketSection?.getBoundingClientRect();
+        const footerRect = footer?.getBoundingClientRect();
+        dockState.heroPassed = !!heroRect && heroRect.bottom < 80;
+        dockState.ticketsVisible = !!ticketRect && ticketRect.bottom > 0 && ticketRect.top < innerHeight;
+        dockState.footerVisible = !!footerRect && footerRect.bottom > 0 && footerRect.top < innerHeight;
+        updateDock();
+      });
+    };
+
     const observeDock = () => {
-      if (!dock) return;
-      dockObserver?.disconnect();
-      updateDock();
+      dockObservers.forEach(observer => observer.disconnect());
+      dockObservers.length = 0;
+      window.removeEventListener('scroll', fallbackDock);
+      if (!dock || !opened || !dockMedia.matches) { updateDock(); return; }
       if ('IntersectionObserver' in window) {
-        dockObserver = new IntersectionObserver(updateDock, {
-          threshold: [0, 0.01, 0.15, 0.5, 1],
-          rootMargin: '-80px 0px 0px 0px',
-        });
-        [hero, ticketSection, footer].filter(Boolean).forEach((element) => dockObserver.observe(element));
+        const heroObserver = new IntersectionObserver(entries => {
+          dockState.heroPassed = entries[0].boundingClientRect.bottom <= 80;
+          updateDock();
+        }, { rootMargin: '-80px 0px 0px 0px', threshold: 0 });
+        if (hero) heroObserver.observe(hero);
+        const contentObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            const visible = entry.isIntersecting && entry.intersectionRect.height > 0;
+            if (entry.target === ticketSection) dockState.ticketsVisible = visible;
+            if (entry.target === footer) dockState.footerVisible = visible;
+          });
+          updateDock();
+        }, { threshold: [0, .001] });
+        [ticketSection, footer].filter(Boolean).forEach(element => contentObserver.observe(element));
+        dockObservers.push(heroObserver, contentObserver);
+      } else {
+        window.addEventListener('scroll', fallbackDock, { passive: true });
+        fallbackDock();
       }
     };
 
@@ -378,11 +407,10 @@
       dock.setAttribute('aria-hidden', 'true');
     }
     window.addEventListener('invitation:open', () => openInvitation());
-    window.addEventListener('resize', updateDock, { passive: true });
-    let dockFrame = 0;
-    window.addEventListener('scroll', () => {
-      if (!opened || dockFrame) return;
-      dockFrame = window.requestAnimationFrame(() => { dockFrame = 0; updateDock(); });
+    if (dockMedia.addEventListener) dockMedia.addEventListener('change', observeDock);
+    else dockMedia.addListener(observeDock);
+    window.addEventListener('resize', () => {
+      if (!('IntersectionObserver' in window)) fallbackDock();
     }, { passive: true });
     if (document.body.classList.contains('invitation-open')) openInvitation();
     const previewInvitation = () => {

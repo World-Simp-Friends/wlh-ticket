@@ -15,7 +15,10 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .invitation img{display:block;max-width:100%;height:auto}
 .invitation ::selection{background:#d8bdc9;color:#342936}
 .invitation [id]{scroll-margin-top:32px}
-.invitation::after{content:"";position:absolute;inset:0;z-index:12;pointer-events:none;opacity:.13;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.87' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23877768' filter='url(%23n)' opacity='.3' d='M0 0h180v180H0z'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+/* A small repeated paper tile replaces the full-document blended SVG layer. */
+.invitation-hero,.programme-section,.ticket-salon,.souvenir-room,.closing-stage{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.87' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23877768' filter='url(%23grain)' opacity='.025' d='M0 0h180v180H0z'/%3E%3C/svg%3E");background-size:180px 180px}
+.invitation::after{content:none}
+.ticket-salon,.souvenir-room,.closing-stage{contain:paint}
 .invitation-nav{position:relative;z-index:20;height:100px;margin:0 5.5%;display:flex;align-items:center;gap:48px;border-bottom:1px solid var(--inv-line)}
 .invitation-wordmark{font-size:11px;letter-spacing:.16em;font-weight:600;line-height:1.5}
 .invitation-wordmark span{display:block;font-size:8px;letter-spacing:.22em;font-weight:400;margin-top:3px}
@@ -28,25 +31,32 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .hero-architecture{position:absolute;inset:0 0 0 20%;background:url("assets/web/cathedral-landscape.webp") 67% center/cover no-repeat;opacity:.68;mask-image:linear-gradient(to right,transparent,#000 42%);-webkit-mask-image:linear-gradient(to right,transparent,#000 42%)}
 .hero-vertical-rule{position:absolute;left:68%;top:0;bottom:0;width:1px;background:linear-gradient(var(--inv-line),transparent 85%);opacity:.55}
 .hero-scene{position:absolute;top:0;right:0;width:60%;height:100%;pointer-events:none}
-.hero-characters{position:absolute;width:min(64vw,1030px);max-width:none!important;height:auto!important;right:-6%;bottom:-23%;transform-origin:60% 65%;filter:drop-shadow(3px 10px 22px rgba(82,62,86,.08))}
+.hero-characters{position:absolute;width:min(64vw,1030px);max-width:none!important;height:auto!important;right:-6%;bottom:-23%;transform-origin:60% 65%;filter:none}
 .hero-copy{position:relative;z-index:3;margin-left:8%;width:43%;max-width:650px;padding:70px 0 135px}
 .invitation-eyebrow{display:flex;align-items:center;gap:13px;}
 .little-star{font-size:20px;color:var(--inv-gold);line-height:1}
 .hero-copy h1{margin:34px -9px 28px;width:calc(100% + 18px)}
 .hero-copy h1 img{width:100%;height:auto}
-.hero-film{border-left:1px solid var(--inv-gold);padding-left:20px;margin-top:10px}
-.hero-film>span{color:var(--inv-plum)}
-.hero-film p{margin-top:8px}
+.hero-film{position:relative;margin-top:24px}
+.hero-film:before{content:"";position:absolute;left:-22px;top:1px;bottom:1px;width:1px;background:var(--inv-gold)}
+.hero-film-kicker{display:flex;align-items:center;gap:11px}
+.hero-film-kicker:before{content:"✦";flex:0 0 auto;font-size:.9em;line-height:1;color:var(--inv-gold)}
+.hero-film-title{margin-top:14px}
+.hero-film-release{margin-top:7px;color:var(--inv-gold)}
 .hero-event-date{display:flex;align-items:baseline;gap:14px;margin-top:18px;padding-left:20px;flex-wrap:wrap}
 .hero-event-date .hero-date{font-family:var(--inv-serif);font-size:clamp(1.5rem,2.2vw,2rem);font-weight:600;line-height:1;letter-spacing:.02em;color:var(--inv-ink)}
 .hero-event-date .hero-date span{color:var(--inv-gold);margin:0 2px}
 .hero-event-date .hero-time{font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#7b696a}
-.hero-countdown{display:flex;align-items:center;gap:10px;margin-top:14px;padding-left:20px}
-.hero-countdown-unit{display:flex;flex-direction:column;align-items:center;min-width:58px;padding:10px 8px;background:rgba(92,61,88,.08);border:1px solid var(--inv-line);border-radius:2px;position:relative}
-.hero-countdown-unit:before{content:"";position:absolute;inset:3px;border:1px solid rgba(184,154,112,.35);pointer-events:none}
-.hero-countdown-value{font-family:var(--inv-serif);font-size:clamp(1.6rem,2.4vw,2.3rem);font-weight:600;line-height:1;color:var(--inv-plum);font-variant-numeric:tabular-nums}
-.hero-countdown-label{margin-top:6px;font-size:.625rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#7b696a}
-.hero-countdown-sep{font-family:var(--inv-serif);font-size:1.6rem;font-weight:600;color:var(--inv-gold);line-height:1;align-self:center;margin-bottom:18px}
+.hero-countdown{display:grid;grid-template-columns:auto;justify-items:stretch;width:max-content;gap:16px;margin-top:34px}
+.hero-countdown-caption{display:flex;align-items:center;gap:12px;font-size:.6875rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--inv-gold)}
+.hero-countdown-caption>span{margin-right:-.24em}
+.hero-countdown-caption:before,.hero-countdown-caption:after{content:"";flex:1 1 0;height:1px;background:var(--inv-gold);opacity:.55}
+.hero-countdown-track{position:relative;display:flex;border:1px solid rgba(164,139,94,.5);outline:1px solid rgba(164,139,94,.2);outline-offset:4px;background:linear-gradient(180deg,rgba(92,61,88,.06),rgba(92,61,88,.01))}
+.hero-countdown-unit{position:relative;width:76px;padding:15px 8px 13px;display:flex;flex-direction:column;align-items:center}
+.hero-countdown-unit+.hero-countdown-unit:before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:1px;background:var(--inv-line)}
+.hero-countdown-unit+.hero-countdown-unit:after{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;background:var(--inv-gold);transform:translate(-50%,-50%) rotate(45deg)}
+.hero-countdown-value{width:100%;text-align:center;font-family:var(--inv-serif);font-size:clamp(1.9rem,2.9vw,2.5rem);font-weight:600;line-height:1;color:var(--inv-plum);font-variant-numeric:tabular-nums;font-feature-settings:"lnum" 1,"onum" 0}
+.hero-countdown-label{margin-top:10px;width:100%;padding-top:8px;border-top:1px solid rgba(164,139,94,.4);font-size:.6875rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#5d4a58}
 .hero-description{margin:26px 0 26px!important;color:#635965}
 .invitation-button{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-height:52px;padding:13px 22px;background:var(--inv-plum);border:1px solid var(--inv-plum);color:var(--inv-paper)!important;transition:background 200ms ease,border-color 200ms ease}
 .invitation-button:hover{background:#453046;border-color:#453046}
@@ -56,9 +66,12 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .hero-cities>span{color:var(--inv-gold);font-size:12px}
 .hero-footnote{position:absolute;z-index:4;bottom:0;left:5.5%;right:5.5%;min-height:94px;border-top:1px solid var(--inv-line);display:flex;align-items:center;gap:30px}
 .hero-footnote>div{display:flex;align-items:center;gap:22px}
-.hero-date{white-space:nowrap}
-.hero-date>span{color:var(--inv-gold);}
-.hero-time{white-space:nowrap}
+/* The date inscription is pinned to the hero's foot, over paper. */
+.hero-dateline{position:absolute;z-index:4;left:5.5%;right:5.5%;bottom:0;display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);padding-bottom:clamp(22px,3.6vh,42px)}
+.hero-dateline-mark{flex:0 0 auto;color:var(--inv-gold);font-size:13px;line-height:1;opacity:.95;transform:translateY(2px)}
+.hero-dateline-date{white-space:nowrap;color:var(--inv-ink)}
+.hero-dateline-rule{flex:0 0 auto;align-self:stretch;width:1px;margin-inline:clamp(4px,.6vw,9px);background:linear-gradient(transparent,var(--inv-line) 22%,var(--inv-line) 78%,transparent)}
+.hero-dateline-meta{display:flex;flex-direction:column;gap:6px;margin:0}
 .scroll-invitation{display:flex;align-items:center;gap:20px;margin-left:auto}
 .scroll-invitation span{font-size:20px}
 .hero-folio{color:var(--inv-muted);margin-left:30px}
@@ -212,12 +225,15 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .reservation-dialog>.invitation-button{margin-top:25px;width:100%}
 /* One opening sequence: two black leaves reveal the paper world. */
 .invitation-opening{position:fixed;inset:0;z-index:100;pointer-events:none;visibility:hidden;overflow:hidden}
-.opening-leaf{position:absolute;inset:0;background:#141216;will-change:transform;backface-visibility:hidden}
+.opening-leaf{position:absolute;inset:0;background:#141216;backface-visibility:hidden}
 .opening-leaf-left{clip-path:polygon(0 0,53% 0,47% 100%,0 100%)}
 .opening-leaf-right{clip-path:polygon(53% 0,100% 0,100% 100%,47% 100%)}
 .opening-seam{position:absolute;left:50%;top:-10%;height:120%;width:1px;background:#d9c6a8;transform:rotate(3.5deg);opacity:0;box-shadow:0 0 18px 2px rgba(236,218,185,.2)}
 .opening-mark{position:absolute;left:50%;top:48%;font-family:var(--inv-serif);font-size:12px;letter-spacing:.4em;color:#cab49b;transform:translate(-50%,-50%)}
 .invitation:not(.is-ready) .invitation-opening{visibility:visible}
+.invitation.is-ready .invitation-opening{display:none}
+.invitation.is-opening .opening-leaf{will-change:transform}
+body.invitation-open .phoneScale{display:none}
 .invitation.is-opening .opening-leaf-left{animation:open-leaf-left 1150ms var(--inv-ease) 200ms both}
 .invitation.is-opening .opening-leaf-right{animation:open-leaf-right 1150ms var(--inv-ease) 200ms both}
 .invitation.is-opening .opening-seam{animation:open-seam 1150ms ease 50ms both}
@@ -227,7 +243,7 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 @keyframes open-leaf-left{0%,8%{transform:translateX(0)}100%{transform:translateX(-60%) rotate(-4deg)}}
 @keyframes open-leaf-right{0%,8%{transform:translateX(0)}100%{transform:translateX(60%) rotate(4deg)}}
 @keyframes open-seam{0%{opacity:0;transform:rotate(3.5deg) scaleY(.02)}25%{opacity:1;transform:rotate(3.5deg) scaleY(1)}70%,100%{opacity:0;transform:rotate(3.5deg) scaleY(1)}}
-@keyframes open-mark{0%,25%{opacity:1}100%{opacity:0;filter:blur(3px)}}
+@keyframes open-mark{0%,25%{opacity:1}100%{opacity:0}}
 @keyframes character-arrival{from{opacity:.3;transform:translate(25px,18px) scale(1.035)}to{opacity:1;transform:translate(0,0) scale(1)}}
 @keyframes copy-arrival{from{opacity:.35;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 .invitation.motion-enabled .scene-reveal{opacity:0;transform:translateY(18px);transition:opacity 650ms var(--inv-ease),transform 650ms var(--inv-ease)}
@@ -240,9 +256,9 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
  .invitation-hero{height:auto;min-height:0;display:flex;flex-direction:column;padding-bottom:0}
  .hero-architecture{inset:0;background-image:url("assets/web/cathedral-portrait.webp");background-position:50% 35%;background-size:cover;opacity:.28;mask-image:linear-gradient(to bottom,#000,transparent 93%);-webkit-mask-image:linear-gradient(to bottom,#000,transparent 93%)}
  .hero-vertical-rule{left:88%;opacity:.4}.hero-copy{width:100%;max-width:600px;margin:0 auto;padding:38px 7% 0;display:flex;flex-direction:column;align-items:center;text-align:center}
- .invitation-eyebrow{gap:9px}.little-star{font-size:15px}.hero-copy h1{width:min(100%,470px);margin:26px 0 22px}.hero-film{padding:0;border:0}.hero-film p{margin-top:5px}.hero-description{margin:17px 0 19px!important}.desktop-break{display:none}.invitation-button{min-height:47px;padding:11px 19px;gap:30px}.hero-cities{gap:10px;margin-top:16px!important}.hero-countdown{gap:6px;padding-left:0;justify-content:center}.hero-countdown-unit{min-width:46px;padding:8px 6px}.hero-countdown-value{font-size:1.35rem}.hero-countdown-sep{font-size:1.2rem;margin-bottom:14px}.hero-event-date{padding-left:0;justify-content:center;gap:10px}.hero-event-date .hero-date{font-size:1.35rem}
+ .invitation-eyebrow{gap:9px}.little-star{font-size:15px}.hero-copy h1{width:min(100%,470px);margin:26px 0 22px}.hero-film{width:100%;text-align:center}.hero-film:before{display:none}.hero-film-kicker{justify-content:center}.hero-film-title{margin-top:10px}.hero-film-release{margin-top:6px}.hero-description{margin:17px 0 19px!important}.desktop-break{display:none}.invitation-button{min-height:47px;padding:11px 19px;gap:30px}.hero-cities{gap:10px;margin-top:16px!important}.hero-countdown{display:flex;flex-direction:column;align-items:center;width:100%;gap:12px;padding-left:0}.hero-countdown-caption{gap:10px}.hero-countdown-caption:before,.hero-countdown-caption:after{display:none}.hero-countdown-track{width:100%;max-width:340px}.hero-countdown-unit{width:auto;flex:1 1 0;padding:12px 4px 10px}.hero-countdown-value{font-size:1.7rem}.hero-event-date{padding-left:0;justify-content:center;gap:10px}.hero-event-date .hero-date{font-size:1.35rem}
  .hero-scene{position:relative;order:2;width:100%;height:440px;margin-top:-8px;overflow:hidden}.hero-characters{width:min(115vw,620px);height:auto!important;right:50%;bottom:-27%;transform:translateX(50%);max-width:none!important}.feather-one{width:60px;top:15%;left:10%;transform:rotate(-24deg)}.feather-two{width:40px;right:7%;top:44%}
- .hero-footnote{position:relative;order:3;left:auto;right:auto;margin:0 6%;min-height:83px;gap:16px;justify-content:space-between;background:var(--inv-paper)}.hero-footnote>div{flex-direction:column;align-items:flex-start;gap:3px}.scroll-invitation{gap:11px}.scroll-invitation span{font-size:18px}
+ .hero-footnote{position:relative;order:3;left:auto;right:auto;margin:0 6%;min-height:83px;gap:16px;justify-content:space-between;background:var(--inv-paper)}.hero-footnote>div{flex-direction:column;align-items:flex-start;gap:3px}.scroll-invitation{gap:11px}.scroll-invitation span{font-size:18px}.hero-dateline{position:relative;left:auto;right:auto;bottom:auto;order:3;margin:0 6%;padding:22px 0 30px;flex-direction:column;gap:12px;justify-content:center}.hero-dateline-mark{font-size:11px}.hero-dateline-rule{display:none}.hero-dateline-meta{align-items:center;gap:4px}
  .invitation-section{padding:70px 6%}.section-heading h2{margin-top:17px}.section-heading>p{margin-top:16px}.invitation-letter{margin-top:35px;grid-template-columns:1fr;padding:30px 25px;min-height:0}.letter-date{border-right:0;padding-bottom:28px;border-bottom:1px solid var(--inv-line)}.date-composition{margin-top:13px;gap:15px}.date-composition>span:first-child{font-size:110px}.date-month b{font-size:39px}.letter-year{font-size:20px;margin-top:8px}.letter-time{font-size:13px;margin-top:21px}.letter-date>p{font-size:9px}.letter-location{padding:26px 3px 35px;align-items:stretch}.city-selector{gap:24px;margin-bottom:25px;align-self:center}.city-selector button{font-size:10px;min-height:44px;padding-bottom:10px}.venue-info{min-height:128px}.venue-info h3{font-size:31px;line-height:1.1;margin:13px 0 10px}.venue-info>p{font-size:11px;min-height:42px;max-width:100%}.letter-label{font-size:8px}.invitation-text-link{align-self:flex-start;margin-top:8px;font-size:10px}.letter-stamp{right:0;bottom:-9px;font-size:10px}.letter-stamp b{font-size:6px}.letter-feather{right:0;bottom:30px;width:75px}
  .ticket-section-top{flex-direction:column;align-items:flex-start;gap:23px;margin-bottom:30px}.ticket-section-top .section-heading h2{font-size:45px}.ticket-section-note{text-align:left;border-left:1px solid var(--inv-gold);padding:0 0 0 15px;display:grid;grid-template-columns:1fr 1fr;column-gap:15px;width:100%}.small-caption{font-size:7px;align-self:end}.ticket-section-note>strong{font-size:25px;margin:4px 0 0;grid-column:1}.ticket-section-note>p{grid-row:1/3;grid-column:2;font-size:9px;align-self:center;line-height:1.8}
  .ticket-pair{grid-template-columns:1fr;gap:25px}.admission-ticket{grid-template-columns:1fr 70px;min-height:380px}.ticket-body{padding:25px 24px}.ticket-topline{font-size:6px}.ticket-body h3{font-size:45px;margin-top:26px}.ticket-tagline{font-size:17px;margin-top:9px!important;margin-bottom:21px!important}.ticket-price{font-size:57px}.ticket-price>span{font-size:28px}.ticket-price-note{font-size:8px}.ticket-highlights strong{font-size:11px}.ticket-highlights li>span{font-size:9px;max-width:none}.ticket-rule{margin:22px 0 18px}.ticket-detail-link{margin-top:20px;font-size:10px!important;min-height:36px}.ticket-choose{font-size:10px!important;padding:15px}.stub-date{font-size:9px}.stub-date>span{font-size:21px}.stub-number{font-size:8px}
