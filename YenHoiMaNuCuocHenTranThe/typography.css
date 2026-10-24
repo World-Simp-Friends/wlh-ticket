@@ -1,0 +1,248 @@
+/* Typography for this event only. Artwork microtype stays in its own stylesheet.
+   Cormorant: narrative headings. Be Vietnam Pro: reading/actions/prices.
+   Libre Bodoni: the invitation cover, where the type is deliberately theatrical. */
+:root{
+ --inv-serif:"Cormorant Garamond",Georgia,serif;
+ --inv-sans:"Be Vietnam Pro",Arial,sans-serif;
+ --inv-theatre:"Libre Bodoni",Georgia,serif;
+ --type-caption:.75rem;
+ --type-small:.875rem;
+ --type-body:1rem;
+ --type-section:clamp(2.75rem,4.5vw,4rem);
+ --type-leading:1.7;
+}
+.invitation{font-family:var(--inv-sans);font-size:var(--type-body);font-weight:400;line-height:var(--type-leading);-moz-osx-font-smoothing:grayscale}
+.invitation button{font-family:var(--inv-sans)}
+.invitation h2,.invitation h3,.invitation h4{text-wrap:balance}
+.invitation p{text-wrap:pretty}
+.invitation :is(.programme-heading h2,.salon-heading h2,.souvenir-heading h2,.closing-heading h2,.reservation-dialog h2){font-family:var(--inv-serif);font-size:var(--type-section);font-weight:600;line-height:1.08;letter-spacing:-.015em}
+.invitation :is(.programme-heading h2,.salon-heading h2,.souvenir-heading h2,.closing-heading h2,.reservation-dialog h2) em{font-weight:500}
+.invitation :is(.chapter-label,.souvenir-eyebrow,.closing-eyebrow){font-size:var(--type-caption);font-weight:600;line-height:1.6;letter-spacing:.1em}
+.invitation :is(.programme-heading>p,.souvenir-controls>p,.section-heading>p){font-size:var(--type-body);line-height:var(--type-leading);max-width:40ch}
+
+/* Banner */
+.invitation-eyebrow{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.13em}
+.hero-film>span{font-size:var(--type-caption);font-weight:600;line-height:1.5;letter-spacing:.12em}
+.hero-film p{font-family:var(--inv-serif);font-size:clamp(1.375rem,1.8vw,1.75rem);font-weight:500;line-height:1.35;letter-spacing:0}
+.hero-film em{font-size:1.08em;font-weight:600}
+.hero-description{font-size:var(--type-body);line-height:1.8}
+.invitation .invitation-button{font-size:var(--type-small);font-weight:600;line-height:1.45;letter-spacing:0}
+.hero-cities{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.06em}
+.hero-date{font-family:var(--inv-serif);font-size:2rem;font-weight:600;line-height:1.2;letter-spacing:0;font-variant-numeric:lining-nums}
+.hero-date>span{font-size:.7em;font-weight:400}
+.hero-time,.scroll-invitation,.hero-folio{font-size:var(--type-caption);font-weight:500;line-height:1.5;letter-spacing:.06em}
+
+/* An invitation that remains readable while pinned. */
+.destination-index{font-size:.6875rem;font-weight:600;line-height:1.5;letter-spacing:.08em}
+.destination-leaf h3{font-family:var(--inv-serif);font-size:clamp(2rem,2.8vw,2.5rem);font-weight:600;line-height:1.12;letter-spacing:-.015em}
+.destination-venue>span{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.08em}
+.destination-venue h4{font-family:var(--inv-sans);font-size:1.0625rem;font-weight:600;line-height:1.4;letter-spacing:0}
+.destination-venue>p{font-size:var(--type-small);font-weight:400;line-height:1.7;letter-spacing:0;color:#65535e}
+.destination-map{font-size:var(--type-small);font-weight:500;line-height:1.5;letter-spacing:0}
+.invitation .destination-choice{font-size:var(--type-small);font-weight:500;line-height:1.45;letter-spacing:0}
+.destination-selected{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.03em}
+.calendar-caption{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.08em}
+.programme-day{font-family:var(--inv-serif);font-size:7.5rem;font-weight:600;line-height:.9;letter-spacing:-.07em;font-variant-numeric:lining-nums}
+.programme-year{font-family:var(--inv-serif);font-size:1.5rem;font-weight:500;line-height:1.2;letter-spacing:.14em}
+.programme-hours{font-family:var(--inv-sans);font-size:1.125rem;font-weight:500;line-height:1.4;letter-spacing:0;font-variant-numeric:tabular-nums}
+.programme-hours>b{font-weight:500}
+.calendar-leaf>p{font-size:.8125rem;line-height:1.65;color:#66534d}
+.programme-notation{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:0}
+.programme-notation>span{font-size:inherit}
+.programme-notation>strong{font-size:.8125rem;font-weight:600;letter-spacing:0}
+.programme-bottom{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.05em}
+.cover-eyebrow,.cover-caption{font-size:.6875rem;font-weight:500;line-height:1.6;letter-spacing:.1em}
+.cover-title{font-family:var(--inv-theatre);font-size:clamp(2rem,3.1vw,2.75rem);font-weight:500;line-height:1.28;letter-spacing:-.015em}
+.cover-title em{font-weight:500}
+.cover-date{font-family:var(--inv-sans);font-size:1.25rem;font-weight:500;line-height:1.5;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+
+/* Prices and benefits share the reading face, not the poster face. */
+.salon-city>span{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.06em}
+.salon-city>strong{font-family:var(--inv-sans);font-size:1.25rem;font-weight:600;line-height:1.4;letter-spacing:0}
+.salon-city>small{font-size:var(--type-caption);line-height:1.6}
+.pass-kicker,.pass-date,.pass-contents-heading{font-size:.6875rem;font-weight:500;line-height:1.5;letter-spacing:.06em;opacity:.85}
+.pass-identity h3{font-family:var(--inv-sans);font-size:1.375rem;font-weight:600;line-height:1.3;letter-spacing:.015em}
+.pass-amount{font-family:var(--inv-sans);font-size:2rem;font-weight:500;line-height:1.2;letter-spacing:-.035em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pass-amount>span{font-size:.64em;letter-spacing:-.02em}
+.invitation .pass-select{font-size:var(--type-small);font-weight:500;line-height:1.45;letter-spacing:0}
+.pass-perks li>strong{font-size:var(--type-small);font-weight:600;line-height:1.55;letter-spacing:0}
+.pass-perks li>span{font-size:var(--type-caption);font-weight:400;line-height:1.65;letter-spacing:0;opacity:.88}
+.ticket-salon-note{font-size:var(--type-small);line-height:1.7}
+
+/* The merch caption is content; the small printing on the mock object is artwork. */
+.invitation .souvenir-tier-selector button{font-size:var(--type-caption);font-weight:600;line-height:1.5;letter-spacing:.025em}
+.souvenir-room .souvenir-tier-selector button>span{font-size:var(--type-small);font-weight:500;line-height:1.5;letter-spacing:0}
+.souvenir-room .keepsake-label{line-height:1.6}
+.souvenir-room .keepsake-index{font-size:.6875rem;line-height:1.5}
+.souvenir-room .keepsake-label h3{font-family:var(--inv-sans);font-size:1rem;font-weight:600;line-height:1.5;letter-spacing:0}
+.souvenir-room .keepsake-label p{font-size:var(--type-small);font-weight:400;line-height:1.65;letter-spacing:0;color:#685260}
+.souvenir-room .keepsake-availability,.souvenir-room .keepsake-vip .keepsake-availability{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:0;color:#694b60}
+.souvenir-room .souvenir-bottom{font-size:var(--type-small);line-height:1.7}
+.souvenir-room .souvenir-bottom>span{font-size:var(--type-caption);line-height:1.7;color:#685260}
+
+/* Credits and the reservation sheet */
+.closing-heading h2{font-size:clamp(3.25rem,6vw,5rem)}
+.closing-date{font-family:var(--inv-serif);font-size:clamp(4rem,11.5vw,10rem);font-weight:500;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:lining-nums}
+.closing-partner>span{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.08em}
+.closing-partner h3{font-family:var(--inv-sans);font-size:var(--type-small);font-weight:500;line-height:1.7;letter-spacing:0}
+.closing-footer strong{font-size:var(--type-small);font-weight:600;line-height:1.6}
+.closing-footer p{font-size:var(--type-small);line-height:1.75}
+.invitation .closing-replay{font-size:var(--type-small);font-weight:500;line-height:1.5}
+.closing-signature{font-size:var(--type-caption);font-weight:400;line-height:1.75;letter-spacing:.05em}
+.reservation-dialog{font-family:var(--inv-sans);font-size:var(--type-body);line-height:1.7}
+.reservation-dialog h2{font-family:var(--inv-serif);font-size:2.75rem;font-weight:600;line-height:1.15;letter-spacing:-.015em}
+.reservation-dialog h2 em{font-weight:500}
+.reservation-details{font-size:var(--type-small);line-height:1.7}
+.reservation-details>strong{font-family:var(--inv-sans);font-size:1.25rem;font-weight:600;line-height:1.5;letter-spacing:0}
+.reservation-dialog>p{font-size:var(--type-small);line-height:1.8}
+.booking-dock>div>span{font-size:var(--type-caption);line-height:1.5}
+.booking-dock>div>strong{font-size:var(--type-small);font-weight:600;line-height:1.4}
+.invitation .booking-dock>a{font-size:var(--type-small);font-weight:500;line-height:1.45}
+
+/* Fit the larger type without changing the folio's hinges or scroll timing. */
+.destination-selected{position:static;margin-top:8px}
+.destination-leaf h3{margin-top:10px;white-space:normal}
+.destination-venue{margin-top:16px}
+.destination-venue h4{margin:6px 0 8px}
+.destination-venue h4 br{display:none}
+.destination-choice{margin-top:12px;min-height:44px}
+.calendar-leaf{padding:24px 20px 20px}
+.programme-day{margin-top:12px}
+.programme-hours{padding-top:12px;margin-top:12px}
+.calendar-leaf>p{margin-top:10px}
+.programme-notation{padding-top:12px;gap:10px;flex-wrap:wrap;justify-content:center}
+.programme-bottom{gap:16px}
+.hero-footnote{gap:20px}
+.salon-heading{align-items:center}
+.salon-city>small{max-width:31ch}
+.pass-perks{gap:16px 20px}
+.pass-contents-heading{padding-bottom:12px;flex-wrap:wrap}
+.pass-identity{min-width:0}
+.pass-identity h3{margin-top:10px}
+.pass-select{gap:12px}
+.souvenir-room .keepsake-label{grid-template-columns:20px minmax(0,1fr);gap:3px 8px;padding-top:12px}
+.souvenir-room .souvenir-controls{min-width:285px}
+.reservation-details>strong{margin-bottom:2px}
+
+@media(min-width:1024px){
+ .admission-pass{grid-template-columns:230px minmax(0,1fr)}
+ .pass-identity{padding:22px 24px}
+ .pass-contents{padding:22px 24px}
+ .pass-vip .pass-perks{gap:16px}
+ .programme-heading{margin-bottom:24px}
+ .programme-bottom{margin-top:22px}
+ .hero-footnote>div{gap:18px}
+ .hero-folio{margin-left:10px}
+}
+@media(min-width:1024px) and (min-height:700px) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .invitation[data-desktop-motion="true"] .programme-leaf{height:clamp(440px,49svh,480px)}
+ .invitation[data-desktop-motion="true"] .destination-leaf{padding:20px 22px}
+ .invitation[data-desktop-motion="true"] .programme-stage{padding-top:20px;padding-bottom:20px}
+ .invitation[data-desktop-motion="true"] .programme-heading h2{font-size:clamp(2.75rem,4vw,3.5rem)}
+ .programme-heading>p{font-size:var(--type-small)}
+}
+@media(min-width:1024px) and (max-width:1190px){
+ .admission-pass{grid-template-columns:215px minmax(0,1fr)}
+ .pass-vip .pass-perks{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .hero-footnote>div{gap:12px}
+ .hero-folio{display:none}
+}
+@media(max-width:1023px){
+ .invitation{--type-body:.9375rem;--type-section:3rem}
+ .programme-heading>p{font-size:var(--type-small)}
+ .destination-face{display:contents}
+ .calendar-leaf>p{font-size:var(--type-caption)}
+ .programme-day{font-size:6.5rem}
+ .pass-perks,.pass-vip .pass-perks{gap:16px}
+ .souvenir-room .souvenir-controls{min-width:0}
+}
+@media(max-width:760px){
+ .hero-film p{font-size:1.375rem}
+ .hero-film em{font-size:1.08em}
+ .hero-cities{font-size:.6875rem}
+ .hero-footnote{min-height:100px;gap:12px}
+ .hero-time,.scroll-invitation{font-size:.6875rem;letter-spacing:.025em}
+ .hero-date{font-size:1.875rem}
+ .hero-description{font-size:var(--type-body)}
+ .hero-copy{padding-top:calc(32px + env(safe-area-inset-top,0px))}
+ .hero-copy h1{margin-top:22px}
+ .hero-scene{height:300px}
+ .invitation .invitation-button{min-height:48px}
+ .hero-cities{gap:8px}
+ .hero-footnote>div{gap:4px}
+ .booking-dock{gap:12px}
+ .booking-dock>a{gap:12px}
+ .souvenir-room .souvenir-tier-selector button{padding:10px 12px}
+ .souvenir-room .souvenir-tier-selector button>span{margin-left:8px}
+}
+@media(max-width:600px){
+ .invitation{--type-section:2.75rem}
+ .invitation :is(.chapter-label,.souvenir-eyebrow,.closing-eyebrow){font-size:.6875rem;letter-spacing:.07em}
+ .programme-heading{display:block;margin-bottom:28px}
+ .programme-heading>p{font-size:var(--type-body);padding-top:0;margin-top:16px;max-width:32ch}
+ .programme-heading>p br{display:none}
+ .programme-heading .chapter-label{white-space:normal}
+ .calendar-caption{font-size:.625rem;letter-spacing:.04em}
+ .programme-day{font-size:6rem}
+ .programme-year{font-size:1.625rem}
+ .programme-hours{font-size:1rem}
+ .calendar-leaf>p{font-size:.75rem}
+ .programme-notation>span{font-size:.6875rem}
+ .programme-notation>strong{font-size:.875rem}
+ .programme-notation{gap:8px;padding-top:16px}
+ .destination-leaf{padding:26px 24px}
+ .destination-leaf h3{font-size:2.25rem}
+ .destination-venue h4{font-size:1.125rem}
+ .destination-selected{margin-top:12px}
+ .programme-bottom{font-size:.625rem;letter-spacing:.025em;align-items:flex-start}
+ .salon-heading{align-items:stretch}
+ .salon-heading h2{max-width:none}
+ .salon-city>span{font-size:.6875rem}
+ .salon-city>strong{font-size:1.25rem}
+ .salon-city>small{font-size:.75rem;max-width:none}
+ .pass-identity{grid-template-columns:minmax(0,1fr) auto;gap:0 12px}
+ .pass-identity h3{font-size:1.25rem;letter-spacing:0}
+ .pass-amount{font-size:1.75rem}
+ .pass-kicker,.pass-date,.pass-contents-heading{font-size:.625rem;letter-spacing:.03em}
+ .pass-select{font-size:.8125rem!important;gap:8px}
+ .pass-date{max-width:17ch}
+ .pass-perks li>strong{font-size:.875rem}
+ .pass-perks li>span{font-size:.75rem}
+ .pass-perks,.pass-vip .pass-perks{gap:18px 14px}
+ .souvenir-room .keepsake-label h3{font-size:.875rem}
+ .souvenir-room .keepsake-label p{font-size:.8125rem}
+ .souvenir-room .keepsake-availability,.souvenir-room .keepsake-vip .keepsake-availability{font-size:.75rem}
+ .souvenir-room .keepsake-label{grid-template-columns:17px minmax(0,1fr);column-gap:5px}
+ .souvenir-room .keepsake-index{font-size:.625rem}
+ .souvenir-room .souvenir-bottom{font-size:.875rem}
+ .souvenir-room .souvenir-bottom>span{font-size:.75rem}
+ .closing-heading h2{font-size:3rem}
+ .closing-date{font-size:clamp(3.25rem,16vw,5rem)}
+ .closing-footer p{font-size:.8125rem}
+ .closing-signature{font-size:.6875rem}
+ .closing-partner h3{font-size:.8125rem;max-width:none}
+ .closing-partner>span{font-size:.6875rem}
+ .closing-footer{gap:24px}
+ .reservation-dialog h2{font-size:2.5rem}
+}
+@media(max-width:360px){
+ .invitation{--type-section:2.5rem}
+ .invitation-eyebrow{font-size:.6875rem;letter-spacing:.08em}
+ .hero-film p{font-size:1.25rem}
+ .hero-cities{font-size:.625rem}
+ .hero-date{font-size:1.625rem}
+ .hero-time,.scroll-invitation{font-size:.625rem}
+ .scroll-invitation{gap:8px}
+ .pass-amount{font-size:1.5625rem}
+ .pass-identity h3{font-size:1.125rem}
+ .pass-identity,.pass-contents{padding-left:17px;padding-right:17px}
+ .invitation .pass-select{font-size:.75rem;gap:6px}
+}
+
+/* Readable dialogue while preserving the native-looking 2013 phone chrome. */
+#phone .bubble{font-family:var(--inv-sans);font-size:14px;line-height:1.55;letter-spacing:0}
+#phone .bubbleTranslation{font-family:var(--inv-sans);font-size:11px;font-style:italic;line-height:1.5;letter-spacing:0}
+#phone .choice{font-family:var(--inv-sans);font-size:12px;line-height:1.5;letter-spacing:0}
+#phone .popupBody{font-family:var(--inv-sans);font-size:13px;line-height:1.55}
+#phone .dialog p{font-family:var(--inv-sans);font-size:12px;line-height:1.6}
+#phone .dialogTranslation{font-size:11px;line-height:1.5}
