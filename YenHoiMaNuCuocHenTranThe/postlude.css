@@ -39,7 +39,10 @@
 .programme-notation>span{color:#89766c}
 .programme-notation>strong{color:var(--inv-plum);}
 .calendar-fold{position:absolute;right:0;bottom:0;width:24px;height:24px;background:linear-gradient(135deg,#e4d7c4 49%,#d0beaa 50%,#e8e1d7 53%)}
-.programme-bottom{display:flex;justify-content:space-between;align-items:center;gap:25px;max-width:1160px;margin:30px auto 0;color:#7b696a}
+.programme-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:25px;max-width:1160px;margin:30px auto 0;color:#7b696a}
+.programme-bottom>span:first-child{text-align:left}
+.programme-bottom>span:last-child{text-align:right}
+.programme-bottom .programme-scroll-cue{text-align:center}
 .programme-scroll-cue{display:none;align-items:center;gap:18px}
 .programme-scroll-cue i{font-style:normal;font-size:20px}
 .ticket-salon{padding:80px var(--post-gutter) 72px;background:#f7f2e9}
