@@ -1,0 +1,222 @@
+/* A collector's desk: all artwork here is a replaceable merch placeholder. */
+.souvenir-room{--souvenir-desk:#eee7db;--souvenir-paper:#fbf7ed;--souvenir-ink:#453541;--souvenir-line:#c9b9ad;--souvenir-pink:#c58598;--souvenir-plum:#62455d;position:relative;padding-top:92px;padding-bottom:74px;background:var(--souvenir-desk);color:var(--souvenir-ink);isolation:isolate;overflow:hidden}
+.souvenir-room:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 48% 44%,#fffaf2 0,transparent 65%);z-index:-1}
+.souvenir-room .souvenir-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;position:relative;z-index:2}
+.souvenir-room .souvenir-heading h2{margin-top:22px}
+.souvenir-room .souvenir-controls{padding-bottom:4px}
+.souvenir-room .souvenir-controls>p{margin:0 0 15px;color:#776373}
+.souvenir-room .souvenir-tier-selector{display:flex;border:1px solid #a5929d;padding:4px;gap:4px;background:rgba(255,250,242,.45)}
+.souvenir-room .souvenir-tier-selector button{background:transparent;border:0;color:var(--souvenir-ink);padding:11px 17px;min-height:45px;transition:background 180ms ease,color 180ms ease}
+.souvenir-room .souvenir-tier-selector button>span{margin-left:14px}
+.souvenir-room .souvenir-tier-selector button[aria-pressed="true"]{background:var(--souvenir-plum);color:#fff8f0}
+.souvenir-room .keepsake-desk{position:relative;width:100%;max-width:1260px;margin:26px auto 0;aspect-ratio:1.45;min-height:700px}
+.souvenir-room .keepsake-desk:before{content:"";position:absolute;left:27%;top:6%;width:47%;aspect-ratio:1;border:1px solid rgba(164,139,94,.2);border-radius:50%;box-shadow:0 0 0 30px rgba(164,139,94,.035),0 0 0 88px rgba(164,139,94,.025);pointer-events:none}
+.souvenir-room .keepsake-desk-mark{position:absolute;right:0;top:0;color:#998394;text-align:right;line-height:1.2;transform:rotate(90deg);transform-origin:100% 100%;pointer-events:none}
+.souvenir-room .keepsake-desk-mark>span{font:400 39px var(--inv-serif,Georgia,serif);letter-spacing:.1em;display:block}
+.souvenir-room .keepsake-desk-mark>b{font-size:7px;font-weight:400;letter-spacing:.28em;display:block;margin-top:5px}
+.souvenir-room .keepsake-desk-caption{position:absolute;left:0%;top:69%;font-size:8px;line-height:1.6;letter-spacing:.17em;color:#8c7683;pointer-events:none}
+.souvenir-room .keepsake-object{position:absolute;z-index:2;min-width:0;--entry-x:0px;--entry-y:100px;--entry-turn:0deg}
+.souvenir-room .keepsake-art{position:relative;transform:rotate(var(--object-angle,0deg));transform-origin:50% 60%;margin-bottom:17px;box-shadow:5px 9px 13px rgba(71,47,62,.14),0 1px 2px rgba(71,47,62,.1);transition:transform 550ms var(--inv-ease,cubic-bezier(.22,1,.36,1)),opacity 350ms ease,filter 350ms ease;user-select:none;pointer-events:none}
+.souvenir-room .keepsake-label{display:grid;grid-template-columns:19px 1fr;column-gap:7px;align-items:start;position:relative;z-index:2;color:var(--souvenir-ink);border-top:1px solid rgba(130,102,119,.28);padding:9px 0 0;}
+.souvenir-room .keepsake-index{grid-row:1 / 3;color:#9b7b8a;padding-top:2px;font-variant-numeric:tabular-nums}
+.souvenir-room .keepsake-label h3{margin:0}
+.souvenir-room .keepsake-label p{color:#7c6676;margin:2px 0 0;}
+.souvenir-room .keepsake-availability{grid-column:2;color:#7d6173;margin-top:4px}
+.souvenir-room .keepsake-vip .keepsake-availability{color:#7d5069;}
+.souvenir-room .keepsake-print{left:34%;top:3%;width:26%;z-index:4;--entry-y:70px;--entry-turn:-8deg}
+.souvenir-room .keepsake-postcard{left:4%;top:6%;width:24%;z-index:3;--entry-x:-140px;--entry-y:45px;--entry-turn:10deg}
+.souvenir-room .keepsake-shikishi{left:72%;top:6%;width:22%;z-index:3;--entry-x:130px;--entry-y:-50px;--entry-turn:-9deg}
+.souvenir-room .keepsake-keychain{left:8%;top:42%;width:17%;z-index:5;--entry-x:-170px;--entry-y:60px;--entry-turn:18deg}
+.souvenir-room .keepsake-badge{left:61%;top:45%;width:13%;z-index:5;--entry-x:40px;--entry-y:150px;--entry-turn:32deg}
+.souvenir-room .keepsake-card{left:79%;top:45%;width:19%;z-index:4;--entry-x:170px;--entry-y:65px;--entry-turn:-18deg}
+.souvenir-room .keepsake-ticket{left:8%;top:75%;width:29%;z-index:3;--entry-x:-80px;--entry-y:120px;--entry-turn:-10deg}
+.souvenir-room .keepsake-banner{left:48%;top:75%;width:48%;z-index:6;--entry-x:180px;--entry-y:80px;--entry-turn:12deg}
+.souvenir-room .mock-print{aspect-ratio:210/297;padding:11px;background:var(--souvenir-paper);color:var(--souvenir-plum)}
+.souvenir-room .mock-print-border{height:100%;position:relative;border:1px solid #bba07a;padding:16px 13px;overflow:hidden;display:flex;align-items:center;flex-direction:column;text-align:center}
+.souvenir-room .mock-print-border>span{font-size:clamp(6px,.7vw,10px);letter-spacing:.21em}
+.souvenir-room .mock-print-border>strong{position:relative;z-index:2;font:400 clamp(44px,6.8vw,94px)/1 var(--inv-serif,Georgia,serif);margin-top:auto;letter-spacing:-.06em}
+.souvenir-room .mock-print-border>small{position:relative;z-index:2;font-size:clamp(5px,.5vw,7px);letter-spacing:.15em;margin-top:8px}
+.souvenir-room .mock-print-border>em{font:italic 20px/1 var(--inv-serif,Georgia,serif);position:absolute;bottom:12px;right:12px;opacity:.6}
+.souvenir-room .mock-arch{position:absolute;left:14%;right:14%;top:17%;height:64%;border:1px solid #b797a1;border-radius:50% 50% 0 0;background:linear-gradient(152deg,#e8c4cf,#e9d9da 50%,#d1c5d5);overflow:hidden}
+.souvenir-room .mock-arch:before,.souvenir-room .mock-arch:after{content:"";position:absolute;inset:12%;border:1px solid rgba(104,68,100,.3);border-radius:50%;transform:rotate(35deg) scaleX(.6)}
+.souvenir-room .mock-arch:after{transform:rotate(-35deg) scaleX(.6)}
+.souvenir-room .mock-arch>i{position:absolute;inset:29% 0 0;background:linear-gradient(160deg,transparent 43%,#faf4e3 44%,#faf4e3 47%,transparent 48%);opacity:.5}
+.souvenir-room .mock-arch>b{position:absolute;left:0;right:0;top:28%;text-align:center;font:400 44px var(--inv-serif,Georgia,serif);color:#fff4e8}
+.souvenir-room .mock-postcard{aspect-ratio:148/105;background:#e1c5cc;border:7px solid #f9f3e9;padding:12px 13px;overflow:hidden;isolation:isolate}
+.souvenir-room .mock-postcard:before{content:"";width:58%;aspect-ratio:1;position:absolute;right:-12%;top:-20%;border:1px solid rgba(110,72,97,.35);border-radius:50%;box-shadow:0 0 0 18px rgba(255,244,229,.15),0 0 0 43px rgba(255,244,229,.13);z-index:-1}
+.souvenir-room .mock-postcard>span{display:block;font-size:7px;letter-spacing:.25em}
+.souvenir-room .mock-postcard>b{font:400 clamp(40px,5vw,70px)/1 var(--inv-serif,Georgia,serif);position:absolute;left:13px;bottom:22px;letter-spacing:-.04em}
+.souvenir-room .mock-postcard>small{position:absolute;left:13px;bottom:9px;font-size:6px;letter-spacing:.12em}
+.souvenir-room .mock-postcard-sun{position:absolute;right:12%;top:30%;font-size:43px;color:#fff5e8}
+.souvenir-room .mock-shikishi{aspect-ratio:1;background:#faf3e3;border:7px solid #b49a6c;outline:1px solid #9a7f53;outline-offset:-3px;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;isolation:isolate;overflow:hidden}
+.souvenir-room .mock-shikishi:before{content:"";position:absolute;inset:13%;border:1px solid #d1bdbd;border-radius:50%;z-index:-1;transform:rotate(30deg);background:linear-gradient(140deg,#dacbd6,transparent 65%)}
+.souvenir-room .mock-shikishi>span{font-size:8px;letter-spacing:.16em}
+.souvenir-room .mock-shikishi>i{font:400 70px/1 var(--inv-serif,Georgia,serif);color:#9e7c9b;margin-top:8px}
+.souvenir-room .mock-shikishi>b{font:400 clamp(20px,3vw,40px)/1 var(--inv-serif,Georgia,serif);letter-spacing:.08em}
+.souvenir-room .mock-shikishi>small{font-size:6px;letter-spacing:.25em}
+.souvenir-room .mock-keychain{height:180px;box-shadow:none;isolation:isolate;margin-bottom:22px}
+.souvenir-room .mock-keyring{position:absolute;left:calc(50% - 24px);top:0;width:48px;height:48px;border:5px solid #c6b99e;border-radius:50%;box-shadow:1px 3px 3px #a795915e,inset 1px 2px 2px #fff9;z-index:3}
+.souvenir-room .mock-keyring:after{content:"";position:absolute;width:9px;height:25px;border:2px solid #a99580;border-radius:7px;left:14px;top:32px;background:#e9e0cb}
+.souvenir-room .mock-keychain-body{position:absolute;width:100px;height:119px;border-radius:45% 45% 15% 15%;border:3px solid rgba(255,255,255,.75);background:#d6b9c6;left:calc(50% - 50px);bottom:0;box-shadow:3px 6px 8px #4d304d33;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(7deg);z-index:2}
+.souvenir-room .mock-keychain-body>span{font-size:35px;color:#fff3e4;line-height:1}
+.souvenir-room .mock-keychain-body>b{font:400 19px var(--inv-serif,Georgia,serif);letter-spacing:.12em;margin-top:3px}
+.souvenir-room .mock-keychain-body>small{font-size:6px;letter-spacing:.1em;margin-top:2px}
+.souvenir-room .mock-second-keychain{position:absolute;width:81px;height:102px;left:calc(50% - 9px);bottom:6px;border-radius:45% 45% 15% 15%;border:3px solid #ffffffb0;background:#b5a0bd;box-shadow:3px 6px 8px #4d304d33;transform:translate(-9px,0) rotate(-12deg);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;transition:transform 180ms var(--inv-ease,ease),opacity 110ms ease}
+.souvenir-room .mock-second-keychain>span{font-size:31px;color:#f9e6ee;line-height:1}
+.souvenir-room .mock-second-keychain>b{font:400 15px var(--inv-serif,Georgia,serif);margin-top:4px}
+#reveal[data-tier="vip"] .souvenir-room .mock-second-keychain{transform:translate(22px,3px) rotate(19deg);opacity:1}
+.souvenir-room .mock-badge{width:100%;aspect-ratio:1;border-radius:50%;background:#61465c;color:#f8e9e7;border:5px solid #e8ddd0;box-shadow:4px 7px 10px #45324526,inset 0 0 0 1px #b19498;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden}
+.souvenir-room .mock-badge:after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(145deg,#fff3,transparent 40%,#0001 82%);pointer-events:none}
+.souvenir-room .mock-badge>span{font-size:clamp(5px,.6vw,8px);letter-spacing:.08em}
+.souvenir-room .mock-badge>b{font:400 clamp(24px,3.5vw,48px)/1 var(--inv-serif,Georgia,serif);margin:7px 0}
+.souvenir-room .mock-badge>small{font-size:6px;letter-spacing:.1em}
+.souvenir-room .mock-paper-card{aspect-ratio:86/54;background:#ab859b;color:#fff7eb;border-radius:9px;padding:14px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid #e6cecf;overflow:hidden}
+.souvenir-room .mock-paper-card:before{content:"";position:absolute;inset:7px;border:1px solid #ead5d277;border-radius:5px}
+.souvenir-room .mock-paper-card>span{font-size:9px;letter-spacing:.13em}
+.souvenir-room .mock-paper-card>b{font:400 35px/1 var(--inv-serif,Georgia,serif);margin:4px 0}
+.souvenir-room .mock-paper-card>small{font-size:6px;letter-spacing:.25em}
+.souvenir-room .mock-hard-ticket{display:flex;aspect-ratio:2.9;background:#faf1df;color:#705064;border-top:2px dotted #998471;border-bottom:2px dotted #998471}
+.souvenir-room .mock-hard-ticket>div{flex:1;padding:10px 15px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.souvenir-room .mock-hard-ticket span{font-size:7px;letter-spacing:.13em}
+.souvenir-room .mock-hard-ticket b{font:400 clamp(22px,2.8vw,39px)/1.1 var(--inv-serif,Georgia,serif);white-space:nowrap;letter-spacing:-.02em;margin:4px 0}
+.souvenir-room .mock-hard-ticket small{font-size:5px;letter-spacing:.14em}
+.souvenir-room .mock-hard-ticket>i{width:24%;border-left:1px dashed #bda9a1;font-size:8px;font-style:normal;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;line-height:1.65}
+.souvenir-room .mock-hand-banner{aspect-ratio:5.4;display:flex;align-items:center;justify-content:space-around;gap:12px;background:#715266;color:#fff0e8;border:5px solid #d7c6c7;outline:1px solid #a1869c;outline-offset:-9px;padding:9px 15px;isolation:isolate}
+.souvenir-room .mock-hand-banner:after{content:"";position:absolute;top:0;bottom:0;left:31%;width:15%;background:#ffffff0a;transform:skew(-12deg);z-index:-1}
+.souvenir-room .mock-hand-banner>span{font:400 35px/1 var(--inv-serif,Georgia,serif);color:#dcb3c0}
+.souvenir-room .mock-hand-banner>div{text-align:center}
+.souvenir-room .mock-hand-banner b{font:400 clamp(16px,2.5vw,32px)/1 var(--inv-serif,Georgia,serif);letter-spacing:.07em;display:block;white-space:nowrap}
+.souvenir-room .mock-hand-banner small{font-size:7px;letter-spacing:.2em;display:block;margin-top:7px}
+.souvenir-room .keepsake-object[hidden]{display:none!important}
+.souvenir-room .souvenir-bottom{display:flex;align-items:center;justify-content:space-between;gap:30px;position:relative;margin-top:35px;padding-top:22px;border-top:1px solid #c4b3b4;}
+.souvenir-room .souvenir-bottom>p{max-width:570px;margin:0}
+.souvenir-room .souvenir-bottom>p strong{font-weight:500}
+.souvenir-room .souvenir-bottom>span{color:#846e7c;max-width:280px;text-align:right}
+@media(min-width:1024px) and (pointer:fine){
+ .invitation.motion-enabled .souvenir-room .keepsake-object{opacity:0;transform:translate3d(var(--entry-x),var(--entry-y),0) rotate(var(--entry-turn));transition:opacity 500ms ease,transform 1050ms var(--inv-ease,cubic-bezier(.22,1,.36,1));transition-delay:calc(var(--object-order,0) * 65ms);will-change:transform,opacity}
+ .invitation.motion-enabled .souvenir-room.is-in-view .keepsake-object,.invitation.motion-enabled .souvenir-room.is-visible .keepsake-object{opacity:1;transform:translate3d(0,0,0) rotate(0deg)}
+ .souvenir-room .keepsake-object:hover{z-index:10}
+ .souvenir-room .keepsake-object:hover .keepsake-art{transform:translateY(-7px) rotate(calc(var(--object-angle,0deg) - 1deg))}
+}
+@media(min-width:1600px){.souvenir-room .keepsake-desk{min-height:820px}}
+@media(max-width:1023px){
+ .souvenir-room{padding-top:60px;padding-bottom:55px}
+ .souvenir-room .souvenir-heading{gap:24px;align-items:flex-start}
+ .souvenir-room .souvenir-controls{padding-top:30px}
+ .souvenir-room .keepsake-desk{aspect-ratio:auto;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 28px;margin-top:38px;padding:24px 0 0;border-top:1px solid #c4b3b4}
+ .souvenir-room .keepsake-desk:before,.souvenir-room .keepsake-desk-mark,.souvenir-room .keepsake-desk-caption{display:none}
+ .souvenir-room .keepsake-object{position:relative;left:auto;top:auto;width:auto;opacity:1;transform:none;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-end;padding:15px 15px 0;min-height:300px;--object-angle:0deg!important}
+ .souvenir-room .keepsake-art{margin:auto auto 22px;width:75%;max-width:210px;transform:none!important;transition:none}
+ .souvenir-room .keepsake-label{padding-top:12px;min-height:76px;flex-shrink:0}
+ .souvenir-room .keepsake-print .keepsake-art{max-width:165px;width:60%}
+ .souvenir-room .mock-print-border>strong{font-size:60px}
+ .souvenir-room .mock-print-border>span{font-size:7px}
+ .souvenir-room .mock-print-border>small{font-size:5px}
+ .souvenir-room .mock-print-border>em{font-size:16px}
+ .souvenir-room .mock-arch>b{font-size:34px}
+ .souvenir-room .mock-shikishi{max-width:180px}
+ .souvenir-room .mock-shikishi>b{font-size:27px}
+ .souvenir-room .mock-keychain{height:180px;max-width:170px}
+ .souvenir-room .mock-badge{width:60%;max-width:145px}
+ .souvenir-room .mock-badge>span{font-size:7px}
+ .souvenir-room .mock-badge>b{font-size:40px}
+ .souvenir-room .mock-postcard>b{font-size:45px}
+ .souvenir-room .mock-hand-banner{width:100%;max-width:290px;aspect-ratio:3.7;gap:7px;padding:10px;border-width:4px}
+ .souvenir-room .mock-hand-banner b{font-size:16px;letter-spacing:.02em}
+ .souvenir-room .mock-hand-banner>span{font-size:20px}
+ .souvenir-room .mock-hand-banner small{font-size:5px;letter-spacing:.05em;margin-top:5px}
+ .souvenir-room .mock-hard-ticket{width:100%;max-width:270px;aspect-ratio:2.7}
+ .souvenir-room .mock-hard-ticket>div{padding:8px 10px}
+ .souvenir-room .mock-hard-ticket b{font-size:28px}
+ .souvenir-room .souvenir-bottom{margin-top:30px;gap:20px}
+}
+@media(max-width:600px){
+ .souvenir-room{padding-top:53px;padding-bottom:50px}
+ .souvenir-room .souvenir-heading{display:block}
+ .souvenir-room .souvenir-heading h2{margin-top:17px}
+ .souvenir-room .souvenir-controls{padding-top:25px}
+ .souvenir-room .souvenir-controls>p{margin-bottom:10px}
+ .souvenir-room .souvenir-tier-selector{width:100%;max-width:420px}
+ .souvenir-room .souvenir-tier-selector button{width:50%;padding:10px 12px}
+ .souvenir-room .keepsake-desk{gap:24px 15px;padding-top:18px;margin-top:23px}
+ .souvenir-room .keepsake-object{min-height:245px;padding:8px 0 0}
+ .souvenir-room .keepsake-art{width:85%;margin-bottom:18px}
+ .souvenir-room .keepsake-label{grid-template-columns:15px 1fr;gap:0 4px;padding-top:9px;min-height:79px}
+ .souvenir-room .keepsake-print .keepsake-art{width:69%;max-width:125px}
+ .souvenir-room .mock-print{padding:6px}
+ .souvenir-room .mock-print-border{padding:9px 5px}
+ .souvenir-room .mock-print-border>strong{font-size:40px}
+ .souvenir-room .mock-print-border>span{font-size:4px}
+ .souvenir-room .mock-print-border>small{font-size:4px;letter-spacing:.02em;margin-top:5px}
+ .souvenir-room .mock-print-border>em{font-size:11px;bottom:8px;right:5px}
+ .souvenir-room .mock-arch>b{font-size:26px}
+ .souvenir-room .mock-postcard{border-width:5px;padding:8px;max-width:170px}
+ .souvenir-room .mock-postcard>span{font-size:5px}
+ .souvenir-room .mock-postcard>b{font-size:34px;left:8px;bottom:15px}
+ .souvenir-room .mock-postcard>small{font-size:4px;left:8px;bottom:6px}
+ .souvenir-room .mock-postcard-sun{font-size:30px;top:24%}
+ .souvenir-room .mock-shikishi{width:76%;max-width:135px;border-width:5px;padding:11px}
+ .souvenir-room .mock-shikishi>span{font-size:5px}
+ .souvenir-room .mock-shikishi>i{font-size:43px;margin-top:0}
+ .souvenir-room .mock-shikishi>b{font-size:22px}
+ .souvenir-room .mock-shikishi>small{font-size:4px}
+ .souvenir-room .mock-keychain{height:145px;max-width:135px}
+ .souvenir-room .mock-keyring{width:36px;height:36px;border-width:4px;left:calc(50% - 18px)}
+ .souvenir-room .mock-keyring:after{left:9px;top:24px;height:21px;width:8px}
+ .souvenir-room .mock-keychain-body{width:78px;height:94px;left:calc(50% - 39px)}
+ .souvenir-room .mock-keychain-body>span{font-size:25px}
+ .souvenir-room .mock-keychain-body>b{font-size:15px}
+ .souvenir-room .mock-keychain-body>small{font-size:5px}
+ .souvenir-room .mock-second-keychain{width:64px;height:81px;left:calc(50% - 6px);bottom:4px}
+ .souvenir-room .mock-second-keychain>span{font-size:24px}
+ .souvenir-room .mock-second-keychain>b{font-size:11px}
+ #reveal[data-tier="vip"] .souvenir-room .mock-second-keychain{transform:translate(15px,3px) rotate(19deg)}
+ .souvenir-room .mock-badge{width:68%;max-width:112px;border-width:4px}
+ .souvenir-room .mock-badge>span{font-size:5px}
+ .souvenir-room .mock-badge>b{font-size:32px;margin:5px 0}
+ .souvenir-room .mock-badge>small{font-size:5px}
+ .souvenir-room .mock-paper-card{padding:10px;max-width:155px;border-radius:7px}
+ .souvenir-room .mock-paper-card>span{font-size:7px}
+ .souvenir-room .mock-paper-card>b{font-size:25px;margin:1px 0}
+ .souvenir-room .mock-paper-card>small{font-size:4px}
+ .souvenir-room .mock-hard-ticket{aspect-ratio:2.5}
+ .souvenir-room .mock-hard-ticket b{font-size:22px;margin:3px 0}
+ .souvenir-room .mock-hard-ticket span{font-size:5px;letter-spacing:.02em}
+ .souvenir-room .mock-hard-ticket small{font-size:3px;letter-spacing:.02em}
+ .souvenir-room .mock-hard-ticket>i{font-size:5px;width:23%}
+ .souvenir-room .mock-hand-banner{aspect-ratio:3.3;padding:7px;gap:4px;border-width:3px;outline-offset:-6px}
+ .souvenir-room .mock-hand-banner b{font-size:11px}
+ .souvenir-room .mock-hand-banner>span{font-size:14px}
+ .souvenir-room .mock-hand-banner small{font-size:4px;letter-spacing:0;margin-top:4px}
+ .souvenir-room .souvenir-bottom{flex-direction:column;align-items:flex-start;gap:10px;padding-top:17px;margin-top:24px}
+ .souvenir-room .souvenir-bottom>span{text-align:left;max-width:none}
+}
+@media(prefers-reduced-motion:reduce){.souvenir-room .keepsake-object,.souvenir-room .keepsake-art,.souvenir-room .mock-second-keychain{animation:none!important;transition:none!important}.invitation.motion-enabled .souvenir-room .keepsake-object{opacity:1!important;transform:none!important}}
+
+/* Leave breathing room beneath the keychain and badge labels. */
+@media(min-width:1024px){.souvenir-room .keepsake-ticket,.souvenir-room .keepsake-banner{top:calc(75% + 65px)}.souvenir-room .souvenir-bottom{margin-top:100px}}
+
+/* A staggered display grid keeps the flat lay tactile without crossing labels. */
+@media(min-width:1024px){
+ .souvenir-room .keepsake-desk{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto auto;gap:38px 20px;align-items:start;min-height:0;aspect-ratio:auto;padding:24px 0 8px}
+ .souvenir-room .keepsake-object{position:relative;left:auto!important;top:auto!important;width:auto!important;min-width:0}
+ .souvenir-room .keepsake-print{grid-column:5/8;grid-row:1/3;align-self:center}
+ .souvenir-room .keepsake-postcard{grid-column:1/4;grid-row:1;align-self:center}
+ .souvenir-room .keepsake-shikishi{grid-column:10/13;grid-row:1}
+ .souvenir-room .keepsake-keychain{grid-column:2/4;grid-row:2;align-self:center}
+ .souvenir-room .keepsake-badge{grid-column:8/10;grid-row:2;align-self:center}
+ .souvenir-room .keepsake-card{grid-column:10/13;grid-row:2;align-self:center}
+ .souvenir-room .keepsake-ticket{grid-column:1/5;grid-row:3}
+ .souvenir-room .keepsake-banner{grid-column:7/13;grid-row:3;align-self:center}
+ .souvenir-room .keepsake-desk-caption{display:none}
+ .souvenir-room .souvenir-bottom{margin-top:40px}
+}
+
+/* Standard clears the VIP pieces off the desk; its four keepsakes retain a complete composition. */
+@media(min-width:1024px){
+ #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-desk{grid-template-rows:auto auto;gap:28px 24px;max-width:1050px}
+ #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-postcard{grid-column:1/5;grid-row:1;align-self:center}
+ #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-keychain{grid-column:6/8;grid-row:1;align-self:center}
+ #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-card{grid-column:9/13;grid-row:1;align-self:center}
+ #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-ticket{grid-column:4/10;grid-row:2;align-self:center}
+}
