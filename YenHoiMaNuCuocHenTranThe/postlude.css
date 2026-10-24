@@ -97,6 +97,7 @@
 .closing-footer-title-accent{color:#f0e3ec}
 .closing-footer-title-rest{color:#c9a9bd;font-style:italic}
 .closing-footer-brand p{color:#c1abb8;margin-top:9px;max-width:520px}
+.closing-footer-credit{color:#c9a9bd;margin-top:4px;font-style:italic}
 .closing-footer-social{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .closing-social-link{width:46px;height:46px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(247,242,233,.12);color:#f0e3ec;border:1px solid rgba(240,227,236,.35);transition:background .2s,color .2s,transform .2s}
 .closing-social-link:hover{background:#f0e3ec;color:#302533;transform:translateY(-2px)}
