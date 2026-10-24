@@ -293,8 +293,12 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
           <span class="hero-countdown-sep" aria-hidden="true">:</span>
           <div class="hero-countdown-unit"><span class="hero-countdown-value" data-cd="seconds">--</span><span class="hero-countdown-label">Giây</span></div>
         </div>
+        <div class="hero-cta">
+          <a class="scroll-invitation" href="#rendezvous">MỞ LỜI MỜI <span aria-hidden="true">↓</span></a>
+          <span class="hero-folio" aria-hidden="true">I — THE INVITATION</span>
+        </div>
       </div>
-      <div class="hero-footnote"><a class="scroll-invitation" href="#rendezvous">MỞ LỜI MỜI <span aria-hidden="true">↓</span></a><span class="hero-folio" aria-hidden="true">I — THE INVITATION</span></div>
+      <div class="hero-footnote"></div>
     </section>
 
     <section class="programme-section" id="rendezvous" aria-labelledby="rendezvous-title" data-desktop-scene>
@@ -845,6 +849,13 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
   }
   tick();
   setInterval(tick, 1000);
+  document.querySelectorAll('.scroll-invitation').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = (a.getAttribute('href')||'').replace('#','');
+      var el = id ? document.getElementById(id) : null;
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'auto',block:'start'}); }
+    });
+  });
 })();
 </script>
 </body>
