@@ -85,7 +85,7 @@
 .closing-date{font-family:var(--inv-serif);font-size:clamp(4rem,11.5vw,10rem);font-weight:500;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:lining-nums}
 .closing-partner>span{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.08em}
 .closing-partner h3{font-family:var(--inv-sans);font-size:var(--type-small);font-weight:500;line-height:1.7;letter-spacing:0}
-.closing-footer strong{font-size:var(--type-small);font-weight:600;line-height:1.6}
+.closing-footer-title{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:600;line-height:1.05;letter-spacing:.02em}
 .closing-footer p{font-size:var(--type-small);line-height:1.75}
 .invitation .closing-replay{font-size:var(--type-small);font-weight:500;line-height:1.5}
 .closing-signature{font-size:var(--type-caption);font-weight:400;line-height:1.75;letter-spacing:.05em}
