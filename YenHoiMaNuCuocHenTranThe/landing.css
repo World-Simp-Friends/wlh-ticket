@@ -27,11 +27,18 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .invitation-nav nav a:after{content:"";position:absolute;left:0;bottom:8px;width:100%;height:1px;background:var(--inv-plum);transform:scaleX(0);transform-origin:left;transition:transform 200ms var(--inv-ease)}
 .invitation-nav nav a:hover:after{transform:scaleX(1)}
 .nav-edition{font-size:9px;letter-spacing:.15em;border-left:1px solid var(--inv-line);padding-left:36px}
-.invitation-hero{position:relative;min-height:770px;height:100svh;max-height:1080px;margin:0;overflow:hidden}
+.invitation-hero{position:relative;min-height:770px;height:100svh;margin:0;overflow:hidden;--hero-h:100svh}
 .hero-architecture{position:absolute;inset:0 0 0 20%;background:url("assets/web/cathedral-landscape.webp") 67% center/cover no-repeat;opacity:.68;mask-image:linear-gradient(to right,transparent,#000 42%);-webkit-mask-image:linear-gradient(to right,transparent,#000 42%)}
 .hero-vertical-rule{position:absolute;left:68%;top:0;bottom:0;width:1px;background:linear-gradient(var(--inv-line),transparent 85%);opacity:.55}
 .hero-scene{position:absolute;top:0;right:0;width:60%;height:100%;pointer-events:none}
-.hero-characters{position:absolute;width:min(64vw,1030px);max-width:none!important;height:auto!important;right:-6%;bottom:-23%;transform-origin:60% 65%;filter:none}
+/* The artwork is portrait (1500x1798). It has to fit the space left of the copy on every
+   aspect ratio: height alone let it grow into the text on 16:10, 5:4 and 4:3 screens.
+   Both axes are bounded and the image keeps its own ratio, so it shrinks instead of
+   distorting or spilling. The copy holds the left 51% (8% margin + 43% width), so the
+   cast is capped at 45vw to keep clear of the text at any height.
+   max-width and max-height need !important to beat `.invitation img{max-width:100%;height:auto}`,
+   whose selector outranks a bare class. */
+.hero-characters{position:absolute;height:auto!important;width:auto!important;max-width:45vw!important;max-height:118%!important;right:-2%;bottom:-14%;transform-origin:60% 100%;filter:none}
 .hero-copy{position:relative;z-index:3;margin-left:8%;width:43%;max-width:650px;padding:70px 0 135px}
 .invitation-eyebrow{display:flex;align-items:center;gap:13px;}
 .little-star{font-size:20px;color:var(--inv-gold);line-height:1}
@@ -249,8 +256,8 @@ body.invitation-open .phoneScale{display:none}
 .invitation.motion-enabled .scene-reveal{opacity:0;transform:translateY(18px);transition:opacity 650ms var(--inv-ease),transform 650ms var(--inv-ease)}
 .invitation.motion-enabled .scene-reveal.is-visible{opacity:1;transform:translateY(0)}
 .admission-ticket:nth-child(2){transition-delay:90ms!important}
-@media(min-width:1600px){.hero-copy{padding-top:95px}.hero-characters{right:2%;bottom:-24%;width:min(62vw,1150px)}.invitation-hero{min-height:860px}.hero-copy h1{margin-top:46px;margin-bottom:40px}.hero-description{margin-top:35px!important}}
-@media(max-width:1100px){.invitation-nav{height:82px;gap:25px}.nav-edition{padding-left:25px}.invitation-hero{height:auto;min-height:740px}.hero-copy{margin-left:6%;width:46%;padding-top:65px}.hero-characters{width:76vw;right:-20%;bottom:-9%}.hero-scene{width:59%}.hero-copy h1{margin-top:35px}.hero-folio{display:none}.hero-footnote>div{gap:15px}.invitation-section{padding-left:6%;padding-right:6%}.letter-location{padding-left:35px;padding-right:35px}.admission-ticket{grid-template-columns:1fr 64px}.ticket-body{padding:24px 22px}.ticket-topline{font-size:6px}.ticket-body h3{font-size:40px}.ticket-tagline{font-size:16px}.ticket-highlights li{align-items:flex-start}.ticket-highlights li>span{max-width:90px}.vip-gifts{grid-template-columns:1fr 1fr 1fr 1fr;padding-top:35px;position:relative}.vip-gifts-label{position:absolute;top:12px;left:0;font-size:7px}.invitation[data-tier="standard"] .vip-extra:after{top:-8px}.community-section h2{font-size:41px}.partners-grid{gap:20px}.ticket-section-note>p{max-width:250px}}
+@media(min-width:1600px){.hero-copy{padding-top:95px}.hero-characters{right:1%;height:126%;bottom:-15%}.invitation-hero{min-height:860px}.hero-copy h1{margin-top:46px;margin-bottom:40px}.hero-description{margin-top:35px!important}}
+@media(max-width:1100px){.invitation-nav{height:82px;gap:25px}.nav-edition{padding-left:25px}.invitation-hero{height:auto;min-height:740px}.hero-copy{margin-left:6%;width:46%;padding-top:65px}.hero-characters{height:112%;width:auto;right:-8%;bottom:-12%}.hero-scene{width:59%}.hero-copy h1{margin-top:35px}.hero-folio{display:none}.hero-footnote>div{gap:15px}.invitation-section{padding-left:6%;padding-right:6%}.letter-location{padding-left:35px;padding-right:35px}.admission-ticket{grid-template-columns:1fr 64px}.ticket-body{padding:24px 22px}.ticket-topline{font-size:6px}.ticket-body h3{font-size:40px}.ticket-tagline{font-size:16px}.ticket-highlights li{align-items:flex-start}.ticket-highlights li>span{max-width:90px}.vip-gifts{grid-template-columns:1fr 1fr 1fr 1fr;padding-top:35px;position:relative}.vip-gifts-label{position:absolute;top:12px;left:0;font-size:7px}.invitation[data-tier="standard"] .vip-extra:after{top:-8px}.community-section h2{font-size:41px}.partners-grid{gap:20px}.ticket-section-note>p{max-width:250px}}
 @media(max-width:760px){
  .invitation-nav{height:76px;margin:0 6%;gap:15px}.invitation-wordmark{font-size:9px;letter-spacing:.11em}.invitation-wordmark span{font-size:6px;letter-spacing:.15em}.invitation-nav nav{gap:18px;font-size:10px}.nav-edition{display:none}
  .invitation-hero{height:auto;min-height:0;display:flex;flex-direction:column;padding-bottom:0}
