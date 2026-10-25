@@ -6,3 +6,7 @@ Thumbs.db
 node_modules/
 dist/
 
+# Config công cụ cá nhân, không thuộc repo
+.commandcode/
+.impeccable/
+
