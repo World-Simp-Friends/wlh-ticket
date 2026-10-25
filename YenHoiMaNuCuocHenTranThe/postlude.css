@@ -115,6 +115,15 @@
 .closing-sponsor-list .credit{grid-template-columns:auto}
 .closing-sponsor-list .credit-seal{width:100px;height:100px;margin-top:0}
 .closing-sponsor-list h3{margin-top:14px}
+/* Artists are laid out like the keepsakes: each print tilted a few degrees, lifting on hover. */
+.credit-artist-list{display:flex;justify-content:center;flex-wrap:wrap;align-items:flex-start;gap:34px 26px;list-style:none;margin:26px 0 0;padding:0}
+.credit-artist-list .credit{grid-template-columns:auto;gap:0}
+.artist-art{position:relative;display:block;width:clamp(132px,15vw,176px);aspect-ratio:1;margin-top:0;background:#fbf8f2;border:1px solid rgba(212,185,139,.3);box-shadow:5px 9px 13px rgba(0,0,0,.28);transform:rotate(var(--object-angle,0deg));transform-origin:50% 60%;transition:transform 550ms var(--inv-ease),box-shadow 550ms var(--inv-ease)}
+.artist-art img{width:100%;height:100%;object-fit:cover;display:block}
+.credit-artist-list .credit:hover{z-index:10}
+.credit-artist-list .credit:hover .artist-art{transform:translateY(-7px) rotate(calc(var(--object-angle,0deg) - 1deg));box-shadow:7px 14px 22px rgba(0,0,0,.36)}
+.credit-artist-list h3{margin-top:16px;font-family:var(--inv-sans);font-size:var(--type-body);font-weight:500;letter-spacing:.01em}
+@media(prefers-reduced-motion:reduce){.artist-art{transition:none}}
 .closing-footer{max-width:1160px;margin:0 auto;padding-top:34px;display:flex;flex-direction:column;gap:28px}
 .closing-footer-main{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap}
 .closing-footer-brand{min-width:0}
@@ -191,6 +200,7 @@
  .credit-divider{margin:30px auto 24px}
  .closing-sponsor-list{gap:22px 40px;margin-top:14px}
  .closing-sponsor-list h3{margin-top:10px}
+ .credit-artist-list{gap:26px 18px;margin-top:20px}
 }
 @media(max-width:600px){
  .credit-tier-hosts{gap:22px 0}
@@ -198,6 +208,9 @@
  .closing-sponsor-list .credit{grid-template-columns:auto;min-width:0}
  .closing-sponsor-list .credit-seal{width:clamp(64px,19vw,84px);height:clamp(64px,19vw,84px)}
  .closing-sponsor-list h3{font-size:.8125rem}
+ .credit-artist-list{gap:22px 14px;margin-top:18px}
+ .artist-art{width:clamp(104px,30vw,132px)}
+ .credit-artist-list h3{margin-top:12px;font-size:.8125rem}
 }
 @media(max-width:360px){.programme-heading>p{max-width:105px}.calendar-star{right:-7px}.programme-hours{gap:7px}.admission-pass{padding-left:16px;padding-right:16px}}
 @media(prefers-reduced-motion:reduce){.programme-leaf,.closing-shutter,.closing-heading{animation:none!important;transition:none!important;transform:none!important}.closing-shutters{display:none!important}}
