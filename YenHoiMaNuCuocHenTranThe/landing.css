@@ -34,11 +34,13 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 /* The artwork is portrait (1500x1798). It has to fit the space left of the copy on every
    aspect ratio: height alone let it grow into the text on 16:10, 5:4 and 4:3 screens.
    Both axes are bounded and the image keeps its own ratio, so it shrinks instead of
-   distorting or spilling. The copy holds the left 51% (8% margin + 43% width), so the
-   cast is capped at 45vw to keep clear of the text at any height.
-   max-width and max-height need !important to beat `.invitation img{max-width:100%;height:auto}`,
-   whose selector outranks a bare class. */
-.hero-characters{position:absolute;height:auto!important;width:auto!important;max-width:45vw!important;max-height:118%!important;right:-2%;bottom:-14%;transform-origin:60% 100%;filter:none}
+   distorting or spilling. The copy column holds the left 43-50% plus a 5-7% margin; 47vw is
+   the widest setting that still clears the text at 1600x900, which is the tightest ratio
+   measured. The height ceiling then lets a tall or narrow screen take the rest of its room,
+   so the cast still grows where the width limit is not what binds. Both limits need
+   !important to beat `.invitation img{max-width:100%;height:auto}`, whose selector outranks
+   a bare class. */
+.hero-characters{position:absolute;height:auto!important;width:auto!important;max-width:47vw!important;max-height:150%!important;right:-2%;bottom:-14%;transform-origin:60% 100%;filter:none}
 /* Wide screens were left with two thirds of the sheet empty: the copy stopped growing at
    650px, so the same 650px block sat on a 2560 and a 3840 display. The column and the type
    steps now scale with the viewport, so the left side keeps its weight on a large monitor.
