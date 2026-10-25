@@ -225,7 +225,7 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .reservation-dialog>.invitation-button{margin-top:25px;width:100%}
 /* One opening sequence: two black leaves reveal the paper world. */
 .invitation-opening{position:fixed;inset:0;z-index:100;pointer-events:none;visibility:hidden;overflow:hidden}
-.opening-leaf{position:absolute;inset:0;background:#141216;backface-visibility:hidden}
+.opening-leaf{position:absolute;inset:0;background:#000;backface-visibility:hidden}
 .opening-leaf-left{clip-path:polygon(0 0,53% 0,47% 100%,0 100%)}
 .opening-leaf-right{clip-path:polygon(53% 0,100% 0,100% 100%,47% 100%)}
 .opening-seam{position:absolute;left:50%;top:-10%;height:120%;width:1px;background:#d9c6a8;transform:rotate(3.5deg);opacity:0;box-shadow:0 0 18px 2px rgba(236,218,185,.2)}
@@ -234,16 +234,16 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .invitation.is-ready .invitation-opening{display:none}
 .invitation.is-opening .opening-leaf{will-change:transform}
 body.invitation-open .phoneScale{display:none}
-.invitation.is-opening .opening-leaf-left{animation:open-leaf-left 1150ms var(--inv-ease) 200ms both}
-.invitation.is-opening .opening-leaf-right{animation:open-leaf-right 1150ms var(--inv-ease) 200ms both}
-.invitation.is-opening .opening-seam{animation:open-seam 1150ms ease 50ms both}
+.invitation.is-opening .opening-leaf-left{animation:open-leaf-left 1000ms cubic-bezier(.65,0,.35,1) 120ms both}
+.invitation.is-opening .opening-leaf-right{animation:open-leaf-right 1000ms cubic-bezier(.65,0,.35,1) 120ms both}
+.invitation.is-opening .opening-seam{animation:open-seam 1000ms ease 50ms both}
 .invitation.is-opening .opening-mark{animation:open-mark 450ms ease both}
-.invitation.is-opening .hero-characters{animation:character-arrival 1400ms var(--inv-ease) both}
-.invitation.is-opening .hero-copy{animation:copy-arrival 1000ms var(--inv-ease) 300ms both}
-@keyframes open-leaf-left{0%,8%{transform:translateX(0)}100%{transform:translateX(-60%) rotate(-4deg)}}
-@keyframes open-leaf-right{0%,8%{transform:translateX(0)}100%{transform:translateX(60%) rotate(4deg)}}
+.invitation.is-opening .hero-characters{animation:character-arrival 1120ms var(--inv-ease) both}
+.invitation.is-opening .hero-copy{animation:copy-arrival 870ms var(--inv-ease) 250ms both}
+@keyframes open-leaf-left{0%{transform:translateX(0)}100%{transform:translateX(-65%) rotate(-3deg)}}
+@keyframes open-leaf-right{0%{transform:translateX(0)}100%{transform:translateX(65%) rotate(3deg)}}
 @keyframes open-seam{0%{opacity:0;transform:rotate(3.5deg) scaleY(.02)}25%{opacity:1;transform:rotate(3.5deg) scaleY(1)}70%,100%{opacity:0;transform:rotate(3.5deg) scaleY(1)}}
-@keyframes open-mark{0%,25%{opacity:1}100%{opacity:0}}
+@keyframes open-mark{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
 @keyframes character-arrival{from{opacity:.3;transform:translate(25px,18px) scale(1.035)}to{opacity:1;transform:translate(0,0) scale(1)}}
 @keyframes copy-arrival{from{opacity:.35;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 .invitation.motion-enabled .scene-reveal{opacity:0;transform:translateY(18px);transition:opacity 650ms var(--inv-ease),transform 650ms var(--inv-ease)}
@@ -267,7 +267,7 @@ body.invitation-open .phoneScale{display:none}
  .invitation-footer{padding:45px 6% 40px}.footer-heading>span{font-size:7px}.footer-heading>p{font-size:75px;gap:13px;line-height:1.2;margin-top:10px}.footer-heading>p>span{font-size:25px;margin-left:auto}.footer-bottom{margin-top:22px;padding-top:23px;align-items:flex-start;flex-wrap:wrap;gap:20px}.footer-bottom>div{width:100%}.footer-bottom strong{font-size:10px}.footer-bottom p{font-size:9px;line-height:1.9}.replay-invitation{font-size:9px!important;min-height:44px}.footer-signature{font-size:7px;margin-left:auto;padding-top:9px}
  .booking-dock{display:flex;position:fixed;z-index:30;bottom:0;left:0;right:0;justify-content:space-between;align-items:center;padding:12px 6% calc(12px + env(safe-area-inset-bottom,0px));background:#f9f5ee;border-top:1px solid #cbbfb2;box-shadow:0 -5px 15px rgba(40,31,40,.04);transform:translateY(110%);visibility:hidden;transition:transform 300ms var(--inv-ease),visibility 300ms;gap:15px}.booking-dock.is-visible{transform:translateY(0);visibility:visible}.booking-dock>div{display:flex;flex-direction:column;gap:2px}.booking-dock>div>span{color:var(--inv-muted)}.booking-dock>a{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--inv-plum);color:var(--inv-paper);padding:11px 15px;min-height:44px}.booking-dock>a>span{font-size:19px}
  .reservation-dialog{padding:38px 27px}
- .invitation.is-opening .hero-characters{animation:mobile-character-arrival 1400ms var(--inv-ease) both}
+ .invitation.is-opening .hero-characters{animation:mobile-character-arrival 1120ms var(--inv-ease) both}
 }
 @media(max-width:380px){.invitation-nav nav{gap:13px;font-size:9px}.invitation-wordmark{font-size:8px}.hero-copy{padding-top:31px}.hero-copy h1{margin-top:23px}.hero-scene{height:390px}.hero-characters{bottom:-27%}.ticket-section-top .section-heading h2{font-size:40px}.ticket-body{padding:24px 20px}.ticket-body h3{font-size:40px}.ticket-topline{font-size:5px}.ticket-highlights li>span{font-size:8px}.ticket-tagline{font-size:16px}.admission-ticket{grid-template-columns:1fr 60px}.community-section h2{font-size:30px}.footer-heading>p{font-size:66px}.footer-heading>p>span{font-size:20px}}
 @keyframes mobile-character-arrival{from{opacity:.35;transform:translate(53%,15px) scale(1.035)}to{opacity:1;transform:translate(50%,0) scale(1)}}

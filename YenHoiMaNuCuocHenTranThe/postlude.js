@@ -12,6 +12,10 @@
     const foldViewport = matchMedia('(min-height: 700px)');
     const nativeTimeline = CSS.supports('animation-timeline', 'view()')
       && CSS.supports('animation-range', 'contain 8% contain 82%');
+    const paperTimeline = nativeTimeline && CSS.supports('timeline-scope', '--programme-unfold')
+      && !!root.querySelector('.paper-journey');
+    const papers = root.querySelector('.paper-journey');
+    const paperStage = programme.querySelector('.programme-stage');
     const wings = [...programme.querySelectorAll('.destination-leaf')];
     const faces = [...programme.querySelectorAll('.destination-face')];
     const cue = programme.querySelector('.programme-scroll-cue');
@@ -20,11 +24,26 @@
     const entryObservers = [];
     let ready = root.classList.contains('is-ready');
     let foldEnabled = false;
+    let paperEnabled = false;
     let frame = 0;
     let geometryDirty = true;
     let start = 0;
     let distance = 1;
     let previous = -1;
+
+    const layoutPapers = () => {
+      delete root.dataset.paperJourney;
+      if (!paperEnabled || !paperStage) return;
+      // Measure the ordinary sheet once on layout changes. Short desktop windows
+      // retain its full readable height; the reveal still moves one viewport.
+      const height = Math.max(innerHeight, Math.ceil(paperStage.getBoundingClientRect().height));
+      const span = height + innerHeight * .4;
+      papers.style.setProperty('--paper-height', `${height}px`);
+      papers.style.setProperty('--paper-fold-start', `${innerHeight * .064 / span * 100}%`);
+      papers.style.setProperty('--paper-fold-end', `${innerHeight * .656 / span * 100}%`);
+      papers.style.setProperty('--paper-lift-start', `${(span - innerHeight * .56) / span * 100}%`);
+      root.dataset.paperJourney = 'true';
+    };
 
     const renderFold = () => {
       frame = 0;
@@ -34,7 +53,8 @@
       if (geometryDirty) {
         const rect = programme.getBoundingClientRect();
         start = rect.top + y;
-        distance = Math.max(1, rect.height - window.innerHeight);
+        // Keep the original 80svh folio timing independently of the paper exit.
+        distance = Math.max(1, paperEnabled ? window.innerHeight * .8 : rect.height - window.innerHeight);
         geometryDirty = false;
       }
       const progress = clamp((clamp((y - start) / distance) - .08) / .74);
@@ -98,6 +118,7 @@
       frame = 0;
       window.removeEventListener('scroll', requestFold);
       foldEnabled = desktop.matches && foldViewport.matches;
+      paperEnabled = desktop.matches && paperTimeline;
       if (desktop.matches) root.dataset.desktopMotion = 'true';
       else delete root.dataset.desktopMotion;
       if (foldEnabled) {
@@ -109,6 +130,7 @@
         wings.forEach(wing => wing.style.removeProperty('transform'));
         cue?.style.removeProperty('opacity');
       }
+      layoutPapers();
       faces.forEach(face => { face.inert = foldEnabled; });
       if (ready) observeEntrances();
       invalidateGeometry();
@@ -127,11 +149,13 @@
     });
     window.addEventListener('invitation:ready', () => {
       ready = true;
+      layoutPapers();
       observeEntrances();
       invalidateGeometry();
     });
     window.addEventListener('invitation:layout', invalidateGeometry);
     window.addEventListener('resize', () => {
+      layoutPapers();
       if (ready) observeEntrances();
       invalidateGeometry();
     }, { passive: true });
@@ -143,7 +167,7 @@
       const observer = new ResizeObserver(invalidateGeometry);
       [root.querySelector('.invitation-hero'), programme].filter(Boolean).forEach(target => observer.observe(target));
     }
-    document.fonts?.ready.then(invalidateGeometry);
+    document.fonts?.ready.then(() => { layoutPapers(); invalidateGeometry(); });
     [desktop, foldViewport].forEach(query => {
       if (query.addEventListener) query.addEventListener('change', setMode);
       else query.addListener(setMode);
