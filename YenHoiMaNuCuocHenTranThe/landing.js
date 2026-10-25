@@ -31,6 +31,8 @@
     let opened = false;
     let openingTimer;
     let openingFrame;
+    let openingSequence=0;
+    let preparedOpening;
     let sceneObserver;
     const dockObservers = [];
     let dockFrame = 0;
@@ -270,9 +272,33 @@
       }
     };
 
+    const prepareOpening = () => {
+      if(preparedOpening)return preparedOpening;
+      const assets=[...hero.querySelectorAll('img')];
+      const background=getComputedStyle(hero.querySelector('.hero-architecture')).backgroundImage.match(/^url\(["']?(.+?)["']?\)$/);
+      if(background){const image=new Image();image.src=background[1];assets.push(image)}
+      const tasks=assets.map(image=>image.decode?image.decode():Promise.resolve());
+      if(document.fonts?.load){
+        const fonts=new Map();
+        hero.querySelectorAll('.invitation-eyebrow,.hero-film-title,.hero-film-release,.hero-dateline-date').forEach(element=>{
+          const font=getComputedStyle(element).font;
+          if(font)fonts.set(font,element.textContent.trim());
+        });
+        fonts.forEach((text,font)=>{
+          try{tasks.push(document.fonts.load(font,text))}catch(_){/* Use the existing fallback face. */}
+        });
+      }
+      preparedOpening=Promise.allSettled(tasks);
+      return preparedOpening;
+    };
+    window.addEventListener('invitation:prepare',prepareOpening,{once:true});
+
     const finishOpening = () => {
+      if(root.classList.contains('is-ready'))return;
+      window.clearTimeout(openingTimer);
       root.classList.remove('is-opening');
       root.classList.add('is-ready');
+      root.inert=false;
       updateDock();
       window.dispatchEvent(new CustomEvent('invitation:ready'));
     };
@@ -280,6 +306,7 @@
     const openInvitation = (replay = false) => {
       if (opened && !replay) return;
       opened = true;
+      const sequence=++openingSequence;
       window.clearTimeout(openingTimer);
       window.cancelAnimationFrame(openingFrame);
       root.classList.remove('is-ready', 'is-opening');
@@ -291,13 +318,30 @@
         finishOpening();
         return;
       }
-      // A committed initial frame lets CSS replay the paper-opening sequence.
-      void root.offsetWidth;
-      openingFrame = window.requestAnimationFrame(() => {
-        root.classList.add('is-opening');
-        openingTimer = window.setTimeout(finishOpening, 1400);
+      // Warm artwork/fonts and commit the new layout while it is still covered.
+      Promise.race([prepareOpening(),new Promise(resolve=>setTimeout(resolve,700))]).then(()=>{
+        if(sequence!==openingSequence||root.classList.contains('is-ready'))return;
+        void root.offsetWidth;
+        openingFrame = window.requestAnimationFrame(() => {
+          if(sequence!==openingSequence||root.classList.contains('is-ready'))return;
+          root.classList.add('is-opening');
+          window.dispatchEvent(new CustomEvent('invitation:opening'));
+          const timing=getComputedStyle(root.querySelector('.opening-leaf-right'));
+          const ms=value=>parseFloat(value)*(value.trim().endsWith('ms')?1:1000);
+          const deadline=ms(timing.animationDuration)+ms(timing.animationDelay);
+          // Recovery only; the CSS animation end normally completes the opening.
+          openingTimer = window.setTimeout(()=>{
+            root.querySelectorAll('.opening-leaf,.opening-seam,.opening-mark,.hero-characters,.hero-copy').forEach(element=>{
+              element.getAnimations?.().forEach(animation=>{try{animation.finish()}catch(_){}});
+            });
+            finishOpening();
+          },deadline+250);
+        });
       });
     };
+    root.addEventListener('animationend',event=>{
+      if(event.animationName==='open-leaf-right'&&root.classList.contains('is-opening'))finishOpening();
+    });
 
     const closeReservation = () => {
       if (!dialog) return;
