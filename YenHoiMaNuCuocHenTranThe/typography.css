@@ -89,9 +89,13 @@
 /* Credits and the reservation sheet */
 .closing-heading h2{font-size:clamp(3.25rem,6vw,5rem)}
 .closing-date{font-family:var(--inv-serif);font-size:clamp(4rem,11.5vw,10rem);font-weight:500;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:lining-nums}
-.closing-partner>span{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.08em}
-.closing-partner h3{font-family:var(--inv-sans);font-size:var(--type-small);font-weight:500;line-height:1.7;letter-spacing:0}
-.closing-footer-title{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:600;line-height:1.05;letter-spacing:.02em}
+.closing-role{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.08em}
+.credit h3{font-family:var(--inv-serif);font-size:clamp(1.75rem,2.6vw,2.375rem);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-wrap:initial}
+.closing-sponsor-list h3{font-family:var(--inv-sans);font-size:var(--type-body);font-weight:500;line-height:1.6;letter-spacing:0}
+.closing-footer-title{font-family:var(--inv-serif);font-size:clamp(1.75rem,2.6vw,2.375rem);font-weight:600;line-height:1.05;letter-spacing:.01em}
+.closing-footer-title-rest{font-size:.8em;font-weight:500;letter-spacing:.02em}
+.closing-social-link{font-size:var(--type-small);font-weight:500;line-height:1.5}
+@media(max-width:600px){.credit h3{font-size:clamp(1.375rem,6.5vw,1.625rem)}}
 .closing-footer p{font-size:var(--type-small);line-height:1.75}
 .invitation .closing-replay{font-size:var(--type-small);font-weight:500;line-height:1.5}
 .closing-signature{font-size:var(--type-caption);font-weight:400;line-height:1.75;letter-spacing:.05em}
@@ -230,10 +234,10 @@
  .invitation .pass-select{font-size:.75rem;gap:6px}
 }
 
-/* Readable dialogue while preserving the native-looking 2013 phone chrome. */
-#phone .bubble{font-family:var(--inv-sans);font-size:14px;line-height:1.55;letter-spacing:0}
-#phone .bubbleTranslation{font-family:var(--inv-sans);font-size:11px;font-style:italic;line-height:1.5;letter-spacing:0}
-#phone .choice{font-family:var(--inv-sans);font-size:12px;line-height:1.5;letter-spacing:0}
-#phone .popupBody{font-family:var(--inv-sans);font-size:13px;line-height:1.55}
-#phone .dialog p{font-family:var(--inv-sans);font-size:12px;line-height:1.6}
-#phone .dialogTranslation{font-size:11px;line-height:1.5}
+/* iOS 7 uses the same reading face across chrome, conversation, and replies. */
+#phone .bubble{font-family:var(--ios-font);font-size:17px;line-height:1.35;letter-spacing:0}
+#phone .bubbleTranslation{font-family:var(--ios-font);font-size:12px;font-style:italic;line-height:1.45;letter-spacing:0}
+#phone .choice{font-family:var(--ios-font);font-size:16px;line-height:1.4;letter-spacing:0}
+#phone .popupBody{font-family:var(--ios-font);font-size:14px;line-height:1.4}
+#phone .dialog p{font-family:var(--ios-font);font-size:13px;line-height:1.5}
+#phone .dialogTranslation{font-size:12px;line-height:1.5}

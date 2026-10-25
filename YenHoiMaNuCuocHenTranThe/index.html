@@ -8,270 +8,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Libre+Bodoni:ital,wght@0,500;1,500&amp;display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#14171a}
-body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
-:root{
-  --ow:390px;--oh:760px;--sw:360px;--sh:640px;
-  --lineTop1:#465368;--lineTop2:#293446;--lineTop3:#151f2c;
-  --lime1:#c8ef68;--lime2:#9fd53d;--lime3:#80b925;
-  --chat:#8eb1ce;
-}
-.stage{
-  position:relative;width:100vw;height:100vh;overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 36%,rgba(255,255,255,.035),transparent 34%),
-    linear-gradient(#1d2024,#121416 76%);
-}
-.stage:before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
-  background:
-    linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.02) 50%,transparent 50.1%),
-    linear-gradient(transparent 49.9%,rgba(255,255,255,.015) 50%,transparent 50.1%);
-  background-size:34px 34px;
-}
-.phoneScale{
-  position:absolute;left:50%;top:50%;width:var(--ow);height:var(--oh);
-  transform:translate(-50%,-50%);transform-origin:center;z-index:5;
-  opacity:1;transition:opacity .45s ease;
-}
-.phoneScale.gone{opacity:0;pointer-events:none}
-.phone{
-  position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(100deg,#111214 0 9%,#303236 12%,#0f1013 18% 82%,#2c2e31 90%,#08090b 100%);
-  border:1px solid #030405;
-  box-shadow:0 36px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 -14px 28px rgba(255,255,255,.02);
-}
-.phone.vibrate{animation:vib .12s steps(2,end) 5}
-@keyframes vib{0%{transform:translateX(-1px) rotate(-.08deg)}100%{transform:translateX(1px) rotate(.08deg)}}
-.earpiece{position:absolute;top:20px;left:50%;width:64px;height:5px;transform:translateX(-50%);border-radius:5px;background:#050607}
-.cam{position:absolute;right:83px;top:18px;width:7px;height:7px;border-radius:50%;background:#111923;border:1px solid #050607;box-shadow:inset 0 0 3px #385368}
-.sensor{position:absolute;left:79px;top:19px;width:18px;height:5px;border-radius:5px;background:#090a0c}
-.screen{
-  position:absolute;left:15px;top:57px;width:var(--sw);height:var(--sh);overflow:hidden;
-  background:#000;border:1px solid #050607;box-shadow:0 0 0 1px rgba(255,255,255,.055),inset 0 0 14px rgba(0,0,0,.35);
-}
-.screen:after{
-  content:"";position:absolute;inset:0;z-index:200;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,0,0,.026) 0 1px,rgba(0,255,0,.018) 1px 2px,rgba(0,0,255,.022) 2px 3px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);
-}
-.ui{position:absolute;inset:0;background:#000;text-rendering:optimizeSpeed;-webkit-font-smoothing:subpixel-antialiased}
-.status{
-  position:absolute;left:0;right:0;top:0;height:24px;z-index:70;
-  display:flex;align-items:center;padding:0 7px;color:#eee;font-size:10px;
-  background:rgba(0,0,0,.88);text-shadow:0 1px rgba(0,0,0,.8)
-}
-.sl{display:flex;align-items:center;gap:5px}.sr{margin-left:auto;display:flex;align-items:center;gap:5px}
-.mail{width:10px;height:7px;border:1px solid #cfd3d5;position:relative}
-.mail:after{content:"";position:absolute;width:6px;height:6px;left:1px;top:-3px;border-right:1px solid #cfd3d5;border-bottom:1px solid #cfd3d5;transform:rotate(45deg)}
-.sig{display:flex;align-items:end;gap:1px;height:10px}.sig i{display:block;width:2px;background:#d7d9da}.sig i:nth-child(1){height:3px}.sig i:nth-child(2){height:5px}.sig i:nth-child(3){height:7px}.sig i:nth-child(4){height:9px}
-.bat{width:17px;height:9px;border:1px solid #d7dadc;position:relative;padding:1px}.bat:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:4px;background:#d7dadc}.bat b{display:block;width:78%;height:100%;background:#88d145}
-.status.noService .sig{display:none}.status.noService .net{font-size:0}.status.noService .net:after{content:"圏外 · Mất sóng";font-size:10px}
-.nav{
-  position:absolute;left:0;right:0;bottom:0;height:48px;z-index:70;background:#07090b;border-top:1px solid #1f252a;
-  display:flex;align-items:center;justify-content:space-around
-}
-.nav button{width:70px;height:44px;border:0;background:transparent;position:relative;opacity:.8;cursor:pointer}
-.back:before{content:"";position:absolute;left:28px;top:14px;width:12px;height:12px;border-left:2px solid #c4c9cc;border-bottom:2px solid #c4c9cc;transform:rotate(45deg)}
-.back:after{content:"";position:absolute;left:29px;top:20px;width:14px;height:2px;background:#c4c9cc}
-.home:before{content:"";position:absolute;left:27px;top:14px;width:16px;height:14px;border:2px solid #c4c9cc;border-top:0}
-.home:after{content:"";position:absolute;left:28px;top:9px;width:14px;height:14px;border-left:2px solid #c4c9cc;border-top:2px solid #c4c9cc;transform:rotate(45deg)}
-.recent:before,.recent:after{content:"";position:absolute;width:13px;height:10px;border:2px solid #c4c9cc}.recent:before{left:26px;top:13px}.recent:after{left:31px;top:18px;background:#07090b}
-.view{position:absolute;left:0;right:0;top:24px;bottom:48px;display:none}
-.view.active{display:block}
-@keyframes lineSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.lineView.slideInFromRight{animation:lineSlideIn .42s cubic-bezier(.2,.72,.22,1) both}
-
-/* HOME */
-.homeView{
-  background:
-    radial-gradient(circle at 68% 23%,rgba(255,255,255,.25) 0 1%,transparent 1.8%),
-    radial-gradient(circle at 72% 29%,rgba(255,255,255,.1) 0 4%,transparent 5%),
-    radial-gradient(circle at 26% 64%,rgba(231,196,207,.22) 0 7%,transparent 9%),
-    radial-gradient(circle at 70% 58%,rgba(132,172,191,.33) 0 12%,transparent 18%),
-    linear-gradient(145deg,#4c5c6d,#b5a7af 53%,#5f6670)
-}
-.clock{position:absolute;top:29px;left:18px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55)}
-.clock .t{font-size:41px;line-height:.95;font-weight:300;letter-spacing:-1.8px}.clock .d{margin-top:5px;font-size:11px}
-.grid{position:absolute;left:18px;right:18px;top:138px;display:grid;grid-template-columns:repeat(4,1fr);gap:21px 12px}
-.app{text-align:center;color:#fff;font-size:9px;text-shadow:0 1px 2px rgba(0,0,0,.8);cursor:pointer}
-.icon{width:42px;height:42px;margin:0 auto 5px;border-radius:8px;border:1px solid rgba(0,0,0,.28);box-shadow:inset 0 1px rgba(255,255,255,.42),0 1px 2px rgba(0,0,0,.32);position:relative}
-.lineIcon{background:linear-gradient(#84d935,#4ba812);border-radius:11px}
-.lineIcon:after{content:"";position:absolute;left:8px;top:9px;width:25px;height:18px;background:#fff;border-radius:50%}.lineIcon:before{content:"";position:absolute;z-index:2;left:10px;top:19px;width:9px;height:8px;background:#fff;transform:skewX(-28deg)}
-.albumIcon{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsIcon{background:linear-gradient(#aab0b4,#62686c)}
-.settingsIcon:after{content:"⚙";position:absolute;inset:0;display:grid;place-items:center;color:#eef0f1;font-size:22px;text-shadow:0 -1px rgba(0,0,0,.4)}
-.cameraIcon{background:linear-gradient(#a6b4bc,#45515a)}.cameraIcon:after{content:"";position:absolute;left:10px;top:10px;width:20px;height:16px;border:2px solid #edf1f2;border-radius:4px}.cameraIcon:before{content:"";position:absolute;left:16px;top:14px;width:8px;height:8px;border:2px solid #edf1f2;border-radius:50%}
-.musicIcon{background:linear-gradient(#c35f78,#7b3349)}.musicIcon:after{content:"♪";position:absolute;inset:0;display:grid;place-items:center;color:white;font-size:26px}
-.browserIcon{background:linear-gradient(#8bc9ee,#357ca5)}.browserIcon:after{content:"";position:absolute;left:9px;top:9px;width:22px;height:22px;border:2px solid white;border-radius:50%}
-.phoneIcon{background:linear-gradient(#8fd963,#4da82f)}.contactIcon{background:linear-gradient(#f1d57a,#bd9438)}
-.dock{position:absolute;left:0;right:0;bottom:0;height:62px;background:rgba(28,32,37,.42);border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-around}
-.dock .icon{width:39px;height:39px;margin:0}
-
-/* LINE popup */
-.popup{
-  position:absolute;left:17px;right:17px;top:154px;z-index:90;opacity:0;transform:translateY(-8px);pointer-events:none;
-  background:#f0f0f0;border:1px solid #515151;box-shadow:0 7px 17px rgba(0,0,0,.46);transition:.2s
-}
-.popup.show{opacity:1;transform:none;pointer-events:auto}
-.popupHead{height:34px;display:flex;align-items:center;padding:0 10px;color:#fff;font-weight:bold;font-size:12px;text-shadow:0 -1px rgba(0,0,0,.35);background:linear-gradient(#82d238,#56ad16);border-bottom:1px solid #467f18}
-.miniLine{width:19px;height:19px;margin-right:7px;border-radius:5px;background:#fff;position:relative}
-.miniLine:after{content:"LINE";position:absolute;left:1px;top:5px;color:#55af16;font-size:6px;font-weight:bold}
-.popupBody{padding:13px;}.popupBody strong{display:block;margin-bottom:4px}
-.popupActions{height:42px;border-top:1px solid #c3c3c3;background:#ddd;display:flex;align-items:center;justify-content:flex-end;gap:7px;padding:0 8px}
-.oldBtn{min-width:68px;height:28px;border:1px solid #666;border-radius:3px;background:linear-gradient(#fff,#c9c9c9);color:#222;font-size:11px;font-weight:bold;box-shadow:inset 0 1px #fff;cursor:pointer}.oldBtn.primary{color:#fff;border-color:#4f7415;background:linear-gradient(#91c93e,#61951a);text-shadow:0 -1px rgba(0,0,0,.35)}
-
-/* LINE */
-.lineView{background:var(--chat)}
-.topbar{height:50px;display:flex;align-items:center;padding:0 6px;color:#fff;background:linear-gradient(var(--lineTop1),var(--lineTop2) 48%,var(--lineTop3) 52%,#1a2432);border-bottom:1px solid #0b1118;box-shadow:inset 0 1px rgba(255,255,255,.14);text-shadow:0 -1px rgba(0,0,0,.7)}
-.topBtn{height:31px;min-width:41px;border:1px solid #0d141d;border-radius:4px;color:#fff;background:linear-gradient(#46556a,#1b2737);box-shadow:inset 0 1px rgba(255,255,255,.14);font-size:11px;font-weight:bold;cursor:pointer}.topBack{font-size:19px}
-.chatTitle{flex:1;text-align:center;font-size:16px;font-weight:bold}
-.scroll{
-  position:absolute;left:0;right:0;top:50px;bottom:48px;padding:9px 7px 16px;overflow-y:auto;overflow-x:hidden;
-  scrollbar-width:none;-ms-overflow-style:none;
-  background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.12) 0 1px,transparent 1.3px) 0 0/7px 7px,linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.025)),#8cb1cf
-}
-.scroll::-webkit-scrollbar{width:0;height:0}
-.dateChip{display:table;margin:0 auto 8px;padding:2px 8px;border-radius:8px;background:rgba(55,80,101,.42);color:#fff;font-size:9px;text-shadow:0 1px rgba(0,0,0,.3)}
-.row{display:flex;align-items:flex-end;width:100%;margin:7px 0 12px;position:relative;z-index:2}.them{justify-content:flex-start;align-items:flex-start;gap:7px}.me{justify-content:flex-end}
-.avatar{flex:0 0 35px;width:35px;height:35px;margin-right:0;background:linear-gradient(#d3d5d6,#909497);border:1px solid rgba(0,0,0,.35);box-shadow:0 1px 2px rgba(0,0,0,.25);position:relative;overflow:hidden}
-.avatar:before,.avatar:after{content:"";position:absolute;width:13px;height:21px;top:2px;background:#f4f4f4;border-radius:75% 18% 70% 18%;opacity:0;transition:opacity .8s}.avatar:before{left:2px;transform:rotate(-22deg)}.avatar:after{right:2px;transform:scaleX(-1) rotate(-22deg)}
-.avatar .eye{position:absolute;left:50%;top:16px;width:5px;height:5px;transform:translateX(-50%);border-radius:50%;background:#7a7d7e;transition:.8s}
-.bw{max-width:235px;position:relative}.bubble{display:inline-block;position:relative;min-height:31px;padding:8px 11px 9px;border:1px solid rgba(0,0,0,.23);border-radius:14px;box-shadow:0 2px 3px rgba(0,0,0,.21),inset 0 1px rgba(255,255,255,.55)}
-.bubbleTranslation{display:block;margin-top:3px;color:#686868;}
-.them .bubble{background:linear-gradient(#fff,#f7f7f7 57%,#e8e8e8)}.them .bubble:before{content:"";position:absolute;width:12px;height:12px;left:-6px;top:10px;background:#fafafa;border-left:1px solid rgba(0,0,0,.19);border-bottom:1px solid rgba(0,0,0,.16);transform:rotate(45deg)}
-.them .stamp{align-self:flex-end}
-.me .bubble{background:linear-gradient(var(--lime1),var(--lime2) 53%,var(--lime3))}.me .bubble:after{content:"";position:absolute;width:12px;height:12px;right:-6px;top:10px;background:#a1d843;border-right:1px solid rgba(0,0,0,.2);transform:rotate(45deg)}
-.stamp{min-width:31px;margin:0 5px 2px;color:#fff;font-size:8px;line-height:1.2;text-shadow:0 1px rgba(0,0,0,.38)}.me .stamp{text-align:right}
-.typing{width:50px;display:flex;justify-content:center;gap:4px}.typing i{display:block;width:5px;height:5px;border-radius:50%;background:#777;animation:dot 1s infinite}.typing i:nth-child(2){animation-delay:.12s}.typing i:nth-child(3){animation-delay:.24s}@keyframes dot{0%,65%,100%{transform:none}35%{transform:translateY(-4px)}}
-.composer{position:absolute;left:0;right:0;bottom:0;height:48px;display:flex;align-items:center;gap:5px;padding:6px;background:linear-gradient(#dedede,#bdbdbd);border-top:1px solid #707070;box-shadow:inset 0 1px #f6f6f6}
-.plus{width:33px;height:33px;border:1px solid #727272;border-radius:4px;background:linear-gradient(#f8f8f8,#c7c7c7);color:#666;font-size:23px;line-height:29px;text-align:center}.input{flex:1;height:33px;border:1px solid #777;border-radius:3px;background:#fff;box-shadow:inset 0 1px 3px rgba(0,0,0,.18);color:#999;font-size:12px;padding:8px 7px}.send{height:33px;min-width:48px;border:1px solid #4d7116;border-radius:3px;background:linear-gradient(#8bc337,#5c8f17);color:#fff;font-size:11px;font-weight:bold}
-.choices{position:absolute;left:12px;right:12px;bottom:58px;z-index:50;display:none;background:#ededed;border:1px solid #626262;box-shadow:0 6px 16px rgba(0,0,0,.4)}.choices.show{display:block}.choice{display:block;width:100%;border:0;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:11px 12px;text-align:left;cursor:pointer}.choice:last-child{border-bottom:0}
-.menu{position:absolute;top:52px;right:7px;width:135px;z-index:60;display:none;background:#eee;border:1px solid #5d5d5d;box-shadow:0 5px 13px rgba(0,0,0,.4)}.menu.show{display:block}.menu button{width:100%;height:37px;border:0;border-bottom:1px solid #c7c7c7;background:linear-gradient(#fff,#e7e7e7);text-align:left;padding:0 10px;font-size:11px;cursor:pointer}
-.toast{position:absolute;z-index:65;left:50%;bottom:67px;transform:translateX(-50%);padding:8px 12px;border-radius:3px;background:rgba(20,20,20,.9);color:#fff;font-size:10px;opacity:0;white-space:nowrap;transition:.18s;pointer-events:none}.toast.show{opacity:1}
-.dialogMask{position:absolute;inset:0;z-index:66;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.24)}.dialogMask.show{display:flex}.dialog{width:246px;border:1px solid #4d4d4d;background:#efefef;box-shadow:0 8px 20px rgba(0,0,0,.48)}.dialog h3{margin:0;padding:10px 12px;background:linear-gradient(#4a5669,#202a39);color:#fff;font-size:12px}.dialog p{margin:0;padding:14px 12px;}.da{padding:7px;background:#ddd;border-top:1px solid #c0c0c0;display:flex;justify-content:flex-end;gap:6px}
-.dialogTranslation{display:block;margin-top:4px;color:#4d4d4d;}
-.who{position:absolute;inset:0;z-index:68;display:grid;place-items:center;color:#fff;background:#000;font:700 24px Georgia,serif;letter-spacing:.1em;opacity:0;pointer-events:none}
-.who.flash{animation:who .32s steps(2,end)}@keyframes who{0%{opacity:0}35%{opacity:1}65%{opacity:0}100%{opacity:0}}
-.lineView.stage1 .avatar:before,.lineView.stage1 .avatar:after{opacity:.22}.lineView.stage2 .avatar:before,.lineView.stage2 .avatar:after{opacity:.9}.lineView.stage2 .avatar .eye{width:7px;height:7px;background:#bf1830;box-shadow:0 0 7px rgba(190,24,48,.6)}
-
-/* RECENTS */
-.recentsView{background:#1f2327;padding:13px}
-.recentsTitle{color:#d7dadd;font-size:12px;margin:3px 0 11px}
-.card{height:108px;margin:0 0 10px;background:#e9e9e9;border:1px solid #444;box-shadow:0 2px 6px rgba(0,0,0,.35);display:flex;cursor:pointer;position:relative;overflow:hidden}
-.cardPreview{width:108px;background:#8cb1cf;border-right:1px solid #aaa;position:relative}.cardText{padding:11px 12px;font-size:12px}.cardText strong{display:block;margin-bottom:5px}.cardText span{font-size:10px;color:#777}
-.linePrev:before{content:"LINE";position:absolute;left:15px;top:15px;padding:4px 8px;background:#61bc22;color:#fff;font-weight:bold;border-radius:4px}
-.albumPrev{background:linear-gradient(135deg,#e58572 0 34%,#e4bf56 34% 63%,#5aa2b8 63%)}
-.settingsPrev{background:linear-gradient(#7d858a,#454b4f)}
-.voidCard{display:none;background:#070707;border-color:#111}.voidCard.show{display:flex}.voidCard .cardPreview{background:#000;border-right-color:#111}.voidCard .cardText{color:#bbb}
-
-/* ALBUM */
-.albumView{background:#111}
-.appHeader{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #0d131a;font-size:15px;font-weight:bold;text-shadow:0 -1px #000}
-.albumGrid{padding:9px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.photo{aspect-ratio:1;background:#555;position:relative;border:1px solid #222;cursor:pointer;overflow:hidden}.p1{background:linear-gradient(#7f9bb1 0 58%,#556b4d 58%)}.p2{background:linear-gradient(#b3bac2 0 45%,#595c63 45%)}.p3{background:linear-gradient(135deg,#b9a69e,#504c50)}.p4{background:linear-gradient(#667680,#252b31)}.p5{background:linear-gradient(#ae9f90,#67554e)}.p6{background:linear-gradient(#7c8794,#29313a)}
-.secretPhoto{display:none;background:#050607}.secretPhoto.show{display:block}.secretPhoto:before,.secretPhoto:after{content:"";position:absolute;top:44%;width:4px;height:4px;border-radius:50%;background:#8f0e22;box-shadow:0 0 4px #8f0e22}.secretPhoto:before{left:42%}.secretPhoto:after{right:42%}.fname{position:absolute;left:3px;bottom:3px;color:#eee;font-size:7px;text-shadow:0 1px 2px #000}
-.viewer{position:absolute;inset:0;z-index:55;background:#030405;display:none}.viewer.show{display:block}.viewerTop{height:50px;background:linear-gradient(#3d4857,#202a37);color:#fff;display:flex;align-items:center;padding:0 9px;font-size:11px}.viewerImage{position:absolute;left:14px;right:14px;top:70px;bottom:72px;background:#050607;border:1px solid #1b1d1f}.redEyes:before,.redEyes:after{content:"";position:absolute;top:46%;width:5px;height:5px;border-radius:50%;background:#a31128;box-shadow:0 0 7px #a31128}.redEyes:before{left:46%}.redEyes:after{right:46%}.rune{position:absolute;right:18px;bottom:18px;color:#7c7470;font:700 15px Georgia,serif;transform:rotate(-7deg);opacity:.58}.viewerMeta{position:absolute;left:14px;right:14px;bottom:20px;color:#888;font-size:9px;display:flex;justify-content:space-between}
-
-/* SETTINGS / ABOUT */
-.settingsView{background:#eee}.settingRow{height:48px;border-bottom:1px solid #c6c6c6;background:linear-gradient(#fff,#e7e7e7);padding:9px 13px;font-size:12px;cursor:pointer}.settingRow strong{display:block}.settingRow span{font-size:10px;color:#777}
-.aboutView{background:#eee}.aboutList{padding-top:4px}.aboutRow{padding:9px 13px;border-bottom:1px solid #c8c8c8;background:#f7f7f7}.aboutRow small{display:block;color:#777;font-size:9px;margin-bottom:3px}.aboutRow div{font-size:12px}
-
-/* REVEAL */
-.black{position:absolute;inset:0;z-index:150;background:#000;opacity:0;pointer-events:none;transition:.28s}.black.show{opacity:1}
-/* The event invitation is styled in landing.css. */
-.hint{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);color:#656b70;font-size:8px;letter-spacing:.16em;text-transform:uppercase;opacity:.42;white-space:nowrap}
-
-/* === v4 asset pass: real Jelly Bean bitmap resources === */
-.nav .back::before,.nav .back::after,.nav .home::before,.nav .home::after,.nav .recent::before,.nav .recent::after{display:none!important}
-.nav .back{background:url(data:image/png;base64,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) center/30px 34px no-repeat!important}
-.nav .home{background:url(data:image/png;base64,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) center/32px 32px no-repeat!important}
-.nav .recent{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACKklEQVR4nO2Wu04CQRSGh/USgxJxd8XEkhhLEowCCShvQUXFg/AAQAEFJR0ldhTa8hIqaCg2khBCoMFAuHn+cWYDMRBGtjJs8ocZmPN9s8PtMEZXr9dj8/mcZzab4dHlZASTBy5+1Wo1+8nJZKKJxXy+7SU5YAo2n8NpvzgcDnnG4/EezU+cDJiSv3RTNNDEHV/TsTzSuEF5obxuGTAaYIItpBqX4vyLxSKGrul0WqUXRpQWpeNQwBqBDQdccMoPEqtUKiY98U7jT4pFO2xQ6lsGJ2eBCTYc8j23xblczke7esMuUZBKpR4CgcBNPB6/i8ViSkENasEQ8g7YcKwS18WieiKRuKKj0d1u9zk9mioRNToYi8yNxOl0+pKKtWQyeRAOh/dVghrUgqEszmQyF/Yi9e8vZ4KhLF5a9EfxWuZOvBPvxDvx/xHn83n5W631+/2NGzuxlnc0YKiK38rlstFsNpllWcp3jBrUgiH/41eKs9msb3FRtVr1t9ttN8091D1s3NiJtR7UgrF4M3D8EhcKBRwLWh/0SBYBsImtmj3BQOvTAhuORbE8oePBYPBM86+5883eF9hwiA/fj7Hb7aLl3CuVSvfU6T/R7j4caPR4wAITbDiEizGv18uoMWPUJx3S9NQ0TT81bLdINBpVbvRkRC3ngAk2HHDBCaE8alcoFDoyDOOMxgZTbPDWxAATbDggsp26rttfhWAwqEUiEaXmbl3AAlPypesbOxdoJvZrI0AAAAAASUVORK5CYII=) center/30px 30px no-repeat!important}
-.lineIcon{background:#62c71b url("https://imgcp.aacdn.jp/img-a/800/auto/aa/gm/article/3/9/7/6/7/9/01.png") center/cover no-repeat!important;border-radius:9px!important;box-shadow:0 1px 2px rgba(0,0,0,.35)!important}
-.lineIcon::before,.lineIcon::after{display:none!important}
-.icon{image-rendering:auto}
-/* make the faux CSS utility icons less visually dominant; v4 prioritizes authentic system/LINE assets */
-.cameraIcon,.albumIcon,.settingsIcon,.browserIcon,.phoneIcon,.contactIcon{filter:saturate(.88) contrast(.95)}
-
-/* v4.1: actual AOSP launcher art */
-.albumIcon{background:transparent url(data:image/png;base64,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) center/contain no-repeat!important;border:0!important;box-shadow:none!important}
-.settingsIcon{background:transparent url(data:image/png;base64,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) center/contain no-repeat!important;border:0!important;box-shadow:none!important}
-.cameraIcon{background:transparent url(data:image/png;base64,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) center/contain no-repeat!important;border:0!important;box-shadow:none!important}
-.albumIcon::before,.albumIcon::after,.settingsIcon::before,.settingsIcon::after,.cameraIcon::before,.cameraIcon::after{display:none!important}
-
-/* ===== V5 avatar/narrative fidelity pass ===== */
-
-/* Early sender avatar is deliberately mundane and rasterized.
-   No Kyubey silhouette is drawn with CSS anymore. */
-.avatar {
-  background:#d2d4d6 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABVklEQVR4nO2aQQ5CIRBD+cZzaTy50SMY43V0xcZE4wztlEi7VaDzKD+f0e12fzzbwtqpDahlAGoDahmA2oBaBqA2oJYBqA2otTyAvWLR8+X68bPT8VDopLWt8i7wrfB3VYEoOwKR4jPfz4qeAEQhzDQs/xCkAkDFmHkcaADQplkQfAQYk7J2izGvE6A2oJYBqA2oZQBqA2pRALDe3RnzOgGsidG7xUoVNQEo074OE1XWEsu8x1e0xcoSEC3m73qCrf1eVGVnuOQIjFxj2TCoAJD3dxYICgBmDw8NAv4MYPfz0fNDAVT9mIFcBwagqnj0ehAA1cUj1x0GoCoetf4QAHXxXSM+lr8MpQHMsvtdWT9OQGbQbLvflfHlBKgNqBUGMGv8u6L+nAC1AbUMQG1ALQNQG1DLAKIDqv/NHVXUnxOgNqBWCsCsxyDjywnIDpwtBVk/yyfgBcgCdG0CaGeuAAAAAElFTkSuQmCC") center/cover no-repeat !important;
-  border:1px solid rgba(0,0,0,.32) !important;
-}
-.avatar::before,
-.avatar::after,
-.avatar .eye {
-  display:none !important;
-}
-
-/* The old CSS "stage1/stage2 ears + red eye" is intentionally disabled. */
-.lineView.stage1 .avatar::before,
-.lineView.stage1 .avatar::after,
-.lineView.stage2 .avatar::before,
-.lineView.stage2 .avatar::after,
-.lineView.stage2 .avatar .eye {
-  display:none !important;
-}
-
-/* Keep the Album anomaly abstract until proper Witch Rune art is supplied. */
-.rune {
-  font-family:Georgia,"Times New Roman",serif !important;
-  letter-spacing:.3em;
-  opacity:.28 !important;
-}
-
-/* V5 removes the prototype caption. */
-.hint { display:none !important; }
-
-/* Keep the mock handset on desktop, but let the experience use the whole
-   viewport on phones and other narrow/touch screens. */
-@media (max-width:600px), (pointer:coarse) {
-  html,body,.stage {width:100%;height:100%;height:100dvh;}
-  .stage:before,.earpiece,.cam,.sensor {display:none;}
-  .phoneScale {
-    position:fixed;left:0;top:0;width:100vw;height:100%;height:100dvh;
-    transform:none !important;
-  }
-  .phone {
-    border:0;border-radius:0;background:#000;box-shadow:none;
-  }
-  .screen {
-    left:0;top:0;width:100%;height:100%;border:0;box-shadow:none;
-  }
-  .status {
-    height:calc(24px + env(safe-area-inset-top,0px));
-    padding-top:env(safe-area-inset-top,0px);
-  }
-  .view {
-    top:calc(24px + env(safe-area-inset-top,0px));
-    bottom:calc(48px + env(safe-area-inset-bottom,0px));
-  }
-  .nav {
-    height:calc(48px + env(safe-area-inset-bottom,0px));
-    padding-bottom:env(safe-area-inset-bottom,0px);
-  }
-}
-
-</style>
-<link rel="stylesheet" href="landing.css?v=20261025-scroll1">
-<link rel="stylesheet" href="postlude.css?v=20261025-scroll1">
+<link rel="stylesheet" href="phone.css?v=20261025-handoff2">
+<link rel="stylesheet" href="landing.css?v=20261025-handoff2">
+<link rel="stylesheet" href="postlude.css?v=20261025-credits1">
 <link rel="stylesheet" href="souvenirs.css?v=20261025-scroll1">
-<link rel="stylesheet" href="typography.css?v=20261025-scroll1">
+<link rel="stylesheet" href="typography.css?v=20261025-credits1">
 </head>
 <body>
-<!-- v4 asset pass: original AOSP Jelly Bean bitmap resources for system/launcher chrome; historical LINE icon reference used for prototype fidelity. -->
+<!-- Inline SVG sprite: <use> referencing external files silently renders empty on file:// and in Safari. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="camera" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5 6.7 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2.7L16 5H8Z"/><circle cx="12" cy="13.5" r="4.1" fill="none" stroke="#f7f7f7" stroke-width="1.5"/><circle cx="19" cy="9.5" r=".8" fill="#f7f7f7"/></symbol>
+    <symbol id="settings" viewBox="0 0 60 60"><defs><linearGradient id="metal" x2="0" y2="1"><stop stop-color="#e7e9ea"/><stop offset="1" stop-color="#a8adb2"/></linearGradient></defs><rect width="60" height="60" rx="13" fill="url(#metal)"/><g fill="none" stroke="#646970"><circle cx="31" cy="31" r="21" stroke-width="2.5"/><circle cx="31" cy="31" r="16.5" stroke-width="1"/><circle cx="31" cy="31" r="11" stroke-width="5.5" stroke-dasharray="3 2"/><circle cx="31" cy="31" r="5" stroke-width="2.5"/><circle cx="15" cy="15" r="7" stroke-width="3" stroke-dasharray="2.5 1.5"/><circle cx="46" cy="45" r="8" stroke-width="3" stroke-dasharray="2.5 1.5"/></g></symbol>
+    <symbol id="clock" viewBox="0 0 60 60"><rect width="60" height="60" rx="13" fill="#151515"/><circle cx="30" cy="30" r="26" fill="#fff"/><g fill="none" stroke="#111" stroke-width="1"><path d="M30 6v3m0 42v3M6 30h3m42 0h3M18 9.2l1.5 2.6m21 36.4 1.5 2.6M9.2 18l2.6 1.5m36.4 21 2.6 1.5M9.2 42l2.6-1.5m36.4-21 2.6-1.5M18 50.8l1.5-2.6m21-36.4L42 9.2"/></g><g stroke="#171717" stroke-linecap="round"><path d="M30 30 28.6 16" stroke-width="2.5"/><path d="M30 30 11.5 26" stroke-width="1.8"/></g><path d="M30 35V9" stroke="#ed493d" stroke-width=".8"/><circle cx="30" cy="30" r="1.7" fill="#ed493d"/></symbol>
+    <symbol id="wifi" viewBox="0 0 16 12"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 3a11 11 0 0 1 14 0M4 6a6.5 6.5 0 0 1 8 0M6.5 8.5a2.3 2.3 0 0 1 3 0"/></g><circle cx="8" cy="11" r=".9" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+<!-- iOS 7 prologue: live controls with artwork derived from the supplied design SVGs. -->
 <main class="stage">
   <section class="invitation" id="reveal" data-tier="standard" aria-label="Yến Hội Ma Nữ — Lời mời" hidden inert>
     <div class="invitation-opening" aria-hidden="true"><div class="opening-leaf opening-leaf-left"></div><div class="opening-leaf opening-leaf-right"></div><div class="opening-seam"></div><span class="opening-mark">招待状</span></div>
@@ -308,6 +61,7 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
       </div>
     </section>
 
+    <div class="paper-journey">
     <section class="programme-section" id="rendezvous" aria-labelledby="rendezvous-title" data-desktop-scene>
       <div class="programme-stage">
         <div class="programme-heading"><div><span class="chapter-label">01 / CHƯƠNG TRÌNH CUỘC HẸN</span><h2 id="rendezvous-title">Một ngày.<br><em>Hai điểm hẹn.</em></h2></div><p>Chọn nơi cậu sẽ đến.<br> Phần còn lại, mình cùng đón chờ.</p></div>
@@ -316,7 +70,7 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
           <div class="programme-leaf calendar-leaf"><span class="calendar-caption">THỨ BẢY · THÁNG 11</span><div class="programme-day">21<span class="calendar-star" aria-hidden="true">✦</span></div><span class="programme-year">2 0 2 6</span><div class="programme-hours"><b>16:00</b><span aria-hidden="true">—</span><b>20:00</b></div><p>Off-fan screening<br>dành cho cộng đồng Madoka Magica Việt Nam.</p><div class="programme-notation"><span>ĐIỂM HẸN ĐÃ CHỌN</span><strong data-city-label>TP.HCM</strong></div><span class="calendar-fold" aria-hidden="true"></span></div>
           <article class="programme-leaf destination-leaf destination-hn"><div class="destination-face"><span class="destination-index">02 — MIỀN BẮC</span><h3>Hà Nội<span aria-hidden="true">.</span></h3><div class="destination-venue"><span>RẠP CHIẾU</span><h4>BHD Phạm <br>Ngọc Thạch</h4><p>TTTM Vincom 2, Phạm Ngọc Thạch,<br>Kim Liên, TP. Hà Nội</p></div><a class="destination-map" href="https://www.google.com/maps/search/?api=1&amp;query=BHD%20Ph%E1%BA%A1m%20Ng%E1%BB%8Dc%20Th%E1%BA%A1ch%20Vincom%202%20H%C3%A0%20N%E1%BB%99i" target="_blank" rel="noopener noreferrer" aria-label="Xem đường đến BHD Phạm Ngọc Thạch">Xem đường đến rạp <span aria-hidden="true">↗</span></a><button class="destination-choice" type="button" data-city="hn" aria-pressed="false"><span>Chọn Hà Nội</span><span aria-hidden="true">↗</span></button><span class="destination-selected"><i aria-hidden="true">✦</i> ĐIỂM HẸN CỦA CẬU</span></div><div class="destination-cover" aria-hidden="true"><span class="cover-eyebrow">YẾN HỘI MA NỮ</span><span class="cover-ornament">✦</span><span class="cover-title">Cuộc Hẹn<br><em>Trần Thế</em></span><span class="cover-date">21.11.2026</span><span class="cover-caption">MỘT LỜI MỜI DÀNH CHO CẬU</span></div></article>
         </div>
-        <div class="programme-bottom"><span>YẾN HỘI MA NỮ / CUỘC HẸN TRẦN THẾ</span><span class="programme-scroll-cue">CUỘN ĐỂ MỞ LỜI MỜI <i aria-hidden="true">↓</i></span><span>21.11.2026</span></div>
+        <div class="programme-bottom"><span>YẾN HỘI MA NỮ / CUỘC HẸN TRẦN THẾ</span><span class="programme-scroll-cue">CUỘN ĐỂ MỞ LỜI MỜI <i aria-hidden="true">↓</i></span><span class="programme-ticket-cue" aria-hidden="true">CUỘN TIẾP ĐỂ CHỌN VÉ <i>↓</i></span><span>21.11.2026</span></div>
       </div>
     </section>
 
@@ -371,6 +125,8 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
           </article>
         </div>
     </section>
+
+    </div>
 
 <section class="souvenir-room invitation-section" id="ticket-package" aria-labelledby="souvenir-title">
   <div class="souvenir-heading">
@@ -428,16 +184,39 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
     <section class="closing-stage" id="community" aria-labelledby="community-title" data-desktop-scene>
       <div class="closing-shutters" aria-hidden="true"><div class="closing-shutter closing-shutter-left"></div><div class="closing-shutter closing-shutter-right"></div></div>
       <div class="closing-heading"><span class="closing-eyebrow">NHỮNG NGƯỜI TẠO NÊN CUỘC HẸN</span><h2 id="community-title">Hẹn gặp cậu<span aria-hidden="true">.</span></h2><div class="closing-date">21.11.2026 <span aria-hidden="true">✦</span></div></div>
-      <div class="closing-partners"><div class="closing-partner"><span>TỔ CHỨC</span><div><img src="assets/web/organizer-wsf.webp" alt="World Simp And Friends" width="400" height="392" loading="lazy"></div><h3>World Simp And Friends</h3></div><div class="closing-partner"><span>ĐỒNG TỔ CHỨC</span><div><img src="assets/web/coorganizer-madoka.webp" alt="Madoka Magica VN Fanpage" width="400" height="400" loading="lazy"></div><h3>Madoka Magica VN Fanpage</h3></div><div class="closing-partner"><span>TÀI TRỢ</span><div><img src="assets/web/sponsor-box8.webp" alt="Box8 Lầy Lội" width="400" height="400" loading="lazy"></div><h3>Box8 Lầy Lội</h3></div><div class="closing-partner"><span>TÀI TRỢ</span><div><img src="assets/web/sponsor-mfigure.webp" alt="M Figure" width="400" height="400" loading="lazy"></div><h3>M Figure</h3></div></div>
+      <div class="closing-credits" aria-label="Ban tổ chức và nhà tài trợ">
+        <div class="credit-tier credit-tier-hosts">
+          <div class="credit">
+            <p class="closing-role">Tổ chức</p>
+            <span class="credit-seal"><img class="closing-logo" src="assets/web/organizer-wsf.webp" alt="" width="400" height="392" loading="lazy" decoding="async"></span>
+            <span class="credit-join" aria-hidden="true">×</span>
+            <h3>World Simp And Friends</h3>
+          </div>
+          <div class="credit credit-partner">
+            <p class="closing-role">Đồng tổ chức</p>
+            <span class="credit-seal"><img class="closing-logo" src="assets/web/coorganizer-madoka.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+            <h3>Madoka Magica VN Fanpage</h3>
+          </div>
+        </div>
+        <div class="credit-divider" aria-hidden="true"><span>✦</span></div>
+        <div class="credit-tier credit-tier-sponsors">
+          <p class="closing-role">Nhà tài trợ</p>
+          <ul class="closing-sponsor-list">
+            <li class="credit"><span class="credit-seal"><img class="closing-logo" src="assets/web/sponsor-box8.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></span><h3>Box8 Lầy Lội</h3></li>
+            <li class="credit"><span class="credit-seal"><img class="closing-logo" src="assets/web/sponsor-mfigure.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></span><h3>M Figure</h3></li>
+          </ul>
+        </div>
+      </div>
       <footer class="closing-footer" id="invitation-footer">
         <div class="closing-footer-main">
           <div class="closing-footer-brand">
             <h2 class="closing-footer-title"><span class="closing-footer-title-accent">YẾN HỘI MA NỮ</span><span class="closing-footer-title-rest">CUỘC HẸN TRẦN THẾ</span></h2>
-            <p>Một dự án của World Simp &amp; Friends.</p>
+            <p>Off-Fan Screening 2026. Một dự án phi lợi nhuận<br>dành cho cộng đồng fan Việt Nam.</p>
           </div>
           <div class="closing-footer-social">
             <a class="closing-social-link" href="https://www.facebook.com/worldsimp235" target="_blank" rel="noopener noreferrer" aria-label="Facebook World Simp And Friends">
               <svg class="closing-social-icon" width="20" height="20" style="width:20px;height:20px" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>World Simp And Friends</span><span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
@@ -451,82 +230,77 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
   </section>
 
   <div class="phoneScale" id="phoneScale">
-    <div class="phone" id="phone">
-      <div class="earpiece"></div><div class="cam"></div><div class="sensor"></div>
+    <div class="phone" id="phone" data-view="home">
       <div class="screen">
         <div class="ui">
-          <div class="status" id="status">
-            <div class="sl"><div class="mail"></div></div>
-            <div class="sr"><span class="net">3G</span><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"><b></b></span><span id="sysClock">23:47</span></div>
+          <div class="status" id="status" aria-label="Trạng thái điện thoại">
+            <div class="sl"><span class="sig" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="net">docomo</span><svg class="wifi" viewBox="0 0 16 12" aria-hidden="true"><use href="#wifi"></use></svg></div>
+            <time class="statusClock" id="sysClock">23:47</time>
+            <div class="sr"><span>100%</span><span class="bat" aria-label="Pin đầy"><b></b></span></div>
           </div>
 
-          <!-- HOME -->
-          <section class="view homeView active" id="homeView">
-            <div class="clock"><div class="t">23:47</div><div class="d">Saturday</div></div>
+          <section class="view homeView active" id="homeView" aria-label="Home screen">
             <div class="grid">
-              <div class="app" data-open="line"><div class="icon lineIcon"></div><span>LINE</span></div>
-              <div class="app" data-open="album"><div class="icon albumIcon"></div><span>Album</span></div>
-              <div class="app" data-open="settings"><div class="icon settingsIcon"></div><span>Settings</span></div>
-              <div class="app"><div class="icon cameraIcon"></div><span>Camera</span></div>
-              <div class="app"><div class="icon musicIcon"></div><span>Music</span></div>
-              <div class="app"><div class="icon browserIcon"></div><span>Browser</span></div>
+              <button class="app" type="button" data-open="line"><img class="icon" src="assets/ios7/app-messages.webp" width="57" height="57" alt="" draggable="false"><span class="app-badge" id="messagesBadge">1</span><span>Messages</span></button>
+              <div class="app app-static" aria-hidden="true"><span class="icon calendarIcon"><small>Saturday</small><b>26</b></span><span>Calendar</span></div>
+              <button class="app" type="button" data-open="album"><img class="icon" src="assets/ios7/app-photos.webp" width="57" height="57" alt="" draggable="false"><span>Photos</span></button>
+              <div class="app app-static" aria-hidden="true"><img class="icon" src="assets/ios7/app-camera.webp" width="57" height="57" alt="" draggable="false"><span>Camera</span></div>
+              <div class="app app-static" aria-hidden="true"><img class="icon" src="assets/ios7/app-weather.webp" width="57" height="57" alt="" draggable="false"><span>Weather</span></div>
+              <div class="app app-static" aria-hidden="true"><svg class="icon" viewBox="0 0 60 60" aria-hidden="true"><use href="#clock"></use></svg><span>Clock</span></div>
+              <div class="app app-static" aria-hidden="true"><img class="icon" src="assets/ios7/app-maps.webp" width="57" height="57" alt="" draggable="false"><span>Maps</span></div>
+              <div class="app app-static" aria-hidden="true"><img class="icon" src="assets/ios7/app-videos.webp" width="57" height="57" alt="" draggable="false"><span>Videos</span></div>
+              <div class="app app-static" aria-hidden="true"><img class="icon" src="assets/ios7/app-notes.webp" width="57" height="57" alt="" draggable="false"><span>Notes</span></div>
+              <button class="app" type="button" data-open="settings"><svg class="icon" viewBox="0 0 60 60" aria-hidden="true"><use href="#settings"></use></svg><span>Settings</span></button>
             </div>
-            <div class="dock">
-              <div class="icon phoneIcon"></div><div class="icon contactIcon"></div><div class="icon lineIcon"></div><div class="icon browserIcon"></div>
-            </div>
-
-            <div class="popup" id="popup">
-              <div class="popupHead"><span class="miniLine" style="background:url(https://imgcp.aacdn.jp/img-a/800/auto/aa/gm/article/3/9/7/6/7/9/01.png) center/cover no-repeat;border-radius:4px"></span>LINE</div>
-              <div class="popupBody"><strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small></div>
-              <div class="popupActions"><button class="oldBtn" id="closePopup">Close</button><button class="oldBtn primary" id="viewPopup">View</button></div>
+            <div class="page-dots" aria-hidden="true"><i></i><i></i></div>
+            <div class="dock" aria-hidden="true"><img class="icon" src="assets/ios7/app-phone.webp" width="57" height="57" alt="" draggable="false"><img class="icon" src="assets/ios7/app-mail.webp" width="57" height="57" alt="" draggable="false"><img class="icon" src="assets/ios7/app-safari.webp" width="57" height="57" alt="" draggable="false"><img class="icon" src="assets/ios7/app-music.webp" width="57" height="57" alt="" draggable="false"></div>
+            <div class="popup" id="popup" role="alertdialog" aria-labelledby="notification-title" aria-describedby="notification-body">
+              <div class="popupHead" id="notification-title">Messages</div>
+              <div class="popupBody" id="notification-body"><strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small></div>
+              <div class="popupActions"><button class="oldBtn" id="closePopup" type="button">Close</button><button class="oldBtn primary" id="viewPopup" type="button">View</button></div>
             </div>
           </section>
 
-          <!-- LINE -->
-          <section class="view lineView" id="lineView">
+          <section class="view lineView" id="lineView" aria-label="iMessage — Unknown">
             <header class="topbar">
-              <button class="topBtn topBack" id="lineBack">‹</button>
+              <button class="topBtn topBack" id="lineBack" type="button" aria-label="Quay về Home">Messages</button>
               <div class="chatTitle">Unknown</div>
-              <button class="topBtn" id="menuBtn">Menu</button>
+              <button class="topBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">Contact</button>
             </header>
-
-            <div class="scroll" id="scroll">
-              <div class="dateChip">Sat.</div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">ねえ。<small class="bubbleTranslation">Này.</small></div></div><div class="stamp">23:47</div>
-              </div>
-              <div class="row them">
-                <div class="avatar"><span class="eye"></span></div>
-                <div class="bw"><div class="bubble">Cậu có tin vào một chiếc điện thoại có thể thực hiện điều ước không?</div></div><div class="stamp">23:47</div>
-              </div>
+            <div class="scroll" id="scroll" role="log" aria-label="Cuộc trò chuyện với Unknown" aria-live="polite" aria-relevant="additions text">
+              <div class="dateChip">iMessage<br><b>Saturday</b> 23:47</div>
+              <div class="row them"><div class="bw"><div class="bubble">ねえ。<small class="bubbleTranslation">Này.</small></div></div><div class="stamp">23:47</div></div>
+              <div class="row them"><div class="bw"><div class="bubble">Cậu có tin vào một chiếc điện thoại có thể thực hiện điều ước không?</div></div><div class="stamp">23:47</div></div>
               <div id="dynamic"></div>
             </div>
-
-            <div class="choices show" id="choices">
-              <button class="choice" data-answer="who">Cậu là ai?</button>
-              <button class="choice" data-answer="wrong">Điện thoại gì?</button>
+            <div class="choices show" id="choices" role="group" aria-label="Chọn câu trả lời">
+              <button class="choice" data-answer="who" type="button">Cậu là ai?</button>
+              <button class="choice" data-answer="wrong" type="button">Điện thoại gì?</button>
             </div>
-
-            <footer class="composer"><div class="plus">＋</div><div class="input">Nhập tin nhắn</div><button class="send">Gửi</button></footer>
-            <div class="menu" id="menu"><button id="profileBtn">Profile</button><button id="blockBtn">Block</button></div>
-            <div class="toast" id="toast">ユーザーが見つかりません</div>
-            <div class="who" id="whoFlash">WHO AM I?</div>
-            <div class="dialogMask" id="dialogMask"><div class="dialog"><h3>Block user</h3><p>このユーザーをブロックしますか？<small class="dialogTranslation">Chặn người dùng này?</small></p><div class="da"><button class="oldBtn" id="cancelBlock">Cancel</button><button class="oldBtn primary" id="confirmBlock">OK</button></div></div></div>
+            <footer class="composer" aria-label="iMessage">
+              <svg class="composer-camera" viewBox="0 0 24 24" aria-hidden="true"><use href="#camera"></use></svg>
+              <input class="input" aria-label="iMessage" placeholder="iMessage" readonly tabindex="-1">
+              <button class="send" type="button" disabled>Send</button>
+            </footer>
+            <button class="contact-backdrop" id="contactBackdrop" type="button" aria-label="Đóng Contact" hidden></button>
+            <div class="menu" id="menu" role="group" aria-label="Contact"><button id="profileBtn" type="button">Profile</button><button id="blockBtn" type="button">Block</button><button id="closeContact" type="button">Cancel</button></div>
+            <div class="toast" id="toast" role="status">ユーザーが見つかりません</div>
+            <div class="who" id="whoFlash" aria-hidden="true">WHO AM I?</div>
+            <div class="dialogMask" id="dialogMask"><div class="dialog" role="alertdialog" aria-labelledby="block-title"><h3 id="block-title">Block user</h3><p>このユーザーをブロックしますか？<small class="dialogTranslation">Chặn người dùng này?</small></p><div class="da"><button class="oldBtn" id="cancelBlock" type="button">Cancel</button><button class="oldBtn primary" id="confirmBlock" type="button">OK</button></div></div></div>
           </section>
 
-          <!-- RECENTS -->
-          <section class="view recentsView" id="recentsView">
-            <div class="recentsTitle">Recent apps</div>
-            <div class="card" data-open="line"><div class="cardPreview linePrev"></div><div class="cardText"><strong>LINE</strong><span>Unknown</span></div></div>
-            <div class="card" data-open="album"><div class="cardPreview albumPrev"></div><div class="cardText"><strong>Album</strong><span>Photos</span></div></div>
-            <div class="card" data-open="settings"><div class="cardPreview settingsPrev"></div><div class="cardText"><strong>Settings</strong><span>About phone</span></div></div>
-            <div class="card voidCard" id="voidCard"><div class="cardPreview"></div><div class="cardText"><strong>&nbsp;</strong><span>&nbsp;</span></div></div>
+          <section class="view recentsView" id="recentsView" aria-label="App Switcher">
+            <div class="recentsTitle">App Switcher</div>
+            <div class="switcher-cards">
+              <button class="card" data-open="line" type="button"><span class="cardPreview linePrev" aria-hidden="true"></span><span class="cardText"><img src="assets/ios7/app-messages.webp" width="29" height="29" alt=""><strong>Messages</strong></span></button>
+              <button class="card" data-open="album" type="button"><span class="cardPreview albumPrev" aria-hidden="true"></span><span class="cardText"><img src="assets/ios7/app-photos.webp" width="29" height="29" alt=""><strong>Photos</strong></span></button>
+              <button class="card" data-open="settings" type="button"><span class="cardPreview settingsPrev" aria-hidden="true"></span><span class="cardText"><svg viewBox="0 0 60 60" aria-hidden="true"><use href="#settings"></use></svg><strong>Settings</strong></span></button>
+              <button class="card voidCard" id="voidCard" type="button" aria-label="Ứng dụng không xác định"><span class="cardPreview" aria-hidden="true"></span><span class="cardText" aria-hidden="true">&nbsp;</span></button>
+            </div>
           </section>
 
-          <!-- ALBUM -->
-          <section class="view albumView" id="albumView">
-            <div class="appHeader">Album</div>
+          <section class="view albumView" id="albumView" aria-label="Photos">
+            <header class="appHeader"><button class="ios-back" type="button" data-phone-back="home">Home</button><strong>Camera Roll</strong><span></span></header>
             <div class="albumGrid">
               <div class="photo p1"><span class="fname">IMG_1001.JPG</span></div>
               <div class="photo p2"><span class="fname">IMG_1008.JPG</span></div>
@@ -534,357 +308,50 @@ body{font-family:Arial,"Helvetica Neue",sans-serif;color:#111}
               <div class="photo p4"><span class="fname">IMG_1016.JPG</span></div>
               <div class="photo p5"><span class="fname">IMG_1020.JPG</span></div>
               <div class="photo p6"><span class="fname">IMG_1024.JPG</span></div>
-              <div class="photo secretPhoto" id="secretPhoto"><span class="fname">IMG_1026.JPG</span></div>
+              <button class="photo secretPhoto" id="secretPhoto" type="button" aria-label="Mở IMG_1026.JPG"><span class="fname">IMG_1026.JPG</span></button>
             </div>
             <div class="viewer" id="viewer">
-              <div class="viewerTop">IMG_1026.JPG</div>
+              <div class="viewerTop"><button class="ios-back" type="button">Photos</button><span>IMG_1026.JPG</span></div>
               <div class="viewerImage redEyes"><div class="rune">···</div></div>
               <div class="viewerMeta"><span>--:--</span><span>IMG_1026.JPG</span></div>
             </div>
           </section>
 
-          <!-- SETTINGS -->
-          <section class="view settingsView" id="settingsView">
-            <div class="appHeader">Settings</div>
-            <div class="settingRow"><strong>Wi‑Fi</strong><span>Off</span></div>
-            <div class="settingRow"><strong>Sound</strong><span>Default</span></div>
-            <div class="settingRow" id="aboutRow"><strong>About phone</strong><span>Status · Legal information · Android version</span></div>
+          <section class="view settingsView" id="settingsView" aria-label="Settings">
+            <header class="appHeader"><button class="ios-back" type="button" data-phone-back="home">Home</button><strong>Settings</strong><span></span></header>
+            <div class="settings-list">
+              <div class="settingRow"><strong>Wi-Fi</strong><span>Off</span></div>
+              <div class="settingRow"><strong>Sounds</strong><span>Default</span></div>
+              <button class="settingRow" id="aboutRow" type="button"><strong>About</strong><span class="chevron" aria-hidden="true">›</span></button>
+            </div>
           </section>
-
-          <section class="view aboutView" id="aboutView">
-            <div class="appHeader">About phone</div>
+          <section class="view aboutView" id="aboutView" aria-label="About">
+            <header class="appHeader"><button class="ios-back" type="button" data-phone-back="settings">Settings</button><strong>About</strong><span></span></header>
             <div class="aboutList">
-              <div class="aboutRow"><small>Android version</small><div>4.2.2</div></div>
-              <div class="aboutRow"><small>Model number</small><div id="modelNumber">MT-13A</div></div>
-              <div class="aboutRow"><small>Build number</small><div id="buildNumber">10.3.A.0.423</div></div>
+              <div class="aboutRow"><small>Version</small><div>7.0</div></div>
+              <div class="aboutRow"><small>Model</small><div id="modelNumber">iPhone 5</div></div>
+              <div class="aboutRow"><small>Build</small><div id="buildNumber">11A465</div></div>
             </div>
           </section>
 
-          <nav class="nav">
-            <button class="back" id="navBack" aria-label="Back"></button>
-            <button class="home" id="navHome" aria-label="Home"></button>
-            <button class="recent" id="navRecent" aria-label="Recent"></button>
+          <button class="assistive-trigger" id="assistiveToggle" type="button" aria-label="AssistiveTouch — Home và App Switcher" aria-expanded="false" aria-controls="systemMenu"></button>
+          <nav class="system-menu" id="systemMenu" aria-label="AssistiveTouch" hidden>
+            <button id="navBack" type="button"><span class="system-symbol" aria-hidden="true">‹</span>Back</button>
+            <button id="touchHome" type="button"><span class="system-symbol" aria-hidden="true">□</span>Home</button>
+            <button id="navRecent" type="button"><span class="system-symbol" aria-hidden="true">▯▯</span>App Switcher</button>
           </nav>
           <div class="black" id="black"></div>
         </div>
       </div>
+      <button class="iphoneHome" id="navHome" type="button" aria-label="Home — nhấn hai lần để mở App Switcher" title="Home · Double-click for App Switcher"></button>
     </div>
   </div>
+  <div class="phone-transition" id="phoneTransition" aria-hidden="true"></div>
   </main>
 
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const phoneScale=$('phoneScale'),phone=$('phone'),popup=$('popup'),status=$('status');
-  const homeView=$('homeView'),lineView=$('lineView'),recentsView=$('recentsView'),albumView=$('albumView'),settingsView=$('settingsView'),aboutView=$('aboutView');
-  const views=[homeView,lineView,recentsView,albumView,settingsView,aboutView];
-  const scroll=$('scroll'),dynamic=$('dynamic'),choices=$('choices'),menu=$('menu'),toast=$('toast'),whoFlash=$('whoFlash');
-  const dialogMask=$('dialogMask'),secretPhoto=$('secretPhoto'),viewer=$('viewer'),voidCard=$('voidCard'),modelNumber=$('modelNumber'),buildNumber=$('buildNumber');
-  const black=$('black'),reveal=$('reveal');
-  const lizardPhoneMessage='「トカゲさん電話。」<small class="bubbleTranslation">Lizard Phone</small>';
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false, firstLineOpen=true;
-
-  function fit(){
-    const mobile=matchMedia('(max-width: 600px), (pointer: coarse)').matches;
-    if(mobile){phoneScale.style.transform='none';return}
-    const s=Math.min(1.24,(innerWidth-40)/390,(innerHeight-40)/760);
-    phoneScale.style.transform=`translate(-50%,-50%) scale(${s})`;
-  }
-  fit(); addEventListener('resize',fit);
-
-  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-  function buzz(){phone.classList.remove('vibrate');void phone.offsetWidth;phone.classList.add('vibrate')}
-  function showView(name){
-    const map={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
-    previous=current; current=name;
-    views.forEach(v=>v.classList.remove('active'));
-    map[name].classList.add('active');
-    menu.classList.remove('show');
-  }
-  function toastMsg(t){
-    toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);
-  }
-  function bottom(){scroll.scrollTop=scroll.scrollHeight}
-  function updateChoiceGap(){
-    scroll.style.bottom=choices.classList.contains('show')?`${choices.offsetHeight+70}px`:'48px';
-  }
-  function showChoices(){
-    choices.classList.add('show');updateChoiceGap();bottom();
-  }
-  function hideChoices(){
-    choices.classList.remove('show');updateChoiceGap();
-  }
-  updateChoiceGap();
-  function addMine(t){
-    const r=document.createElement('div');r.className='row me';
-    r.innerHTML=`<div class="stamp">既読<br>23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function addThem(t,time='23:47'){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble">${t}</div></div><div class="stamp">${time}</div>`;
-    dynamic.appendChild(r);bottom();
-  }
-  function typing(){
-    const r=document.createElement('div');r.className='row them';
-    r.innerHTML=`<div class="avatar"><span class="eye"></span></div><div class="bw"><div class="bubble typing"><i></i><i></i><i></i></div></div>`;
-    dynamic.appendChild(r);bottom();return r;
-  }
-  async function reply(t,delay=800,time='23:47'){const x=typing();await sleep(delay);x.remove();addThem(t,time)}
-
-  // first notification
-  (async()=>{await sleep(900);buzz();popup.classList.add('show')})();
-
-  $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
-  $('viewPopup').onclick=()=>{
-    popup.classList.remove('show');showView('line');
-    if(firstLineOpen){
-      firstLineOpen=false;
-      lineView.classList.remove('slideInFromRight');void lineView.offsetWidth;
-      lineView.classList.add('slideInFromRight');
-      lineView.addEventListener('animationend',()=>lineView.classList.remove('slideInFromRight'),{once:true});
-    }
-  };
-
-  document.querySelectorAll('[data-open]').forEach(el=>{
-    el.addEventListener('click',()=>showView(el.dataset.open));
-  });
-
-  $('lineBack').onclick=()=>showView('home');
-  $('menuBtn').onclick=()=>menu.classList.toggle('show');
-
-  $('profileBtn').onclick=async()=>{
-    menu.classList.remove('show'); profileVisits++;
-    if(profileVisits>=2 && stage>=1){
-      whoFlash.classList.remove('flash');void whoFlash.offsetWidth;whoFlash.classList.add('flash');
-      await sleep(330);
-    }
-    toastMsg('ユーザーが見つかりません · Không tìm thấy người dùng');
-  };
-
-  $('blockBtn').onclick=()=>{menu.classList.remove('show');dialogMask.classList.add('show')};
-  $('cancelBlock').onclick=()=>dialogMask.classList.remove('show');
-  $('confirmBlock').onclick=async()=>{
-    dialogMask.classList.remove('show');toastMsg('ブロックしました · Đã chặn');
-    await sleep(900);buzz();addThem('<span>まだ聞こえる？</span><small class="bubbleTranslation">Cậu vẫn nghe thấy chứ?</small>','--:--');
-  };
-
-  document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>begin(b.dataset.answer));
-
-  async function begin(kind){
-    if(started)return; started=true; hideChoices();
-    addMine(kind==='who'?'Cậu là ai?':'Điện thoại gì?');
-    await sleep(450);
-    if(kind==='who'){
-      await reply('Điều đó quan trọng sao?',820);
-      await sleep(350);
-      await reply('Thứ cậu nên tò mò là chiếc điện thoại.',820);
-    }else{
-      await reply('Một chiếc điện thoại xuất hiện trong lời đồn.',820);
-    }
-    await sleep(450);
-
-    stage=1;
-    status.classList.add('noService');
-    lineView.classList.add('stage1');
-    secretPhoto.classList.add('show');
-
-    await sleep(450);
-    await reply('Gần đây, các cô gái ở Mitakihara đang truyền tai nhau về nó.',880,'--:--');
-    showRumorChoices();
-  }
-
-  function showRumorChoices(){
-    choices.innerHTML=`<button class="choice" id="askRumor">Lời đồn gì?</button><button class="choice" id="neverHeard">Tôi chưa từng nghe.</button>`;
-    showChoices();
-    $('askRumor').onclick=()=>continueFromRumor('Lời đồn gì?','Về một chiếc điện thoại.');
-    $('neverHeard').onclick=()=>continueFromRumor('Tôi chưa từng nghe.','Vậy thì bây giờ cậu sẽ biết.');
-  }
-
-  async function continueFromRumor(userText,response){
-    hideChoices();addMine(userText);
-    await sleep(350);await reply(response,780,'--:--');
-    await sleep(450);await reply(lizardPhoneMessage,800,'--:--');
-    await sleep(800);await reply('Nghe nói nó có thể thực hiện một điều ước.',820,'--:--');
-    showPriceChoices();
-  }
-
-  function showPriceChoices(){
-    choices.innerHTML=`<button class="choice" id="anyWish">Bất kỳ điều ước nào?</button><button class="choice" id="soundsSuspicious">Nghe đáng ngờ quá.</button><button class="choice" id="askPrice">Cái giá là gì?</button>`;
-    showChoices();
-    $('anyWish').onclick=()=>continueFromWishClaim('Bất kỳ điều ước nào?','Người ta đồn là vậy.');
-    $('soundsSuspicious').onclick=()=>continueFromWishClaim('Nghe đáng ngờ quá.','Những lời đồn thú vị thường là thế mà.');
-    $('askPrice').onclick=()=>continueFromWishClaim('Cái giá là gì?','Tất nhiên là có.');
-  }
-
-  async function continueFromWishClaim(userText,response){
-    hideChoices();addMine(userText);
-    await sleep(350);await reply(response,780,'--:--');
-    await sleep(450);await reply('Cái giá là phải chiến đấu với những lời nguyền của thế giới này.',900,'--:--');
-    await sleep(1000);await reply('Nếu lời đồn đó là thật…',820,'--:--');
-    await sleep(450);await reply('Cậu sẽ ước điều gì?',780,'--:--');
-    showWishChoices();
-  }
-
-  function showWishOrLeaveChoices(){
-    choices.innerHTML=`<button class="choice" id="wish">Tôi có một điều ước.</button><button class="choice" id="leave">Đóng cuộc trò chuyện.</button>`;
-    showChoices();
-    $('wish').onclick=()=>contract(false);
-    $('leave').onclick=leaveConversation;
-  }
-
-  function showWishChoices(){
-    choices.innerHTML=`<button class="choice" id="wantSomething">…Có một điều tôi muốn.</button><button class="choice" id="whyAsk">Tại sao cậu muốn biết?</button><button class="choice" id="noAnswer">Không trả lời.</button>`;
-    showChoices();
-    $('wantSomething').onclick=()=>contract(false,'…Có một điều tôi muốn.');
-    $('whyAsk').onclick=()=>respondToWishChoice('Tại sao cậu muốn biết?','Tớ chỉ muốn biết cậu có tin vào lời đồn không.');
-    $('noAnswer').onclick=()=>respondToWishChoice('Không trả lời.','Ừm. Tùy cậu.');
-  }
-
-  async function respondToWishChoice(userText,response){
-    hideChoices();addMine(userText);
-    await sleep(350);await reply(response,780,'--:--');
-    showWishOrLeaveChoices();
-  }
-
-  async function leaveConversation(){
-    hideChoices();addMine('Đóng cuộc trò chuyện.');
-
-    await sleep(850);
-    showView('home');
-
-    await sleep(900);
-    buzz();
-
-    // LINE comes back even after the user tries to leave.
-    popup.classList.add('show');
-    popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
-
-    await sleep(1400);
-    popup.classList.remove('show');
-    showView('line');
-
-    await sleep(350);
-    addThem('Cậu không cần phải tin đâu.','--:--');
-
-    await sleep(700);
-    await reply('Chỉ cần nhớ cái tên này.',800,'--:--');
-
-    await sleep(450);
-    await reply(lizardPhoneMessage,820,'--:--');
-
-    await sleep(500);
-
-    choices.innerHTML=`
-      <button class="choice" id="returnWish">…Tôi có một điều ước.</button>
-      <button class="choice" id="ignoreAgain">Tiếp tục bỏ qua.</button>
-    `;
-    showChoices();
-
-    $('returnWish').onclick=()=>contract(true);
-
-    $('ignoreAgain').onclick=async()=>{
-      hideChoices();
-      addMine('Tiếp tục bỏ qua.');
-
-      await sleep(1000);
-
-      status.classList.add('noService');
-      lineView.classList.add('stage2');
-      voidCard.classList.add('show');
-      secretPhoto.classList.add('show');
-
-      await reply('Ừm.',650,'--:--');
-      await sleep(1400);
-      await reply('Vậy cứ coi như cậu chưa từng thấy những tin nhắn này.',900,'--:--');
-      await sleep(600);
-      await reply('Nhưng nếu một chiếc điện thoại lạ reo lên…',850,'--:--');
-      await sleep(500);
-      await reply('đừng bỏ lỡ cuộc gọi.',820,'--:--');
-      showFinalContinue();
-    };
-  }
-
-  async function contract(returning=false,userText='Tôi có một điều ước.'){
-    hideChoices();addMine(returning?'…Tôi có một điều ước.':userText);
-    await sleep(450);
-    await reply(returning?'Vậy thì cậu có lý do để nhớ lời đồn đó.':'Vậy thì cậu có lý do để nhớ cái tên đó.',800,'--:--');
-    if(!returning){
-      await sleep(450);
-      await reply(lizardPhoneMessage,800,'--:--');
-    }
-    stage=2;lineView.classList.add('stage2');voidCard.classList.add('show');buildNumber.textContent='QB.1026';
-    await sleep(600);
-    choices.innerHTML=`<button class="choice" id="askNext">Hỏi tiếp</button>`;
-    showChoices();$('askNext').onclick=()=>askNext(returning);
-  }
-
-  async function askNext(returning){
-    hideChoices();addMine('…Vậy tôi phải làm gì?');
-    await sleep(450);await reply('Không cần làm gì cả.',820,'--:--');
-    if(!returning){
-      await sleep(450);await reply('Chỉ cần nhớ lời đồn này.',820,'--:--');
-    }
-    await sleep(450);await reply('Nếu một chiếc điện thoại lạ reo lên…',850,'--:--');
-    await sleep(600);await reply('đừng bỏ lỡ cuộc gọi.',820,'--:--');
-    showFinalContinue();
-  }
-
-  function showFinalContinue(){
-    choices.innerHTML='<button class="choice" id="finishInvite">Tiếp tục</button>';
-    showChoices();$('finishInvite').onclick=revealEvent;
-  }
-
-  let invitationStarted=false;
-  function openInvitation(){
-    if(invitationStarted)return;
-    invitationStarted=true;
-    popup.classList.remove('show');
-    phoneScale.classList.add('gone');
-    phoneScale.inert=true;
-    phoneScale.setAttribute('aria-hidden','true');
-    reveal.hidden=false;
-    reveal.inert=false;
-    document.documentElement.classList.add('invitation-open');
-    document.body.classList.add('invitation-open');
-    window.scrollTo(0,0);
-    window.dispatchEvent(new CustomEvent('invitation:open'));
-  }
-  window.addEventListener('invitation:preview',openInvitation);
-  async function revealEvent(){
-    if(invitationStarted)return;
-    hideChoices();
-    await sleep(400);
-    black.classList.add('show');
-    await sleep(360);
-    openInvitation();
-  }
-
-  $('navHome').onclick=()=>showView('home');
-  $('navRecent').onclick=()=>showView('recents');
-  $('navBack').onclick=()=>{
-    if(current==='about')showView('settings');
-    else if(current==='settings'||current==='album'||current==='recents'||current==='line')showView('home');
-  };
-
-  $('aboutRow').onclick=()=>showView('about');
-
-  secretPhoto.onclick=()=>{
-    viewer.classList.add('show');secretOpened=true;
-  };
-  viewer.onclick=()=>{
-    viewer.classList.remove('show');
-    if(secretOpened){setTimeout(()=>secretPhoto.classList.remove('show'),180)}
-  };
-
-  voidCard.onclick=()=>{
-    showView('line');
-    if(stage<2){stage=2;lineView.classList.add('stage2')}
-  };
-})();
-</script>
-<script src="landing.js?v=20261025-scroll1"></script>
-<script src="postlude.js?v=20261025-scroll1"></script>
+<script src="phone.js?v=20261025-handoff2"></script>
+<script src="landing.js?v=20261025-handoff2"></script>
+<script src="postlude.js?v=20261025-paper3"></script>
 <script>
 (function(){
   var target = new Date('2026-11-21T16:00:00+07:00').getTime();
