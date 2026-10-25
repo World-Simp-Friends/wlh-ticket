@@ -326,8 +326,7 @@
     phoneTransition.classList.remove('is-active','is-releasing');
   }
   window.addEventListener('invitation:opening',releasePhoneTransition);
-  window.addEventListener('invitation:ready',releasePhoneTransition);
-  phoneTransition.addEventListener('wheel',event=>event.preventDefault(),{passive:false});
+  window.addEventListener('invitation:ready',releasePhoneTransition);  phoneTransition.addEventListener('wheel',event=>event.preventDefault(),{passive:false});
   function openInvitation(){
     if(invitationStarted)return;
     invitationStarted=true;
@@ -355,6 +354,12 @@
     await opacityFinished(phoneTransition);
     openInvitation();
   }
+
+  // Skip hands the visitor straight to the invitation through the same cover-and-release
+  // path the phone uses, so the prologue never plays a second transition style.
+  const prologueSkip=$('prologueSkip');
+  prologueSkip.onclick=()=>{revealEvent()};
+  window.addEventListener('invitation:open',()=>prologueSkip.classList.add('is-hidden'));
 
   let homeTap=0;
   $('navHome').onclick=()=>{
