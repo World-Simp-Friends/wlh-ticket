@@ -91,7 +91,8 @@
 .closing-date{font-family:var(--inv-serif);font-size:clamp(4rem,11.5vw,10rem);font-weight:500;line-height:1.15;letter-spacing:-.035em;font-variant-numeric:lining-nums}
 .closing-role{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.08em}
 .credit h3{font-family:var(--inv-serif);font-size:clamp(1.75rem,2.6vw,2.375rem);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-wrap:initial}
-.closing-sponsor-list h3{font-family:var(--inv-sans);font-size:var(--type-body);font-weight:500;line-height:1.6;letter-spacing:0}
+.closing-sponsor-list h3{font-family:var(--inv-serif);font-size:clamp(1.25rem,1.5vw,1.5rem);font-weight:600;line-height:1.15;letter-spacing:-.01em;text-wrap:initial}
+.credit-artist-list h3{font-family:var(--inv-serif);font-size:clamp(1.125rem,1.3vw,1.375rem);font-weight:600;line-height:1.15;letter-spacing:-.01em;text-wrap:initial}
 .closing-footer-title{font-family:var(--inv-serif);font-size:clamp(1.75rem,2.6vw,2.375rem);font-weight:600;line-height:1.05;letter-spacing:.01em}
 .closing-footer-title-rest{font-size:.8em;font-weight:500;letter-spacing:.02em}
 .closing-social-link{font-size:var(--type-small);font-weight:500;line-height:1.5}
