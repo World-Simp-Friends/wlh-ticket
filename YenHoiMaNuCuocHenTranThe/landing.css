@@ -1,6 +1,10 @@
 /* The invitation is a separate visual world after the phone prologue. */
 :root{--inv-paper:#f5f1e9;--inv-ink:#39303e;--inv-muted:#766b76;--inv-line:#d6cec6;--inv-gold:#a48b5e;--inv-plum:#5c3d58;--inv-pink:#c18393;--inv-ease:cubic-bezier(.22,1,.36,1)}
 html.invitation-open,body.invitation-open{height:auto;min-height:100%;overflow:visible;background:var(--inv-paper);scroll-behavior:smooth}
+/* The invitation reads as one printed sheet, so the bar is hidden. Firefox needs the
+   scrollbar-width property; WebKit and Blink need the pseudo element. */
+html.invitation-open{scrollbar-width:none;-ms-overflow-style:none}
+html.invitation-open::-webkit-scrollbar{width:0;height:0;display:none}
 body.invitation-open .stage{height:auto;min-height:100svh;overflow:clip;background:var(--inv-paper)}
 body.invitation-open .stage:before{display:none}
 body.invitation-open .phoneScale{position:fixed;pointer-events:none}
