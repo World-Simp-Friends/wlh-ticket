@@ -39,7 +39,10 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
    max-width and max-height need !important to beat `.invitation img{max-width:100%;height:auto}`,
    whose selector outranks a bare class. */
 .hero-characters{position:absolute;height:auto!important;width:auto!important;max-width:45vw!important;max-height:118%!important;right:-2%;bottom:-14%;transform-origin:60% 100%;filter:none}
-.hero-copy{position:relative;z-index:3;margin-left:8%;width:43%;max-width:650px;padding:70px 0 135px}
+/* Wide screens were left with two thirds of the sheet empty: the copy stopped growing at
+   650px, so the same 650px block sat on a 2560 and a 3840 display. The column and the type
+   steps now scale with the viewport, so the left side keeps its weight on a large monitor. */
+.hero-copy{position:relative;z-index:3;margin-left:clamp(5%,7.2%,8%);width:clamp(43%,36vw,50%);max-width:min(40vw,1180px);padding:clamp(56px,7.5vh,110px) 0 clamp(90px,11vh,150px)}
 .invitation-eyebrow{display:flex;align-items:center;gap:13px;}
 .little-star{font-size:20px;color:var(--inv-gold);line-height:1}
 .hero-copy h1{margin:34px -9px 28px;width:calc(100% + 18px)}
@@ -62,8 +65,8 @@ body.invitation-open .phoneScale{position:fixed;pointer-events:none}
 .hero-countdown-unit{position:relative;width:76px;padding:15px 8px 13px;display:flex;flex-direction:column;align-items:center}
 .hero-countdown-unit+.hero-countdown-unit:before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:1px;background:var(--inv-line)}
 .hero-countdown-unit+.hero-countdown-unit:after{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;background:var(--inv-gold);transform:translate(-50%,-50%) rotate(45deg)}
-.hero-countdown-value{width:100%;text-align:center;font-family:var(--inv-serif);font-size:clamp(1.9rem,2.9vw,2.5rem);font-weight:600;line-height:1;color:var(--inv-plum);font-variant-numeric:tabular-nums;font-feature-settings:"lnum" 1,"onum" 0}
-.hero-countdown-label{margin-top:10px;width:100%;padding-top:8px;border-top:1px solid rgba(164,139,94,.4);font-size:.6875rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#5d4a58}
+.hero-countdown-value{width:100%;text-align:center;font-family:var(--inv-serif);font-size:clamp(1.9rem,1.1vw + .75rem,4.8rem);font-weight:600;line-height:1;color:var(--inv-plum);font-variant-numeric:tabular-nums;font-feature-settings:"lnum" 1,"onum" 0}
+.hero-countdown-label{margin-top:10px;width:100%;padding-top:8px;border-top:1px solid rgba(164,139,94,.4);font-size:clamp(.6875rem,.14vw + .63rem,.875rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#5d4a58}
 .hero-description{margin:26px 0 26px!important;color:#635965}
 .invitation-button{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-height:52px;padding:13px 22px;background:var(--inv-plum);border:1px solid var(--inv-plum);color:var(--inv-paper)!important;transition:background 200ms ease,border-color 200ms ease}
 .invitation-button:hover{background:#453046;border-color:#453046}
