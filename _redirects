@@ -1,1 +1,5 @@
-/ /ThapNienHenUoc/ 302
+# ticket.worldsimp.com phục vụ Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế.
+# Chuyển trang chủ vào folder của sự kiện, và chuyển mọi đường dẫn cũ của
+# Thập Niên Hẹn Ước sang nhà mới để link cũ không chết.
+/  /YenHoiMaNuCuocHenTranThe/  302
+/ThapNienHenUoc/*  /YenHoiMaNuCuocHenTranThe/:splat  302

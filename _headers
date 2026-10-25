@@ -6,26 +6,28 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
 # HTML: không cache, luôn kiểm tra phiên bản mới
-/ThapNienHenUoc/index.html
+/YenHoiMaNuCuocHenTranThe/index.html
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
 
-# WebP images: cache 1 năm (immutable vì có hash/content-based)
-/ThapNienHenUoc/assets/*.webp
+# WebP: cache 1 năm (nội dung ít đổi, tên file đã đánh số phiên bản khi cần)
+/YenHoiMaNuCuocHenTranThe/assets/*.webp
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: image/webp
 
 # PNG/JPG gốc (fallback): cache 30 ngày
-/ThapNienHenUoc/assets/*.png
+/YenHoiMaNuCuocHenTranThe/assets/*.png
   Cache-Control: public, max-age=2592000
-/ThapNienHenUoc/assets/*.jpg
+/YenHoiMaNuCuocHenTranThe/assets/*.jpg
   Cache-Control: public, max-age=2592000
 
-# Favicon: cache 7 ngày
-/ThapNienHenUoc/assets/favicon_io/*
-  Cache-Control: public, max-age=604800
+# SVG: cache 30 ngày
+/YenHoiMaNuCuocHenTranThe/assets/*.svg
+  Cache-Control: public, max-age=2592000
+  Content-Type: image/svg+xml
 
-# Web Manifest
-/ThapNienHenUoc/assets/favicon_io/site.webmanifest
-  Content-Type: application/manifest+json
-  Cache-Control: public, max-age=604800
+# CSS và JS: cache ngắn vì tên file có ?v= nhưng vẫn nên kiểm tra lại sớm
+/YenHoiMaNuCuocHenTranThe/*.css
+  Cache-Control: public, max-age=3600
+/YenHoiMaNuCuocHenTranThe/*.js
+  Cache-Control: public, max-age=3600
