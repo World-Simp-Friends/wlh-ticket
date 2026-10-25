@@ -1,0 +1,14 @@
+{
+  "name": "Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế",
+  "short_name": "Yến Hội Ma Nữ",
+  "description": "Off-Fan Screening Madoka Magica, 21/11/2026 tại TP.HCM và Hà Nội.",
+  "start_url": "/YenHoiMaNuCuocHenTranThe/",
+  "display": "standalone",
+  "background_color": "#f5f1e9",
+  "theme_color": "#5c3d58",
+  "lang": "vi",
+  "icons": [
+    { "src": "/YenHoiMaNuCuocHenTranThe/assets/favicon_io/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/YenHoiMaNuCuocHenTranThe/assets/favicon_io/favicon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
