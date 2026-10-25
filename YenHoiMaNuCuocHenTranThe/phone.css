@@ -192,7 +192,7 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
 .phone .system-menu[hidden]{display:none}
 .phone .system-menu button{display:flex;align-items:center;flex-direction:column;justify-content:center;gap:9px;min-width:0;min-height:73px;border:0;background:none;color:#fff;font-size:12px}
 .phone .system-symbol{font-size:27px;line-height:1;font-weight:300}
-.phone .black{position:absolute;inset:0;z-index:150;background:#000;opacity:0;pointer-events:none;transition:opacity 220ms ease-in-out}
+.phone .black{position:absolute;inset:0;z-index:150;background:#000;opacity:0;pointer-events:none;transition:opacity 180ms ease-out}
 .phone .black.show{opacity:1}
 .phone-transition{position:fixed;inset:0;z-index:200;opacity:0;visibility:hidden;pointer-events:none;touch-action:none;background:#000;transition:opacity 320ms ease-in-out}
 .phone-transition.is-active{visibility:visible;pointer-events:auto}
@@ -202,6 +202,8 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
 /* Prologue skip: outside .phoneScale so the phone transform and its fade do not touch it. */
 .prologue-skip{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:210;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:11px 20px;border:1px solid #ffffff3d;border-radius:999px;background:#1b1b1db3;color:#fff;font:500 12px/1 var(--ios-font);letter-spacing:.02em;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity 260ms ease,visibility 260ms,border-color 180ms ease,background 180ms ease;cursor:pointer}
 .prologue-skip:hover{border-color:#ffffff7a;background:#1b1b1dcc}
+/* Pressed state answers immediately; the handoff itself stays silent for its first frames. */
+.prologue-skip.is-pressed{border-color:#ffffffa8;background:#ffffff2b;transform:translateX(-50%) scale(.96)}
 .prologue-skip:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .prologue-skip>span{font-size:15px;line-height:1}
 .prologue-skip.is-hidden{opacity:0;visibility:hidden;pointer-events:none}

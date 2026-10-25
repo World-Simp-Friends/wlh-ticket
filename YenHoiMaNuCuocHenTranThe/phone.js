@@ -357,8 +357,13 @@
 
   // Skip hands the visitor straight to the invitation through the same cover-and-release
   // path the phone uses, so the prologue never plays a second transition style.
+  // The button answers on pointerdown: the handoff spends its first frames setting up the
+  // fade, so waiting for the cover made a pressed button look dead.
   const prologueSkip=$('prologueSkip');
-  prologueSkip.onclick=()=>{revealEvent()};
+  prologueSkip.onpointerdown=()=>prologueSkip.classList.add('is-pressed');
+  prologueSkip.onclick=()=>{prologueSkip.classList.remove('is-pressed');revealEvent()};
+  prologueSkip.onpointerup=()=>prologueSkip.classList.remove('is-pressed');
+  prologueSkip.onpointercancel=()=>prologueSkip.classList.remove('is-pressed');
   window.addEventListener('invitation:open',()=>prologueSkip.classList.add('is-hidden'));
 
   let homeTap=0;
