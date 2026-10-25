@@ -21,17 +21,17 @@
 .invitation :is(.programme-heading>p,.souvenir-controls>p,.section-heading>p){font-size:var(--type-body);line-height:var(--type-leading);max-width:40ch}
 
 /* Banner */
-.invitation-eyebrow{font-size:clamp(.75rem,.13vw + .69rem,1.25rem);font-weight:500;line-height:1.6;letter-spacing:.13em}
+.invitation-eyebrow{font-size:clamp(.75rem,.13vw + .34vh,1.3rem);font-weight:500;line-height:1.6;letter-spacing:.13em}
 .hero-film-kicker{font-size:.6875rem;font-weight:600;line-height:1.5;letter-spacing:.26em;text-transform:uppercase;color:var(--inv-gold)}
-.hero-film-title{font-family:var(--inv-serif);font-size:clamp(1.55rem,1.1vw + .55rem,4.4rem);font-weight:500;line-height:1.2;letter-spacing:.005em;font-style:italic;color:var(--inv-ink);text-wrap:balance}
-.hero-film-release{font-family:var(--inv-theatre);font-size:clamp(1.05rem,.78vw + .3rem,2.9rem);font-weight:500;line-height:1.2;letter-spacing:.06em}
+.hero-film-title{font-family:var(--inv-serif);font-size:clamp(1.55rem,1.1vw + 2.1vh,4.6rem);font-weight:500;line-height:1.2;letter-spacing:.005em;font-style:italic;color:var(--inv-ink);text-wrap:balance}
+.hero-film-release{font-family:var(--inv-theatre);font-size:clamp(1.05rem,.78vw + 1.5vh,3.1rem);font-weight:500;line-height:1.2;letter-spacing:.06em}
 .hero-description{font-size:var(--type-body);line-height:1.8}
 .invitation .invitation-button{font-size:var(--type-small);font-weight:600;line-height:1.45;letter-spacing:0}
 .hero-cities{font-size:var(--type-caption);font-weight:500;line-height:1.6;letter-spacing:.06em}
 /* Hero inscription: a serif date scored with gold caesuras, answered by a
    letterspaced sans block for the weekday and the hours. */
 .hero-dateline{font-variant-numeric:lining-nums}
-.hero-dateline-date{font-family:var(--inv-serif);font-size:clamp(1.75rem,.95vw + .65rem,4.2rem);font-weight:600;line-height:1;letter-spacing:-.005em;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1,"onum" 0}
+.hero-dateline-date{font-family:var(--inv-serif);font-size:clamp(1.75rem,.95vw + 1.9vh,4.4rem);font-weight:600;line-height:1;letter-spacing:-.005em;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1,"onum" 0}
 .hero-dateline-date>span{display:inline-block;margin:0 .14em;font-size:.82em;font-weight:400;font-style:normal;color:var(--inv-gold);transform:translateY(-.02em)}
 .hero-dateline-weekday{font-size:clamp(.75rem,.14vw + .71rem,.95rem);font-weight:600;line-height:1.2;letter-spacing:.22em;text-transform:uppercase;color:#4f3a52}
 .hero-dateline-clock{font-size:clamp(.875rem,.16vw + .83rem,1.1rem);font-weight:500;line-height:1.2;letter-spacing:.12em;color:#5f4d5a;font-variant-numeric:tabular-nums}
