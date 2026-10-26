@@ -10,7 +10,11 @@
   const black=$('black'),reveal=$('reveal');
   const phoneTransition=$('phoneTransition');
   const lizardPhoneMessage='「トカゲさん電話。」<small class="bubbleTranslation">Lizard Phone</small>';
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false;
+  let current='home', previous='home', stage=0, profileVisits=0, started=false;
+  const banner=$('messageBanner'),badge=$('messagesBadge');
+  let unreadCount=1,latestUnread={text:'ねえ。 · Này.',time:'23:47'};
+  let bannerTimer=0,bannerEpoch=0,popupReplay=0,airplaneMode=false;
+  let followChat=true,savedChatScroll=0;
 
   function fit(){
     const mobile=matchMedia('(max-width: 600px), (pointer: coarse)').matches;
@@ -80,6 +84,10 @@
   function showView(name,trigger){
     const map=VIEW_MAP;
     const from=current;
+    if(from==='line'&&name!=='line'){
+      savedChatScroll=scroll.scrollTop;
+      followChat=scroll.scrollHeight-scroll.clientHeight-scroll.scrollTop<48;
+    }
     const kind=viewKindFor(name,from,trigger);
     const outgoing=map[from];
     const incoming=map[name];
@@ -121,10 +129,12 @@
       views.forEach(v=>{v.classList.toggle('active',v===map[name]);v.inert=v!==map[name]});
       if(kind)playViewAnimation(incoming,kind,anchor);
     }
-    if(name==='line')phone.dataset.unread='false';
     closeContacts();closeSystemMenu();
+    if(name==='album')albumView.dispatchEvent(new Event('photos:open'));
     if(name==='line'){
+      markMessagesRead();
       updateChoiceGap();
+      if(followChat)bottom();else scroll.scrollTop=savedChatScroll;
       window.dispatchEvent(new CustomEvent('invitation:prepare'));
     }
   }
@@ -136,7 +146,78 @@
   function toastMsg(t){
     toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);
   }
-  function bottom(){scroll.scrollTop=scroll.scrollHeight}
+  function motionAllowed(){return !matchMedia('(prefers-reduced-motion: reduce)').matches}
+  function setUnreadCount(value){
+    const wasUnread=unreadCount>0;
+    unreadCount=Math.max(0,value);
+    badge.textContent=unreadCount>99?'99+':String(unreadCount);
+    badge.hidden=unreadCount===0;
+    phone.dataset.unread=String(unreadCount>0);
+    badge.closest('button').setAttribute('aria-label',unreadCount?`Messages · ${unreadCount} tin nhắn chưa đọc`:'Messages');
+    if(unreadCount&&!wasUnread&&motionAllowed())badge.animate([{transform:'scale(.82)'},{transform:'scale(1)'}],{duration:180,easing:'cubic-bezier(.22,1,.36,1)'});
+  }
+  function hideMessageBanner(immediate=false){
+    const epoch=++bannerEpoch;
+    clearTimeout(bannerTimer);banner.inert=true;
+    banner.getAnimations().forEach(animation=>animation.cancel());
+    if(immediate||banner.hidden||!motionAllowed()){banner.hidden=true;return}
+    banner.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(-100%)',opacity:0}],{duration:150,easing:'cubic-bezier(.4,0,1,1)'}).finished.catch(()=>{}).then(()=>{
+      if(epoch===bannerEpoch)banner.hidden=true;
+    });
+  }
+  function showMessageBanner(message){
+    if(!message||current==='line'||invitationStarted||handoffStarted)return;
+    ++bannerEpoch;clearTimeout(bannerTimer);
+    const entering=banner.hidden||banner.inert;
+    banner.getAnimations().forEach(animation=>animation.cancel());
+    $('messageBannerText').textContent=message.text;
+    $('messageBannerTime').textContent=message.time;
+    banner.setAttribute('aria-label',`Unknown: ${message.text} Mở tin nhắn.`);
+    banner.hidden=false;banner.inert=false;bannerDismissed=false;
+    if(entering&&motionAllowed())banner.animate([{transform:'translateY(-100%)',opacity:.6},{transform:'translateY(0)',opacity:1}],{duration:250,easing:'cubic-bezier(.22,1,.36,1)'});
+    bannerTimer=setTimeout(()=>hideMessageBanner(),6000);
+  }
+  function markMessagesRead(){
+    setUnreadCount(0);latestUnread=null;++popupReplay;
+    popup.classList.remove('show');hideMessageBanner(true);
+  }
+  function notifyIncoming(html,time){
+    if(invitationStarted||handoffStarted)return;
+    if(current==='line'&&!document.hidden){markMessagesRead();return}
+    const preview=document.createElement('div');preview.innerHTML=html;
+    preview.querySelectorAll('small,br').forEach(node=>node.before(document.createTextNode(' · ')));
+    latestUnread={text:preview.textContent.replace(/\s+/g,' ').trim(),time};
+    setUnreadCount(unreadCount+1);
+    if(!document.hidden){buzz();showMessageBanner(latestUnread)}
+  }
+  let bannerStartY=0,bannerDismissed=false;
+  banner.onpointerdown=event=>{bannerStartY=event.clientY;banner.setPointerCapture(event.pointerId)};
+  banner.onpointerup=event=>{
+    if(event.clientY-bannerStartY< -24){bannerDismissed=true;hideMessageBanner(true)}
+  };
+  banner.onclick=()=>{
+    if(bannerDismissed){bannerDismissed=false;return}
+    showView('line',badge.closest('button'));
+  };
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden||invitationStarted||handoffStarted)return;
+    if(current==='line')markMessagesRead();else if(unreadCount)showMessageBanner(latestUnread);
+  });
+  function syncConnectivity(){
+    $('airplaneStatus').hidden=!airplaneMode;
+    $('airplaneToggle').setAttribute('aria-checked',String(airplaneMode));
+    $('wifiState').textContent=airplaneMode||status.classList.contains('noService')?'Off':'On';
+    $('networkNote').hidden=!airplaneMode;
+    status.setAttribute('aria-label',airplaneMode?'Trạng thái điện thoại — Chế độ máy bay':'Trạng thái điện thoại');
+  }
+  $('airplaneToggle').onclick=()=>{
+    airplaneMode=!airplaneMode;
+    status.classList.toggle('airplane-mode',airplaneMode);
+    syncConnectivity();
+  };
+  new MutationObserver(syncConnectivity).observe(status,{attributes:true,attributeFilter:['class']});
+  syncConnectivity();setUnreadCount(1);
+  function bottom(){if(current==='line'&&followChat)scroll.scrollTop=scroll.scrollHeight}
   function updateChoiceGap(){
     const base=composer.offsetHeight||44;
     const gap=choices.classList.contains('show')?choices.offsetHeight+18:0;
@@ -149,12 +230,18 @@
     choices.classList.remove('show');updateChoiceGap();
   }
   updateChoiceGap();
+  scroll.addEventListener('scroll',()=>{
+    if(current!=='line'||!scroll.clientHeight)return;
+    savedChatScroll=scroll.scrollTop;
+    followChat=scroll.scrollHeight-scroll.clientHeight-scroll.scrollTop<48;
+  },{passive:true});
   views.forEach(v=>{v.inert=!v.classList.contains('active')});
   if('ResizeObserver' in window){
     const observer=new ResizeObserver(updateChoiceGap);
     observer.observe(choices);observer.observe(composer);
   }
   function addMine(t){
+    followChat=true;
     const r=document.createElement('div');r.className='row me';
     r.innerHTML=`<div class="stamp">既読 23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
     dynamic.appendChild(r);bottom();
@@ -163,6 +250,7 @@
     const r=document.createElement('div');r.className='row them';
     r.innerHTML=`<div class="bw"><div class="bubble">${t}</div></div><div class="stamp${time==='--:--'?' anomaly':''}">${time}</div>`;
     dynamic.appendChild(r);bottom();
+    notifyIncoming(t,time);
   }
   function typing(){
     const r=document.createElement('div');r.className='row them';
@@ -174,17 +262,24 @@
   const notificationObserver=new MutationObserver(()=>{
     const shown=popup.classList.contains('show');
     homeView.querySelector('.grid').inert=shown;
-    if(shown){
-      phone.dataset.unread='true';
-      if(current==='home')$('viewPopup').focus({preventScroll:true});
-    }
+    if(shown&&current==='home')$('viewPopup').focus({preventScroll:true});
   });
   notificationObserver.observe(popup,{attributes:true,attributeFilter:['class']});
 
   // first notification
-  (async()=>{await sleep(900);buzz();popup.classList.add('show')})();
+  (async()=>{
+    await sleep(900);
+    if(invitationStarted||handoffStarted||!unreadCount)return;
+    buzz();
+    if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
+  })();
 
-  $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
+  $('closePopup').onclick=async()=>{
+    popup.classList.remove('show');const replay=++popupReplay;
+    await sleep(850);
+    if(replay!==popupReplay||!unreadCount||invitationStarted||handoffStarted)return;
+    buzz();if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
+  };
   $('viewPopup').onclick=()=>{
     popup.classList.remove('show');
     showView('line',document.getElementById('messagesBadge')?.closest('.app')||null);
@@ -310,7 +405,9 @@
     buzz();
 
     // LINE comes back even after the user tries to leave.
-    popup.classList.add('show');
+    latestUnread={text:'ねえ。 · Này.',time:'--:--'};
+    setUnreadCount(unreadCount+1);
+    if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
     popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
 
     await sleep(1400);
@@ -419,6 +516,7 @@
   function openInvitation(){
     if(invitationStarted)return;
     invitationStarted=true;
+    ++popupReplay;hideMessageBanner(true);
     popup.classList.remove('show');
     phoneScale.classList.add('gone');
     phoneScale.inert=true;
@@ -463,6 +561,7 @@
   $('touchHome').onclick=()=>showView('home');
   $('navRecent').onclick=()=>showView('recents');
   $('navBack').onclick=()=>{
+    if(current==='album'&&!albumView.dispatchEvent(new Event('photos:back',{cancelable:true})))return;
     if(current==='about')showView('settings');
     else if(current==='settings'||current==='album'||current==='recents'||current==='line')showView('home');
   };
@@ -501,19 +600,11 @@
       if(!systemMenu.hidden)closeSystemMenu();
       else if(dialogMask.classList.contains('show'))dialogMask.classList.remove('show');
       else if(menu.classList.contains('show'))closeContacts();
-      else if(viewer.classList.contains('show'))viewer.classList.remove('show');
+      else if(current==='album'&&viewer.classList.contains('show'))viewer.dispatchEvent(new Event('photos:close'));
       else $('navBack').click();
       event.preventDefault();
     }
   });
-
-  secretPhoto.onclick=()=>{
-    viewer.classList.add('show');secretOpened=true;
-  };
-  viewer.onclick=()=>{
-    viewer.classList.remove('show');
-    if(secretOpened){setTimeout(()=>secretPhoto.classList.remove('show'),180)}
-  };
 
   voidCard.onclick=e=>{
     showView('line',e.currentTarget);
