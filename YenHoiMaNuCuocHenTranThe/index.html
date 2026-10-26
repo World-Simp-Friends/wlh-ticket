@@ -41,7 +41,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Libre+Bodoni:ital,wght@0,500;1,500&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="phone.css?v=20261025-handoff2">
+<link rel="stylesheet" href="phone.css?v=20261026-trio2">
+<link rel="stylesheet" href="photos.css?v=20261026-trio2">
 <link rel="stylesheet" href="landing.css?v=20261025-handoff2">
 <link rel="stylesheet" href="postlude.css?v=20261025-credits1">
 <link rel="stylesheet" href="souvenirs.css?v=20261025-scroll1">
@@ -278,10 +279,15 @@
       <div class="screen">
         <div class="ui">
           <div class="status" id="status" aria-label="Trạng thái điện thoại">
-            <div class="sl"><span class="sig" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="net">docomo</span><svg class="wifi" viewBox="0 0 16 12" aria-hidden="true"><use href="#wifi"></use></svg></div>
+            <div class="sl"><span class="sig" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="net">docomo</span><svg class="wifi" viewBox="0 0 16 12" aria-hidden="true"><use href="#wifi"></use></svg><span class="airplane-indicator" id="airplaneStatus" role="img" aria-label="Chế độ máy bay" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m22 15-8-5V4c0-1.1-.9-2-2-2s-2 .9-2 2v6l-8 5v2l8-2.5V20l-2 1.5V23l4-1 4 1v-1.5L14 20v-5.5l8 2.5z"/></svg></span></div>
             <time class="statusClock" id="sysClock">23:47</time>
             <div class="sr"><span>100%</span><span class="bat" aria-label="Pin đầy"><b></b></span></div>
           </div>
+          <button class="message-banner" id="messageBanner" type="button" aria-label="Mở tin nhắn từ Unknown" aria-live="polite" aria-atomic="true" hidden inert>
+            <img src="assets/ios7/app-messages.webp" alt="" width="32" height="32">
+            <span class="message-banner-copy"><strong>Unknown</strong><span id="messageBannerText"></span></span>
+            <time id="messageBannerTime">23:47</time>
+          </button>
 
           <section class="view homeView active" id="homeView" aria-label="Home screen">
             <div class="grid">
@@ -344,30 +350,43 @@
           </section>
 
           <section class="view albumView" id="albumView" aria-label="Photos">
-            <header class="appHeader"><button class="ios-back" type="button" data-phone-back="home">Home</button><strong>Camera Roll</strong><span></span></header>
-            <div class="albumGrid">
-              <div class="photo p1"><span class="fname">IMG_1001.JPG</span></div>
-              <div class="photo p2"><span class="fname">IMG_1008.JPG</span></div>
-              <div class="photo p3"><span class="fname">IMG_1012.JPG</span></div>
-              <div class="photo p4"><span class="fname">IMG_1016.JPG</span></div>
-              <div class="photo p5"><span class="fname">IMG_1020.JPG</span></div>
-              <div class="photo p6"><span class="fname">IMG_1024.JPG</span></div>
-              <button class="photo secretPhoto" id="secretPhoto" type="button" aria-label="Mở IMG_1026.JPG"><span class="fname">IMG_1026.JPG</span></button>
+            <div class="photos-background" id="photosBackground">
+              <header class="appHeader"><button class="ios-back" type="button" data-phone-back="home">Home</button><strong id="photosTitle">Camera Roll</strong><button class="photos-albums-toggle" id="photosAlbumsToggle" type="button" disabled>Albums</button></header>
+              <div class="photo-library" id="photoLibrary">
+                <p class="photos-status" id="photosStatus" role="status">Đang mở thư viện…</p>
+                <div class="albumGrid" id="photoGrid">
+                  <button class="photo secretPhoto" id="secretPhoto" type="button" aria-label="Mở IMG_1026.JPG"><span class="fname">IMG_1026.JPG</span></button>
+                </div>
+                <p class="photos-count" id="photosCount" aria-live="polite"></p>
+              </div>
+              <div class="photos-albums" id="photosAlbums" hidden></div>
             </div>
-            <div class="viewer" id="viewer">
-              <div class="viewerTop"><button class="ios-back" type="button">Photos</button><span>IMG_1026.JPG</span></div>
-              <div class="viewerImage redEyes"><div class="rune">···</div></div>
-              <div class="viewerMeta"><span>--:--</span><span>IMG_1026.JPG</span></div>
+            <div class="viewer" id="viewer" role="dialog" aria-label="Xem ảnh" hidden inert>
+              <div class="viewerTop"><button class="ios-back" id="photoClose" type="button">Photos</button><strong id="photoName"></strong><button id="photoInfoToggle" type="button" aria-expanded="false" aria-controls="photoDetails">Info</button></div>
+              <div class="viewerImage" id="photoStage">
+                <div class="photo-secret" id="photoSecret" hidden><div class="photo-secret-art" role="img" aria-label="Một khe sáng giữa những mái vòm — ảnh chụp lúc 23:48"></div></div>
+                <p class="photos-status" id="photoLoading" role="status" hidden>Đang mở ảnh…</p>
+              </div>
+              <div class="photo-details" id="photoDetails" hidden><p id="photoDimensions"></p><a id="photoOriginal" target="_blank" rel="noopener noreferrer">Ảnh gốc ↗</a></div>
+              <div class="viewerMeta">
+                <button id="photoPrev" type="button" aria-label="Ảnh trước">‹</button>
+                <span id="photoPosition" aria-live="polite"></span>
+                <button class="photo-zoom" id="photoZoom" type="button" aria-label="Phóng to ảnh" aria-pressed="false">2×</button>
+                <button id="photoBackdrop" type="button" aria-label="Đổi nền sáng hoặc tối" title="Đổi nền ảnh">◐</button>
+                <button id="photoNext" type="button" aria-label="Ảnh tiếp theo">›</button>
+              </div>
             </div>
           </section>
 
           <section class="view settingsView" id="settingsView" aria-label="Settings">
             <header class="appHeader"><button class="ios-back" type="button" data-phone-back="home">Home</button><strong>Settings</strong><span></span></header>
             <div class="settings-list">
-              <div class="settingRow"><strong>Wi-Fi</strong><span>Off</span></div>
+              <button class="settingRow airplane-setting" id="airplaneToggle" type="button" role="switch" aria-checked="false" aria-label="Chế độ máy bay"><strong>Airplane Mode</strong><span class="ios-switch" aria-hidden="true"></span></button>
+              <div class="settingRow"><strong>Wi-Fi</strong><span id="wifiState">On</span></div>
               <div class="settingRow"><strong>Sounds</strong><span>Default</span></div>
               <button class="settingRow" id="aboutRow" type="button"><strong>About</strong><span class="chevron" aria-hidden="true">›</span></button>
             </div>
+            <p class="network-note" id="networkNote" role="status" hidden>Không có kết nối mạng.</p>
           </section>
           <section class="view aboutView" id="aboutView" aria-label="About">
             <header class="appHeader"><button class="ios-back" type="button" data-phone-back="settings">Settings</button><strong>About</strong><span></span></header>
@@ -394,7 +413,8 @@
   <button class="prologue-skip" id="prologueSkip" type="button" aria-label="Bỏ qua phần điện thoại, mở lời mời">Bỏ qua <span aria-hidden="true">↗</span></button>
   </main>
 
-<script src="phone.js?v=20261025-handoff2"></script>
+<script src="phone.js?v=20261026-trio2"></script>
+<script src="photos.js?v=20261026-trio2"></script>
 <script src="landing.js?v=20261025-handoff2"></script>
 <script src="postlude.js?v=20261025-paper3"></script>
 <script>
