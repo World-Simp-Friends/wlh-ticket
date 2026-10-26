@@ -24,28 +24,46 @@
   function buzz(){phone.classList.remove('vibrate');void phone.offsetWidth;phone.classList.add('vibrate')}
   // Work out where the tapped icon sits inside the screen so the zoom grows out of it,
   // the way SpringBoard opened an app. Falls back to centre when there is no icon.
-  function launchOriginFrom(trigger,view){
-    if(!trigger)return '50% 50%';
-    const t=trigger.getBoundingClientRect(),v=view.getBoundingClientRect();
-    if(!t.width||!v.width)return '50% 50%';
-    const x=((t.left+t.width/2)-v.left)/v.width*100;
-    const y=((t.top+t.height/2)-v.top)/v.height*100;
-    return `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+  const VIEW_MAP={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
+
+  // On the way out the cast shrinks toward its own icon on the home screen, not toward the
+  // button that was tapped, so the close finds that icon by the app it belongs to.
+  function iconFor(view){
+    const name=Object.keys(VIEW_MAP).find(k=>VIEW_MAP[k]===view);
+    if(!name)return null;
+    if(name==='about')return document.querySelector('[data-open="settings"]');
+    return document.querySelector(`[data-open="${name}"]`);
   }
-  function playViewAnimation(view,kind,trigger){
-    if(!kind)return;
+  // transform-origin is read against the view's own box, so the icon centre is expressed
+  // relative to that box. The icon rect is measured earlier, while the home screen is still
+  // on screen, because a hidden home screen measures its icons as 0x0.
+  function launchOriginFrom(anchor,view){
+    if(!anchor||!anchor.width||!anchor.height)return '50% 50%';
+    const v=view.getBoundingClientRect();
+    if(!v.width||!v.height)return '50% 50%';
+    const cx=anchor.left+anchor.width/2, cy=anchor.top+anchor.height/2;
+    return `${(cx-v.left).toFixed(2)}px ${(cy-v.top).toFixed(2)}px`;
+  }
+  function playViewAnimation(view,kind,anchor){
+    if(!kind)return 0;
     view.style.removeProperty('--launch-origin');
-    view.classList.remove('from-icon','from-icon-reverse','slideInFromRight','slideOutToRight','settle');
-    if(kind==='open')view.style.setProperty('--launch-origin',launchOriginFrom(trigger,view));
-    // Reflow so the class lands after the element is shown, letting the animation replay.
+    view.classList.remove('from-icon','from-icon-reverse','slideInFromRight','slideOutToRight','settle','is-leaving');
+    const leaving=kind==='close'||kind==='pop';
+    // Measure before any transform lands: a view mid-animation reports a scaled box, and an
+    // origin read from it sits in the wrong place.
+    void view.offsetWidth;
+    if(kind==='open'||kind==='close')view.style.setProperty('--launch-origin',launchOriginFrom(anchor,view));
+    // Reflow again so the class lands after the origin is set, letting the animation replay.
     void view.offsetWidth;
     const cls=kind==='open'?'from-icon':kind==='close'?'from-icon-reverse'
       :kind==='push'?'slideInFromRight':kind==='pop'?'slideOutToRight':'settle';
+    if(leaving)view.classList.add('is-leaving');
     view.classList.add(cls);
-    const done=()=>view.classList.remove(cls);
+    const done=()=>{view.classList.remove(cls);if(leaving)view.classList.remove('is-leaving')};
     view.addEventListener('animationend',done,{once:true});
     // Backgrounded tabs may drop the end frame, which would leave the class stuck on.
     setTimeout(done,700);
+    return leaving?380:0;
   }
   function viewKindFor(name,from,trigger){
     const appViews=['line','album','settings','about'];
@@ -60,13 +78,50 @@
     return '';
   }
   function showView(name,trigger){
-    const map={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
-    const kind=viewKindFor(name,current,trigger);
-    previous=current; current=name;
-    views.forEach(v=>{v.classList.toggle('active',v===map[name]);v.inert=v!==map[name]});
+    const map=VIEW_MAP;
+    const from=current;
+    const kind=viewKindFor(name,from,trigger);
+    const outgoing=map[from];
+    const incoming=map[name];
+    previous=from; current=name;
+    // The exit plays on the view being left, the entrance on the view being entered. Running
+    // both through one element meant an opening app zoomed the home screen instead of itself.
+    const leaving=kind==='close'||kind==='pop';
+    // Measure the icon before the classes change. Once the home screen loses active it is
+    // display:none and every icon inside measures 0x0, which is what parked the zoom in the
+    // middle of the phone on every opening.
+    // The home screen is display:none while an app is open, and an icon inside a hidden
+    // subtree measures 0x0. Show it for the read, invisibly, then restore.
+    const probe=kind?(leaving?iconFor(outgoing):trigger):null;
+    let anchor=null;
+    if(probe){
+      const homeShown=homeView.classList.contains('active');
+      if(homeShown){
+        anchor=probe.getBoundingClientRect();
+      }else{
+        homeView.style.visibility='hidden';
+        homeView.classList.add('active');
+        anchor=probe.getBoundingClientRect();
+        homeView.classList.remove('active');
+        homeView.style.removeProperty('visibility');
+      }
+    }
     phone.dataset.view=name;
+    const delay=leaving?playViewAnimation(outgoing,kind,anchor):0;
+    views.forEach(v=>{if(v!==outgoing){v.classList.toggle('active',v===map[name]);v.inert=v!==map[name]}});
+    if(leaving){
+      outgoing.classList.remove('active');outgoing.inert=true;
+      incoming.classList.remove('active');incoming.inert=true;
+      setTimeout(()=>{
+        if(current!==name)return;
+        incoming.classList.add('active');incoming.inert=false;
+        outgoing.classList.remove('is-leaving');
+      },delay);
+    }else{
+      views.forEach(v=>{v.classList.toggle('active',v===map[name]);v.inert=v!==map[name]});
+      if(kind)playViewAnimation(incoming,kind,anchor);
+    }
     if(name==='line')phone.dataset.unread='false';
-    if(kind)playViewAnimation(map[name],kind,trigger);
     closeContacts();closeSystemMenu();
     if(name==='line'){
       updateChoiceGap();

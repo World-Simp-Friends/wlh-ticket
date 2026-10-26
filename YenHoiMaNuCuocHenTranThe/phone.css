@@ -35,7 +35,7 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
 .phone .status.noService .net:after{content:"圏外 · Mất sóng";font-size:10px}
 .phone[data-view="home"] .status,.phone[data-view="recents"] .status{background:transparent;color:#fff}
 .phone .view{position:absolute;inset:var(--status-height) 0 0;display:none;background:#fff}
-.phone .view.active{display:block}
+.phone .view.active,.phone .view.is-leaving{display:block}
 .phone .topbar,.phone .appHeader{position:relative;height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 7px;border-bottom:1px solid var(--ios-line);background:#f7f7f7;color:#111;z-index:5}
 .phone .topBtn,.phone .ios-back{display:flex;align-items:center;gap:4px;min-width:0;min-height:44px;padding:0;border:0;background:transparent;color:var(--ios-blue);font-size:16px;font-weight:400;text-align:left;white-space:nowrap}
 .phone .topBtn:last-child{justify-content:flex-end}
@@ -53,7 +53,9 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
   55%{opacity:1}
   100%{transform:none;opacity:1;border-radius:0}
 }
-.phone .view.active.from-icon-reverse{animation:ios-app-close 320ms cubic-bezier(.4,0,1,1) both}
+/* Leaving views keep a class of their own: active is dropped at once, so a rule keyed to it
+   never ran and the app vanished instead of shrinking. */
+.phone .view.is-leaving.from-icon-reverse{transform-origin:var(--launch-origin,50% 50%);animation:ios-app-close 320ms cubic-bezier(.4,0,1,1) both}
 @keyframes ios-app-close{
   0%{transform:none;opacity:1;border-radius:0}
   100%{transform:scale(.46) translateY(6%);opacity:0;border-radius:26px}
@@ -61,7 +63,7 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
 /* Right-to-left push for drilling into a list, which iOS 7 also slid rather than zoomed. */
 .phone .view.active.slideInFromRight{animation:ios-push-in 350ms cubic-bezier(.22,.61,.36,1) both}
 @keyframes ios-push-in{0%{transform:translateX(22%);opacity:.72}100%{transform:none;opacity:1}}
-.phone .view.active.slideOutToRight{animation:ios-push-out 350ms cubic-bezier(.4,0,1,1) both}
+.phone .view.is-leaving.slideOutToRight{animation:ios-push-out 350ms cubic-bezier(.4,0,1,1) both}
 @keyframes ios-push-out{0%{transform:none;opacity:1}100%{transform:translateX(22%);opacity:.72}}
 /* The shell spring: a hair of overshoot on the way in, as the OS spring had. */
 @keyframes ios-settle{0%{transform:scale(1.016)}62%{transform:scale(.998)}100%{transform:none}}
