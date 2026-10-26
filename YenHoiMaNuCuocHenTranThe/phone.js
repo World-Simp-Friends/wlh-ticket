@@ -10,7 +10,7 @@
   const black=$('black'),reveal=$('reveal');
   const phoneTransition=$('phoneTransition');
   const lizardPhoneMessage='「トカゲさん電話。」<small class="bubbleTranslation">Lizard Phone</small>';
-  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false, firstLineOpen=true;
+  let current='home', previous='home', stage=0, profileVisits=0, started=false, secretOpened=false;
 
   function fit(){
     const mobile=matchMedia('(max-width: 600px), (pointer: coarse)').matches;
@@ -22,12 +22,51 @@
 
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   function buzz(){phone.classList.remove('vibrate');void phone.offsetWidth;phone.classList.add('vibrate')}
-  function showView(name){
+  // Work out where the tapped icon sits inside the screen so the zoom grows out of it,
+  // the way SpringBoard opened an app. Falls back to centre when there is no icon.
+  function launchOriginFrom(trigger,view){
+    if(!trigger)return '50% 50%';
+    const t=trigger.getBoundingClientRect(),v=view.getBoundingClientRect();
+    if(!t.width||!v.width)return '50% 50%';
+    const x=((t.left+t.width/2)-v.left)/v.width*100;
+    const y=((t.top+t.height/2)-v.top)/v.height*100;
+    return `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+  }
+  function playViewAnimation(view,kind,trigger){
+    if(!kind)return;
+    view.style.removeProperty('--launch-origin');
+    view.classList.remove('from-icon','from-icon-reverse','slideInFromRight','slideOutToRight','settle');
+    if(kind==='open')view.style.setProperty('--launch-origin',launchOriginFrom(trigger,view));
+    // Reflow so the class lands after the element is shown, letting the animation replay.
+    void view.offsetWidth;
+    const cls=kind==='open'?'from-icon':kind==='close'?'from-icon-reverse'
+      :kind==='push'?'slideInFromRight':kind==='pop'?'slideOutToRight':'settle';
+    view.classList.add(cls);
+    const done=()=>view.classList.remove(cls);
+    view.addEventListener('animationend',done,{once:true});
+    // Backgrounded tabs may drop the end frame, which would leave the class stuck on.
+    setTimeout(done,700);
+  }
+  function viewKindFor(name,from,trigger){
+    const appViews=['line','album','settings','about'];
+    if(name===from)return '';
+    if(name==='home')return 'close';
+    if(appViews.includes(name)){
+      if(from==='about'&&name==='settings')return 'pop';
+      if(from==='settings'&&name==='about')return 'push';
+      return 'open';
+    }
+    if(name==='recents')return 'settle';
+    return '';
+  }
+  function showView(name,trigger){
     const map={home:homeView,line:lineView,recents:recentsView,album:albumView,settings:settingsView,about:aboutView};
+    const kind=viewKindFor(name,current,trigger);
     previous=current; current=name;
     views.forEach(v=>{v.classList.toggle('active',v===map[name]);v.inert=v!==map[name]});
     phone.dataset.view=name;
     if(name==='line')phone.dataset.unread='false';
+    if(kind)playViewAnimation(map[name],kind,trigger);
     closeContacts();closeSystemMenu();
     if(name==='line'){
       updateChoiceGap();
@@ -92,20 +131,15 @@
 
   $('closePopup').onclick=async()=>{popup.classList.remove('show');await sleep(850);buzz();popup.classList.add('show')};
   $('viewPopup').onclick=()=>{
-    popup.classList.remove('show');showView('line');
-    if(firstLineOpen){
-      firstLineOpen=false;
-      lineView.classList.remove('slideInFromRight');void lineView.offsetWidth;
-      lineView.classList.add('slideInFromRight');
-      lineView.addEventListener('animationend',()=>lineView.classList.remove('slideInFromRight'),{once:true});
-    }
+    popup.classList.remove('show');
+    showView('line',document.getElementById('messagesBadge')?.closest('.app')||null);
   };
 
   document.querySelectorAll('[data-open]').forEach(el=>{
     el.addEventListener('click',()=>{
       if(el.dataset.open==='line'){
         $('viewPopup').onclick();
-      }else showView(el.dataset.open);
+      }else showView(el.dataset.open,el);
     });
   });
 
@@ -378,9 +412,9 @@
     else if(current==='settings'||current==='album'||current==='recents'||current==='line')showView('home');
   };
 
-  $('aboutRow').onclick=()=>showView('about');
+  $('aboutRow').onclick=e=>showView('about',e.currentTarget);
   phone.querySelectorAll('[data-phone-back]').forEach(button=>{
-    button.onclick=()=>showView(button.dataset.phoneBack);
+    button.onclick=()=>showView(button.dataset.phoneBack,button);
   });
 
   let drag=null,dragged=false;
@@ -426,8 +460,8 @@
     if(secretOpened){setTimeout(()=>secretPhoto.classList.remove('show'),180)}
   };
 
-  voidCard.onclick=()=>{
-    showView('line');
+  voidCard.onclick=e=>{
+    showView('line',e.currentTarget);
     if(stage<2){stage=2;lineView.classList.add('stage2')}
   };
 })();
