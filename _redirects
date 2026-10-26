@@ -1,10 +1,4 @@
-# ticket.worldsimp.com phục vụ Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế.
-# Chuyển trang chủ vào folder của sự kiện, và chuyển mọi đường dẫn cũ của
-# Thập Niên Hẹn Ước sang nhà mới để link cũ không chết.
-#
-# Dòng trần không có dấu / phải đứng trước: Cloudflare Pages tự thêm / vào
-# đường dẫn thư mục bằng một cú 308, nên nếu chỉ có /* thì khách phải nhảy
-# hai bước mới tới nơi.
+# ticket.worldsimp.com phục vụ Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế ở trang chủ.
+# Thập Niên Hẹn Ước vẫn sống ở /ThapNienHenUoc/ như cũ, không chuyển đi đâu:
+# link cũ đã chia sẻ vẫn vào đúng site đó.
 /  /YenHoiMaNuCuocHenTranThe/  302
-/ThapNienHenUoc  /YenHoiMaNuCuocHenTranThe/  302
-/ThapNienHenUoc/*  /YenHoiMaNuCuocHenTranThe/:splat  302
