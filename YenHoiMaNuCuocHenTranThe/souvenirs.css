@@ -221,6 +221,16 @@
  #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-ticket{grid-column:4/10;grid-row:2;align-self:center}
 }
 
+/* The next step follows the complete gift display and retains the selected tier. */
+.souvenir-room .souvenir-next{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:32px;padding:24px 0 0;border-top:1px solid #c4b3b4}
+.souvenir-room .souvenir-next>div{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.souvenir-room .souvenir-next>div>span{font-size:11px;letter-spacing:.08em;color:#786877}
+.souvenir-room .souvenir-next strong{font-size:18px;color:var(--inv-plum)}
+.souvenir-room .souvenir-next p{margin:0;color:#786877;font-size:13px;line-height:1.5}
+.souvenir-room .souvenir-next-button{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:48px;padding:12px 18px;border:1px solid var(--inv-plum);background:var(--inv-plum);color:#fff;text-align:left}
+.souvenir-room .souvenir-next-button span:last-child{font-size:20px}
+@media(max-width:760px){.souvenir-room .souvenir-next{align-items:stretch;flex-direction:column}.souvenir-room .souvenir-next-button{width:100%}}
+
 /* Promote only the active entrance; release layers once each object has landed. */
 @media(min-width:1024px) and (pointer:fine) and (prefers-reduced-motion:no-preference){
  .invitation.motion-enabled .souvenir-room.is-in-view .keepsake-object:not(.has-arrived){will-change:transform,opacity}

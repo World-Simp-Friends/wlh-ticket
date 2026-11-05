@@ -15,6 +15,7 @@
   let unreadCount=1,latestUnread={text:'ねえ。 · Này.',time:'23:47'};
   let bannerTimer=0,bannerEpoch=0,popupReplay=0,airplaneMode=false;
   let followChat=true,savedChatScroll=0;
+  let returnConversationPending=false;
 
   function fit(){
     const mobile=matchMedia('(max-width: 600px), (pointer: coarse)').matches;
@@ -136,6 +137,7 @@
       updateChoiceGap();
       if(followChat)bottom();else scroll.scrollTop=savedChatScroll;
       window.dispatchEvent(new CustomEvent('invitation:prepare'));
+      if(returnConversationPending){returnConversationPending=false;resumeConversation()}
     }
   }
   function closeContacts(){
@@ -276,7 +278,7 @@
 
   $('closePopup').onclick=async()=>{
     popup.classList.remove('show');const replay=++popupReplay;
-    await sleep(850);
+    await sleep(4000);
     if(replay!==popupReplay||!unreadCount||invitationStarted||handoffStarted)return;
     buzz();if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
   };
@@ -400,8 +402,9 @@
 
     await sleep(850);
     showView('home');
-
-    await sleep(900);
+    returnConversationPending=true;
+    await sleep(2400);
+    if(!returnConversationPending||invitationStarted||handoffStarted)return;
     buzz();
 
     // LINE comes back even after the user tries to leave.
@@ -410,11 +413,11 @@
     if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
     popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
 
-    await sleep(1400);
+  }
+  async function resumeConversation(){
     popup.classList.remove('show');
-    showView('line');
-
     await sleep(350);
+    if(invitationStarted||handoffStarted)return;
     addThem('Cậu không cần phải tin đâu.','--:--');
 
     await sleep(700);
@@ -482,7 +485,7 @@
 
   function showFinalContinue(){
     choices.innerHTML='<button class="choice" id="finishInvite">Tiếp tục</button>';
-    showChoices();$('finishInvite').onclick=revealEvent;
+    showChoices();$('finishInvite').onclick=()=>revealEvent(true);
   }
 
   let invitationStarted=false,handoffStarted=false;
@@ -530,8 +533,9 @@
     window.dispatchEvent(new CustomEvent('invitation:open'));
   }
   window.addEventListener('invitation:preview',openInvitation);
-  async function revealEvent(){
+  async function revealEvent(fromStory=false){
     if(invitationStarted||handoffStarted)return;
+    if(fromStory===true)reveal.dataset.storyHandoff='true';
     handoffStarted=true;phone.inert=true;
     // Freeze the reply layout until it is covered: hiding choices first shifts chat.
     black.classList.add('show');
@@ -548,7 +552,7 @@
   // fade, so waiting for the cover made a pressed button look dead.
   const prologueSkip=$('prologueSkip');
   prologueSkip.onpointerdown=()=>prologueSkip.classList.add('is-pressed');
-  prologueSkip.onclick=()=>{prologueSkip.classList.remove('is-pressed');revealEvent()};
+  prologueSkip.onclick=()=>{prologueSkip.classList.remove('is-pressed');revealEvent(false)};
   prologueSkip.onpointerup=()=>prologueSkip.classList.remove('is-pressed');
   prologueSkip.onpointercancel=()=>prologueSkip.classList.remove('is-pressed');
   window.addEventListener('invitation:open',()=>prologueSkip.classList.add('is-hidden'));

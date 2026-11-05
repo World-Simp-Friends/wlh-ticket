@@ -260,6 +260,19 @@ body.invitation-open .phoneScale{display:none}
 .invitation.is-opening .opening-mark{animation:open-mark 450ms ease both}
 .invitation.is-opening .hero-characters{animation:character-arrival 1120ms var(--inv-ease) both}
 .invitation.is-opening .hero-copy{animation:copy-arrival 870ms var(--inv-ease) 250ms both}
+/* The impossible photo becomes the same place glimpsed before the invitation opens. */
+@media (prefers-reduced-motion:no-preference){
+ .invitation[data-story-handoff="true"] .opening-leaf{background:#18131b url("assets/web/cathedral-landscape.webp") 78% center / cover no-repeat}
+ .invitation[data-story-handoff="true"] .opening-leaf:after{content:"";position:absolute;inset:0;background:#000;opacity:1}
+ .invitation[data-story-handoff="true"].is-opening .opening-leaf:after{animation:photo-from-dark 700ms cubic-bezier(.23,1,.32,1) 100ms both}
+ .invitation[data-story-handoff="true"].is-opening .opening-leaf-left{animation-delay:1050ms}
+ .invitation[data-story-handoff="true"].is-opening .opening-leaf-right{animation-delay:1050ms}
+ .invitation[data-story-handoff="true"].is-opening .opening-seam{animation-delay:980ms}
+ .invitation[data-story-handoff="true"] .opening-mark{display:none}
+ .invitation[data-story-handoff="true"].is-opening .hero-characters{animation-delay:950ms}
+ .invitation[data-story-handoff="true"].is-opening .hero-copy{animation-delay:1100ms}
+}
+@keyframes photo-from-dark{to{opacity:.12}}
 @keyframes open-leaf-left{0%{transform:translateX(0)}100%{transform:translateX(-65%) rotate(-3deg)}}
 @keyframes open-leaf-right{0%{transform:translateX(0)}100%{transform:translateX(65%) rotate(3deg)}}
 @keyframes open-seam{0%{opacity:0;transform:rotate(3.5deg) scaleY(.02)}25%{opacity:1;transform:rotate(3.5deg) scaleY(1)}70%,100%{opacity:0;transform:rotate(3.5deg) scaleY(1)}}
