@@ -111,6 +111,28 @@
         observer.observe(target);
         entryObservers.push(observer);
       });
+      // Let the two passes emerge as whole sheets below the opened folio.
+      // They remain visible without JS and are never gated on the animation.
+      const tickets = root.querySelector('.ticket-salon');
+      const list = tickets?.querySelector('.admission-list');
+      if (tickets && list && !tickets.dataset.arrived && desktop.matches && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          if (!ready || !entries.some(entry => entry.isIntersecting)) return;
+          const entry = entries.find(item => item.isIntersecting);
+          tickets.dataset.arrived = 'true';
+          observer.disconnect();
+          // A jump to an already visible section should never move text being read.
+          if (entry.boundingClientRect.top < 0) return;
+          list.querySelectorAll('.admission-pass').forEach((pass, index) => {
+            pass.animate([
+              { opacity: .55, transform: `translate(${index ? 18 : -18}px, 48px) rotate(${index ? 1.5 : -1.5}deg)` },
+              { opacity: 1, transform: 'translate(0, 0) rotate(0)' },
+            ], { duration: 800, delay: index * 100, easing: 'cubic-bezier(.23,1,.32,1)' });
+          });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+        observer.observe(list);
+        entryObservers.push(observer);
+      }
     };
 
     const setMode = () => {

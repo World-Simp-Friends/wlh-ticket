@@ -43,9 +43,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Libre+Bodoni:ital,wght@0,500;1,500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="phone.css?v=20261026-trio2">
 <link rel="stylesheet" href="photos.css?v=20261026-trio2">
-<link rel="stylesheet" href="landing.css?v=20261025-handoff2">
+<link rel="stylesheet" href="landing.css?v=20261106-story1">
 <link rel="stylesheet" href="postlude.css?v=20261025-credits1">
-<link rel="stylesheet" href="souvenirs.css?v=20261025-scroll1">
+<link rel="stylesheet" href="souvenirs.css?v=20261106-benefits1">
 <link rel="stylesheet" href="typography.css?v=20261025-credits1">
 </head>
 <body>
@@ -129,7 +129,7 @@
                 <li><strong>01 card giấy bo góc</strong></li>
               </ul>
             </div>
-            <button class="pass-select" type="button" data-reserve="standard"><span>Chọn Standard</span><span aria-hidden="true">↗</span></button>
+            <button class="pass-select" type="button" data-select-tier="standard"><span>Xem bộ quà Standard</span><span aria-hidden="true">↓</span></button>
           </article>
           <article class="admission-pass pass-vip" aria-labelledby="pass-vip-title">
             <header class="pass-head">
@@ -155,7 +155,7 @@
                 <li><strong>01 shikishi</strong></li>
               </ul>
             </div>
-            <button class="pass-select" type="button" data-reserve="vip"><span>Chọn VIP</span><span aria-hidden="true">↗</span></button>
+            <button class="pass-select" type="button" data-select-tier="vip"><span>Xem bộ quà VIP</span><span aria-hidden="true">↓</span></button>
           </article>
         </div>
     </section>
@@ -212,6 +212,10 @@
     </article>
   </div>
   <div class="souvenir-bottom"><p>Những kỷ vật của Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế.</p><span>Hình minh họa danh mục. Thiết kế quà tặng sẽ được cập nhật.</span></div>
+  <div class="souvenir-next">
+    <div><span>HẠNG VÉ CỦA CẬU</span><strong><span data-tier-label>STANDARD</span> · <span data-tier-price>209.000đ</span></strong><p>Liên kết đăng ký vé sẽ được cập nhật tại đây.</p></div>
+    <button class="souvenir-next-button" type="button" data-reserve="selected"><span>Thông tin đăng ký</span><span aria-hidden="true">↗</span></button>
+  </div>
 </section>
 
 
@@ -413,10 +417,10 @@
   <button class="prologue-skip" id="prologueSkip" type="button" aria-label="Bỏ qua phần điện thoại, mở lời mời">Bỏ qua <span aria-hidden="true">↗</span></button>
   </main>
 
-<script src="phone.js?v=20261026-trio2"></script>
+<script src="phone.js?v=20261106-story1"></script>
 <script src="photos.js?v=20261026-trio2"></script>
 <script src="landing.js?v=20261025-handoff2"></script>
-<script src="postlude.js?v=20261025-paper3"></script>
+<script src="postlude.js?v=20261106-story1"></script>
 <script>
 (function(){
   var target = new Date('2026-11-21T16:00:00+07:00').getTime();
