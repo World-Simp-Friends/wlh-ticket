@@ -44,9 +44,10 @@
 <link rel="stylesheet" href="phone.css?v=20261026-trio2">
 <link rel="stylesheet" href="photos.css?v=20261026-trio2">
 <link rel="stylesheet" href="landing.css?v=20261106-story1">
-<link rel="stylesheet" href="postlude.css?v=20261106-final-cta">
+<link rel="stylesheet" href="postlude.css?v=20261106-ticket-cta2">
 <link rel="stylesheet" href="souvenirs.css?v=20261106-final-cta">
 <link rel="stylesheet" href="typography.css?v=20261025-credits1">
+<link rel="stylesheet" href="hero-depth.css?v=20261106-2">
 </head>
 <body>
 <!-- Inline SVG sprite: <use> referencing external files silently renders empty on file:// and in Safari. -->
@@ -65,7 +66,7 @@
     <section class="invitation-hero" id="invitation-hero" aria-labelledby="event-title">
       <div class="hero-architecture" aria-hidden="true"></div>
       <div class="hero-vertical-rule" aria-hidden="true"></div>
-      <div class="hero-scene" aria-hidden="true"><img class="hero-characters" src="assets/web/characters-2x.webp" srcset="assets/web/characters.webp 1500w, assets/web/characters-2x.webp 2200w" sizes="(max-width:760px) 115vw, 50vw" alt="" width="2200" height="2637" fetchpriority="high"><img class="hero-feather feather-one" src="assets/web/feather.webp" alt="" width="181" height="110"><img class="hero-feather feather-two" src="assets/web/feather.webp" alt="" width="181" height="110"></div>
+      <div class="hero-scene" aria-hidden="true"><img class="hero-characters" src="assets/web/characters-2x.webp" srcset="assets/web/characters.webp 1500w, assets/web/characters-2x.webp 2200w" sizes="(max-width:760px) 115vw, 50vw" alt="" width="2200" height="2637" fetchpriority="high"><img class="hero-feather feather-one" src="assets/web/feather.webp" alt="" width="181" height="110"><img class="hero-feather feather-two" src="assets/web/feather.webp" alt="" width="181" height="110"><img class="hero-feather feather-near" src="assets/web/feather.webp" alt="" width="181" height="110"></div>
       <div class="hero-copy">
         <p class="invitation-eyebrow"><span class="little-star" aria-hidden="true">✦</span> MỘT LỜI MỜI DÀNH CHO CẬU</p>
         <h1 id="event-title"><img src="assets/web/event-logo.webp" alt="Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế" width="1300" height="376" fetchpriority="high"></h1>
@@ -210,6 +211,15 @@
     </article>
   </div>
   <div class="souvenir-bottom"><p>Những kỷ vật của Yến Hội Ma Nữ: Cuộc Hẹn Trần Thế.</p><span>Hình minh họa danh mục. Thiết kế quà tặng sẽ được cập nhật.</span></div>
+  <section class="final-invitation" aria-labelledby="final-invitation-title">
+    <div class="final-invitation-heading"><h2 id="final-invitation-title">Cuộc hẹn <em>bắt đầu từ đây.</em></h2><p>21.11.2026 · 16:00–20:00</p></div>
+    <div class="final-destinations" aria-describedby="final-ticket-note">
+      <button class="final-destination" type="button" disabled><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN NAM</span><strong>TP. Hồ Chí Minh</strong><span>Lotte Cinema Gò Vấp</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
+      <button class="final-destination" type="button" disabled><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN BẮC</span><strong>Hà Nội</strong><span>BHD Phạm Ngọc Thạch</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
+    </div>
+    <p class="final-ticket-note" id="final-ticket-note">Liên kết đặt vé sẽ được cập nhật sau.</p>
+  </section>
+
 </section>
 
 
@@ -250,14 +260,7 @@
           </ul>
         </div>
       </div>
-      <section class="final-invitation" aria-labelledby="final-invitation-title">
-        <div class="final-invitation-heading"><div><span class="final-invitation-kicker">MỘT CUỘC HẸN, HAI THÀNH PHỐ</span><h2 id="final-invitation-title">Hẹn gặp cậu<br><em>ở nơi này.</em></h2></div><p>Chọn thành phố của cậu.<br>Phần còn lại, để chúng mình chuẩn bị.</p></div>
-        <div class="final-destinations" aria-describedby="final-ticket-note">
-          <button class="final-destination" type="button" disabled><span class="final-destination-index">01 <span aria-hidden="true">/</span> MIỀN NAM</span><span class="final-destination-main"><strong>TP. Hồ Chí Minh</strong><span>Lotte Cinema Gò Vấp</span></span><span class="final-destination-arrow" aria-hidden="true">↗</span><span class="final-destination-action">VÉ TP. HỒ CHÍ MINH</span></button>
-          <button class="final-destination" type="button" disabled><span class="final-destination-index">02 <span aria-hidden="true">/</span> MIỀN BẮC</span><span class="final-destination-main"><strong>Hà Nội</strong><span>BHD Phạm Ngọc Thạch</span></span><span class="final-destination-arrow" aria-hidden="true">↗</span><span class="final-destination-action">VÉ HÀ NỘI</span></button>
-        </div>
-        <p class="final-ticket-note" id="final-ticket-note">Liên kết đặt vé sẽ được cập nhật sau.</p>
-      </section>
+
       <footer class="closing-footer" id="invitation-footer">
         <div class="closing-footer-main">
           <div class="closing-footer-brand">
@@ -420,6 +423,7 @@
 <script src="phone.js?v=20261106-story1"></script>
 <script src="photos.js?v=20261026-trio2"></script>
 <script src="landing.js?v=20261025-handoff2"></script>
+<script src="hero-depth.js?v=20261106-2"></script>
 <script src="postlude.js?v=20261106-story1"></script>
 <script>
 (function(){
