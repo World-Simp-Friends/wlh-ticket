@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap tĩnh cho ticket.worldsimp.com (#342). Thêm landing mới thì thêm một <url> với URL tuyệt đối, có "/" cuối. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ticket.worldsimp.com/YenHoiMaNuCuocHenTranThe/</loc></url>
+  <url><loc>https://ticket.worldsimp.com/ThapNienHenUoc/</loc></url>
+  <url><loc>https://ticket.worldsimp.com/DrivinIntoDream/</loc></url>
+</urlset>
