@@ -8,6 +8,7 @@
  * - No utm_* on the landing URL: adds utm_source=ticket_landing,
  *   utm_medium=landing, utm_campaign=<landing folder>.
  * - Never overwrites a param the href already has.
+ * - wsf_link is forwarded only when all buy links target the same event.
  *
  * Usage (once per landing, before </body>):
  *   <script src="/cta-attribution.js?v=20261108" data-campaign="<FolderName>" defer></script>
@@ -41,7 +42,8 @@
       if (!value) return;
       var isUtm = key.indexOf('utm_') === 0;
       if (isUtm || key === 'ref' || key === 'wsf_link') {
-        if (isUtm) hasUtm = true;
+        // buy only reads these three; utm_content/utm_term alone must not suppress the default source.
+        if (key === 'utm_source' || key === 'utm_medium' || key === 'utm_campaign') hasUtm = true;
         out.push([key, value]);
       }
     });
@@ -49,6 +51,19 @@
       out.push(['utm_source', 'ticket_landing'], ['utm_medium', 'landing'], ['utm_campaign', campaignName()]);
     }
     return out;
+  }
+
+  // wsf_link belongs to one event; the backend drops all attribution when it
+  // lands on another event's order. Only forward it when every buy link on the
+  // page points at the same path.
+  function singleTarget(links) {
+    var first = null;
+    for (var i = 0; i < links.length; i++) {
+      var path = new URL(links[i].getAttribute('href')).pathname.replace(/\/+$/, '');
+      if (first === null) first = path;
+      else if (path !== first) return false;
+    }
+    return true;
   }
 
   function decorate(href, params) {
@@ -68,6 +83,9 @@
       if (typeof URL !== 'function' || typeof URLSearchParams !== 'function') return;
       var params = collectParams(window.location.search);
       var links = document.querySelectorAll('a[href^="' + BUY_PREFIX + '"]');
+      var oneTarget = false;
+      try { oneTarget = singleTarget(links); } catch (_) { /* treat as several targets */ }
+      if (!oneTarget) params = params.filter(function (pair) { return pair[0] !== 'wsf_link'; });
       for (var i = 0; i < links.length; i++) {
         try {
           var href = links[i].getAttribute('href');

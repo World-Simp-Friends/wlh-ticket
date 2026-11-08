@@ -214,12 +214,12 @@
   <section class="final-invitation" aria-labelledby="final-invitation-title">
     <div class="final-invitation-heading"><h2 id="final-invitation-title">Cuộc hẹn <em>bắt đầu từ đây.</em></h2><p>21.11.2026 · 16:00–20:00</p></div>
     <!-- CTA đặt vé (#342): 08/11/2026 event Yến Hội chưa public trên buy (không có trong sitemap buy, /events/discover hay /metadata/events/<id>), nên hai nút vẫn tắt.
-         Khi event đã publish: lấy slug thật bằng GET https://api.worldsimp.com/metadata/events/<id>, điền vào data-buy-href, rồi đổi từng nút thành
+         Khi event đã publish: lấy slug thật bằng GET https://api.worldsimp.com/metadata/events/<id>, rồi đổi từng nút thành
          <a class="final-destination" href="https://buy.worldsimp.com/events/<slug>" data-buy-city="..."> (bỏ type/disabled, đóng bằng </a>),
          và sửa/xoá dòng "Liên kết đặt vé sẽ được cập nhật sau.". /cta-attribution.js tự nối utm_*/ref/wsf_link vào link; CSS a.final-destination đã có trong postlude.css. -->
     <div class="final-destinations" aria-describedby="final-ticket-note">
-      <button class="final-destination" type="button" disabled data-buy-city="hcm" data-buy-href=""><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN NAM</span><strong>TP. Hồ Chí Minh</strong><span>Lotte Cinema Gò Vấp</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
-      <button class="final-destination" type="button" disabled data-buy-city="hn" data-buy-href=""><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN BẮC</span><strong>Hà Nội</strong><span>BHD Phạm Ngọc Thạch</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
+      <button class="final-destination" type="button" disabled data-buy-city="hcm"><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN NAM</span><strong>TP. Hồ Chí Minh</strong><span>Lotte Cinema Gò Vấp</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
+      <button class="final-destination" type="button" disabled data-buy-city="hn"><span class="final-destination-main"><span class="final-destination-index">ĐIỂM HẸN MIỀN BẮC</span><strong>Hà Nội</strong><span>BHD Phạm Ngọc Thạch</span></span><span class="final-destination-stub"><span>ĐẶT VÉ</span><span class="final-destination-arrow" aria-hidden="true">↗</span></span></button>
     </div>
     <p class="final-ticket-note" id="final-ticket-note">Liên kết đặt vé sẽ được cập nhật sau.</p>
   </section>
