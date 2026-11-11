@@ -12,19 +12,19 @@
     const cityStorageKey = 'yen-hoi-selected-city';
     const venues = {
       hcm: {
-        label: 'TP.HCM',
-        name: 'Lotte Cinema Gò Vấp',
-        address: '242 Đ. Nguyễn Văn Lượng, Gò Vấp, TP. Hồ Chí Minh',
+        label: 'TP. Hồ Chí Minh',
+        name: 'Rạp chiếu sẽ được công bố sau',
+        address: 'TP. Hồ Chí Minh',
       },
       hn: {
         label: 'Hà Nội',
-        name: 'BHD Phạm Ngọc Thạch',
-        address: 'TTTM Vincom 2, Phạm Ngọc Thạch, Kim Liên, TP. Hà Nội',
+        name: 'Rạp chiếu sẽ được công bố sau',
+        address: 'TP. Hà Nội',
       },
     };
     const tiers = {
-      standard: { label: 'STANDARD', price: '209.000đ', count: '1', method: 'ngẫu nhiên' },
-      vip: { label: 'VIP', price: '309.000đ', count: '2', method: 'tự chọn trên web' },
+      standard: { label: 'STANDARD', price: 'TBA', count: '1', method: 'Random trong 7 mẫu' },
+      vip: { label: 'VIP', price: 'TBA', count: '2', method: 'Tự chọn trong 7 mẫu' },
     };
     let city = 'hcm';
     let tier = 'standard';

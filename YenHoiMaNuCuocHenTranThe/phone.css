@@ -254,6 +254,18 @@ body{font-family:Arial,Helvetica,sans-serif;color:#111}
 .prologue-skip.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
 @media(prefers-reduced-motion:reduce){.prologue-skip{transition:none}}
 
+/* On a desktop viewport the phone owns the centre of the stage, so the skip pill
+   moves into the bottom left corner instead of resting on the phone's bezel. */
+@media(min-width:601px){
+  .prologue-skip{left:28px;bottom:28px;transform:none}
+  .prologue-skip.is-pressed{transform:scale(.96)}
+}
+/* A touch screen keeps the full bleed phone, so the pill stays centred under it. */
+@media(pointer:coarse){
+  .prologue-skip{left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%)}
+  .prologue-skip.is-pressed{transform:translateX(-50%) scale(.96)}
+}
+
 @media(max-width:600px),(pointer:coarse){
  html,body{height:100%;height:100dvh}
  .phoneScale{position:fixed;inset:0;width:100%;height:100%;height:100dvh;transform:none!important}

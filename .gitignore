@@ -10,3 +10,6 @@ dist/
 .commandcode/
 .impeccable/
 
+# Logo gốc của các bên: nguồn làm việc, chỉ bản tối ưu trong assets/credits mới được deploy
+YenHoiMaNuCuocHenTranThe/Logo các bên/
+

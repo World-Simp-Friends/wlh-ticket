@@ -9,10 +9,10 @@
   const dialogMask=$('dialogMask'),secretPhoto=$('secretPhoto'),viewer=$('viewer'),voidCard=$('voidCard'),modelNumber=$('modelNumber'),buildNumber=$('buildNumber');
   const black=$('black'),reveal=$('reveal');
   const phoneTransition=$('phoneTransition');
-  const lizardPhoneMessage='「トカゲさん電話。」<small class="bubbleTranslation">Lizard Phone</small>';
+  const lizardPhoneMessage='Điện Thoại Thằn Lằn';
   let current='home', previous='home', stage=0, profileVisits=0, started=false;
   const banner=$('messageBanner'),badge=$('messagesBadge');
-  let unreadCount=1,latestUnread={text:'ねえ。 · Này.',time:'23:47'};
+  let unreadCount=1,latestUnread={text:'Này.',time:'23:47'};
   let bannerTimer=0,bannerEpoch=0,popupReplay=0,airplaneMode=false;
   let followChat=true,savedChatScroll=0;
   let returnConversationPending=false;
@@ -245,7 +245,7 @@
   function addMine(t){
     followChat=true;
     const r=document.createElement('div');r.className='row me';
-    r.innerHTML=`<div class="stamp">既読 23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
+    r.innerHTML=`<div class="stamp">đã đọc 23:47</div><div class="bw"><div class="bubble">${t}</div></div>`;
     dynamic.appendChild(r);bottom();
   }
   function addThem(t,time='23:47'){
@@ -316,7 +316,7 @@
   $('cancelBlock').onclick=()=>dialogMask.classList.remove('show');
   $('confirmBlock').onclick=async()=>{
     dialogMask.classList.remove('show');toastMsg('ブロックしました · Đã chặn');
-    await sleep(900);buzz();addThem('<span>まだ聞こえる？</span><small class="bubbleTranslation">Cậu vẫn nghe thấy chứ?</small>','--:--');
+    await sleep(900);buzz();addThem('Cậu vẫn nghe thấy chứ?','--:--');
   };
 
   document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>begin(b.dataset.answer));
@@ -408,10 +408,10 @@
     buzz();
 
     // LINE comes back even after the user tries to leave.
-    latestUnread={text:'ねえ。 · Này.',time:'--:--'};
+    latestUnread={text:'Này.',time:'--:--'};
     setUnreadCount(unreadCount+1);
     if(current==='home')popup.classList.add('show');else showMessageBanner(latestUnread);
-    popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>ねえ。<small class="bubbleTranslation">Này.</small>';
+    popup.querySelector('.popupBody').innerHTML='<strong>Unknown</strong>Này.';
 
   }
   async function resumeConversation(){
