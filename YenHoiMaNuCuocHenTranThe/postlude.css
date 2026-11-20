@@ -142,10 +142,11 @@
 .final-invitation-heading p{font-size:12px;line-height:1.5;color:#776373;white-space:nowrap}
 .final-destinations{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .final-destination{position:relative;display:grid;grid-template-columns:1fr 88px;width:100%;padding:0;border:0;min-height:158px;text-align:left;background:#5c3d58;color:#fff5e5;text-decoration:none;opacity:1;cursor:pointer;box-shadow:0 5px 0 #442c42;transition:transform 220ms var(--inv-ease),box-shadow 220ms var(--inv-ease)}
+.invitation .final-destination{color:#fff5e5}
 .final-destination:before{content:"";position:absolute;inset:7px;border:1px solid #c2a587;opacity:.45;pointer-events:none}
 .final-destination-main{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:7px;padding:26px 28px}
 .final-destination-main .final-destination-index{font:500 11px/1.4 'Be Vietnam Pro',sans-serif;letter-spacing:.06em;color:#dac6ba}
-.final-destination-main strong{font-family:var(--inv-serif);font-size:clamp(30px,3vw,42px);font-weight:500;line-height:1.05}
+.final-destination-main strong{font-family:var(--inv-serif);font-size:clamp(30px,3vw,42px);font-weight:500;line-height:1.05;color:#fff5e5}
 .final-destination-main>span:last-child{font-size:13px;line-height:1.5;color:#e2d1d8}
 .final-destination-stub{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;border-left:1px dashed #b69b98;background:#ffffff08}
 .final-destination-stub:before,.final-destination-stub:after{content:"";position:absolute;left:-9px;width:16px;height:16px;border-radius:50%;background:var(--souvenir-desk)}

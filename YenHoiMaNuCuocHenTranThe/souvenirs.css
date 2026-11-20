@@ -199,28 +199,13 @@
 /* Keep the lower display pieces clear of the labels above them. */
 
 
-/* A staggered display grid keeps the flat lay tactile without crossing labels. */
+/* A four-column desktop grid gives every product image enough room. */
 @media(min-width:1024px){
- .souvenir-room .keepsake-desk{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto auto;gap:38px 20px;align-items:start;min-height:0;aspect-ratio:auto;padding:24px 0 8px}
+ .souvenir-room .keepsake-desk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row;gap:clamp(24px,3vw,46px);align-items:stretch;align-content:start;min-height:0;max-width:1360px;aspect-ratio:auto;padding:30px 0 8px}
  .souvenir-room .keepsake-object{position:relative;left:auto!important;top:auto!important;width:auto!important;min-width:0}
- .souvenir-room .keepsake-print{grid-column:5/8;grid-row:1/3;align-self:center}
- .souvenir-room .keepsake-postcard{grid-column:1/4;grid-row:1;align-self:center}
- .souvenir-room .keepsake-shikishi{grid-column:10/13;grid-row:1}
- .souvenir-room .keepsake-keychain{grid-column:2/4;grid-row:2;align-self:center}
- .souvenir-room .keepsake-badge{grid-column:8/10;grid-row:2;align-self:center}
- .souvenir-room .keepsake-card{grid-column:10/13;grid-row:2;align-self:center}
- .souvenir-room .keepsake-ticket{grid-column:1/5;grid-row:3}
- .souvenir-room .keepsake-banner{grid-column:7/13;grid-row:3;align-self:center}
- .souvenir-room .keepsake-desk-caption{display:none}
-}
-
-/* Standard clears the VIP pieces off the desk; its four keepsakes retain a complete composition. */
-@media(min-width:1024px){
- #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-desk{grid-template-rows:auto auto;gap:28px 24px;max-width:1050px}
- #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-postcard{grid-column:1/5;grid-row:1;align-self:center}
- #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-keychain{grid-column:6/8;grid-row:1;align-self:center}
- #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-card{grid-column:9/13;grid-row:1;align-self:center}
- #reveal[data-gift-tier="standard"] .souvenir-room .keepsake-ticket{grid-column:4/10;grid-row:2;align-self:center}
+ .souvenir-room .keepsake-desk-mark,.souvenir-room .keepsake-desk-caption{display:none}
+ .souvenir-room .gift-image-print,.souvenir-room .gift-image-keychain,.souvenir-room .gift-image-ticket,.souvenir-room .gift-image-banner{width:100%;max-width:none}
+ .souvenir-room .gift-image>img{max-height:clamp(240px,30vw,390px)}
 }
 
 /* Promote only the active entrance; release layers once each object has landed. */
