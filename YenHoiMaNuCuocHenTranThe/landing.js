@@ -13,18 +13,20 @@
     const venues = {
       hcm: {
         label: 'TP. Hồ Chí Minh',
-        name: 'Rạp chiếu sẽ được công bố sau',
-        address: 'TP. Hồ Chí Minh',
+        name: 'Lotte Cinema Gò Vấp (SUPER PLEX)',
+        address: '242 Đ. Nguyễn Văn Lượng, Gò Vấp, TP. Hồ Chí Minh',
+        map: 'https://maps.app.goo.gl/3fsyhKjvWagtwSQC6',
       },
       hn: {
         label: 'Hà Nội',
-        name: 'Rạp chiếu sẽ được công bố sau',
-        address: 'TP. Hà Nội',
+        name: 'BHD Star Phạm Ngọc Thạch',
+        address: 'TTTM Vincom 2, Phạm Ngọc Thạch, Kim Liên, TP. Hà Nội',
+        map: 'https://maps.app.goo.gl/dEn4t9UMjShkJuj8A',
       },
     };
     const tiers = {
-      standard: { label: 'STANDARD', price: 'TBA', count: '1', method: 'Random trong 7 mẫu' },
-      vip: { label: 'VIP', price: 'TBA', count: '2', method: 'Tự chọn trong 7 mẫu' },
+      standard: { label: 'STANDARD', price: '209.000đ', count: '1', method: 'Random trong 7 mẫu' },
+      vip: { label: 'VIP', price: '309.000đ', count: '2', method: 'Tự chọn trong 7 mẫu' },
     };
     let city = 'hcm';
     let tier = 'standard';
@@ -84,8 +86,7 @@
         root.querySelector('.venue-info')?.animate([{opacity:.35,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}], {duration:250,easing:'cubic-bezier(.22,1,.36,1)'});
       }
       root.querySelectorAll('a[data-venue-map]').forEach((link) => {
-        link.href = 'https://www.google.com/maps/search/?api=1&query='
-          + encodeURIComponent(venue.name + ', ' + venue.address);
+        link.href = venue.map;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.setAttribute('aria-label', 'Mở bản đồ đến ' + venue.name);
@@ -185,7 +186,7 @@
         if (button.getAttribute('role') === 'tab') button.setAttribute('aria-selected', String(selected));
       });
       setText('[data-tier-label]', selection.label);
-      setText('[data-tier-price]', selection.price);
+      setText('[data-tier-price="' + tier + '"]', selection.price);
       setText('[data-keychain-count], [data-giveaway-count]', selection.count);
       setText('[data-keychain-method]', selection.method);
     };

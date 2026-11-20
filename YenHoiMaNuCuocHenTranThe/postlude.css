@@ -20,9 +20,6 @@
 .destination-venue>p{color:#74636d;min-height:39px}
 .destination-map{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:9px 0 6px;border-bottom:1px solid #c5b49a;margin-top:8px}
 .destination-map>span{font-size:18px;line-height:1}
-/* The venues are still being confirmed, so the cinema and its address stay off the page.
-   Both cities remain choosable; only the rạp details are held back. */
-.destination-venue,.destination-map{display:none}
 .destination-choice{background:transparent;border:1px solid #c7b5be;color:var(--inv-plum);display:flex;align-items:center;justify-content:space-between;width:100%;min-height:40px;padding:8px 11px;margin-top:24px;transition:background 180ms ease,color 180ms ease}
 .destination-choice>span:last-child{font-size:18px;line-height:1}
 .destination-choice:hover,.destination-choice[aria-pressed="true"]{background:var(--inv-plum);border-color:var(--inv-plum);color:#f9f4ec}
@@ -144,7 +141,7 @@
 .final-invitation-heading h2 em{font-weight:400;color:var(--souvenir-plum)}
 .final-invitation-heading p{font-size:12px;line-height:1.5;color:#776373;white-space:nowrap}
 .final-destinations{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.final-destination{position:relative;display:grid;grid-template-columns:1fr 88px;width:100%;padding:0;border:0;min-height:158px;text-align:left;background:#5c3d58;color:#fff5e5;opacity:1;cursor:default;box-shadow:0 5px 0 #442c42;transition:transform 220ms var(--inv-ease),box-shadow 220ms var(--inv-ease)}
+.final-destination{position:relative;display:grid;grid-template-columns:1fr 88px;width:100%;padding:0;border:0;min-height:158px;text-align:left;background:#5c3d58;color:#fff5e5;text-decoration:none;opacity:1;cursor:pointer;box-shadow:0 5px 0 #442c42;transition:transform 220ms var(--inv-ease),box-shadow 220ms var(--inv-ease)}
 .final-destination:before{content:"";position:absolute;inset:7px;border:1px solid #c2a587;opacity:.45;pointer-events:none}
 .final-destination-main{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:7px;padding:26px 28px}
 .final-destination-main .final-destination-index{font:500 11px/1.4 'Be Vietnam Pro',sans-serif;letter-spacing:.06em;color:#dac6ba}
