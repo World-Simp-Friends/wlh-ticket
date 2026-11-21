@@ -22,7 +22,8 @@
 .destination-map>span{font-size:18px;line-height:1}
 .destination-choice{background:transparent;border:1px solid #c7b5be;color:var(--inv-plum);display:flex;align-items:center;justify-content:space-between;width:100%;min-height:40px;padding:8px 11px;margin-top:24px;transition:background 180ms ease,color 180ms ease}
 .destination-choice>span:last-child{font-size:18px;line-height:1}
-.destination-choice:hover,.destination-choice[aria-pressed="true"]{background:var(--inv-plum);border-color:var(--inv-plum);color:#f9f4ec}
+.invitation .destination-choice{color:var(--inv-plum)}
+.invitation .destination-choice:hover,.invitation .destination-choice:focus-visible{background:var(--inv-plum);border-color:var(--inv-plum);color:#f9f4ec}
 .destination-selected{visibility:hidden;color:#8b5d76;display:flex;align-items:center;gap:7px;position:absolute;right:28px;top:31px;white-space:nowrap}
 .destination-selected i{font-style:normal;font-size:10px}
 .invitation[data-city="hcm"] .destination-hcm .destination-selected,.invitation[data-city="hn"] .destination-hn .destination-selected{visibility:visible}
